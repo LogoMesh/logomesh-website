@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* ── FONT VARIABLES (set by layout.tsx via next/font) ── */
+@theme inline {
+  --font-sans:    var(--font-dm-sans);
+  --font-display: var(--font-syne);
+  --font-mono:    var(--font-jb-mono);
+  --font-serif:   var(--font-instrument-serif);
+}
+
+/* ── DESIGN TOKENS ── */
+@theme {
+  /* Background scale */
+  --color-canvas:   #060608;
+  --color-canvas-2: #0c0c0f;
+  --color-canvas-3: #121218;
+  --color-canvas-4: #1c1c24;
+
+  /* Borders */
+  --color-border:    #171720;
+  --color-border-hi: #252530;
+
+  /* Text */
+  --color-ink:   #ede8de;
+  --color-muted: #9898a6;
+  --color-dim:   #52525e;
+
+  /* Accent — acid yellow-green */
+  --color-accent:     #c4ff00;
+  --color-accent-sub: oklch(0.94 0.24 122 / 0.1);
+
+  /* Semantic */
+  --color-danger:     #ff3b3b;
+  --color-danger-sub: oklch(0.58 0.24 27 / 0.1);
+  --color-pass:       #00e87a;
+
+  /* Animation keyframes */
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.25; transform: scale(0.55); }
+  }
+}
+
+/* ── BASE ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-canvas);
+  background-image: radial-gradient(rgba(152, 152, 166, 0.11) 1px, transparent 1px);
+  background-size: 26px 26px;
+  background-attachment: fixed;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 9999;
+}
