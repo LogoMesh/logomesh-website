@@ -28,7 +28,7 @@ function BentoCard({
 // Mini terminal showing property inference output
 function PropertyCard() {
   return (
-    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[11.5px] leading-[1.7]">
+    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[12.5px] leading-[1.7]">
       <motion.p
         className="text-[var(--color-dim)] mb-2"
         initial={{ opacity: 0 }}
@@ -61,13 +61,13 @@ function PropertyCard() {
 // Mini sandbox execution card
 function SandboxCard() {
   return (
-    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[11px] leading-[1.65] space-y-1">
+    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[12px] leading-[1.65] space-y-1">
       <p className="text-[var(--color-dim)]">Container environment:</p>
       <div className="flex gap-2 flex-wrap mt-1">
         {["airgapped", "nobody user", "128 MB RAM", "50 PIDs", "read-only"].map((flag) => (
           <span
             key={flag}
-            className="border border-[var(--color-border-hi)] text-[var(--color-muted)] px-2 py-px text-[10px] font-bold uppercase tracking-wide"
+            className="border border-[var(--color-border-hi)] text-[var(--color-muted)] px-2 py-px text-[11px] font-bold uppercase tracking-wide"
           >
             {flag}
           </span>
@@ -88,7 +88,7 @@ export function FeaturesBento() {
         transition={{ duration: 0.55, ease: EASE }}
         className="flex items-center gap-3.5 mb-7"
       >
-        <span className="font-[family-name:var(--font-mono)] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+        <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
           Why it catches what others miss
         </span>
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
@@ -99,7 +99,7 @@ export function FeaturesBento() {
 
         {/* Large card — Property Inference (spans 2 cols) */}
         <BentoCard className="lg:col-span-2" delay={0}>
-          <span className="font-[family-name:var(--font-mono)] text-[10px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
+          <span className="font-[family-name:var(--font-mono)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             01 · Property Inference
           </span>
           <h3 className="font-[family-name:var(--font-display)] text-[24px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
@@ -119,7 +119,7 @@ export function FeaturesBento() {
 
         {/* Sandboxed exec */}
         <BentoCard delay={0.06}>
-          <span className="font-[family-name:var(--font-mono)] text-[10px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
+          <span className="font-[family-name:var(--font-mono)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             02 · Sandboxed Exec
           </span>
           <h3 className="font-[family-name:var(--font-display)] text-[20px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
@@ -136,7 +136,7 @@ export function FeaturesBento() {
         <BentoCard className="lg:col-span-2" delay={0.1}>
           <div className="flex items-start justify-between gap-8 flex-col md:flex-row">
             <div className="flex-1">
-              <span className="font-[family-name:var(--font-mono)] text-[10px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4 block">
+              <span className="font-[family-name:var(--font-mono)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4 block">
                 03 · Zero Config
               </span>
               <h3 className="font-[family-name:var(--font-display)] text-[24px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
@@ -150,7 +150,7 @@ export function FeaturesBento() {
                 and runs the full pipeline automatically.
               </p>
             </div>
-            <div className="flex-shrink-0 flex flex-col gap-2.5 font-[family-name:var(--font-mono)] text-[12px]">
+            <div className="flex-shrink-0 flex flex-col gap-2.5 font-[family-name:var(--font-mono)] text-[13px]">
               {[
                 { label: "Config files required", val: "0" },
                 { label: "Setup time", val: "< 60s" },
@@ -158,7 +158,7 @@ export function FeaturesBento() {
                 { label: "Languages supported", val: "Python" },
               ].map(({ label, val }) => (
                 <div key={label} className="flex items-center justify-between gap-8">
-                  <span className="text-[var(--color-muted)] text-[11px]">{label}</span>
+                  <span className="text-[var(--color-muted)] text-[12px]">{label}</span>
                   <span className="text-[var(--color-accent)] font-bold">{val}</span>
                 </div>
               ))}
@@ -168,7 +168,7 @@ export function FeaturesBento() {
 
         {/* Crash validation */}
         <BentoCard delay={0.14}>
-          <span className="font-[family-name:var(--font-mono)] text-[10px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
+          <span className="font-[family-name:var(--font-mono)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             04 · Crash Validation
           </span>
           <h3 className="font-[family-name:var(--font-display)] text-[20px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
@@ -179,7 +179,7 @@ export function FeaturesBento() {
             LLM validates every crash is caller-reachable before posting.
             False positives are the #1 reason developers uninstall.
           </p>
-          <div className="mt-auto pt-5 border-t border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)]">
+          <div className="mt-auto pt-5 border-t border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)]">
             arXiv:2510.02185 — crash validation study
           </div>
         </BentoCard>

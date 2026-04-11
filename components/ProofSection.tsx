@@ -66,17 +66,17 @@ function GitHubComment() {
             style={{ background: "#c4ff00" }}>
             LM
           </div>
-          <span className="text-[#e6edf3] text-[13px] font-semibold">logomesh</span>
-          <span className="text-[#8b949e] text-[12px]">bot</span>
+          <span className="text-[#e6edf3] text-[14px] font-semibold">logomesh</span>
+          <span className="text-[#8b949e] text-[13px]">bot</span>
           <span
-            className="text-[10px] font-bold px-1.5 py-0.5 border border-[#388bfd]/40"
+            className="text-[11px] font-bold px-1.5 py-0.5 border border-[#388bfd]/40"
             style={{ color: "#388bfd", background: "rgba(56,139,253,0.08)" }}
           >
             bot
           </span>
-          <span className="text-[#8b949e] text-[12px]">commented 2 minutes ago</span>
+          <span className="text-[#8b949e] text-[13px]">commented 2 minutes ago</span>
         </div>
-        <span className="text-[11px] text-[#8b949e] hidden sm:block">on checkout.py</span>
+        <span className="text-[12px] text-[#8b949e] hidden sm:block">on checkout.py</span>
       </div>
 
       {/* Comment body */}
@@ -90,18 +90,18 @@ function GitHubComment() {
           transition={{ duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
         >
           <span
-            className="font-bold text-[11px] px-2 py-0.5"
+            className="font-bold text-[12px] px-2 py-0.5"
             style={{ background: "rgba(248,81,73,0.15)", color: "#f85149", border: "1px solid rgba(248,81,73,0.3)" }}
           >
             1 ISSUE FOUND
           </span>
-          <span className="text-[#e6edf3] text-[14px] font-semibold">
+          <span className="text-[#e6edf3] text-[15px] font-semibold">
             Negative quantity bypasses checkout validation
           </span>
         </motion.div>
 
         {/* Finding rows — staggered reveal */}
-        <div className="space-y-2.5 font-[family-name:var(--font-mono)] text-[13px] leading-[1.65]">
+        <div className="space-y-2.5 font-[family-name:var(--font-mono)] text-[14px] leading-[1.65]">
           {FINDINGS.map(({ key, value, valueClass, valueBg }, i) => (
             <motion.div
               key={key}
@@ -111,7 +111,7 @@ function GitHubComment() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.35, ease: EASE, delay: 0.15 + i * 0.12 }}
             >
-              <span className="text-[11px] font-bold uppercase tracking-[0.06em] text-[#8b949e] pt-px">
+              <span className="text-[12px] font-bold uppercase tracking-[0.06em] text-[#8b949e] pt-px">
                 {key}
               </span>
               <span
@@ -132,11 +132,11 @@ function GitHubComment() {
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.4, delay: 0.7 }}
         >
-          <span className="text-[11px] text-[#8b949e]">
+          <span className="text-[12px] text-[#8b949e]">
             Confirmed caller-reachable · 23 tests run ·{" "}
           </span>
           <span
-            className="text-[11px] font-bold"
+            className="text-[12px] font-bold"
             style={{ color: "#c4ff00" }}
           >
             ✓ reproducible
@@ -153,7 +153,7 @@ export function ProofSection() {
       {/* Tag */}
       <ScrollIn>
         <div className="flex items-center gap-3.5 mb-7">
-          <span className="font-[family-name:var(--font-mono)] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+          <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
             What it looks like on your PR
           </span>
           <span className="w-12 h-px bg-[var(--color-border-hi)]" />
@@ -189,7 +189,7 @@ export function ProofSection() {
         >
           {/* Clean PR */}
           <div className="bg-[var(--color-canvas)] p-10">
-            <p className="font-[family-name:var(--font-mono)] text-[10.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
+            <p className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
               <span className="text-[var(--color-pass)]">●</span>
               Clean PR — nothing posted
             </p>
@@ -216,7 +216,7 @@ export function ProofSection() {
                 <span className="block font-[family-name:var(--font-mono)] text-[15px] font-semibold text-[var(--color-pass)]">
                   No issues found
                 </span>
-                <span className="block font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)] mt-1.5">
+                <span className="block font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] mt-1.5">
                   4 files · 23 tests run · staying quiet
                 </span>
               </div>
@@ -229,7 +229,7 @@ export function ProofSection() {
 
           {/* Bug found — GitHub comment mockup */}
           <div className="bg-[var(--color-canvas)] p-10">
-            <p className="font-[family-name:var(--font-mono)] text-[10.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
+            <p className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
               <span className="text-[var(--color-danger)]">●</span>
               Bug found — PR comment posted
             </p>

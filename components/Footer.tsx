@@ -23,7 +23,7 @@ export function Footer() {
       {/* ASCII log pattern — background layer */}
       <pre
         aria-hidden
-        className="pointer-events-none absolute inset-0 font-[family-name:var(--font-mono)] text-[10px] leading-[14px] text-[var(--color-ink)] select-none whitespace-pre overflow-hidden px-10 py-6"
+        className="pointer-events-none absolute inset-0 font-[family-name:var(--font-mono)] text-[11px] leading-[14px] text-[var(--color-ink)] select-none whitespace-pre overflow-hidden px-10 py-6"
         style={{
           opacity: 0.035,
           maskImage:
@@ -39,7 +39,7 @@ export function Footer() {
       <div className="relative px-10 py-7 flex flex-wrap items-center justify-between gap-5">
         <a
           href="#"
-          className="font-[family-name:var(--font-display)] text-[14px] font-bold tracking-tight text-[var(--color-muted)]"
+          className="font-[family-name:var(--font-display)] text-[15px] font-bold tracking-tight text-[var(--color-muted)]"
         >
           Logo<span className="text-[var(--color-accent)]">Mesh</span>
         </a>
@@ -48,14 +48,14 @@ export function Footer() {
             <li key={l}>
               <a
                 href="#"
-                className="font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors"
+                className="font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors"
               >
                 {l}
               </a>
             </li>
           ))}
         </ul>
-        <p className="font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)]">
+        <p className="font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)]">
           Pre-merge verification. Only comments when it has proof.
         </p>
       </div>

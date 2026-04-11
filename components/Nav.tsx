@@ -83,7 +83,7 @@ export function Nav() {
               <a
                 href={l.href}
                 className={cn(
-                  "text-[13px] transition-colors duration-200 pb-1",
+                  "text-[14px] transition-colors duration-200 pb-1",
                   isActive
                     ? "text-[var(--color-ink)]"
                     : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
@@ -109,7 +109,7 @@ export function Nav() {
           className={cn(
             "flex items-center gap-2 px-4 py-2",
             "bg-[var(--color-accent)] text-black",
-            "font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-wider",
+            "font-[family-name:var(--font-mono)] text-[13px] font-bold uppercase tracking-wider",
             "transition-all duration-150 hover:opacity-90 hover:-translate-y-px",
           )}
         >
@@ -165,7 +165,7 @@ export function Nav() {
                   href={l.href}
                   onClick={() => setMenuOpen(false)}
                   className={cn(
-                    "block py-2 text-[14px] transition-colors duration-150",
+                    "block py-2 text-[15px] transition-colors duration-150",
                     isActive
                       ? "text-[var(--color-ink)]"
                       : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",

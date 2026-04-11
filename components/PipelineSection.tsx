@@ -68,7 +68,7 @@ export function PipelineSection() {
         transition={{ duration: 0.55, ease: EASE }}
         className="flex items-center gap-3.5 mb-7"
       >
-        <span className="font-[family-name:var(--font-mono)] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+        <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
           The pipeline
         </span>
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
@@ -130,17 +130,17 @@ export function PipelineSection() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: EASE, delay: i * 0.08 + 0.2 }}
             />
-            <p className="font-[family-name:var(--font-mono)] text-[10px] font-bold text-[var(--color-dim)] tracking-[0.1em] mb-4">
+            <p className="font-[family-name:var(--font-mono)] text-[11px] font-bold text-[var(--color-dim)] tracking-[0.1em] mb-4">
               {s.n}
             </p>
             <span className="block text-[22px] leading-none mb-3">{s.icon}</span>
             <p
-              className="font-[family-name:var(--font-mono)] text-[13px] font-bold mb-2.5 leading-[1.3]"
+              className="font-[family-name:var(--font-mono)] text-[14px] font-bold mb-2.5 leading-[1.3]"
               style={{ color: s.accent ? "var(--color-accent)" : "var(--color-ink)" }}
             >
               {s.title}
             </p>
-            <p className="font-[family-name:var(--font-sans)] text-[14px] text-[var(--color-muted)] leading-[1.65]">
+            <p className="font-[family-name:var(--font-sans)] text-[15px] text-[var(--color-muted)] leading-[1.65]">
               {s.desc}
             </p>
           </motion.div>

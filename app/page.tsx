@@ -10,7 +10,6 @@ import { CompareTable } from "@/components/CompareTable";
 import { ChangelogStrip } from "@/components/ChangelogStrip";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
-import { CursorGlow } from "@/components/CursorGlow";
 import { MobileInstallCTA } from "@/components/MobileInstallCTA";
 
 const Rule = () => <div className="h-px w-full bg-[var(--color-border)]" />;
@@ -18,7 +17,6 @@ const Rule = () => <div className="h-px w-full bg-[var(--color-border)]" />;
 export default function Home() {
   return (
     <>
-      <CursorGlow />
       <Nav />
       <main>
         <Hero />

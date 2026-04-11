@@ -163,7 +163,7 @@ export function TerminalWindow() {
     lines.forEach(({ text, color, ms }) => {
       const id = setTimeout(() => {
         const span = document.createElement("span");
-        span.className = `block whitespace-pre font-[family-name:var(--font-mono)] text-[12.5px] leading-[1.65] ${COLOR_MAP[color]}`;
+        span.className = `block whitespace-pre font-[family-name:var(--font-mono)] text-[13.5px] leading-[1.65] ${COLOR_MAP[color]}`;
         span.textContent = text || "\u00A0";
         body.insertBefore(span, cursor);
         body.scrollTop = body.scrollHeight;
@@ -199,14 +199,14 @@ export function TerminalWindow() {
     <div>
       {/* Scenario tabs */}
       <div className="flex items-end gap-px mb-0">
-        <span className="font-[family-name:var(--font-mono)] text-[10px] font-bold uppercase tracking-[0.1em] text-[var(--color-dim)] px-3 pb-2 self-end">
+        <span className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--color-dim)] px-3 pb-2 self-end">
           try with:
         </span>
         {SCENARIOS.map((s, i) => (
           <button
             key={i}
             onClick={() => switchScenario(i)}
-            className="font-[family-name:var(--font-mono)] text-[11px] px-4 py-2 border border-b-0 transition-all duration-150 cursor-pointer"
+            className="font-[family-name:var(--font-mono)] text-[12px] px-4 py-2 border border-b-0 transition-all duration-150 cursor-pointer"
             style={{
               background: i === active ? "#08080b" : "transparent",
               borderColor: i === active ? "var(--color-border-hi)" : "transparent",
@@ -238,7 +238,7 @@ export function TerminalWindow() {
           <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
           <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
           <span className="w-3 h-3 rounded-full bg-[#28c840]" />
-          <span className="absolute left-1/2 -translate-x-1/2 font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-muted)] tracking-wide">
+          <span className="absolute left-1/2 -translate-x-1/2 font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-muted)] tracking-wide">
             logomesh&nbsp;&nbsp;·&nbsp;&nbsp;{current.repo}&nbsp;&nbsp;·&nbsp;&nbsp;{current.pr}
           </span>
         </div>
@@ -258,7 +258,7 @@ export function TerminalWindow() {
         {/* Replay button */}
         <button
           onClick={replay}
-          className="absolute bottom-4 right-4 z-[3] font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)] hover:text-[var(--color-accent)] transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
+          className="absolute bottom-4 right-4 z-[3] font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)] hover:text-[var(--color-accent)] transition-all duration-300 flex items-center gap-1.5 cursor-pointer"
           style={{
             opacity: done ? 1 : 0,
             transform: done ? "translateY(0)" : "translateY(4px)",

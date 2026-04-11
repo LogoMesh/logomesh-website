@@ -66,7 +66,7 @@ export function IncidentsGrid() {
         transition={{ duration: 0.55, ease: EASE }}
         className="flex items-center gap-3.5 mb-7"
       >
-        <span className="font-[family-name:var(--font-mono)] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+        <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
           Real production incidents
         </span>
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
@@ -99,10 +99,10 @@ export function IncidentsGrid() {
             25–35% of production incidents are code bugs catchable before merge.
             These all shipped because reviewers read the diff but couldn&rsquo;t run it.
           </p>
-          <span className="block font-[family-name:var(--font-mono)] text-[10px] text-[var(--color-dim)] tracking-[0.04em] mb-5">
+          <span className="block font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)] tracking-[0.04em] mb-5">
             LogoMesh analysis · 20 production postmortems · Apr 2026
           </span>
-          <span className="font-[family-name:var(--font-mono)] text-[10.5px] font-extrabold uppercase tracking-[0.1em] text-[var(--color-accent)]">
+          <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-extrabold uppercase tracking-[0.1em] text-[var(--color-accent)]">
             ● catchable by logomesh
           </span>
         </motion.div>
@@ -128,14 +128,14 @@ export function IncidentsGrid() {
               className="absolute top-3.5 right-3.5 w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] group-hover:animate-[pulse-dot_2s_ease-in-out_infinite]"
               aria-hidden
             />
-            <p className="font-[family-name:var(--font-mono)] text-[10px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-2.5">
+            <p className="font-[family-name:var(--font-mono)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-2.5">
               {inc.company}
             </p>
-            <p className="font-[family-name:var(--font-mono)] text-[14.5px] font-semibold text-[var(--color-ink)] leading-[1.5] mb-3">
+            <p className="font-[family-name:var(--font-mono)] text-[15.5px] font-semibold text-[var(--color-ink)] leading-[1.5] mb-3">
               {inc.title}
             </p>
             {inc.loss && (
-              <p className="font-[family-name:var(--font-mono)] text-[11px] font-bold text-[var(--color-danger)] mb-2">
+              <p className="font-[family-name:var(--font-mono)] text-[12px] font-bold text-[var(--color-danger)] mb-2">
                 {inc.loss}
               </p>
             )}

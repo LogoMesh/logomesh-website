@@ -82,10 +82,10 @@ export function StatsStrip() {
               {s.suffix}
             </span>
           </div>
-          <p className="text-[14px] text-[var(--color-muted)] leading-[1.6] max-w-[200px]">
+          <p className="text-[15px] text-[var(--color-muted)] leading-[1.6] max-w-[200px]">
             {s.label}
           </p>
-          <p className="mt-2.5 text-[12px] text-[var(--color-dim)] tracking-[0.03em]">
+          <p className="mt-2.5 text-[13px] text-[var(--color-dim)] tracking-[0.03em]">
             {s.source}
           </p>
         </motion.div>

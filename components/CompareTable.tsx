@@ -63,12 +63,12 @@ function Cell({ val, label }: { val: "yes" | "partial" | "no" | "label"; label?:
     );
   if (val === "label")
     return (
-      <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-muted)] text-center">
+      <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-muted)] text-center">
         {label}
       </td>
     );
   return (
-    <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-muted)] text-center">
+    <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-muted)] text-center">
       partial
     </td>
   );
@@ -85,7 +85,7 @@ export function CompareTable() {
         transition={{ duration: 0.55, ease: EASE }}
         className="flex items-center gap-3.5 mb-7"
       >
-        <span className="font-[family-name:var(--font-mono)] text-[10.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+        <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
           vs. everything else
         </span>
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
@@ -127,13 +127,13 @@ export function CompareTable() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
             >
-              <th className="px-5 py-3.5 border border-[var(--color-border)] bg-[var(--color-canvas-3)] font-[family-name:var(--font-mono)] text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-[var(--color-muted)] min-w-[220px]">
+              <th className="px-5 py-3.5 border border-[var(--color-border)] bg-[var(--color-canvas-3)] font-[family-name:var(--font-mono)] text-[11.5px] font-extrabold uppercase tracking-[0.08em] text-[var(--color-muted)] min-w-[220px]">
                 Capability
               </th>
               {TOOLS.map((t, i) => (
                 <th
                   key={t}
-                  className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[10.5px] font-extrabold uppercase tracking-[0.08em] text-center whitespace-nowrap"
+                  className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11.5px] font-extrabold uppercase tracking-[0.08em] text-center whitespace-nowrap"
                   style={{
                     background: i === 0 ? "rgba(196,255,0,0.05)" : "var(--color-canvas-3)",
                     color: i === 0 ? "var(--color-accent)" : "var(--color-muted)",
@@ -154,7 +154,7 @@ export function CompareTable() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, ease: EASE, delay: 0.15 + i * 0.06 }}
               >
-                <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-sans)] text-[14px] text-[var(--color-muted)]">
+                <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-sans)] text-[15px] text-[var(--color-muted)]">
                   {row.capability}
                 </td>
                 <Cell val={row.us} />

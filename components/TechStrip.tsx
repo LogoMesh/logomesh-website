@@ -18,7 +18,7 @@ export function TechStrip() {
             className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"
             style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
           />
-          <span className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.12em] text-[var(--color-muted)] whitespace-nowrap">
+          <span className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--color-muted)] whitespace-nowrap">
             Works with
           </span>
         </div>
@@ -52,7 +52,7 @@ export function TechStrip() {
                 <span className="opacity-40 group-hover:opacity-90 transition-opacity duration-300">
                   <Logo size={28} />
                 </span>
-                <span className="font-[family-name:var(--font-mono)] text-[13px] font-semibold text-[var(--color-dim)] group-hover:text-[var(--color-ink)] transition-colors duration-300 whitespace-nowrap">
+                <span className="font-[family-name:var(--font-mono)] text-[14px] font-semibold text-[var(--color-dim)] group-hover:text-[var(--color-ink)] transition-colors duration-300 whitespace-nowrap">
                   {name}
                 </span>
               </div>

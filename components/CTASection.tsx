@@ -92,7 +92,7 @@ export function CTASection() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.28 }}
-        className="relative mt-7 font-[family-name:var(--font-mono)] text-[11.5px] text-[var(--color-dim)]"
+        className="relative mt-7 font-[family-name:var(--font-mono)] text-[12.5px] text-[var(--color-dim)]"
       >
         Private repos coming soon · No config required
       </motion.p>

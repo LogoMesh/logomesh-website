@@ -37,7 +37,7 @@ export function Hero() {
             className="w-[5px] h-[5px] rounded-full bg-[var(--color-accent)]"
             style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
           />
-          <span className="font-[family-name:var(--font-mono)] text-[10.5px] font-bold uppercase tracking-[0.13em] text-[var(--color-accent)]">
+          <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.13em] text-[var(--color-accent)]">
             Beta&nbsp;&nbsp;·&nbsp;&nbsp;Python · Free for public repos
           </span>
         </div>
@@ -89,7 +89,7 @@ export function Hero() {
         <div className="flex items-center gap-7 flex-wrap">
         <motion.a
           href="https://github.com/apps/logomesh"
-          className="relative flex items-center gap-2.5 bg-[var(--color-accent)] text-black px-8 py-4 font-[family-name:var(--font-mono)] text-[13.5px] font-bold"
+          className="relative flex items-center gap-2.5 bg-[var(--color-accent)] text-black px-8 py-4 font-[family-name:var(--font-mono)] text-[14.5px] font-bold"
           whileHover={{ x: -2, y: -2 }}
           whileTap={{ scale: 0.98 }}
           style={{ transition: "none" }}
@@ -103,7 +103,7 @@ export function Hero() {
           />
         </motion.a>
 
-        <span className="flex items-center gap-2.5 text-[12px] text-[var(--color-muted)]">
+        <span className="flex items-center gap-2.5 text-[13px] text-[var(--color-muted)]">
           <span className="w-5 h-px bg-[var(--color-dim)]" />
           <Image
             src="/california_golden_bears.png"
@@ -125,7 +125,7 @@ export function Hero() {
           ].map(({ icon, text }) => (
             <span
               key={text}
-              className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)]"
+              className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)]"
             >
               <span className="text-[var(--color-dim)]">{icon}</span>
               {text}
