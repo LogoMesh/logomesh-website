@@ -29,7 +29,7 @@ function FadeUp({
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-24 sm:pt-32 md:pt-36 pb-16 md:pb-20">
+    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-28 sm:pt-36 md:pt-40 pb-16 md:pb-20">
       {/* Subtle proof-grid dot pattern — fades from top-left where headline lives */}
       <div
         className="pointer-events-none absolute inset-0"

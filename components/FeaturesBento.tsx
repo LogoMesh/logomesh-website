@@ -18,7 +18,8 @@ function BentoCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: EASE, delay }}
-      className={`bg-[var(--color-canvas)] border border-[var(--color-border)] p-5 md:p-7 flex flex-col ${className}`}
+      whileHover={{ borderColor: "rgba(196,255,0,0.28)" }}
+      className={`bg-[var(--color-canvas)] border border-[var(--color-border)] p-5 md:p-7 flex flex-col cursor-default transition-shadow duration-300 hover:shadow-[0_0_28px_rgba(196,255,0,0.05)] ${className}`}
     >
       {children}
     </motion.div>

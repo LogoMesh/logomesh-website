@@ -58,13 +58,21 @@ export function Nav() {
   }, []);
 
   return (
+    <>
+      {/* Scroll progress — fixed at very top of viewport, separate from the floating nav */}
+      <div
+        ref={progressRef}
+        className="fixed top-0 left-0 z-[60] h-[1.5px] bg-[var(--color-accent)] pointer-events-none"
+        style={{ width: "0%", transition: "none" }}
+        aria-hidden
+      />
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center justify-between px-4 sm:px-6 md:px-10 py-4",
-        "border-b transition-all duration-300",
+        "fixed top-3 left-3 right-3 z-50 flex flex-wrap items-center justify-between px-4 sm:px-5 md:px-8 py-3.5",
+        "border transition-all duration-300",
         scrolled || menuOpen
-          ? "border-[var(--color-border)] bg-[var(--color-canvas)]/90 backdrop-blur-xl"
-          : "border-transparent bg-transparent",
+          ? "border-[var(--color-border)] bg-[var(--color-canvas)]/92 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.45)]"
+          : "border-[var(--color-border-hi)]/50 bg-[var(--color-canvas)]/80 backdrop-blur-md",
       )}
     >
       {/* Logo */}
@@ -156,14 +164,6 @@ export function Nav() {
         </button>
       </div>
 
-      {/* Scroll progress — drawn at the very bottom edge of the nav */}
-      <div
-        ref={progressRef}
-        className="absolute bottom-0 left-0 h-[2px] bg-[var(--color-accent)] pointer-events-none"
-        style={{ width: "0%", transition: "none" }}
-        aria-hidden
-      />
-
       {/* Mobile menu */}
       {menuOpen && (
         <ul className="md:hidden w-full list-none flex flex-col gap-1 pt-4 pb-2 border-t border-[var(--color-border)] mt-4">
@@ -192,5 +192,6 @@ export function Nav() {
         </ul>
       )}
     </nav>
+    </>
   );
 }

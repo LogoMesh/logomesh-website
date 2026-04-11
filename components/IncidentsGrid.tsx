@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { EASE } from "@/lib/motion";
+import { LogoMark } from "./LogoMark";
 
 type Incident = {
   company: string;
@@ -102,8 +103,9 @@ export function IncidentsGrid() {
           <span className="block font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)] tracking-[0.04em] mb-5">
             LogoMesh analysis · 20 production postmortems · Apr 2026
           </span>
-          <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-extrabold uppercase tracking-[0.1em] text-[var(--color-accent)]">
-            ● catchable by logomesh
+          <span className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[11.5px] font-extrabold uppercase tracking-[0.1em] text-[var(--color-accent)]">
+            <LogoMark size={14} />
+            catchable by logomesh
           </span>
         </motion.div>
       </div>

@@ -75,8 +75,20 @@ export function StatsStrip() {
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.07 }}
         >
-          <div className="font-[family-name:var(--font-display)] text-[40px] sm:text-[48px] md:text-[54px] font-extrabold leading-none tracking-[-0.05em] text-[var(--color-ink)] mb-2.5 tabular-nums">
-            <span className="text-[var(--color-accent)]">
+          <div className="relative font-[family-name:var(--font-display)] text-[40px] sm:text-[48px] md:text-[54px] font-extrabold leading-none tracking-[-0.05em] mb-2.5 tabular-nums">
+            {/* Subtle glow bloom behind the number */}
+            <span
+              className="absolute inset-0 pointer-events-none"
+              aria-hidden
+              style={{
+                background:
+                  "radial-gradient(ellipse 80% 60% at 0% 50%, rgba(196,255,0,0.08) 0%, transparent 70%)",
+              }}
+            />
+            <span
+              className="relative text-[var(--color-accent)]"
+              style={{ textShadow: "0 0 32px rgba(196,255,0,0.2)" }}
+            >
               {s.prefix}
               <CountUp target={s.value} />
               {s.suffix}

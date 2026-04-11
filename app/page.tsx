@@ -11,7 +11,15 @@ import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { MobileInstallCTA } from "@/components/MobileInstallCTA";
 
-const Rule = () => <div className="h-px w-full bg-[var(--color-border)]" />;
+const Rule = () => (
+  <div
+    className="h-px w-full"
+    style={{
+      background:
+        "linear-gradient(90deg, transparent 0%, var(--color-border-hi) 25%, var(--color-border-hi) 75%, transparent 100%)",
+    }}
+  />
+);
 
 export default function Home() {
   return (
