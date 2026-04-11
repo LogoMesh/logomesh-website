@@ -7,7 +7,6 @@ import { FeaturesBento } from "@/components/FeaturesBento";
 import { IncidentsGrid } from "@/components/IncidentsGrid";
 import { PipelineSection } from "@/components/PipelineSection";
 import { CompareTable } from "@/components/CompareTable";
-import { ChangelogStrip } from "@/components/ChangelogStrip";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
 import { MobileInstallCTA } from "@/components/MobileInstallCTA";
@@ -31,7 +30,6 @@ export default function Home() {
         <PipelineSection />
         <Rule />
         <CompareTable />
-        <ChangelogStrip />
         <CTASection />
       </main>
       <Footer />

@@ -28,7 +28,7 @@ function BentoCard({
 // Mini terminal showing property inference output
 function PropertyCard() {
   return (
-    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[12.5px] leading-[1.7]">
+    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[13.5px] leading-[1.7]">
       <motion.p
         className="text-[var(--color-dim)] mb-2"
         initial={{ opacity: 0 }}
@@ -58,19 +58,45 @@ function PropertyCard() {
   );
 }
 
+const FLAGS = ["airgapped", "nobody user", "128 MB RAM", "50 PIDs", "read-only"];
+
 // Mini sandbox execution card
 function SandboxCard() {
   return (
-    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[12px] leading-[1.65] space-y-1">
+    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[13px] leading-[1.65] space-y-2">
       <p className="text-[var(--color-dim)]">Container environment:</p>
       <div className="flex gap-2 flex-wrap mt-1">
-        {["airgapped", "nobody user", "128 MB RAM", "50 PIDs", "read-only"].map((flag) => (
-          <span
+        {FLAGS.map((flag, i) => (
+          <motion.span
             key={flag}
-            className="border border-[var(--color-border-hi)] text-[var(--color-muted)] px-2 py-px text-[11px] font-bold uppercase tracking-wide"
+            className="relative px-2 py-px text-[12px] font-bold uppercase tracking-wide"
+            style={{
+              color: "#93c5fd",
+              border: "1px solid rgba(29,99,237,0.45)",
+              background: "rgba(29,99,237,0.08)",
+            }}
+            initial={{ opacity: 0, scale: 0.88 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.1 }}
+            animate={{
+              boxShadow: [
+                "0 0 0px 0px rgba(29,99,237,0)",
+                "0 0 8px 2px rgba(29,99,237,0.5)",
+                "0 0 0px 0px rgba(29,99,237,0)",
+              ],
+            }}
+            transition={{
+              boxShadow: {
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.45,
+              },
+            }}
           >
             {flag}
-          </span>
+          </motion.span>
         ))}
       </div>
     </div>
@@ -86,16 +112,17 @@ export function FeaturesBento() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.55, ease: EASE }}
-        className="flex items-center gap-3.5 mb-7"
+        className="flex items-center gap-3.5 mb-10"
       >
+        <span className="w-12 h-px bg-[var(--color-border-hi)]" />
         <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
           Why it catches what others miss
         </span>
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
       </motion.div>
 
-      {/* Bento grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 auto-rows-auto">
+      {/* Bento grid — 3-col so 2+1 fills perfectly each row */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 auto-rows-auto">
 
         {/* Large card — Property Inference (spans 2 cols) */}
         <BentoCard className="lg:col-span-2" delay={0}>
@@ -179,10 +206,11 @@ export function FeaturesBento() {
             LLM validates every crash is caller-reachable before posting.
             False positives are the #1 reason developers uninstall.
           </p>
-          <div className="mt-auto pt-5 border-t border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)]">
+          <div className="mt-auto pt-5 border-t border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)]">
             arXiv:2510.02185 — crash validation study
           </div>
         </BentoCard>
+
       </div>
     </section>
   );
