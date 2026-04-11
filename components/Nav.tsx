@@ -8,8 +8,8 @@ import { LogoMark } from "./LogoMark";
 const links = [
   { label: "Evidence", href: "#problem" },
   { label: "How it works", href: "#proof" },
+  { label: "Features", href: "#features" },
   { label: "Pipeline", href: "#how" },
-  { label: "Compare", href: "#compare" },
 ];
 
 const sectionIds = links.map((l) => l.href.slice(1));
@@ -59,22 +59,22 @@ export function Nav() {
 
   return (
     <>
-      {/* Scroll progress — fixed at very top of viewport, separate from the floating nav */}
+      {/* Scroll progress — above nav chrome */}
       <div
         ref={progressRef}
-        className="fixed top-0 left-0 z-[60] h-[1.5px] bg-[var(--color-accent)] pointer-events-none"
+        className="fixed top-0 left-0 z-[10002] h-[1.5px] bg-[var(--color-accent)] pointer-events-none"
         style={{ width: "0%", transition: "none" }}
         aria-hidden
       />
     <nav
       className={cn(
-        "fixed top-3 left-3 right-3 z-50 flex flex-wrap items-center justify-between px-4 sm:px-5 md:px-8 py-3.5",
-        "border transition-all duration-300",
+        "fixed top-0 left-0 right-0 z-[10000] w-full border-b transition-all duration-300",
         scrolled || menuOpen
-          ? "border-[var(--color-border)] bg-[var(--color-canvas)]/92 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.45)]"
-          : "border-[var(--color-border-hi)]/50 bg-[var(--color-canvas)]/80 backdrop-blur-md",
+          ? "border-[var(--color-border)] bg-[var(--color-canvas)]/95 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.45)]"
+          : "border-[var(--color-border-hi)]/50 bg-[var(--color-canvas)]/92 backdrop-blur-xl",
       )}
     >
+      <div className="mx-auto flex w-full max-w-[1280px] flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 sm:px-8 md:px-10 pt-[env(safe-area-inset-top)] pb-3.5">
       {/* Logo */}
       <a href="#" className="flex items-center gap-2 shrink-0">
         <LogoMark size={22} />
@@ -166,7 +166,7 @@ export function Nav() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <ul className="md:hidden w-full list-none flex flex-col gap-1 pt-4 pb-2 border-t border-[var(--color-border)] mt-4">
+        <ul className="md:hidden w-full list-none flex flex-col gap-1 pt-4 pb-2 border-t border-[var(--color-border)] mt-3 basis-full">
           {links.map((l) => {
             const isActive = activeId === l.href.slice(1);
             return (
@@ -191,6 +191,7 @@ export function Nav() {
           })}
         </ul>
       )}
+      </div>
     </nav>
     </>
   );

@@ -107,7 +107,10 @@ function SandboxCard() {
 
 export function FeaturesBento() {
   return (
-    <section className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28">
+    <section
+      id="features"
+      className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28"
+    >
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
