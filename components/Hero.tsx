@@ -58,13 +58,13 @@ export function Hero() {
 
       {/* Headline */}
       <FadeUp delay={0.07}>
-        <h1 className="font-[family-name:var(--font-display)] text-[clamp(42px,5.5vw,80px)] font-extrabold leading-[0.93] tracking-[-0.04em] text-[var(--color-ink)] mb-1.5">
+        <h1 className="font-[family-name:var(--font-display)] text-[clamp(54px,6.8vw,96px)] font-extrabold leading-[0.91] tracking-[-0.04em] text-[var(--color-ink)] mb-2">
           Catch the{" "}
           <span
             style={{
               color: "var(--color-danger)",
               textShadow:
-                "0 0 28px rgba(255,59,59,0.5), 0 0 60px rgba(255,59,59,0.25)",
+                "0 0 36px rgba(255,59,59,0.55), 0 0 70px rgba(255,59,59,0.25)",
             }}
           >
             bug
@@ -77,23 +77,20 @@ export function Hero() {
       </FadeUp>
 
       {/* Serif italic subline */}
-      <FadeUp delay={0.14}>
-        <p className="font-[family-name:var(--font-serif)] italic text-[clamp(24px,3vw,42px)] leading-[1.2] tracking-[-0.02em] text-[var(--color-muted)] mb-11">
+      <FadeUp delay={0.12}>
+        <p className="font-[family-name:var(--font-serif)] italic text-[clamp(22px,2.8vw,38px)] leading-[1.2] tracking-[-0.02em] text-[var(--color-muted)] mb-10">
           On every PR. Automatically.
         </p>
       </FadeUp>
 
-      {/* Body */}
-      <FadeUp delay={0.2}>
-        <p className="max-w-[520px] text-[17px] leading-[1.75] text-[var(--color-muted)] mb-11">
-          LogoMesh infers what your code{" "}
-          <em className="not-italic font-semibold text-[var(--color-ink)]">
-            should
-          </em>{" "}
-          do, then attacks those properties with adversarial inputs in a
-          hardened Docker sandbox. When it finds a real crash, you get the exact
-          input, exact output, and file location as a PR comment. When it
-          doesn&rsquo;t — silence you can trust.
+      {/* Body — 3 punchy lines */}
+      <FadeUp delay={0.19}>
+        <p className="max-w-[480px] text-[17px] leading-[1.8] text-[var(--color-muted)] mb-10">
+          Infers what your code should{" "}
+          <em className="not-italic font-semibold text-[var(--color-ink)]">guarantee</em>.
+          Attacks it with adversarial inputs in a hardened Docker sandbox.
+          Only posts a PR comment when the crash is{" "}
+          <em className="not-italic font-semibold text-[var(--color-ink)]">confirmed</em>.
         </p>
       </FadeUp>
 
