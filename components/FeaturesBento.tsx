@@ -78,7 +78,6 @@ function SandboxCard() {
             initial={{ opacity: 0, scale: 0.88 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.1 }}
             animate={{
               boxShadow: [
                 "0 0 0px 0px rgba(29,99,237,0)",
@@ -87,6 +86,8 @@ function SandboxCard() {
               ],
             }}
             transition={{
+              opacity: { duration: 0.3, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.1 },
+              scale:   { duration: 0.3, ease: [0.22, 1, 0.36, 1], delay: 0.1 + i * 0.1 },
               boxShadow: {
                 duration: 2.5,
                 repeat: Infinity,
