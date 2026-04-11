@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, Syne, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import { ScrollReset } from "@/components/ScrollReset";
+import { IntroAnimation } from "@/components/IntroAnimation";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -48,6 +49,7 @@ export default function RootLayout({
       className={`${dmSans.variable} ${syne.variable} ${jbMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="antialiased">
+        <IntroAnimation />
         <ScrollReset />
         {children}
       </body>

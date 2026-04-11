@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { GithubIcon } from "./icons/GithubIcon";
+import { LogoMark } from "./LogoMark";
 
 const links = [
   { label: "Evidence", href: "#problem" },
@@ -67,11 +68,12 @@ export function Nav() {
       )}
     >
       {/* Logo */}
-      <a
-        href="#"
-        className="font-[family-name:var(--font-display)] text-[15px] font-bold tracking-tight text-[var(--color-ink)]"
-      >
-        Logo<span className="text-[var(--color-accent)]">Mesh</span>
+      <a href="#" className="flex items-center gap-2.5">
+        <LogoMark size={28} />
+        <span className="font-[family-name:var(--font-display)] text-[15px] font-bold tracking-tight leading-none">
+          <span className="text-[var(--color-accent)]">Logo</span>
+          <span className="text-[var(--color-ink)]">Mesh</span>
+        </span>
       </a>
 
       {/* Desktop links */}
