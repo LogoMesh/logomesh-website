@@ -7,7 +7,7 @@ import { IncidentsGrid } from "@/components/IncidentsGrid";
 import { PipelineSection } from "@/components/PipelineSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
-import { MobileInstallCTA } from "@/components/MobileInstallCTA";
+// import { MobileInstallCTA } from "@/components/MobileInstallCTA";
 
 const Rule = () => (
   <div
@@ -36,7 +36,6 @@ export default function Home() {
         <CTASection />
       </main>
       <Footer />
-      <MobileInstallCTA />
     </>
   );
 }
