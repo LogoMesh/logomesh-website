@@ -58,14 +58,17 @@ const INCIDENTS: Incident[] = [
 
 export function IncidentsGrid() {
   return (
-    <section id="problem" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28">
+    <section
+      id="problem"
+      className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 sm:py-20 md:py-28 overflow-x-hidden"
+    >
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.55, ease: EASE }}
-        className="flex items-center gap-3.5 mb-7"
+        className="flex items-center gap-3.5 mb-6 sm:mb-7"
       >
         <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
           Real production incidents
@@ -74,7 +77,7 @@ export function IncidentsGrid() {
       </motion.div>
 
       {/* Split header */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end mb-10 md:mb-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-16 items-start md:items-end mb-8 sm:mb-10 md:mb-14">
         <motion.h2
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,7 +99,7 @@ export function IncidentsGrid() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.12 }}
         >
-          <p className="text-[17px] leading-[1.75] text-[var(--color-muted)] mb-5">
+          <p className="text-[16px] sm:text-[17px] leading-[1.75] text-[var(--color-muted)] mb-4 sm:mb-5">
             25–35% of production incidents are code bugs catchable before merge.
             These all shipped because reviewers read the diff but couldn&rsquo;t run it.
           </p>
@@ -118,30 +121,29 @@ export function IncidentsGrid() {
         {INCIDENTS.map((inc, i) => (
           <motion.div
             key={i}
-            className="relative bg-[var(--color-canvas)] p-6 cursor-default group border-l-2 border-l-transparent hover:border-l-[var(--color-accent)] transition-all duration-300 hover:shadow-[0_0_24px_rgba(196,255,0,0.06)]"
-            initial={{ opacity: 0, y: 16 }}
+            className="relative bg-[var(--color-canvas)] p-5 sm:p-6 cursor-default group border-l-2 border-l-transparent transition-colors duration-200 md:hover:border-l-[var(--color-accent)] md:hover:bg-[var(--color-canvas-3)] md:hover:shadow-[0_0_24px_rgba(196,255,0,0.06)] active:bg-[var(--color-canvas-3)]"
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: EASE, delay: (i % 4) * 0.06 }}
-            whileHover={{ backgroundColor: "var(--color-canvas-3)" }}
+            viewport={{ once: true, margin: "0px 0px -12% 0px", amount: 0.15 }}
+            transition={{ duration: 0.4, ease: EASE, delay: Math.min(i, 5) * 0.04 }}
           >
-            {/* Catchable dot — pulses on hover */}
+            {/* Catchable dot — pulse only on fine-pointer hover (avoids iOS touch jank) */}
             <span
-              className="absolute top-3.5 right-3.5 w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] group-hover:animate-[pulse-dot_2s_ease-in-out_infinite]"
+              className="absolute top-3.5 right-3.5 w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] md:group-hover:animate-[pulse-dot_2s_ease-in-out_infinite]"
               aria-hidden
             />
             <p className="font-[family-name:var(--font-mono)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-2.5">
               {inc.company}
             </p>
-            <p className="font-[family-name:var(--font-mono)] text-[15.5px] font-semibold text-[var(--color-ink)] leading-[1.5] mb-3">
+            <p className="font-[family-name:var(--font-mono)] text-[14.5px] sm:text-[15.5px] font-semibold text-[var(--color-ink)] leading-[1.55] mb-3 break-words hyphens-auto">
               {inc.title}
             </p>
             {inc.loss && (
-              <p className="font-[family-name:var(--font-mono)] text-[12px] font-bold text-[var(--color-danger)] mb-2">
+              <p className="font-[family-name:var(--font-mono)] text-[11.5px] sm:text-[12px] font-bold text-[var(--color-danger)] mb-2 break-words">
                 {inc.loss}
               </p>
             )}
-            <span className="inline-block font-[family-name:var(--font-mono)] text-[10px] font-bold uppercase tracking-[0.08em] text-[var(--color-muted)] border border-[var(--color-border-hi)] px-2 py-0.5 mt-1">
+            <span className="inline-block max-w-full font-[family-name:var(--font-mono)] text-[10px] font-bold uppercase tracking-[0.08em] text-[var(--color-muted)] border border-[var(--color-border-hi)] px-2 py-1 mt-1 break-words">
               {inc.tag}
             </span>
           </motion.div>

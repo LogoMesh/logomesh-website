@@ -29,7 +29,7 @@ function FadeUp({
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-28 sm:pt-36 md:pt-40 pb-16 md:pb-20">
+    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-28 sm:pt-36 md:pt-40 pb-20 md:pb-20">
       {/* Subtle proof-grid dot pattern — fades from top-left where headline lives */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -45,7 +45,7 @@ export function Hero() {
       />
       {/* Kicker */}
       <FadeUp>
-        <div className="inline-flex items-center gap-2.5 border border-[var(--color-accent)]/25 px-3.5 py-1.5 mb-9">
+        <div className="inline-flex max-w-full flex-wrap items-center gap-2.5 border border-[var(--color-accent)]/25 px-3.5 py-1.5 mb-7 sm:mb-9">
           <span
             className="w-[5px] h-[5px] rounded-full bg-[var(--color-accent)]"
             style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
@@ -58,7 +58,7 @@ export function Hero() {
 
       {/* Headline */}
       <FadeUp delay={0.07}>
-        <h1 className="font-[family-name:var(--font-display)] text-[clamp(54px,6.8vw,96px)] font-extrabold leading-[0.91] tracking-[-0.04em] text-[var(--color-ink)] mb-2">
+        <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.35rem,9.2vw,6rem)] sm:text-[clamp(2.75rem,6.8vw,6rem)] font-extrabold leading-[0.93] sm:leading-[0.91] tracking-[-0.04em] text-[var(--color-ink)] mb-3 sm:mb-2">
           Catch the{" "}
           <span
             style={{
@@ -78,14 +78,14 @@ export function Hero() {
 
       {/* Serif italic subline */}
       <FadeUp delay={0.12}>
-        <p className="font-[family-name:var(--font-serif)] italic text-[clamp(22px,2.8vw,38px)] leading-[1.2] tracking-[-0.02em] text-[var(--color-muted)] mb-10">
+        <p className="font-[family-name:var(--font-serif)] italic text-[clamp(1.2rem,4.5vw,2.375rem)] leading-[1.25] tracking-[-0.02em] text-[var(--color-muted)] mb-8 sm:mb-10">
           On every PR. Automatically.
         </p>
       </FadeUp>
 
       {/* Body — 3 punchy lines */}
       <FadeUp delay={0.19}>
-        <p className="max-w-[480px] text-[17px] leading-[1.8] text-[var(--color-muted)] mb-10">
+        <p className="max-w-[480px] text-[16px] sm:text-[17px] leading-[1.85] text-[var(--color-muted)] mb-8 sm:mb-10">
           Infers what your code should{" "}
           <em className="not-italic font-semibold text-[var(--color-ink)]">guarantee</em>.
           Attacks it with adversarial inputs in a hardened Docker sandbox.
@@ -95,11 +95,11 @@ export function Hero() {
       </FadeUp>
 
       {/* CTAs */}
-      <FadeUp delay={0.26} className="mb-12 md:mb-20">
+      <FadeUp delay={0.26} className="mb-10 sm:mb-12 md:mb-20">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-7">
         <motion.a
           href="https://github.com/apps/logomesh"
-          className="relative flex items-center justify-center gap-2.5 bg-[var(--color-accent)] text-black px-8 py-4 font-[family-name:var(--font-mono)] text-[14.5px] font-bold"
+          className="relative flex w-full sm:w-auto min-h-[48px] items-center justify-center gap-2.5 bg-[var(--color-accent)] text-black px-6 sm:px-8 py-3.5 sm:py-4 font-[family-name:var(--font-mono)] text-[14px] sm:text-[14.5px] font-bold"
           whileHover={{ x: -2, y: -2 }}
           whileTap={{ scale: 0.98 }}
           style={{ transition: "none" }}
@@ -113,7 +113,7 @@ export function Hero() {
           />
         </motion.a>
 
-        <span className="flex items-center gap-2.5 text-[13px] text-[var(--color-muted)] sm:flex-shrink-0">
+        <span className="flex flex-wrap items-center gap-2.5 text-[12.5px] sm:text-[13px] leading-snug text-[var(--color-muted)] sm:shrink-0">
           <span className="w-5 h-px bg-[var(--color-dim)]" />
           <Image
             src="/california_golden_bears.png"

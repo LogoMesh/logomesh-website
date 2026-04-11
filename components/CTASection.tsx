@@ -22,7 +22,7 @@ export function CTASection() {
     <section
       ref={sectionRef}
       id="cta"
-      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-20 md:py-28 px-5 md:px-10"
+      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-16 sm:py-20 md:py-28 px-4 sm:px-5 md:px-10"
       style={{ background: "var(--color-canvas-2)" }}
       onMouseMove={handleMouseMove}
     >
@@ -40,7 +40,7 @@ export function CTASection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.65, ease: EASE }}
-        className="relative font-[family-name:var(--font-display)] text-[clamp(36px,5vw,70px)] font-extrabold leading-[0.93] tracking-[-0.04em] mb-3"
+        className="relative font-[family-name:var(--font-display)] text-[clamp(1.75rem,8vw,4.375rem)] sm:text-[clamp(36px,5vw,70px)] font-extrabold leading-[0.96] sm:leading-[0.93] tracking-[-0.04em] mb-4 sm:mb-3 px-1"
       >
         Install once.
         <br />
@@ -64,7 +64,7 @@ export function CTASection() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.12 }}
-        className="relative text-[17px] text-[var(--color-muted)] mb-8 sm:mb-14"
+        className="relative text-[16px] sm:text-[17px] leading-relaxed text-[var(--color-muted)] mb-8 sm:mb-14 max-w-md mx-auto px-1"
       >
         Free for public repos. No configuration. Works on the next PR you open.
       </motion.p>

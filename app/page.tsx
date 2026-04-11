@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main>
+      <main className="max-md:pb-[calc(5.25rem+env(safe-area-inset-bottom))]">
         <Hero />
         <TechStrip />
         <IncidentsGrid />
