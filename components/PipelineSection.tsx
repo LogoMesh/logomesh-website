@@ -59,7 +59,7 @@ const STEPS: Step[] = [
 
 export function PipelineSection() {
   return (
-    <section id="how" className="max-w-[1280px] mx-auto px-10 py-24">
+    <section id="how" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-24">
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -101,13 +101,13 @@ export function PipelineSection() {
 
       {/* Steps grid */}
       <div
-        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-px"
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-px"
         style={{ background: "var(--color-border)" }}
       >
         {STEPS.map((s, i) => (
           <motion.div
             key={s.n}
-            className="p-6 relative"
+            className="p-4 sm:p-6 relative"
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -140,7 +140,7 @@ export function PipelineSection() {
             >
               {s.title}
             </p>
-            <p className="font-[family-name:var(--font-sans)] text-[15px] text-[var(--color-muted)] leading-[1.65]">
+            <p className="font-[family-name:var(--font-sans)] text-[14px] sm:text-[15px] text-[var(--color-muted)] leading-[1.65]">
               {s.desc}
             </p>
           </motion.div>

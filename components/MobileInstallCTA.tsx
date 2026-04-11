@@ -33,7 +33,7 @@ export function MobileInstallCTA() {
     >
       <a
         href="https://github.com/apps/logomesh"
-        className="flex items-center justify-center gap-2.5 py-4 font-[family-name:var(--font-mono)] text-[14px] font-bold text-black"
+        className="flex items-center justify-center gap-2.5 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] font-[family-name:var(--font-mono)] text-[14px] font-bold text-black"
         style={{ background: "var(--color-accent)" }}
       >
         <GithubIcon size={15} />

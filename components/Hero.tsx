@@ -29,7 +29,7 @@ function FadeUp({
 
 export function Hero() {
   return (
-    <section className="max-w-[1280px] mx-auto px-10 pt-36 pb-20">
+    <section className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-24 sm:pt-32 md:pt-36 pb-16 md:pb-20">
       {/* Kicker */}
       <FadeUp>
         <div className="inline-flex items-center gap-2.5 border border-[var(--color-accent)]/25 px-3.5 py-1.5 mb-9">
@@ -86,10 +86,10 @@ export function Hero() {
 
       {/* CTAs */}
       <FadeUp delay={0.26} className="mb-20">
-        <div className="flex items-center gap-7 flex-wrap">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-7">
         <motion.a
           href="https://github.com/apps/logomesh"
-          className="relative flex items-center gap-2.5 bg-[var(--color-accent)] text-black px-8 py-4 font-[family-name:var(--font-mono)] text-[14.5px] font-bold"
+          className="relative flex items-center justify-center gap-2.5 bg-[var(--color-accent)] text-black px-8 py-4 font-[family-name:var(--font-mono)] text-[14.5px] font-bold"
           whileHover={{ x: -2, y: -2 }}
           whileTap={{ scale: 0.98 }}
           style={{ transition: "none" }}
@@ -103,7 +103,7 @@ export function Hero() {
           />
         </motion.a>
 
-        <span className="flex items-center gap-2.5 text-[13px] text-[var(--color-muted)]">
+        <span className="flex items-center gap-2.5 text-[13px] text-[var(--color-muted)] sm:flex-shrink-0">
           <span className="w-5 h-px bg-[var(--color-dim)]" />
           <Image
             src="/california_golden_bears.png"

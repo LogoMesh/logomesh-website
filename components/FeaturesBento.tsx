@@ -18,7 +18,7 @@ function BentoCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: EASE, delay }}
-      className={`bg-[var(--color-canvas)] border border-[var(--color-border)] p-7 flex flex-col ${className}`}
+      className={`bg-[var(--color-canvas)] border border-[var(--color-border)] p-5 md:p-7 flex flex-col ${className}`}
     >
       {children}
     </motion.div>
@@ -106,7 +106,7 @@ function SandboxCard() {
 
 export function FeaturesBento() {
   return (
-    <section className="max-w-[1280px] mx-auto px-10 py-24">
+    <section className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-24">
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -178,14 +178,14 @@ export function FeaturesBento() {
                 and runs the full pipeline automatically.
               </p>
             </div>
-            <div className="flex-shrink-0 flex flex-col gap-2.5 font-[family-name:var(--font-mono)] text-[13px]">
+            <div className="flex-shrink-0 flex flex-col gap-2.5 font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px]">
               {[
                 { label: "Config files required", val: "0" },
                 { label: "Setup time", val: "< 60s" },
                 { label: "PR events handled", val: "Auto" },
                 { label: "Languages supported", val: "Python" },
               ].map(({ label, val }) => (
-                <div key={label} className="flex items-center justify-between gap-8">
+                <div key={label} className="flex items-center justify-between gap-4 sm:gap-8">
                   <span className="text-[var(--color-muted)] text-[12px]">{label}</span>
                   <span className="text-[var(--color-accent)] font-bold">{val}</span>
                 </div>

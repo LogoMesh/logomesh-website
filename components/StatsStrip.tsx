@@ -63,26 +63,26 @@ function CountUp({ target, duration = 1400 }: { target: number; duration?: numbe
 export function StatsStrip() {
   return (
     <div
-      className="grid grid-cols-2 md:grid-cols-4 border-t border-b border-[var(--color-border)]"
+      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 border-t border-b border-[var(--color-border)]"
       style={{ background: "var(--color-canvas-2)" }}
     >
       {STATS.map((s, i) => (
         <motion.div
           key={i}
-          className="px-10 py-11 border-r border-[var(--color-border)] last:border-r-0 md:[&:nth-child(2)]:border-r"
+          className="px-5 sm:px-8 md:px-10 py-8 md:py-11 border-b border-r border-[var(--color-border)] sm:last:border-r-0 md:[&:nth-child(2)]:border-r [&:nth-last-child(-n+1)]:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0 md:[&:nth-last-child(-n+4)]:border-b-0"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-60px" }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: i * 0.07 }}
         >
-          <div className="font-[family-name:var(--font-display)] text-[54px] font-extrabold leading-none tracking-[-0.05em] text-[var(--color-ink)] mb-2.5 tabular-nums">
+          <div className="font-[family-name:var(--font-display)] text-[40px] sm:text-[48px] md:text-[54px] font-extrabold leading-none tracking-[-0.05em] text-[var(--color-ink)] mb-2.5 tabular-nums">
             <span className="text-[var(--color-accent)]">
               {s.prefix}
               <CountUp target={s.value} />
               {s.suffix}
             </span>
           </div>
-          <p className="text-[15px] text-[var(--color-muted)] leading-[1.6] max-w-[200px]">
+          <p className="text-[15px] text-[var(--color-muted)] leading-[1.6] max-w-none sm:max-w-[200px]">
             {s.label}
           </p>
           <p className="mt-2.5 text-[13px] text-[var(--color-dim)] tracking-[0.03em]">

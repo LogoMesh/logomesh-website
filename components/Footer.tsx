@@ -36,14 +36,14 @@ export function Footer() {
       </pre>
 
       {/* Content */}
-      <div className="relative px-10 py-7 flex flex-wrap items-center justify-between gap-5">
+      <div className="relative px-4 sm:px-10 py-7 flex flex-wrap items-center justify-between gap-5">
         <a
           href="#"
           className="font-[family-name:var(--font-display)] text-[15px] font-bold tracking-tight text-[var(--color-muted)]"
         >
           Logo<span className="text-[var(--color-accent)]">Mesh</span>
         </a>
-        <ul className="flex gap-7 list-none">
+        <ul className="flex flex-wrap gap-x-7 gap-y-2 list-none">
           {LINKS.map((l) => (
             <li key={l}>
               <a

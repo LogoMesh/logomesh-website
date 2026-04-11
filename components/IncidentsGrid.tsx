@@ -57,7 +57,7 @@ const INCIDENTS: Incident[] = [
 
 export function IncidentsGrid() {
   return (
-    <section id="problem" className="max-w-[1280px] mx-auto px-10 py-24">
+    <section id="problem" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-24">
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -73,7 +73,7 @@ export function IncidentsGrid() {
       </motion.div>
 
       {/* Split header */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end mb-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end mb-10 md:mb-14">
         <motion.h2
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +139,7 @@ export function IncidentsGrid() {
                 {inc.loss}
               </p>
             )}
-            <span className="inline-block font-[family-name:var(--font-mono)] text-[9px] font-bold uppercase tracking-[0.08em] text-[var(--color-muted)] border border-[var(--color-border-hi)] px-2 py-0.5 mt-1">
+            <span className="inline-block font-[family-name:var(--font-mono)] text-[10px] font-bold uppercase tracking-[0.08em] text-[var(--color-muted)] border border-[var(--color-border-hi)] px-2 py-0.5 mt-1">
               {inc.tag}
             </span>
           </motion.div>

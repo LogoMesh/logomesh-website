@@ -13,7 +13,7 @@ export function TechStrip() {
     >
       <div className="flex items-center gap-0">
         {/* Label */}
-        <div className="flex-shrink-0 px-8 py-6 border-r border-[var(--color-border)] flex items-center gap-2.5">
+        <div className="flex-shrink-0 px-4 sm:px-8 py-5 sm:py-6 border-r border-[var(--color-border)] flex items-center gap-2.5">
           <span
             className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"
             style={{ animation: "pulse-dot 2s ease-in-out infinite" }}

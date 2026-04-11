@@ -163,7 +163,7 @@ export function TerminalWindow() {
     lines.forEach(({ text, color, ms }) => {
       const id = setTimeout(() => {
         const span = document.createElement("span");
-        span.className = `block whitespace-pre font-[family-name:var(--font-mono)] text-[13.5px] leading-[1.65] ${COLOR_MAP[color]}`;
+        span.className = `block whitespace-pre font-[family-name:var(--font-mono)] text-[11.5px] sm:text-[13.5px] leading-[1.65] ${COLOR_MAP[color]}`;
         span.textContent = text || "\u00A0";
         body.insertBefore(span, cursor);
         body.scrollTop = body.scrollHeight;
@@ -198,7 +198,7 @@ export function TerminalWindow() {
   return (
     <div>
       {/* Scenario tabs */}
-      <div className="flex items-end gap-px mb-0">
+      <div className="flex items-end gap-px mb-0 overflow-x-auto" style={{ scrollbarWidth: "none" }}>
         <span className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--color-dim)] px-3 pb-2 self-end">
           try with:
         </span>
@@ -238,14 +238,14 @@ export function TerminalWindow() {
           <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
           <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
           <span className="w-3 h-3 rounded-full bg-[#28c840]" />
-          <span className="absolute left-1/2 -translate-x-1/2 font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-muted)] tracking-wide">
-            logomesh&nbsp;&nbsp;·&nbsp;&nbsp;{current.repo}&nbsp;&nbsp;·&nbsp;&nbsp;{current.pr}
+          <span className="absolute left-1/2 -translate-x-1/2 font-[family-name:var(--font-mono)] text-[11px] sm:text-[12px] text-[var(--color-muted)] tracking-wide whitespace-nowrap max-w-[55%] overflow-hidden text-ellipsis">
+            <span className="hidden sm:inline">logomesh&nbsp;&nbsp;·&nbsp;&nbsp;{current.repo}&nbsp;&nbsp;·&nbsp;&nbsp;</span>{current.pr}
           </span>
         </div>
         {/* Body */}
         <div
           ref={bodyRef}
-          className="relative z-[1] px-6 py-5 min-h-[320px] overflow-y-auto"
+          className="relative z-[1] px-4 sm:px-6 py-5 min-h-[260px] sm:min-h-[320px] overflow-y-auto"
           style={{ scrollbarWidth: "none" }}
         >
           <span

@@ -61,20 +61,19 @@ function GitHubComment() {
         className="flex items-center justify-between px-4 py-2.5 border-b border-[#30363d]"
         style={{ background: "#161b22" }}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 flex-wrap">
           <div className="w-6 h-6 flex items-center justify-center text-black font-bold text-[9px] flex-shrink-0"
             style={{ background: "#c4ff00" }}>
             LM
           </div>
           <span className="text-[#e6edf3] text-[14px] font-semibold">logomesh</span>
-          <span className="text-[#8b949e] text-[13px]">bot</span>
           <span
             className="text-[11px] font-bold px-1.5 py-0.5 border border-[#388bfd]/40"
             style={{ color: "#388bfd", background: "rgba(56,139,253,0.08)" }}
           >
             bot
           </span>
-          <span className="text-[#8b949e] text-[13px]">commented 2 minutes ago</span>
+          <span className="text-[#8b949e] text-[12px] hidden xs:block">commented 2 min ago</span>
         </div>
         <span className="text-[12px] text-[#8b949e] hidden sm:block">on checkout.py</span>
       </div>
@@ -82,8 +81,8 @@ function GitHubComment() {
       {/* Comment body */}
       <div className="px-5 py-5">
         {/* Issue count header — badge pops in */}
-        <motion.div
-          className="flex items-center gap-2.5 mb-5 pb-4 border-b border-[#30363d]"
+          <motion.div
+          className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 mb-5 pb-4 border-b border-[#30363d]"
           initial={{ opacity: 0, scale: 0.85 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-40px" }}
@@ -95,17 +94,17 @@ function GitHubComment() {
           >
             1 ISSUE FOUND
           </span>
-          <span className="text-[#e6edf3] text-[15px] font-semibold">
+          <span className="text-[#e6edf3] text-[14px] sm:text-[15px] font-semibold min-w-0 break-words">
             Negative quantity bypasses checkout validation
           </span>
         </motion.div>
 
         {/* Finding rows — staggered reveal */}
-        <div className="space-y-2.5 font-[family-name:var(--font-mono)] text-[14px] leading-[1.65]">
+        <div className="space-y-2.5 font-[family-name:var(--font-mono)] text-[13px] sm:text-[14px] leading-[1.65]">
           {FINDINGS.map(({ key, value, valueClass, valueBg }, i) => (
             <motion.div
               key={key}
-              className="grid grid-cols-[80px_1fr] gap-3"
+              className="grid grid-cols-[70px_1fr] sm:grid-cols-[80px_1fr] gap-2 sm:gap-3"
               initial={{ opacity: 0, x: -8 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-40px" }}
@@ -115,7 +114,7 @@ function GitHubComment() {
                 {key}
               </span>
               <span
-                className={`${valueClass} px-1.5 rounded`}
+                className={`${valueClass} px-1.5 rounded break-all min-w-0`}
                 style={valueBg ? { background: valueBg } : undefined}
               >
                 {value}
@@ -149,7 +148,7 @@ function GitHubComment() {
 
 export function ProofSection() {
   return (
-    <section id="proof" className="max-w-[1280px] mx-auto px-10 py-24">
+    <section id="proof" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-24">
       {/* Tag */}
       <ScrollIn>
         <div className="flex items-center gap-3.5 mb-7">
@@ -161,7 +160,7 @@ export function ProofSection() {
       </ScrollIn>
 
       {/* Split header */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 items-end mb-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end mb-10 md:mb-14">
         <ScrollIn delay={0.06}>
           <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,3.8vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
             Two outcomes.
@@ -188,7 +187,7 @@ export function ProofSection() {
           style={{ background: "var(--color-border)" }}
         >
           {/* Clean PR */}
-          <div className="bg-[var(--color-canvas)] p-10">
+          <div className="bg-[var(--color-canvas)] p-5 md:p-10">
             <p className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
               <span className="text-[var(--color-pass)]">●</span>
               Clean PR — nothing posted
@@ -228,7 +227,7 @@ export function ProofSection() {
           </div>
 
           {/* Bug found — GitHub comment mockup */}
-          <div className="bg-[var(--color-canvas)] p-10">
+          <div className="bg-[var(--color-canvas)] p-5 md:p-10">
             <p className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
               <span className="text-[var(--color-danger)]">●</span>
               Bug found — PR comment posted

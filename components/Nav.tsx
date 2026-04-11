@@ -60,7 +60,7 @@ export function Nav() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center justify-between px-10 py-4",
+        "fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center justify-between px-4 sm:px-6 md:px-10 py-4",
         "border-b transition-all duration-300",
         scrolled || menuOpen
           ? "border-[var(--color-border)] bg-[var(--color-canvas)]/90 backdrop-blur-xl"
@@ -68,9 +68,9 @@ export function Nav() {
       )}
     >
       {/* Logo */}
-      <a href="#" className="flex items-center gap-2.5">
-        <LogoMark size={28} />
-        <span className="font-[family-name:var(--font-display)] text-[15px] font-bold tracking-tight leading-none">
+      <a href="#" className="flex items-center gap-2.5 shrink-0">
+        <LogoMark size={26} />
+        <span className="font-[family-name:var(--font-display)] text-[15px] font-extrabold tracking-tight leading-none">
           <span className="text-[var(--color-accent)]">Logo</span>
           <span className="text-[var(--color-ink)]">Mesh</span>
         </span>

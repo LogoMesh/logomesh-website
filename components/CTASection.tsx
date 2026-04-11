@@ -22,7 +22,7 @@ export function CTASection() {
     <section
       ref={sectionRef}
       id="cta"
-      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-32 px-10"
+      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-20 md:py-32 px-5 md:px-10"
       style={{ background: "var(--color-canvas-2)" }}
       onMouseMove={handleMouseMove}
     >
@@ -78,7 +78,7 @@ export function CTASection() {
       >
         <motion.a
           href="https://github.com/apps/logomesh"
-          className="inline-flex items-center gap-3 bg-[var(--color-accent)] text-black px-12 py-5 font-[family-name:var(--font-mono)] text-[15px] font-bold"
+          className="inline-flex items-center gap-3 bg-[var(--color-accent)] text-black px-6 sm:px-12 py-4 sm:py-5 font-[family-name:var(--font-mono)] text-[14px] sm:text-[15px] font-bold w-full sm:w-auto justify-center max-w-xs sm:max-w-none mx-auto"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

@@ -51,24 +51,24 @@ const TOOLS = ["LogoMesh", "CodeRabbit", "Copilot", "Snyk", "SonarQube"];
 function Cell({ val, label }: { val: "yes" | "partial" | "no" | "label"; label?: string }) {
   if (val === "yes")
     return (
-      <td className="px-5 py-3.5 border border-[var(--color-border)] text-center bg-[rgba(196,255,0,0.025)]">
+      <td className="px-2 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] text-center bg-[rgba(196,255,0,0.025)]">
         <Check size={14} className="inline text-[var(--color-accent)]" strokeWidth={3} />
       </td>
     );
   if (val === "no")
     return (
-      <td className="px-5 py-3.5 border border-[var(--color-border)] text-center">
+      <td className="px-2 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] text-center">
         <Minus size={14} className="inline text-[var(--color-dim)]" strokeWidth={2} />
       </td>
     );
   if (val === "label")
     return (
-      <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-muted)] text-center">
+      <td className="px-2 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11px] sm:text-[12px] text-[var(--color-muted)] text-center">
         {label}
       </td>
     );
   return (
-    <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-muted)] text-center">
+    <td className="px-2 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11px] sm:text-[12px] text-[var(--color-muted)] text-center">
       partial
     </td>
   );
@@ -76,7 +76,7 @@ function Cell({ val, label }: { val: "yes" | "partial" | "no" | "label"; label?:
 
 export function CompareTable() {
   return (
-    <section id="compare" className="max-w-[1280px] mx-auto px-10 py-24">
+    <section id="compare" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-24">
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -91,7 +91,7 @@ export function CompareTable() {
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-end mb-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end mb-10 md:mb-14">
         <motion.h2
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -127,13 +127,13 @@ export function CompareTable() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
             >
-              <th className="px-5 py-3.5 border border-[var(--color-border)] bg-[var(--color-canvas-3)] font-[family-name:var(--font-mono)] text-[11.5px] font-extrabold uppercase tracking-[0.08em] text-[var(--color-muted)] min-w-[220px]">
+              <th className="px-3 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] bg-[var(--color-canvas-3)] font-[family-name:var(--font-mono)] text-[10px] sm:text-[11.5px] font-extrabold uppercase tracking-[0.08em] text-[var(--color-muted)] min-w-[140px] sm:min-w-[220px]">
                 Capability
               </th>
               {TOOLS.map((t, i) => (
                 <th
                   key={t}
-                  className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11.5px] font-extrabold uppercase tracking-[0.08em] text-center whitespace-nowrap"
+                  className="px-2 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[10px] sm:text-[11.5px] font-extrabold uppercase tracking-[0.08em] text-center whitespace-nowrap"
                   style={{
                     background: i === 0 ? "rgba(196,255,0,0.05)" : "var(--color-canvas-3)",
                     color: i === 0 ? "var(--color-accent)" : "var(--color-muted)",
@@ -154,7 +154,7 @@ export function CompareTable() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, ease: EASE, delay: 0.15 + i * 0.06 }}
               >
-                <td className="px-5 py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-sans)] text-[15px] text-[var(--color-muted)]">
+                <td className="px-3 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-sans)] text-[13px] sm:text-[15px] text-[var(--color-muted)]">
                   {row.capability}
                 </td>
                 <Cell val={row.us} />
