@@ -5,6 +5,7 @@ import Image from "next/image";
 import { GithubIcon } from "./icons/GithubIcon";
 import { EASE } from "@/lib/motion";
 import { TerminalWindow } from "./TerminalWindow";
+import { HeroPrBackdrop } from "./HeroPrBackdrop";
 
 function FadeUp({
   children,
@@ -29,10 +30,12 @@ function FadeUp({
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-28 sm:pt-36 md:pt-40 pb-16 md:pb-20">
+    <section className="relative overflow-hidden w-full pt-28 sm:pt-36 md:pt-40 pb-16 md:pb-20">
+      <HeroPrBackdrop />
+
       {/* Subtle proof-grid dot pattern — fades from top-left where headline lives */}
       <div
-        className="pointer-events-none absolute inset-0"
+        className="pointer-events-none absolute inset-0 z-[1]"
         aria-hidden
         style={{
           backgroundImage: "radial-gradient(rgba(196,255,0,0.045) 1px, transparent 1px)",
@@ -43,9 +46,11 @@ export function Hero() {
             "radial-gradient(ellipse 75% 55% at 18% 4%, rgba(0,0,0,0.75) 0%, transparent 68%)",
         }}
       />
+
+      <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10">
       {/* Kicker */}
       <FadeUp>
-        <div className="inline-flex items-center gap-2.5 border border-[var(--color-accent)]/25 px-3.5 py-1.5 mb-9">
+        <div className="inline-flex items-center gap-2.5 border border-[var(--color-accent)]/25 px-3.5 py-1.5 mb-7">
           <span
             className="w-[5px] h-[5px] rounded-full bg-[var(--color-accent)]"
             style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
@@ -54,6 +59,14 @@ export function Hero() {
             Beta&nbsp;&nbsp;·&nbsp;&nbsp;Python · Free for public repos
           </span>
         </div>
+      </FadeUp>
+
+      {/* Hook — one line, memorable */}
+      <FadeUp delay={0.04}>
+        <p className="font-[family-name:var(--font-mono)] text-[clamp(14px,1.35vw,16px)] font-semibold tracking-[-0.02em] text-[var(--color-muted)] mb-6 max-w-[min(100%,28rem)] leading-snug">
+          <span className="text-[var(--color-accent)]">Proof, not noise.</span>{" "}
+          If LogoMesh comments on your PR, it reproduced the crash in a sandbox — or it stays quiet.
+        </p>
       </FadeUp>
 
       {/* Headline */}
@@ -176,6 +189,7 @@ export function Hero() {
       <FadeUp delay={0.33}>
         <TerminalWindow />
       </FadeUp>
+      </div>
     </section>
   );
 }
