@@ -1,3 +1,5 @@
+import { LogoMark } from "./LogoMark";
+
 const LINKS = ["Docs", "GitHub", "Privacy", "Terms"];
 
 // Dim pytest-style log fragments — what LogoMesh actually emits.
@@ -39,9 +41,16 @@ export function Footer() {
       <div className="relative px-4 sm:px-10 py-7 flex flex-wrap items-center justify-between gap-5">
         <a
           href="#"
-          className="inline-flex items-center min-h-[44px] font-[family-name:var(--font-display)] text-[15px] font-bold tracking-tight text-[var(--color-muted)]"
+          className="inline-flex items-center gap-1.5 min-h-[44px]"
         >
-          Logo<span className="text-[var(--color-accent)]">Mesh</span>
+          <LogoMark size={18} />
+          <span
+            className="font-mono text-[13.5px] font-semibold"
+            style={{ letterSpacing: "-0.03em" }}
+          >
+            <span style={{ color: "rgba(196,255,0,0.45)" }}>logo</span>
+            <span className="text-muted">mesh</span>
+          </span>
         </a>
         <ul className="flex flex-wrap gap-x-7 gap-y-2 list-none">
           {LINKS.map((l) => (

@@ -68,11 +68,19 @@ export function Nav() {
       )}
     >
       {/* Logo */}
-      <a href="#" className="flex items-center gap-2.5 shrink-0">
-        <LogoMark size={26} />
-        <span className="font-[family-name:var(--font-display)] text-[15px] font-extrabold tracking-tight leading-none">
-          <span className="text-[var(--color-accent)]">Logo</span>
-          <span className="text-[var(--color-ink)]">Mesh</span>
+      <a href="#" className="flex items-center gap-2 shrink-0">
+        <LogoMark size={22} />
+        <span
+          className="font-mono text-[14.5px] font-semibold leading-none"
+          style={{ letterSpacing: "-0.03em" }}
+        >
+          <span
+            className="text-accent"
+            style={{ textShadow: "0 0 12px rgba(196,255,0,0.3)" }}
+          >
+            logo
+          </span>
+          <span className="text-ink">mesh</span>
         </span>
       </a>
 

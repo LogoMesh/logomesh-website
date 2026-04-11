@@ -137,6 +137,7 @@ export function CompareTable() {
                   style={{
                     background: i === 0 ? "rgba(196,255,0,0.05)" : "var(--color-canvas-3)",
                     color: i === 0 ? "var(--color-accent)" : "var(--color-muted)",
+                    borderTop: i === 0 ? "2px solid rgba(196,255,0,0.55)" : undefined,
                   }}
                 >
                   {t}

@@ -29,7 +29,20 @@ function FadeUp({
 
 export function Hero() {
   return (
-    <section className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-24 sm:pt-32 md:pt-36 pb-16 md:pb-20">
+    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-24 sm:pt-32 md:pt-36 pb-16 md:pb-20">
+      {/* Subtle proof-grid dot pattern — fades from top-left where headline lives */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden
+        style={{
+          backgroundImage: "radial-gradient(rgba(196,255,0,0.045) 1px, transparent 1px)",
+          backgroundSize: "30px 30px",
+          maskImage:
+            "radial-gradient(ellipse 75% 55% at 18% 4%, rgba(0,0,0,0.75) 0%, transparent 68%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 75% 55% at 18% 4%, rgba(0,0,0,0.75) 0%, transparent 68%)",
+        }}
+      />
       {/* Kicker */}
       <FadeUp>
         <div className="inline-flex items-center gap-2.5 border border-[var(--color-accent)]/25 px-3.5 py-1.5 mb-9">
@@ -118,16 +131,44 @@ export function Hero() {
 
         {/* Speed + safety reassurances */}
         <div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 mt-4">
-          {[
-            { icon: "⚡", text: "avg. 12s per PR" },
-            { icon: "⬡", text: "runs async — never blocks merge" },
-            { icon: "↩", text: "uninstall in 2 clicks" },
-          ].map(({ icon, text }) => (
+          {([
+            {
+              icon: (
+                <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden>
+                  <path d="M6.5 1L2.5 6.5H5.5L4.5 11L8.5 5.5H5.5L6.5 1Z" fill="#c4ff00" fillOpacity={0.65} />
+                </svg>
+              ),
+              text: "avg. 12s per PR",
+            },
+            {
+              icon: (
+                <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden>
+                  <circle cx="6" cy="6" r="4.5" stroke="#656575" strokeWidth="1.2" />
+                  <circle cx="6" cy="6" r="1.5" fill="#656575" />
+                </svg>
+              ),
+              text: "runs async — never blocks merge",
+            },
+            {
+              icon: (
+                <svg viewBox="0 0 12 12" fill="none" width="11" height="11" aria-hidden>
+                  <path
+                    d="M4.5 8.5L2 6L4.5 3.5M2 6h6a2 2 0 000-4"
+                    stroke="#656575"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              ),
+              text: "uninstall in 2 clicks",
+            },
+          ] as const).map(({ icon, text }) => (
             <span
               key={text}
               className="flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)]"
             >
-              <span className="text-[var(--color-dim)]">{icon}</span>
+              {icon}
               {text}
             </span>
           ))}
