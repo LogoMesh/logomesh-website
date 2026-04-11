@@ -109,7 +109,7 @@ export function Nav() {
         <a
           href="https://github.com/apps/logomesh"
           className={cn(
-            "flex items-center gap-2 px-4 py-2",
+            "flex items-center gap-2 px-4 py-2.5 min-h-[44px]",
             "bg-[var(--color-accent)] text-black",
             "font-[family-name:var(--font-mono)] text-[13px] font-bold uppercase tracking-wider",
             "transition-all duration-150 hover:opacity-90 hover:-translate-y-px",
@@ -123,7 +123,7 @@ export function Nav() {
         {/* Hamburger — mobile only */}
         <button
           onClick={() => setMenuOpen((v) => !v)}
-          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px]"
+          className="md:hidden flex flex-col justify-center items-center min-w-[44px] min-h-[44px] w-11 h-11 gap-[5px]"
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
         >
@@ -167,7 +167,7 @@ export function Nav() {
                   href={l.href}
                   onClick={() => setMenuOpen(false)}
                   className={cn(
-                    "block py-2 text-[15px] transition-colors duration-150",
+                    "flex items-center min-h-[44px] py-2 text-[15px] transition-colors duration-150",
                     isActive
                       ? "text-[var(--color-ink)]"
                       : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",

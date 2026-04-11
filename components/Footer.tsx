@@ -39,7 +39,7 @@ export function Footer() {
       <div className="relative px-4 sm:px-10 py-7 flex flex-wrap items-center justify-between gap-5">
         <a
           href="#"
-          className="font-[family-name:var(--font-display)] text-[15px] font-bold tracking-tight text-[var(--color-muted)]"
+          className="inline-flex items-center min-h-[44px] font-[family-name:var(--font-display)] text-[15px] font-bold tracking-tight text-[var(--color-muted)]"
         >
           Logo<span className="text-[var(--color-accent)]">Mesh</span>
         </a>
@@ -48,7 +48,7 @@ export function Footer() {
             <li key={l}>
               <a
                 href="#"
-                className="font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors"
+                className="inline-flex items-center min-h-[44px] font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors"
               >
                 {l}
               </a>

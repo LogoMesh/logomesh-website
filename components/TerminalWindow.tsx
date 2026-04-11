@@ -206,7 +206,7 @@ export function TerminalWindow() {
           <button
             key={i}
             onClick={() => switchScenario(i)}
-            className="font-[family-name:var(--font-mono)] text-[12px] px-4 py-2 border border-b-0 transition-all duration-150 cursor-pointer"
+            className="font-[family-name:var(--font-mono)] text-[12px] px-4 py-3 min-h-[44px] border border-b-0 transition-all duration-150 cursor-pointer flex items-center"
             style={{
               background: i === active ? "#08080b" : "transparent",
               borderColor: i === active ? "var(--color-border-hi)" : "transparent",
@@ -245,7 +245,7 @@ export function TerminalWindow() {
         {/* Body */}
         <div
           ref={bodyRef}
-          className="relative z-[1] px-4 sm:px-6 py-5 min-h-[260px] sm:min-h-[320px] overflow-y-auto"
+          className="relative z-[1] px-4 sm:px-6 py-5 min-h-[260px] sm:min-h-[320px] overflow-y-auto overflow-x-auto"
           style={{ scrollbarWidth: "none" }}
         >
           <span

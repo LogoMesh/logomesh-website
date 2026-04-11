@@ -62,7 +62,7 @@ function GitHubComment() {
         style={{ background: "#161b22" }}
       >
         <div className="flex items-center gap-1.5 flex-wrap">
-          <div className="w-6 h-6 flex items-center justify-center text-black font-bold text-[9px] flex-shrink-0"
+          <div className="w-6 h-6 flex items-center justify-center text-black font-bold text-[11px] flex-shrink-0"
             style={{ background: "#c4ff00" }}>
             LM
           </div>
@@ -125,7 +125,7 @@ function GitHubComment() {
 
         {/* Footer */}
         <motion.div
-          className="mt-5 pt-4 border-t border-[#30363d] flex items-center gap-2"
+          className="mt-5 pt-4 border-t border-[#30363d] flex flex-wrap items-center gap-x-2 gap-y-1"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-40px" }}

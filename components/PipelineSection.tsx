@@ -94,7 +94,7 @@ export function PipelineSection() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.15 }}
-        className="font-[family-name:var(--font-mono)] text-[15px] text-[var(--color-muted)] mb-12"
+        className="font-[family-name:var(--font-mono)] text-[15px] text-[var(--color-muted)] mb-8 sm:mb-12"
       >
         No comment unless step 7 confirms it.
       </motion.p>

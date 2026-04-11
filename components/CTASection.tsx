@@ -22,7 +22,7 @@ export function CTASection() {
     <section
       ref={sectionRef}
       id="cta"
-      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-20 md:py-32 px-5 md:px-10"
+      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-14 sm:py-20 md:py-32 px-5 md:px-10"
       style={{ background: "var(--color-canvas-2)" }}
       onMouseMove={handleMouseMove}
     >
@@ -64,7 +64,7 @@ export function CTASection() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.12 }}
-        className="relative text-[17px] text-[var(--color-muted)] mb-14"
+        className="relative text-[17px] text-[var(--color-muted)] mb-8 sm:mb-14"
       >
         Free for public repos. No configuration. Works on the next PR you open.
       </motion.p>

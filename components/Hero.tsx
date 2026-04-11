@@ -85,7 +85,7 @@ export function Hero() {
       </FadeUp>
 
       {/* CTAs */}
-      <FadeUp delay={0.26} className="mb-20">
+      <FadeUp delay={0.26} className="mb-12 md:mb-20">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-7">
         <motion.a
           href="https://github.com/apps/logomesh"
