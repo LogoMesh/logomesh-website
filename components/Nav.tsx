@@ -84,7 +84,7 @@ export function Nav() {
         >
           <span
             className="text-accent"
-            style={{ textShadow: "0 0 12px rgba(196,255,0,0.3)" }}
+            style={{ textShadow: "0 0 18px rgba(196,255,0,0.5), 0 0 6px rgba(196,255,0,0.25)" }}
           >
             logo
           </span>

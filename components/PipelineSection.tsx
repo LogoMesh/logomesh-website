@@ -87,7 +87,7 @@ const STEPS: Step[] = [
     n: "07",
     icon: (
       <svg viewBox="0 0 20 20" fill="none" width="20" height="20" aria-hidden>
-        <circle cx="15" cy="15" r="3.5" fill="currentColor" style={{ filter: "drop-shadow(0 0 3px currentColor)" }} />
+        <circle cx="15" cy="15" r="3.5" fill="#c4ff00" style={{ filter: "drop-shadow(0 0 3px rgba(196,255,0,0.9))" }} />
         <line x1="4" y1="4" x2="12" y2="4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity={0.5} />
         <line x1="4" y1="4" x2="4" y2="12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" opacity={0.5} />
         <line x1="12" y1="4" x2="12" y2="15" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
