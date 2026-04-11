@@ -7,7 +7,6 @@ import { IncidentsGrid } from "@/components/IncidentsGrid";
 import { PipelineSection } from "@/components/PipelineSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
-// import { MobileInstallCTA } from "@/components/MobileInstallCTA";
 
 const Rule = () => (
   <div
@@ -23,7 +22,7 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main className="max-md:pb-[calc(5.25rem+env(safe-area-inset-bottom))]">
+      <main>
         <Hero />
         <TechStrip />
         <IncidentsGrid />
