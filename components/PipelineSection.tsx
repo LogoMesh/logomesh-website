@@ -29,7 +29,7 @@ const STEPS = [
 
 export function PipelineSection() {
   return (
-    <section id="how" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-32">
+    <section id="how" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28">
       {/* Tag + heading */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -44,7 +44,7 @@ export function PipelineSection() {
           </span>
           <span className="w-12 h-px bg-[var(--color-border-hi)]" />
         </div>
-        <h2 className="font-[family-name:var(--font-display)] text-[clamp(36px,4.5vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
+        <h2 className="font-[family-name:var(--font-display)] text-[clamp(34px,4.2vw,54px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
           Three steps.
           <br />
           <em

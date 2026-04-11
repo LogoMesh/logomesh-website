@@ -53,13 +53,13 @@ const FINDINGS = [
 function GitHubComment() {
   return (
     <div
-      className="border border-[#30363d] overflow-hidden text-left"
-      style={{ background: "#0d1117", fontFamily: "var(--font-mono)" }}
+      className="border border-[var(--color-border-hi)] overflow-hidden text-left"
+      style={{ background: "var(--color-canvas-2)", fontFamily: "var(--font-mono)" }}
     >
       {/* PR thread header */}
       <div
-        className="flex items-center justify-between px-4 py-2.5 border-b border-[#30363d]"
-        style={{ background: "#161b22" }}
+        className="flex items-center justify-between px-4 py-2.5 border-b border-[var(--color-border-hi)]"
+        style={{ background: "var(--color-canvas-3)" }}
       >
         <div className="flex items-center gap-1.5 flex-wrap">
           <div className="w-6 h-6 flex items-center justify-center text-black font-bold text-[11px] flex-shrink-0"
@@ -82,7 +82,7 @@ function GitHubComment() {
       <div className="px-5 py-5">
         {/* Issue count header — badge pops in */}
           <motion.div
-          className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 mb-5 pb-4 border-b border-[#30363d]"
+          className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-2.5 mb-5 pb-4 border-b border-[var(--color-border-hi)]"
           initial={{ opacity: 0, scale: 0.85 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-40px" }}
@@ -125,7 +125,7 @@ function GitHubComment() {
 
         {/* Footer */}
         <motion.div
-          className="mt-5 pt-4 border-t border-[#30363d] flex flex-wrap items-center gap-x-2 gap-y-1"
+          className="mt-5 pt-4 border-t border-[var(--color-border-hi)] flex flex-wrap items-center gap-x-2 gap-y-1"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, margin: "-40px" }}
@@ -148,7 +148,7 @@ function GitHubComment() {
 
 export function ProofSection() {
   return (
-    <section id="proof" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-24">
+    <section id="proof" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28">
       {/* Tag */}
       <ScrollIn>
         <div className="flex items-center gap-3.5 mb-7">
@@ -162,7 +162,7 @@ export function ProofSection() {
       {/* Split header */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end mb-10 md:mb-14">
         <ScrollIn delay={0.06}>
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,3.8vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(34px,4.2vw,54px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
             Two outcomes.
             <br />
             <em className="font-[family-name:var(--font-serif)] italic font-normal text-[var(--color-muted)] not-italic" style={{ fontStyle: "italic" }}>

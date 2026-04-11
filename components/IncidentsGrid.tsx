@@ -58,7 +58,7 @@ const INCIDENTS: Incident[] = [
 
 export function IncidentsGrid() {
   return (
-    <section id="problem" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-24">
+    <section id="problem" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28">
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -80,7 +80,7 @@ export function IncidentsGrid() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.06 }}
-          className="font-[family-name:var(--font-display)] text-[clamp(30px,3.8vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em]"
+          className="font-[family-name:var(--font-display)] text-[clamp(34px,4.2vw,54px)] font-extrabold leading-[0.96] tracking-[-0.04em]"
         >
           The bugs that
           <br />

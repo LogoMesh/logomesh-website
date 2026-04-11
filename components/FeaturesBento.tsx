@@ -29,7 +29,7 @@ function BentoCard({
 // Mini terminal showing property inference output
 function PropertyCard() {
   return (
-    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[13.5px] leading-[1.7]">
+    <div className="mt-auto bg-[var(--color-canvas-2)] border border-[var(--color-border)] p-4 font-[family-name:var(--font-mono)] text-[13.5px] leading-[1.7]">
       <motion.p
         className="text-[var(--color-dim)] mb-2"
         initial={{ opacity: 0 }}
@@ -64,7 +64,7 @@ const FLAGS = ["airgapped", "nobody user", "128 MB RAM", "50 PIDs", "read-only"]
 // Mini sandbox execution card
 function SandboxCard() {
   return (
-    <div className="mt-auto bg-[#08080b] border border-[var(--color-border-hi)] p-4 font-[family-name:var(--font-mono)] text-[13px] leading-[1.65] space-y-2">
+    <div className="mt-auto bg-[var(--color-canvas-2)] border border-[var(--color-border)] p-4 font-[family-name:var(--font-mono)] text-[13px] leading-[1.65] space-y-2">
       <p className="text-[var(--color-dim)]">Container environment:</p>
       <div className="flex gap-2 flex-wrap mt-1">
         {FLAGS.map((flag, i) => (
@@ -107,7 +107,7 @@ function SandboxCard() {
 
 export function FeaturesBento() {
   return (
-    <section className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 md:py-24">
+    <section className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28">
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}

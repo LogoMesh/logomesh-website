@@ -208,10 +208,10 @@ export function TerminalWindow() {
             onClick={() => switchScenario(i)}
             className="font-[family-name:var(--font-mono)] text-[12px] px-4 py-3 min-h-[44px] border border-b-0 transition-all duration-150 cursor-pointer flex items-center"
             style={{
-              background: i === active ? "#08080b" : "transparent",
+              background: i === active ? "var(--color-canvas-2)" : "transparent",
               borderColor: i === active ? "var(--color-border-hi)" : "transparent",
               color: i === active ? "var(--color-ink)" : "var(--color-dim)",
-              borderBottom: i === active ? "1px solid #08080b" : "1px solid transparent",
+              borderBottom: i === active ? "1px solid var(--color-canvas-2)" : "1px solid transparent",
               marginBottom: i === active ? "-1px" : "0",
             }}
           >
@@ -224,7 +224,7 @@ export function TerminalWindow() {
       </div>
 
       {/* Terminal window */}
-      <div className="border border-[var(--color-border-hi)] bg-[#08080b] overflow-hidden relative">
+      <div className="border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)] overflow-hidden relative">
         {/* Scanlines */}
         <div
           className="absolute inset-0 pointer-events-none z-[2]"

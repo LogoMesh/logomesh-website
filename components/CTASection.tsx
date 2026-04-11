@@ -22,7 +22,7 @@ export function CTASection() {
     <section
       ref={sectionRef}
       id="cta"
-      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-14 sm:py-20 md:py-32 px-5 md:px-10"
+      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-20 md:py-28 px-5 md:px-10"
       style={{ background: "var(--color-canvas-2)" }}
       onMouseMove={handleMouseMove}
     >
