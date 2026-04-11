@@ -39,3 +39,13 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Cursor — local skill installs (data + scripts; reinstall via uipro / marketplace)
+.cursor/skills/
+
+# Superpowers plugin — brainstorm sessions, preview HTML, server state
+.superpowers/
+
+# Python (e.g. skill helper scripts)
+__pycache__/
+*.py[cod]
