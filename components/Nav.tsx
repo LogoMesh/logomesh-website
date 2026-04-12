@@ -371,7 +371,6 @@ export function Nav() {
           </nav>
         </div>
       </div>
-      {/* When this point scrolls above the viewport, the in-flow nav has left the screen — dock */}
       <div
         ref={sentinelRef}
         className="h-px w-full max-w-[1280px] mx-auto pointer-events-none"

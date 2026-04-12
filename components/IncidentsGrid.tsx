@@ -133,7 +133,7 @@ export function IncidentsGrid() {
               className="absolute top-3.5 right-3.5 w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] md:group-hover:animate-[pulse-dot_2s_ease-in-out_infinite]"
               aria-hidden
             />
-            <p className="font-[family-name:var(--font-mono)] text-[11px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-2.5">
+            <p className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13.5px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-2.5">
               {inc.company}
             </p>
             <p className="font-[family-name:var(--font-mono)] text-[14.5px] sm:text-[15.5px] font-semibold text-[var(--color-ink)] leading-[1.55] mb-3 break-words hyphens-auto">

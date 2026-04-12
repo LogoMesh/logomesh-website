@@ -13,12 +13,12 @@ export function Footer() {
     >
 
       {/* Content — stacked + centered on small screens; 3-col grid on lg so nav is truly centered */}
-      <div className="relative z-[2] mx-auto max-w-[1280px] px-4 sm:px-8 py-7 sm:py-8">
-        <div className="grid grid-cols-1 items-center gap-4 text-center lg:grid-cols-3 lg:gap-6 lg:text-left">
+      <div className="relative z-[2] mx-auto max-w-[1280px] px-4 sm:px-8 py-4 sm:py-7 md:py-8">
+        <div className="grid grid-cols-1 items-center gap-2.5 text-center sm:gap-4 lg:grid-cols-3 lg:gap-6 lg:text-left">
           <div className="flex justify-center lg:justify-start">
             <a
               href="#"
-              className="inline-flex w-fit items-center gap-1.5 min-h-[40px] sm:min-h-[44px]"
+              className="inline-flex w-fit items-center gap-1.5 min-h-[36px] sm:min-h-[44px]"
             >
               <LogoMark size={26} />
               <span
@@ -35,12 +35,12 @@ export function Footer() {
             className="flex justify-center lg:justify-center"
             aria-label="Footer"
           >
-            <ul className="flex list-none flex-wrap justify-center gap-x-5 gap-y-1">
+            <ul className="flex list-none flex-wrap justify-center gap-x-4 gap-y-0.5 sm:gap-x-5 sm:gap-y-1">
               {LINKS.map((l) => (
                 <li key={l}>
                   <a
                     href="#"
-                    className="inline-flex items-center min-h-[40px] font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors sm:min-h-[44px]"
+                    className="inline-flex items-center min-h-[36px] py-0.5 font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors sm:min-h-[44px] sm:py-0"
                   >
                     {l}
                   </a>
@@ -57,7 +57,7 @@ export function Footer() {
         <p
           id="beta-python-footnote"
           tabIndex={-1}
-          className="mx-auto mt-4 max-w-[40rem] scroll-mt-24 border-t border-[var(--color-border)] pt-4 text-center font-[family-name:var(--font-mono)] text-[11px] leading-relaxed text-[var(--color-dim)] sm:mt-5 sm:text-[12px]"
+          className="mx-auto mt-3 max-w-[40rem] scroll-mt-24 border-t border-[var(--color-border)] pt-3 text-center font-[family-name:var(--font-mono)] text-[11px] leading-snug text-[var(--color-dim)] sm:mt-5 sm:pt-4 sm:leading-relaxed sm:text-[12px]"
         >
           <span className="font-semibold text-[var(--color-muted)]" aria-hidden>
             *

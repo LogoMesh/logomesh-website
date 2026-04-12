@@ -32,11 +32,11 @@ function LogoCellVertical({
   Logo: (typeof TECH_LOGOS)[number]["Logo"];
 }) {
   return (
-    <div className="flex shrink-0 items-center gap-3 px-4 py-3.5">
-      <span className="opacity-80">
+    <div className="flex w-full shrink-0 items-center justify-center gap-3 px-4 py-3.5">
+      <span className="opacity-100">
         <Logo size={24} />
       </span>
-      <span className="font-[family-name:var(--font-mono)] text-[13px] font-semibold text-[var(--color-muted)]">
+      <span className="font-[family-name:var(--font-mono)] text-[13px] font-semibold text-ink/80">
         {name}
       </span>
     </div>
