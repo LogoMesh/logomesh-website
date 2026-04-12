@@ -23,6 +23,26 @@ function LogoCell({
   );
 }
 
+/** Stacked row for vertical marquee (mobile) — borders via parent divide-y for a clean loop seam */
+function LogoCellVertical({
+  name,
+  Logo,
+}: {
+  name: string;
+  Logo: (typeof TECH_LOGOS)[number]["Logo"];
+}) {
+  return (
+    <div className="flex shrink-0 items-center gap-3 px-4 py-3.5">
+      <span className="opacity-40">
+        <Logo size={24} />
+      </span>
+      <span className="font-[family-name:var(--font-mono)] text-[13px] font-semibold text-[var(--color-dim)]">
+        {name}
+      </span>
+    </div>
+  );
+}
+
 function LogoHalf({ id }: { id: "a" | "b" }) {
   return (
     <div
@@ -31,6 +51,19 @@ function LogoHalf({ id }: { id: "a" | "b" }) {
     >
       {TECH_LOGOS.map(({ name, Logo }, i) => (
         <LogoCell key={`${id}-${name}-${i}`} name={name} Logo={Logo} />
+      ))}
+    </div>
+  );
+}
+
+function LogoHalfVertical({ id }: { id: "a" | "b" }) {
+  return (
+    <div
+      className="flex w-full shrink-0 flex-col divide-y divide-[var(--color-border)]"
+      aria-hidden={id === "b" ? true : undefined}
+    >
+      {TECH_LOGOS.map(({ name, Logo }, i) => (
+        <LogoCellVertical key={`${id}-${name}-${i}`} name={name} Logo={Logo} />
       ))}
     </div>
   );
@@ -45,39 +78,77 @@ const MARQUEE_MASK: CSSProperties = {
   maskSize: "100% 100%",
 };
 
+const MARQUEE_MASK_Y: CSSProperties = {
+  WebkitMaskImage:
+    "linear-gradient(to bottom, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent)",
+  maskImage:
+    "linear-gradient(to bottom, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent)",
+  WebkitMaskSize: "100% 100%",
+  maskSize: "100% 100%",
+};
+
 export function TechStrip() {
   const reducedMotion = useReducedMotion() === true;
-  const trackRef = useRef<HTMLDivElement>(null);
+  const horizontalTrackRef = useRef<HTMLDivElement>(null);
+  const verticalTrackRef = useRef<HTMLDivElement>(null);
   const [marqueeShiftPx, setMarqueeShiftPx] = useState(0);
+  const [marqueeShiftYPx, setMarqueeShiftYPx] = useState(0);
 
   useLayoutEffect(() => {
     if (reducedMotion) return;
-    const track = trackRef.current;
-    const firstHalf = track?.children[0] as HTMLElement | undefined;
-    if (!firstHalf) return;
 
     let raf = 0;
     const measure = () => {
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
-        const w = firstHalf.getBoundingClientRect().width;
-        setMarqueeShiftPx(Math.round(w));
+        const hEl = horizontalTrackRef.current?.children[0] as
+          | HTMLElement
+          | undefined;
+        if (hEl) {
+          const w = hEl.getBoundingClientRect().width;
+          if (w > 0) setMarqueeShiftPx(Math.round(w));
+        }
+        const vEl = verticalTrackRef.current?.children[0] as
+          | HTMLElement
+          | undefined;
+        if (vEl) {
+          // Subpixel-accurate loop distance — rounding caused a visible jump at the bottom each cycle
+          const h = vEl.getBoundingClientRect().height;
+          if (h > 0) setMarqueeShiftYPx(h);
+        }
       });
     };
 
     measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(firstHalf);
+    const ros: ResizeObserver[] = [];
+    const hChild = horizontalTrackRef.current?.children[0];
+    const vChild = verticalTrackRef.current?.children[0];
+    if (hChild) {
+      const ro = new ResizeObserver(measure);
+      ro.observe(hChild);
+      ros.push(ro);
+    }
+    if (vChild) {
+      const ro = new ResizeObserver(measure);
+      ro.observe(vChild);
+      ros.push(ro);
+    }
     void document.fonts.ready.then(measure);
+    window.addEventListener("resize", measure, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
-      ro.disconnect();
+      ros.forEach((r) => r.disconnect());
+      window.removeEventListener("resize", measure);
     };
   }, [reducedMotion]);
 
-  const trackStyle = {
+  const horizontalStyle = {
     "--marquee-shift": `${marqueeShiftPx}px`,
+  } as CSSProperties;
+
+  const verticalStyle = {
+    "--marquee-shift-y": `${marqueeShiftYPx}px`,
   } as CSSProperties;
 
   return (
@@ -85,18 +156,58 @@ export function TechStrip() {
       className="border-y border-[var(--color-border)] overflow-hidden"
       style={{ background: "var(--color-canvas-2)" }}
     >
-      <div className="flex items-center gap-0">
+      {/* Mobile: heading on top, vertical marquee below (same loop as desktop) */}
+      <div className="flex flex-col md:hidden">
+        <div className="flex items-center justify-center gap-3 border-b border-[var(--color-border)] px-5 py-4 sm:px-8 sm:py-5">
+          <span
+            className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-accent)]"
+            style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
+          />
+          <span className="font-[family-name:var(--font-mono)] text-[clamp(0.9rem,3.6vw,1.22rem)] font-bold uppercase tracking-[0.08em] text-[var(--color-muted)]">
+            Frameworks supported
+          </span>
+        </div>
+
+        <div
+          className="relative h-[min(48vh,20rem)] w-full overflow-hidden [contain:paint]"
+          style={MARQUEE_MASK_Y}
+        >
+          {reducedMotion ? (
+            <div
+              className="h-full overflow-y-auto"
+              style={{ scrollbarWidth: "none" }}
+            >
+              <LogoHalfVertical id="a" />
+            </div>
+          ) : (
+            <div
+              ref={verticalTrackRef}
+              className={
+                marqueeShiftYPx > 0
+                  ? "tech-marquee-track-y--ready flex w-full flex-col pointer-events-none"
+                  : "flex w-full flex-col pointer-events-none"
+              }
+              style={verticalStyle}
+            >
+              <LogoHalfVertical id="a" />
+              <LogoHalfVertical id="b" />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* md+: horizontal marquee */}
+      <div className="hidden md:flex md:items-center md:gap-0">
         <div className="shrink-0 px-4 sm:px-8 py-5 sm:py-6 border-r border-[var(--color-border)] flex items-center gap-2.5">
           <span
             className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"
             style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
           />
           <span className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--color-muted)] whitespace-nowrap">
-            Works with
+            Frameworks supported
           </span>
         </div>
 
-        {/* Mask fades edges in one layer (avoids gradient overlays fighting the animated row). */}
         <div
           className="relative min-w-0 flex-1 overflow-hidden [contain:paint]"
           style={MARQUEE_MASK}
@@ -110,13 +221,13 @@ export function TechStrip() {
             </div>
           ) : (
             <div
-              ref={trackRef}
+              ref={horizontalTrackRef}
               className={
                 marqueeShiftPx > 0
                   ? "tech-marquee-track tech-marquee-track--ready flex w-max items-stretch pointer-events-none"
                   : "tech-marquee-track flex w-max items-stretch pointer-events-none"
               }
-              style={trackStyle}
+              style={horizontalStyle}
             >
               <LogoHalf id="a" />
               <LogoHalf id="b" />

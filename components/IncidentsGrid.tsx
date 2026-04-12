@@ -60,8 +60,9 @@ export function IncidentsGrid() {
   return (
     <section
       id="evidence"
-      className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-16 sm:py-20 md:py-28 overflow-x-hidden"
+      className="w-full overflow-x-hidden py-16 sm:py-20 md:py-28"
     >
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 md:px-10">
       {/* Tag */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -148,6 +149,7 @@ export function IncidentsGrid() {
             </span>
           </motion.div>
         ))}
+      </div>
       </div>
     </section>
   );

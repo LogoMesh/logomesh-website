@@ -1,6 +1,7 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { TechStrip } from "@/components/TechStrip";
+import { DemoSection } from "@/components/DemoSection";
 import { ProofSection } from "@/components/ProofSection";
 import { FeaturesBento } from "@/components/FeaturesBento";
 import { IncidentsGrid } from "@/components/IncidentsGrid";
@@ -20,11 +21,12 @@ const Rule = () => (
 
 export default function Home() {
   return (
-    <>
-      <main>
+    <div className="flex min-h-dvh flex-col">
+      <main className="flex w-full flex-1 flex-col">
         <Nav />
         <Hero />
         <TechStrip />
+        <DemoSection />
         <IncidentsGrid />
         <Rule />
         <ProofSection />
@@ -35,6 +37,6 @@ export default function Home() {
         <CTASection />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -29,7 +29,11 @@ const STEPS = [
 
 export function PipelineSection() {
   return (
-    <section id="how" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28">
+    <section
+      id="how"
+      className="w-full bg-[var(--color-canvas-2)] py-20 md:py-28"
+    >
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 md:px-10">
       {/* Tag + heading */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -131,6 +135,7 @@ export function PipelineSection() {
             )}
           </motion.div>
         ))}
+      </div>
       </div>
     </section>
   );

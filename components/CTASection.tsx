@@ -22,8 +22,7 @@ export function CTASection() {
     <section
       ref={sectionRef}
       id="cta"
-      className="relative overflow-hidden border-t border-[var(--color-border)] text-center py-16 sm:py-20 md:py-28 px-4 sm:px-5 md:px-10"
-      style={{ background: "var(--color-canvas-2)" }}
+      className="relative w-full overflow-hidden border-t border-[var(--color-border)] px-4 py-16 text-center sm:px-5 sm:py-20 md:px-10 md:py-28"
       onMouseMove={handleMouseMove}
     >
       {/* Mouse-tracking radial glow */}

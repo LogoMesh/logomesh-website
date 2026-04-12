@@ -29,7 +29,7 @@ function FadeUp({
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-8 sm:pt-14 md:pt-20 pb-20 md:pb-20">
+    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-8 sm:pt-14 md:pt-20 pb-14 sm:pb-16 md:pb-20">
       {/* Subtle proof-grid dot pattern — fades from top-left where headline lives */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -170,8 +170,8 @@ export function Hero() {
         </div>
       </FadeUp>
 
-      {/* Terminal */}
-      <FadeUp delay={0.26}>
+      {/* Terminal — desktop only (demo section carries the visual on mobile) */}
+      <FadeUp delay={0.26} className="hidden md:block">
         <TerminalWindow />
       </FadeUp>
     </section>

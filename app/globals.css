@@ -65,6 +65,16 @@
       transform: translate3d(calc(-1 * var(--marquee-shift, 0px)), 0, 0);
     }
   }
+
+  /* TechStrip mobile — vertical loop; --marquee-shift-y from first column height */
+  @keyframes tech-marquee-y {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(0, calc(-1 * var(--marquee-shift-y, 0px)), 0);
+    }
+  }
 }
 
 /* ── BASE ── */
@@ -76,6 +86,9 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-canvas);
+  min-height: 100%;
+  min-height: 100dvh;
   /* Fixed nav + notch: hash links (#features, etc.) land with section visible */
   scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px));
 }
@@ -107,6 +120,14 @@ html {
   }
 }
 
+/* Mobile vertical marquee — match desktop strip speed (22s on md+) */
+.tech-marquee-track-y--ready {
+  animation: tech-marquee-y 22s linear infinite;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
 /* TerminalWindow — body height from line count (set --term-line-count in JS); avoids layout shift */
 .terminal-window-scroll {
   height: calc(2.5rem + var(--term-line-count) * calc(11.5px * 1.65));
@@ -131,6 +152,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-height: 100%;
+  min-height: 100dvh;
+  min-height: 100svh;
 }
 
 /* Respect reduced-motion preference */
@@ -145,7 +169,8 @@ body {
   html {
     scroll-behavior: auto;
   }
-  .tech-marquee-track--ready {
+  .tech-marquee-track--ready,
+  .tech-marquee-track-y--ready {
     animation: none !important;
   }
   .nav-dock-animated {

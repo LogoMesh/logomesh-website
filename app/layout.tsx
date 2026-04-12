@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { DM_Sans, Syne, JetBrains_Mono, Instrument_Serif } from "next/font/google";
 import { ScrollReset } from "@/components/ScrollReset";
 import "./globals.css";
@@ -27,6 +27,11 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
   weight: "400",
 });
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
+  themeColor: "#060608",
+};
 
 export const metadata: Metadata = {
   title: "LogoMesh — Pre-merge verification. Only comments when it has proof.",

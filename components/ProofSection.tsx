@@ -148,7 +148,11 @@ function GitHubComment() {
 
 export function ProofSection() {
   return (
-    <section id="proof" className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28">
+    <section
+      id="proof"
+      className="w-full bg-[var(--color-canvas-2)] py-20 md:py-28"
+    >
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 md:px-10">
       {/* Tag */}
       <ScrollIn>
         <div className="flex items-center gap-3.5 mb-7">
@@ -240,6 +244,7 @@ export function ProofSection() {
           </div>
         </div>
       </ScrollIn>
+      </div>
     </section>
   );
 }

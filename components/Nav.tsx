@@ -13,12 +13,31 @@ import { LogoMark } from "./LogoMark";
 
 const links = [
   { label: "Evidence", href: "#evidence" },
+  { label: "Demo", href: "#demo" },
   { label: "How it works", href: "#proof" },
   { label: "Features", href: "#features" },
   { label: "Pipeline", href: "#how" },
 ];
 
 const sectionIds = links.map((l) => l.href.slice(1));
+
+/** Document Y of element top (offsetTop is wrong when offsetParent ≠ document body). */
+function getDocumentOffsetTop(el: HTMLElement): number {
+  return el.getBoundingClientRect().top + window.scrollY;
+}
+
+/** Last section whose top has passed the activation line (works when scrolling down; IO alone misses after leaving hero). */
+function getActiveSectionIdFromScroll(): string {
+  const bias = 96;
+  const y = window.scrollY + bias;
+  let active = "";
+  for (const id of sectionIds) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    if (y >= getDocumentOffsetTop(el)) active = id;
+  }
+  return active;
+}
 
 function scrollToHash(href: string) {
   const id = href.startsWith("#") ? href.slice(1) : "";
@@ -41,6 +60,9 @@ export function Nav() {
   const [inHomeZone, setInHomeZone] = useState(true);
   const inHomeZoneRef = useRef(true);
   const dockedRef = useRef(false);
+  /** While true, scroll handler must not treat mid–smooth-scroll positions as “home” (fixes Evidence highlight). */
+  const programmaticSectionNavRef = useRef(false);
+  const programmaticNavClearTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     inHomeZoneRef.current = inHomeZone;
@@ -78,12 +100,19 @@ export function Nav() {
       }
 
       const ev = document.getElementById("evidence");
-      const home =
-        ev != null ? window.scrollY < ev.offsetTop - 56 : window.scrollY < 120;
-      // Keep in sync immediately so IntersectionObserver / hash nav don’t race React’s useEffect
+      const evidenceTop = ev != null ? getDocumentOffsetTop(ev) : 0;
+      const homeRaw =
+        ev != null ? window.scrollY < evidenceTop - 56 : window.scrollY < 120;
+      // Smooth scroll to a section passes through “above evidence” — don’t snap back to Home
+      const home = programmaticSectionNavRef.current ? false : homeRaw;
       inHomeZoneRef.current = home;
       setInHomeZone(home);
-      if (home) setActiveId("");
+      if (programmaticSectionNavRef.current) return;
+      if (home) {
+        setActiveId("");
+      } else {
+        setActiveId(getActiveSectionIdFromScroll());
+      }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -92,39 +121,37 @@ export function Nav() {
   }, []);
 
   useEffect(() => {
-    const elements = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean) as HTMLElement[];
-
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (inHomeZoneRef.current) return;
-        const visible = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-        if (visible.length > 0) {
-          setActiveId(visible[0].target.id);
-        }
-      },
-      { rootMargin: "-18% 0px -62% 0px", threshold: 0 },
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
+    return () => {
+      if (programmaticNavClearTimerRef.current) {
+        clearTimeout(programmaticNavClearTimerRef.current);
+      }
+    };
   }, []);
 
   function goToSection(href: string) {
     const id = href.startsWith("#") ? href.slice(1) : "";
     if (!id) return;
+    if (programmaticNavClearTimerRef.current) {
+      clearTimeout(programmaticNavClearTimerRef.current);
+    }
+    programmaticSectionNavRef.current = true;
     scrollToHash(href);
     inHomeZoneRef.current = false;
     setInHomeZone(false);
     setActiveId(id);
+    // Match smooth scroll duration so we don’t re-apply “home” until scroll has settled
+    programmaticNavClearTimerRef.current = window.setTimeout(() => {
+      programmaticSectionNavRef.current = false;
+      programmaticNavClearTimerRef.current = null;
+    }, 1000);
   }
 
   function goHome() {
+    if (programmaticNavClearTimerRef.current) {
+      clearTimeout(programmaticNavClearTimerRef.current);
+      programmaticNavClearTimerRef.current = null;
+    }
+    programmaticSectionNavRef.current = false;
     window.scrollTo({ top: 0, behavior: "smooth" });
     history.replaceState(null, "", window.location.pathname);
     inHomeZoneRef.current = true;
@@ -174,11 +201,11 @@ export function Nav() {
           goHome();
         }}
       >
-        <span className="flex h-[22px] w-[22px] items-center justify-center shrink-0">
-          <LogoMark size={22} />
+        <span className="flex h-[30px] w-[30px] items-center justify-center shrink-0">
+          <LogoMark size={30} />
         </span>
         <span
-          className="font-mono text-[14.5px] font-semibold leading-none flex items-center h-[22px]"
+          className="font-mono text-[17px] sm:text-[18px] font-semibold leading-none flex items-center h-[30px]"
           style={{ letterSpacing: "-0.03em" }}
         >
           <span

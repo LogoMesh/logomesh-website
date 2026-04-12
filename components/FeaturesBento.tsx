@@ -127,8 +127,9 @@ export function FeaturesBento() {
   return (
     <section
       id="features"
-      className="max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 py-20 md:py-28"
+      className="w-full py-20 md:py-28"
     >
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 md:px-10">
       {/* Section title + description */}
       <motion.div
         initial={{ opacity: 0, y: 18 }}
@@ -249,6 +250,7 @@ export function FeaturesBento() {
             arXiv:2510.02185 — crash validation study
           </div>
         </BentoCard>
+      </div>
       </div>
     </section>
   );
