@@ -13,10 +13,10 @@ function LogoCell({
 }) {
   return (
     <div className="shrink-0 flex items-center gap-3.5 px-7 border-r border-[var(--color-border)] py-5">
-      <span className="opacity-40">
+      <span className="opacity-80">
         <Logo size={28} />
       </span>
-      <span className="font-[family-name:var(--font-mono)] text-[14px] font-semibold text-[var(--color-dim)] whitespace-nowrap">
+      <span className="font-[family-name:var(--font-mono)] text-[14px] font-semibold text-[var(--color-muted)] whitespace-nowrap">
         {name}
       </span>
     </div>
@@ -33,10 +33,10 @@ function LogoCellVertical({
 }) {
   return (
     <div className="flex shrink-0 items-center gap-3 px-4 py-3.5">
-      <span className="opacity-40">
+      <span className="opacity-80">
         <Logo size={24} />
       </span>
-      <span className="font-[family-name:var(--font-mono)] text-[13px] font-semibold text-[var(--color-dim)]">
+      <span className="font-[family-name:var(--font-mono)] text-[13px] font-semibold text-[var(--color-muted)]">
         {name}
       </span>
     </div>

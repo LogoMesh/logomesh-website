@@ -19,7 +19,7 @@ function BentoCard({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, ease: EASE, delay }}
       whileHover={{ borderColor: "rgba(196,255,0,0.28)" }}
-      className={`bg-[var(--color-canvas)] border border-[var(--color-border)] p-5 md:p-7 flex flex-col cursor-default transition-shadow duration-300 hover:shadow-[0_0_28px_rgba(196,255,0,0.05)] ${className}`}
+      className={`bg-[var(--color-canvas)] border border-[var(--color-border)] p-6 md:p-7 flex flex-col cursor-default transition-shadow duration-300 hover:shadow-[0_0_28px_rgba(196,255,0,0.05)] max-md:text-center md:text-left ${className}`}
     >
       {children}
     </motion.div>
@@ -29,7 +29,7 @@ function BentoCard({
 // Mini terminal showing property inference output
 function PropertyCard() {
   return (
-    <div className="mt-auto bg-[var(--color-canvas-2)] border border-[var(--color-border)] p-4 font-[family-name:var(--font-mono)] text-[13.5px] leading-[1.7]">
+    <div className="mt-auto bg-[var(--color-canvas-2)] border border-[var(--color-border)] p-5 text-left font-[family-name:var(--font-mono)] text-[13.5px] leading-[1.7] md:p-4">
       <motion.p
         className="text-[var(--color-dim)] mb-2"
         initial={{ opacity: 0 }}
@@ -74,7 +74,7 @@ const FLAGS = [
 // Mini sandbox execution card
 function SandboxCard() {
   return (
-    <div className="mt-auto bg-[var(--color-canvas-2)] border border-[var(--color-border)] p-4 font-[family-name:var(--font-mono)] text-[13px] leading-[1.65] space-y-2">
+    <div className="mt-auto bg-[var(--color-canvas-2)] border border-[var(--color-border)] p-5 text-left font-[family-name:var(--font-mono)] text-[13px] leading-[1.65] space-y-2 md:p-4">
       <p className="text-[var(--color-dim)]">Container environment:</p>
       <div className="flex gap-2 flex-wrap mt-1">
         {FLAGS.map((flag, i) => (
@@ -136,24 +136,24 @@ export function FeaturesBento() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.55, ease: EASE }}
-        className="mb-10 text-left md:mb-14"
+        className="mb-10 text-center md:mb-14 md:text-left"
       >
         <h2 className="font-[family-name:var(--font-display)] text-[clamp(34px,4.2vw,54px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[var(--color-ink)]">
           Features
         </h2>
-        <p className="mt-4 max-w-[min(100%,42rem)] text-[16px] leading-[1.75] text-[var(--color-muted)] sm:text-[17px]">
+        <p className="mt-4 mx-auto max-w-[min(100%,42rem)] text-[16px] leading-[1.75] text-[var(--color-muted)] sm:text-[17px] md:mx-0">
           Why it catches what others miss
         </p>
       </motion.div>
 
       {/* Bento grid — 3-col so 2+1 fills perfectly each row */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 auto-rows-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-3 auto-rows-auto">
         {/* Large card — Property Inference (spans 2 cols) */}
         <BentoCard className="lg:col-span-2" delay={0}>
           <span className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             01 · Property Inference
           </span>
-          <h3 className="font-[family-name:var(--font-display)] text-[24px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
+          <h3 className="font-[family-name:var(--font-display)] text-[26px] md:text-[24px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
             Asks what should
             <br />
             <em className="font-[family-name:var(--font-serif)] font-normal italic text-[var(--color-muted)]">
@@ -177,7 +177,7 @@ export function FeaturesBento() {
           <span className="font-[family-name:var(--font-mono)] text-[11px] sm:text-[12px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             02 · Sandboxed Exec
           </span>
-          <h3 className="font-[family-name:var(--font-display)] text-[20px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
+          <h3 className="font-[family-name:var(--font-display)] text-[22px] md:text-[20px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
             Actually runs
             <br />
             the code.
@@ -191,12 +191,12 @@ export function FeaturesBento() {
 
         {/* Zero config card */}
         <BentoCard className="lg:col-span-2" delay={0.1}>
-          <div className="flex items-start justify-between gap-8 flex-col md:flex-row">
-            <div className="flex-1">
+          <div className="flex items-center justify-between gap-8 flex-col md:flex-row md:items-start">
+            <div className="flex-1 w-full">
               <span className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4 block">
                 03 · Zero Config
               </span>
-              <h3 className="font-[family-name:var(--font-display)] text-[24px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
+              <h3 className="font-[family-name:var(--font-display)] text-[26px] md:text-[24px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
                 Works on the
                 <br />
                 <em className="font-[family-name:var(--font-serif)] font-normal italic text-[var(--color-muted)]">
@@ -209,7 +209,7 @@ export function FeaturesBento() {
                 the full pipeline automatically.
               </p>
             </div>
-            <div className="flex-shrink-0 flex flex-col gap-2.5 font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px]">
+            <div className="flex-shrink-0 flex w-full max-w-[min(100%,18rem)] flex-col gap-2.5 font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px] md:max-w-none">
               {[
                 { label: "Config files required", val: "0" },
                 { label: "Setup time", val: "< 60s" },
@@ -237,7 +237,7 @@ export function FeaturesBento() {
           <span className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             04 · Crash Validation
           </span>
-          <h3 className="font-[family-name:var(--font-display)] text-[20px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
+          <h3 className="font-[family-name:var(--font-display)] text-[22px] md:text-[20px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
             57% fewer
             <br />
             false positives.
