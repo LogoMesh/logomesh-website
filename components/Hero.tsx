@@ -29,7 +29,7 @@ function FadeUp({
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-[max(7rem,calc(5.25rem+env(safe-area-inset-top)))] sm:pt-36 md:pt-40 pb-20 md:pb-20">
+    <section className="relative overflow-hidden max-w-[1280px] mx-auto px-4 sm:px-8 md:px-10 pt-8 sm:pt-14 md:pt-20 pb-20 md:pb-20">
       {/* Subtle proof-grid dot pattern — fades from top-left where headline lives */}
       <div
         className="pointer-events-none absolute inset-0"
@@ -43,21 +43,8 @@ export function Hero() {
             "radial-gradient(ellipse 75% 55% at 18% 4%, rgba(0,0,0,0.75) 0%, transparent 68%)",
         }}
       />
-      {/* Kicker */}
-      <FadeUp>
-        <div className="inline-flex max-w-full flex-wrap items-center gap-2.5 border border-[var(--color-accent)]/25 px-3.5 py-1.5 mb-7 sm:mb-9">
-          <span
-            className="w-[5px] h-[5px] rounded-full bg-[var(--color-accent)]"
-            style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
-          />
-          <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.13em] text-[var(--color-accent)]">
-            Beta&nbsp;&nbsp;·&nbsp;&nbsp;Python · Free for public repos
-          </span>
-        </div>
-      </FadeUp>
-
       {/* Headline */}
-      <FadeUp delay={0.07}>
+      <FadeUp>
         <h1 className="font-[family-name:var(--font-display)] text-[clamp(2.35rem,9.2vw,6rem)] sm:text-[clamp(2.75rem,6.8vw,6rem)] font-extrabold leading-[0.93] sm:leading-[0.91] tracking-[-0.04em] text-[var(--color-ink)] mb-3 sm:mb-2">
           Catch the{" "}
           <span
@@ -77,14 +64,23 @@ export function Hero() {
       </FadeUp>
 
       {/* Serif italic subline */}
-      <FadeUp delay={0.12}>
-        <p className="font-[family-name:var(--font-serif)] italic text-[clamp(1.2rem,4.5vw,2.375rem)] leading-[1.25] tracking-[-0.02em] text-[var(--color-muted)] mb-8 sm:mb-10">
+      <FadeUp delay={0.07}>
+        <p className="font-[family-name:var(--font-serif)] italic text-[clamp(1.4rem,5.2vw,2.75rem)] leading-[1.22] tracking-[-0.02em] text-[var(--color-muted)] mb-8 sm:mb-10">
           On every PR. Automatically.
+          <sup className="ml-0.5 align-super text-[0.55em] not-italic">
+            <a
+              href="#beta-python-footnote"
+              className="font-semibold text-[var(--color-muted)] underline decoration-dotted decoration-[var(--color-dim)] underline-offset-[3px] hover:text-[var(--color-ink)]"
+              aria-label="Footnote: language support in this beta"
+            >
+              *
+            </a>
+          </sup>
         </p>
       </FadeUp>
 
       {/* Body — 3 punchy lines */}
-      <FadeUp delay={0.19}>
+      <FadeUp delay={0.12}>
         <p className="max-w-[480px] text-[16px] sm:text-[17px] leading-[1.85] text-[var(--color-muted)] mb-8 sm:mb-10">
           Infers what your code should{" "}
           <em className="not-italic font-semibold text-[var(--color-ink)]">guarantee</em>.
@@ -95,7 +91,7 @@ export function Hero() {
       </FadeUp>
 
       {/* CTAs */}
-      <FadeUp delay={0.26} className="mb-10 sm:mb-12 md:mb-20">
+      <FadeUp delay={0.19} className="mb-10 sm:mb-12 md:mb-20">
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-7">
         <motion.a
           href="https://github.com/apps/logomesh"
@@ -113,16 +109,18 @@ export function Hero() {
           />
         </motion.a>
 
-        <span className="flex flex-wrap items-center gap-2.5 text-[12.5px] sm:text-[13px] leading-snug text-[var(--color-muted)] sm:shrink-0">
-          <span className="w-5 h-px bg-[var(--color-dim)]" />
+        <span className="flex min-w-0 w-full flex-nowrap items-center gap-2 overflow-x-auto text-[11px] leading-tight sm:w-auto sm:gap-2.5 sm:overflow-visible sm:text-[12.5px] md:text-[13px] md:leading-snug text-[var(--color-muted)] sm:shrink-0 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:[scrollbar-width:auto]">
+          <span className="h-px w-2.5 shrink-0 bg-[var(--color-dim)] sm:w-3.5" aria-hidden />
           <Image
             src="/california_golden_bears.png"
             alt="California Golden Bears"
             width={35}
             height={15}
-            className="opacity-80 hover:opacity-100 transition-opacity"
+            className="h-[13px] w-auto shrink-0 opacity-80 sm:h-[15px] md:h-[16px] hover:opacity-100 transition-opacity"
           />
-          1st place · UC Berkeley AgentBeats · Software Testing Track
+          <span className="whitespace-nowrap">
+            1st place · UC Berkeley AgentBeats · Software Testing Track
+          </span>
         </span>
         </div>
 
@@ -173,7 +171,7 @@ export function Hero() {
       </FadeUp>
 
       {/* Terminal */}
-      <FadeUp delay={0.33}>
+      <FadeUp delay={0.26}>
         <TerminalWindow />
       </FadeUp>
     </section>

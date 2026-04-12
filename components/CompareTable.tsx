@@ -85,7 +85,7 @@ export function CompareTable() {
         transition={{ duration: 0.55, ease: EASE }}
         className="flex items-center gap-3.5 mb-7"
       >
-        <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+        <span className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-accent)]">
           vs. everything else
         </span>
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
@@ -127,13 +127,13 @@ export function CompareTable() {
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
             >
-              <th className="px-3 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] bg-[var(--color-canvas-3)] font-[family-name:var(--font-mono)] text-[11px] sm:text-[11.5px] font-extrabold uppercase tracking-[0.08em] text-[var(--color-muted)] min-w-[140px] sm:min-w-[220px]">
+              <th className="px-3 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] bg-[var(--color-canvas-3)] font-[family-name:var(--font-mono)] text-[11.5px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.08em] text-[var(--color-muted)] min-w-[140px] sm:min-w-[220px]">
                 Capability
               </th>
               {TOOLS.map((t, i) => (
                 <th
                   key={t}
-                  className="px-2 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11px] sm:text-[11.5px] font-extrabold uppercase tracking-[0.08em] text-center whitespace-nowrap"
+                  className="px-2 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[11.5px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.08em] text-center whitespace-nowrap"
                   style={{
                     background: i === 0 ? "rgba(196,255,0,0.05)" : "var(--color-canvas-3)",
                     color: i === 0 ? "var(--color-accent)" : "var(--color-muted)",

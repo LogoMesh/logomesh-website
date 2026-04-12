@@ -152,7 +152,7 @@ export function ProofSection() {
       {/* Tag */}
       <ScrollIn>
         <div className="flex items-center gap-3.5 mb-7">
-          <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+          <span className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-accent)]">
             What it looks like on your PR
           </span>
           <span className="w-12 h-px bg-[var(--color-border-hi)]" />
@@ -188,7 +188,7 @@ export function ProofSection() {
         >
           {/* Clean PR */}
           <div className="bg-[var(--color-canvas)] p-5 md:p-10">
-            <p className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
+            <p className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
               <span className="text-[var(--color-pass)]">●</span>
               Clean PR — nothing posted
             </p>
@@ -228,7 +228,7 @@ export function ProofSection() {
 
           {/* Bug found — GitHub comment mockup */}
           <div className="bg-[var(--color-canvas)] p-5 md:p-10">
-            <p className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
+            <p className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-muted)] mb-7 flex items-center gap-2.5">
               <span className="text-[var(--color-danger)]">●</span>
               Bug found — PR comment posted
             </p>

@@ -70,7 +70,7 @@ export function IncidentsGrid() {
         transition={{ duration: 0.55, ease: EASE }}
         className="flex items-center gap-3.5 mb-6 sm:mb-7"
       >
-        <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+        <span className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-accent)]">
           Real production incidents
         </span>
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
@@ -106,7 +106,7 @@ export function IncidentsGrid() {
           <span className="block font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)] tracking-[0.04em] mb-5">
             LogoMesh analysis · 20 production postmortems · Apr 2026
           </span>
-          <span className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[11.5px] font-extrabold uppercase tracking-[0.1em] text-[var(--color-accent)]">
+          <span className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13px] font-extrabold uppercase tracking-[0.1em] text-[var(--color-accent)]">
             <LogoMark size={14} />
             catchable by logomesh
           </span>
@@ -139,7 +139,7 @@ export function IncidentsGrid() {
               {inc.title}
             </p>
             {inc.loss && (
-              <p className="font-[family-name:var(--font-mono)] text-[11.5px] sm:text-[12px] font-bold text-[var(--color-danger)] mb-2 break-words">
+              <p className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px] font-bold text-[var(--color-danger)] mb-2 break-words">
                 {inc.loss}
               </p>
             )}

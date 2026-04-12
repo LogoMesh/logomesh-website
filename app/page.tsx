@@ -21,8 +21,8 @@ const Rule = () => (
 export default function Home() {
   return (
     <>
-      <Nav />
       <main>
+        <Nav />
         <Hero />
         <TechStrip />
         <IncidentsGrid />

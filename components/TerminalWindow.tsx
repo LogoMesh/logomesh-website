@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 
 type TermLine = {
   text: string;
@@ -135,6 +141,10 @@ const SCENARIOS: Scenario[] = [
   },
 ];
 
+/** Max lines across demos, plus one row for the blinking cursor (matches `leading-[1.65]` × font size). */
+const MAX_TERM_ROWS =
+  Math.max(...SCENARIOS.map((s) => s.lines.length)) + 1;
+
 export function TerminalWindow() {
   const bodyRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
@@ -245,8 +255,13 @@ export function TerminalWindow() {
         {/* Body */}
         <div
           ref={bodyRef}
-          className="relative z-[1] px-4 sm:px-6 py-5 min-h-[260px] sm:min-h-[320px] overflow-y-auto overflow-x-auto"
-          style={{ scrollbarWidth: "none" }}
+          className="terminal-window-scroll relative z-[1] px-4 sm:px-6 py-5 overflow-y-auto overflow-x-auto"
+          style={
+            {
+              ["--term-line-count" as string]: MAX_TERM_ROWS,
+              scrollbarWidth: "none",
+            } as CSSProperties
+          }
         >
           <span
             ref={cursorRef}

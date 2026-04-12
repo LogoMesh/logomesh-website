@@ -38,34 +38,57 @@ export function Footer() {
       </pre>
 
       {/* Content */}
-      <div className="relative px-4 sm:px-10 py-7 flex flex-wrap items-center justify-between gap-5">
-        <a
-          href="#"
-          className="inline-flex items-center gap-1.5 min-h-[44px]"
-        >
-          <LogoMark size={18} />
-          <span
-            className="font-mono text-[13.5px] font-semibold"
-            style={{ letterSpacing: "-0.03em" }}
-          >
-            <span style={{ color: "rgba(196,255,0,0.45)" }}>logo</span>
-            <span className="text-muted">mesh</span>
-          </span>
-        </a>
-        <ul className="flex flex-wrap gap-x-7 gap-y-2 list-none">
-          {LINKS.map((l) => (
-            <li key={l}>
-              <a
-                href="#"
-                className="inline-flex items-center min-h-[44px] font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors"
+      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-10 py-9 sm:py-10">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-12">
+          {/* Brand */}
+          <div className="flex min-w-0 flex-col lg:max-w-[min(100%,320px)]">
+            <a href="#" className="inline-flex w-fit items-center gap-1.5 min-h-[44px]">
+              <LogoMark size={18} />
+              <span
+                className="font-mono text-[13.5px] font-semibold"
+                style={{ letterSpacing: "-0.03em" }}
               >
-                {l}
-              </a>
-            </li>
-          ))}
-        </ul>
-        <p className="font-[family-name:var(--font-mono)] text-[12px] text-[var(--color-dim)]">
-          Pre-merge verification. Only comments when it has proof.
+                <span style={{ color: "rgba(196,255,0,0.45)" }}>logo</span>
+                <span className="text-muted">mesh</span>
+              </span>
+            </a>
+          </div>
+
+          {/* Nav — centered in the row on large screens */}
+          <nav
+            className="lg:flex-1 lg:flex lg:justify-center lg:self-center"
+            aria-label="Footer"
+          >
+            <ul className="flex flex-wrap gap-x-7 gap-y-2 list-none">
+              {LINKS.map((l) => (
+                <li key={l}>
+                  <a
+                    href="#"
+                    className="inline-flex items-center min-h-[44px] font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors"
+                  >
+                    {l}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          {/* Tagline */}
+          <p className="font-[family-name:var(--font-mono)] text-[12px] leading-relaxed text-[var(--color-dim)] lg:max-w-[min(100%,280px)] lg:text-right">
+            Pre-merge verification. Only comments when it has proof.
+          </p>
+        </div>
+
+        <p
+          id="beta-python-footnote"
+          tabIndex={-1}
+          className="mt-8 scroll-mt-24 border-t border-[var(--color-border)] pt-6 font-[family-name:var(--font-mono)] text-[11px] leading-relaxed text-[var(--color-dim)] sm:text-[12px]"
+        >
+          <span className="font-semibold text-[var(--color-muted)]" aria-hidden>
+            *
+          </span>{" "}
+          During this beta, LogoMesh only runs on Python-based repositories for now. TypeScript,
+          Go, and other languages are in development.
         </p>
       </div>
     </footer>

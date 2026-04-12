@@ -2,61 +2,129 @@
 
 /* ── FONT VARIABLES (set by layout.tsx via next/font) ── */
 @theme inline {
-  --font-sans:    var(--font-dm-sans);
+  --font-sans: var(--font-dm-sans);
   --font-display: var(--font-syne);
-  --font-mono:    var(--font-jb-mono);
-  --font-serif:   var(--font-instrument-serif);
+  --font-mono: var(--font-jb-mono);
+  --font-serif: var(--font-instrument-serif);
 }
 
 /* ── DESIGN TOKENS ── */
 @theme {
   /* Background scale */
-  --color-canvas:   #060608;
+  --color-canvas: #060608;
   --color-canvas-2: #0c0c0f;
   --color-canvas-3: #121218;
   --color-canvas-4: #1c1c24;
 
   /* Borders */
-  --color-border:    #171720;
+  --color-border: #171720;
   --color-border-hi: #252530;
 
   /* Text */
-  --color-ink:   #ede8de;
+  --color-ink: #ede8de;
   --color-muted: #9898a6;
-  --color-dim:   #52525e;
+  --color-dim: #52525e;
 
   /* Accent — acid yellow-green */
-  --color-accent:     #c4ff00;
+  --color-accent: #c4ff00;
   --color-accent-sub: oklch(0.94 0.24 122 / 0.1);
 
   /* Semantic */
-  --color-danger:     #ff3b3b;
+  --color-danger: #ff3b3b;
   --color-danger-sub: oklch(0.58 0.24 27 / 0.1);
-  --color-pass:       #00e87a;
+  --color-pass: #00e87a;
 
   /* Animation keyframes */
   @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
   @keyframes pulse-dot {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50%       { opacity: 0.25; transform: scale(0.55); }
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.25;
+      transform: scale(0.55);
+    }
+  }
+
+  /* TechStrip — distance set in px via --marquee-shift on the track (JS) for a seamless loop */
+  @keyframes tech-marquee {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(calc(-1 * var(--marquee-shift, 0px)), 0, 0);
+    }
   }
 }
 
 /* ── BASE ── */
-*, *::before, *::after { box-sizing: border-box; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 html {
   scroll-behavior: smooth;
   /* Fixed nav + notch: hash links (#features, etc.) land with section visible */
-  scroll-padding-top: calc(4.75rem + env(safe-area-inset-top, 0px));
+  scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px));
+}
+
+/* Nav — docks after scrolling past the in-flow header */
+@keyframes nav-dock-in {
+  from {
+    opacity: 0;
+    transform: translateY(-120%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.nav-dock-animated {
+  animation: nav-dock-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* “Works with” — slower on desktop; phones use longer duration (see below). */
+.tech-marquee-track--ready {
+  animation: tech-marquee 30s linear infinite;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+@media (min-width: 768px) {
+  .tech-marquee-track--ready {
+    animation-duration: 22s;
+  }
+}
+
+/* TerminalWindow — body height from line count (set --term-line-count in JS); avoids layout shift */
+.terminal-window-scroll {
+  height: calc(2.5rem + var(--term-line-count) * calc(11.5px * 1.65));
+  min-height: calc(2.5rem + var(--term-line-count) * calc(11.5px * 1.65));
+}
+@media (min-width: 640px) {
+  .terminal-window-scroll {
+    height: calc(2.5rem + var(--term-line-count) * calc(13.5px * 1.65));
+    min-height: calc(2.5rem + var(--term-line-count) * calc(13.5px * 1.65));
+  }
 }
 
 body {
   background-color: var(--color-canvas);
-  background-image: radial-gradient(rgba(152, 152, 166, 0.11) 1px, transparent 1px);
+  background-image: radial-gradient(
+    rgba(152, 152, 166, 0.11) 1px,
+    transparent 1px
+  );
   background-size: 26px 26px;
   background-attachment: fixed;
   color: var(--color-ink);
@@ -67,17 +135,27 @@ body {
 
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  html { scroll-behavior: auto; }
+  html {
+    scroll-behavior: auto;
+  }
+  .tech-marquee-track--ready {
+    animation: none !important;
+  }
+  .nav-dock-animated {
+    animation: none !important;
+  }
 }
 
 /* Grain overlay */
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.88' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");

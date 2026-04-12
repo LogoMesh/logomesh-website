@@ -39,7 +39,7 @@ export function PipelineSection() {
         className="mb-16 md:mb-20"
       >
         <div className="flex items-center gap-3.5 mb-6">
-          <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+          <span className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-accent)]">
             The pipeline
           </span>
           <span className="w-12 h-px bg-[var(--color-border-hi)]" />
