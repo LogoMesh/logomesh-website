@@ -1,15 +1,46 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" fill="#080808"/>
-  <!-- Mesh frame — top + left, brightened for visibility -->
-  <line x1="7" y1="7" x2="25" y2="7" stroke="#484858" stroke-width="2" stroke-linecap="round"/>
-  <line x1="7" y1="7" x2="7" y2="25" stroke="#484858" stroke-width="2" stroke-linecap="round"/>
-  <!-- Proof edges — right + bottom, lime -->
-  <line x1="25" y1="7" x2="25" y2="25" stroke="#c4ff00" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
-  <line x1="7" y1="25" x2="25" y2="25" stroke="#c4ff00" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
-  <!-- Three dim corner nodes — brightened -->
-  <circle cx="7" cy="7" r="3" fill="#565668"/>
-  <circle cx="25" cy="7" r="3" fill="#565668"/>
-  <circle cx="7" cy="25" r="3" fill="#565668"/>
-  <!-- The proof node — glowing lime -->
-  <circle cx="25" cy="25" r="4" fill="#c4ff00"/>
+  <rect width="32" height="32" fill="#060608" />
+  <!-- LogoMesh mark — matches public/branding/logomesh-mark-transparent.svg -->
+  <line
+    x1="7"
+    y1="7"
+    x2="25"
+    y2="7"
+    stroke="#484858"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+  <line
+    x1="7"
+    y1="7"
+    x2="7"
+    y2="25"
+    stroke="#484858"
+    stroke-width="2"
+    stroke-linecap="round"
+  />
+  <line
+    x1="25"
+    y1="7"
+    x2="25"
+    y2="25"
+    stroke="#c4ff00"
+    stroke-width="2"
+    stroke-linecap="round"
+    opacity="0.65"
+  />
+  <line
+    x1="7"
+    y1="25"
+    x2="25"
+    y2="25"
+    stroke="#c4ff00"
+    stroke-width="2"
+    stroke-linecap="round"
+    opacity="0.65"
+  />
+  <circle cx="7" cy="7" r="3" fill="#565668" />
+  <circle cx="25" cy="7" r="3" fill="#565668" />
+  <circle cx="7" cy="25" r="3" fill="#565668" />
+  <circle cx="25" cy="25" r="4" fill="#c4ff00" />
 </svg>
