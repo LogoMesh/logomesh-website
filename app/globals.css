@@ -90,7 +90,8 @@ html {
   min-height: 100%;
   min-height: 100dvh;
   /* Fixed nav + notch: hash links (#features, etc.) land with section visible */
-  scroll-padding-top: calc(4.5rem + env(safe-area-inset-top, 0px));
+  /* Slightly more air below fixed nav when jumping to #sections */
+  scroll-padding-top: calc(5rem + env(safe-area-inset-top, 0px));
 }
 
 /* Nav — docks after scrolling past the in-flow header */
