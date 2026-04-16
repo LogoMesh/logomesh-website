@@ -49,3 +49,6 @@ next-env.d.ts
 # Python (e.g. skill helper scripts)
 __pycache__/
 *.py[cod]
+
+# Private reference notes (local only)
+/docs/refs-internal/
