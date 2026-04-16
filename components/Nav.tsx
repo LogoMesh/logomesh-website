@@ -12,8 +12,8 @@ import { GithubIcon } from "./icons/GithubIcon";
 import { LogoMark } from "./LogoMark";
 
 const links = [
-  { label: "Evidence", href: "#evidence" },
   { label: "Demo", href: "#demo" },
+  { label: "Examples", href: "#examples" },
   { label: "How it works", href: "#proof" },
   { label: "Features", href: "#features" },
   { label: "Pipeline", href: "#how" },
@@ -60,7 +60,7 @@ export function Nav() {
   const [inHomeZone, setInHomeZone] = useState(true);
   const inHomeZoneRef = useRef(true);
   const dockedRef = useRef(false);
-  /** While true, scroll handler must not treat mid–smooth-scroll positions as “home” (fixes Evidence highlight). */
+  /** While true, scroll handler must not treat mid–smooth-scroll positions as “home” (fixes Examples highlight). */
   const programmaticSectionNavRef = useRef(false);
   const programmaticNavClearTimerRef = useRef<number | null>(null);
 
@@ -99,11 +99,14 @@ export function Nav() {
         setDocked(false);
       }
 
-      const ev = document.getElementById("evidence");
-      const evidenceTop = ev != null ? getDocumentOffsetTop(ev) : 0;
+      const examplesEl = document.getElementById("examples");
+      const examplesTop =
+        examplesEl != null ? getDocumentOffsetTop(examplesEl) : 0;
       const homeRaw =
-        ev != null ? window.scrollY < evidenceTop - 56 : window.scrollY < 120;
-      // Smooth scroll to a section passes through “above evidence” — don’t snap back to Home
+        examplesEl != null
+          ? window.scrollY < examplesTop - 56
+          : window.scrollY < 120;
+      // Smooth scroll to a section passes through “above examples” — don’t snap back to Home
       const home = programmaticSectionNavRef.current ? false : homeRaw;
       inHomeZoneRef.current = home;
       setInHomeZone(home);
@@ -177,7 +180,10 @@ export function Nav() {
     goHome();
   }
 
-  function onDesktopSectionClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
+  function onDesktopSectionClick(
+    e: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) {
     if (!href.startsWith("#")) return;
     e.preventDefault();
     goToSection(href);

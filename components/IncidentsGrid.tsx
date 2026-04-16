@@ -59,7 +59,7 @@ const INCIDENTS: Incident[] = [
 export function IncidentsGrid() {
   return (
     <section
-      id="evidence"
+      id="examples"
       className="w-full overflow-x-hidden py-16 sm:py-20 md:py-28"
     >
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8 md:px-10">
