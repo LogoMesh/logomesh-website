@@ -26,7 +26,7 @@ export function Footer() {
                 style={{ letterSpacing: "-0.03em" }}
               >
                 <span style={{ color: "rgba(196,255,0,0.45)" }}>logo</span>
-                <span className="text-muted">mesh</span>
+                <span className="text-[var(--color-muted)]">mesh</span>
               </span>
             </a>
           </div>

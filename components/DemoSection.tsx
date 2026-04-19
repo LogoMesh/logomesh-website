@@ -4,8 +4,11 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { EASE } from "@/lib/motion";
 
-/** Place `/public/demo.gif` (or change path) to show your screen recording. */
-const DEMO_GIF_SRC = "/demo.gif";
+/**
+ * Set `NEXT_PUBLIC_DEMO_GIF` to a path (e.g. `/demo.gif` after adding `public/demo.gif`)
+ * or a full URL. When unset, no GIF is requested — avoids 404 noise in devtools.
+ */
+const DEMO_GIF_SRC = process.env.NEXT_PUBLIC_DEMO_GIF?.trim() ?? "";
 
 function PlaceholderFrame() {
   return (
@@ -36,12 +39,10 @@ function PlaceholderFrame() {
         <p className="font-[family-name:var(--font-mono)] text-[12px] font-semibold text-[var(--color-ink)] sm:text-[13px]">
           Demo GIF placeholder
         </p>
-        <p className="mt-1.5 max-w-[20rem] font-[family-name:var(--font-mono)] text-[10px] leading-relaxed text-[var(--color-dim)] sm:text-[11px]">
-          Add{" "}
-          <code className="rounded bg-[var(--color-canvas-2)] px-1.5 py-0.5 text-[var(--color-accent)]">
-            public/demo.gif
-          </code>{" "}
-          to replace this frame.
+        <p className="mt-1.5 max-w-[22rem] font-[family-name:var(--font-mono)] text-[10px] leading-relaxed text-[var(--color-dim)] sm:text-[11px]">
+          Add <code className="rounded bg-[var(--color-canvas-2)] px-1.5 py-0.5 text-[var(--color-accent)]">public/demo.gif</code> and set{" "}
+          <code className="rounded bg-[var(--color-canvas-2)] px-1.5 py-0.5 text-[var(--color-accent)]">NEXT_PUBLIC_DEMO_GIF=/demo.gif</code>{" "}
+          in <code className="rounded bg-[var(--color-canvas-2)] px-1 py-0.5">.env.local</code>.
         </p>
       </div>
     </div>
@@ -51,6 +52,7 @@ function PlaceholderFrame() {
 export function DemoSection() {
   const [gifLoaded, setGifLoaded] = useState(false);
   const [gifFailed, setGifFailed] = useState(false);
+  const gifEnabled = DEMO_GIF_SRC.length > 0;
 
   return (
     <section
@@ -65,14 +67,15 @@ export function DemoSection() {
           transition={{ duration: 0.55, ease: EASE }}
           className="mb-6 text-center sm:mb-8 md:mb-10"
         >
-          <span className="font-[family-name:var(--font-mono)] text-[11px] sm:text-[12.5px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-accent)]">
+          <span className="inline-block px-3 font-[family-name:var(--font-mono)] text-[11px] sm:text-[12.5px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-accent)]">
             Watch it run
           </span>
-          <h2 className="mt-2.5 font-[family-name:var(--font-display)] text-[clamp(1.5rem,6.5vw,2.75rem)] sm:text-[clamp(28px,4vw,44px)] font-extrabold leading-[1.05] tracking-[-0.04em] text-[var(--color-ink)] px-1">
-            From install to PR comment
+          <h2 className="mt-2.5 px-3 font-[family-name:var(--font-display)] text-[clamp(1.35rem,5.8vw,2.5rem)] sm:text-[clamp(26px,3.6vw,40px)] font-extrabold leading-[1.06] tracking-[-0.04em] text-[var(--color-ink)] sm:px-4">
+            From install to a GitHub comment
           </h2>
-          <p className="mx-auto mt-2.5 max-w-[36rem] px-0.5 text-[14px] leading-snug text-[var(--color-muted)] sm:mt-3 sm:text-[16px] sm:leading-relaxed">
-            Real sandbox run, real crash, real GitHub thread — in under a minute.
+          <p className="read-max mx-auto mt-2.5 px-3 text-center text-balance text-[14px] leading-relaxed text-[var(--color-muted)] sm:mt-3 sm:px-4 sm:text-[15px]">
+            A full run in the recording: isolated test, real failure, and the thread
+            your team sees — about a minute end to end.
           </p>
         </motion.div>
 
@@ -109,7 +112,7 @@ export function DemoSection() {
 
             {/* Viewport — 16:9; max height on narrow viewports */}
             <div className="relative w-full bg-[var(--color-canvas)] aspect-video max-h-[min(52svh,320px)] sm:max-h-none">
-              {!gifFailed && (
+              {gifEnabled && !gifFailed && (
                 <img
                   src={DEMO_GIF_SRC}
                   alt="LogoMesh demo — install and PR comment flow"
@@ -122,7 +125,7 @@ export function DemoSection() {
                   onError={() => setGifFailed(true)}
                 />
               )}
-              {(!gifLoaded || gifFailed) && <PlaceholderFrame />}
+              {(!gifEnabled || !gifLoaded || gifFailed) && <PlaceholderFrame />}
             </div>
           </div>
 

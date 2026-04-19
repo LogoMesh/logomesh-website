@@ -7,6 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "verify": "npm run build && playwright test",
+    "verify:desktop": "npm run build && playwright test --project=desktop-chrome",
     "generate:github-logo": "node scripts/generate-github-app-logo.mjs",
     "generate:favicon": "node scripts/generate-favicon.mjs"
   },
@@ -20,15 +24,17 @@
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
+    "shadcn": "^4.3.0",
     "sharp": "^0.34.5",
-    "to-ico": "^1.1.5",
     "tailwindcss": "^4",
+    "to-ico": "^1.1.5",
     "typescript": "^5"
   }
 }

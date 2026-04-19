@@ -193,8 +193,8 @@ export function Nav() {
     cn(
       "flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 sm:px-5 md:px-7 py-3 rounded-2xl border transition-colors duration-300",
       docked || menuOpen
-        ? "border-[var(--color-border)] bg-[var(--color-canvas)]/94 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.45)]"
-        : "border-[var(--color-border-hi)]/55 bg-[var(--color-canvas)]/88 backdrop-blur-xl",
+        ? "border-border bg-background/95 backdrop-blur-2xl shadow-[0_8px_40px_rgba(0,0,0,0.45)]"
+        : "border-border-strong/60 bg-background/95 backdrop-blur-xl",
     );
 
   const navChrome = (
@@ -223,7 +223,7 @@ export function Nav() {
           >
             logo
           </span>
-          <span className="text-ink">mesh</span>
+          <span className="text-[var(--color-muted)]">mesh</span>
         </span>
       </a>
 
@@ -233,7 +233,7 @@ export function Nav() {
             href="#"
             onClick={onDesktopHomeClick}
             className={cn(
-              "inline-block text-[14px] py-1 border-b-2 transition-colors duration-200",
+              "inline-block text-[14px] py-1 border-b-2 transition-colors duration-300 ease-out",
               inHomeZone
                 ? "text-[var(--color-ink)] border-[var(--color-accent)]"
                 : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
@@ -250,7 +250,7 @@ export function Nav() {
                 href={l.href}
                 onClick={(e) => onDesktopSectionClick(e, l.href)}
                 className={cn(
-                  "inline-block text-[14px] py-1 border-b-2 transition-colors duration-200",
+                  "inline-block text-[14px] py-1 border-b-2 transition-colors duration-300 ease-out",
                   isActive
                     ? "text-[var(--color-ink)] border-[var(--color-accent)]"
                     : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
@@ -354,27 +354,30 @@ export function Nav() {
 
   return (
     <>
-      <div className="w-full max-w-[1280px] mx-auto px-3 sm:px-6 md:px-8 pt-[max(0.5rem,env(safe-area-inset-top))]">
-        <div className="relative">
-          {docked && (
-            <div
-              aria-hidden
-              className="w-full"
-              style={{ height: Math.max(navHeight, 52) }}
-            />
-          )}
-          <nav
-            ref={navRef}
-            className={cn(
-              shell(docked),
-              docked
-                ? "fixed left-3 right-3 top-[max(0.5rem,env(safe-area-inset-top))] z-[10000] mx-auto max-w-[1280px] w-[calc(100%-1.5rem)] sm:w-[calc(100%-3rem)]"
-                : "relative w-full",
-              docked && dockAnim && "nav-dock-animated",
+      {/* Full-bleed canvas so html dot grid never shows in gutters or above the shell */}
+      <div className="w-full bg-background">
+        <div className="mx-auto max-w-[1280px] px-3 sm:px-6 md:px-8 pt-[max(0.5rem,env(safe-area-inset-top))]">
+          <div className="relative">
+            {docked && (
+              <div
+                aria-hidden
+                className="w-full"
+                style={{ height: Math.max(navHeight, 52) }}
+              />
             )}
-          >
-            {navChrome}
-          </nav>
+            <nav
+              ref={navRef}
+              className={cn(
+                shell(docked),
+                docked
+                  ? "fixed left-3 right-3 top-0 z-[10000] mx-auto max-w-[1280px] w-[calc(100%-1.5rem)] pt-[max(0.5rem,env(safe-area-inset-top))] sm:w-[calc(100%-3rem)]"
+                  : "relative w-full",
+                docked && dockAnim && "nav-dock-animated",
+              )}
+            >
+              {navChrome}
+            </nav>
+          </div>
         </div>
       </div>
       <div

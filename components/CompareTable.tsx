@@ -97,24 +97,22 @@ export function CompareTable() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.06 }}
-          className="font-[family-name:var(--font-display)] text-[clamp(38px,4.8vw,60px)] font-extrabold leading-[0.96] tracking-[-0.04em]"
+          className="font-[family-name:var(--font-display)] text-[clamp(32px,4.1vw,52px)] font-extrabold leading-[0.96] tracking-[-0.04em]"
         >
           They comment.
           <br />
-          <em className="font-[family-name:var(--font-serif)] italic font-normal text-[var(--color-muted)]" style={{ fontStyle: "italic" }}>
-            We prove.
-          </em>
+          <span className="display-subline">We prove.</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.12 }}
-          className="text-[17px] leading-[1.75] text-[var(--color-muted)]"
+          className="read-max text-[15px] leading-[1.72] text-[var(--color-muted)] sm:text-[16px] sm:leading-[1.75]"
         >
-          Every other tool in this category reads your diff and guesses what might be wrong.
-          LogoMesh executes the code and shows you the crash.
-          A comment from us contains the input, the output, and the file location.
+          Most tools skim your code change and guess what might be wrong. LogoMesh
+          actually runs it and shows the failure. When we comment, you get the inputs,
+          the output, and where it happened — so you can verify it in seconds.
         </motion.p>
       </div>
 
@@ -128,7 +126,7 @@ export function CompareTable() {
               transition={{ duration: 0.5, ease: EASE, delay: 0.1 }}
             >
               <th className="px-3 sm:px-5 py-3 sm:py-3.5 border border-[var(--color-border)] bg-[var(--color-canvas-3)] font-[family-name:var(--font-mono)] text-[11.5px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.08em] text-[var(--color-muted)] min-w-[140px] sm:min-w-[220px]">
-                Capability
+                What it checks
               </th>
               {TOOLS.map((t, i) => (
                 <th

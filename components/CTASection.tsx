@@ -3,7 +3,7 @@
 import { useRef, useState, type MouseEvent } from "react";
 import { motion } from "motion/react";
 import { GithubIcon } from "./icons/GithubIcon";
-import { EASE } from "@/lib/motion";
+import { EASE, EASE_SOFT } from "@/lib/motion";
 
 export function CTASection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -27,7 +27,7 @@ export function CTASection() {
     >
       {/* Mouse-tracking radial glow */}
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-500"
+        className="pointer-events-none absolute inset-0 transition-[background,opacity] duration-700 ease-out"
         style={{
           background: `radial-gradient(600px circle at ${glowPos.x}% ${glowPos.y}%, rgba(196,255,0,0.07) 0%, transparent 65%)`,
         }}
@@ -38,8 +38,8 @@ export function CTASection() {
         initial={{ opacity: 0, y: 22 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 0.65, ease: EASE }}
-        className="relative font-[family-name:var(--font-display)] text-[clamp(1.75rem,8vw,4.375rem)] sm:text-[clamp(36px,5vw,70px)] font-extrabold leading-[0.96] sm:leading-[0.93] tracking-[-0.04em] mb-4 sm:mb-3 px-1"
+        transition={{ duration: 0.8, ease: EASE_SOFT }}
+        className="relative font-[family-name:var(--font-display)] text-balance text-[clamp(1.6rem,7.2vw,3.85rem)] sm:text-[clamp(32px,4.6vw,64px)] font-extrabold leading-[0.96] sm:leading-[0.93] tracking-[-0.04em] mb-4 sm:mb-3 px-1"
       >
         Install once.
         <br />
@@ -62,17 +62,18 @@ export function CTASection() {
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.12 }}
-        className="relative text-[16px] sm:text-[17px] leading-relaxed text-[var(--color-muted)] mb-8 sm:mb-14 max-w-md mx-auto px-1"
+        transition={{ duration: 0.65, ease: EASE_SOFT, delay: 0.1 }}
+        className="read-max relative mx-auto mb-8 px-1 text-[16px] leading-[1.65] text-[var(--color-muted)] sm:mb-14 sm:text-[17px] sm:leading-relaxed"
       >
-        Free for public repos. No configuration. Works on the next PR you open.
+        Free on public repositories. No setup files. It runs automatically on the
+        next change you open for review.
       </motion.p>
 
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.55, ease: EASE, delay: 0.18 }}
+        transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
         className="relative"
       >
         <motion.a

@@ -166,20 +166,18 @@ export function ProofSection() {
       {/* Split header */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end mb-10 md:mb-14">
         <ScrollIn delay={0.06}>
-          <h2 className="font-[family-name:var(--font-display)] text-[clamp(34px,4.2vw,54px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
+          <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,3.85vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
             Two outcomes.
             <br />
-            <em className="font-[family-name:var(--font-serif)] italic font-normal text-[var(--color-muted)] not-italic" style={{ fontStyle: "italic" }}>
-              Nothing else.
-            </em>
+            <span className="display-subline">Nothing else.</span>
           </h2>
         </ScrollIn>
         <ScrollIn delay={0.12}>
-          <p className="text-[17px] leading-[1.75] text-[var(--color-muted)]">
-            When a PR has no exploitable bugs, LogoMesh posts nothing.
-            When it finds one, you get the exact call it made, the property it violated,
-            and exactly what came back. Every comment is a reproducible crash —
-            not a suggestion, not a warning.
+          <p className="read-max text-[15px] leading-[1.72] text-[var(--color-muted)] sm:text-[16px] sm:leading-[1.75]">
+            When there&rsquo;s nothing serious to report, LogoMesh stays quiet.
+            When it finds a real problem, you see the exact steps it ran, what rule
+            broke, and what came back. Every note is a crash you can reproduce yourself
+            — not a vague warning or style tip.
           </p>
         </ScrollIn>
       </div>

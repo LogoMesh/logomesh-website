@@ -1,34 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Instrument_Serif,
-  JetBrains_Mono,
-  Plus_Jakarta_Sans,
-  Syne,
-} from "next/font/google";
+import { DM_Sans, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { ScrollReset } from "@/components/ScrollReset";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta",
-  weight: ["400", "500", "600", "700", "800"],
-  preload: true,
-  display: "swap",
-});
-
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-syne",
-  weight: ["700", "800"],
-  preload: true,
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  style: ["normal", "italic"],
-  weight: "400",
+  variable: "--font-dm-sans",
+  weight: ["400", "500", "600", "700", "800", "900"],
   preload: true,
   display: "swap",
 });
@@ -66,9 +45,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} ${syne.variable} ${instrumentSerif.variable} ${jbMono.variable}`}
+      className={`${dmSans.variable} ${jbMono.variable}`}
     >
-      <body className={`${plusJakarta.className} antialiased`}>
+      <body
+        className={`${dmSans.className} bg-background antialiased [text-rendering:optimizeLegibility]`}
+      >
+        <Script id="scroll-restoration-head" strategy="beforeInteractive">
+          {`(function(){try{if("scrollRestoration"in history)history.scrollRestoration="manual";}catch(e){}})()`}
+        </Script>
         <ScrollReset />
         {children}
       </body>

@@ -48,15 +48,10 @@ export function PipelineSection() {
           </span>
           <span className="w-12 h-px bg-[var(--color-border-hi)]" />
         </div>
-        <h2 className="font-[family-name:var(--font-display)] text-[clamp(34px,4.2vw,54px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
+        <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,3.85vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
           Three steps.
           <br />
-          <em
-            className="font-[family-name:var(--font-serif)] italic font-normal text-[var(--color-muted)]"
-            style={{ fontStyle: "italic" }}
-          >
-            One guarantee.
-          </em>
+          <span className="display-subline">One guarantee.</span>
         </h2>
       </motion.div>
 
@@ -106,12 +101,12 @@ export function PipelineSection() {
             </p>
 
             {/* Headline */}
-            <h3 className="font-[family-name:var(--font-display)] text-[22px] md:text-[26px] font-extrabold leading-[1.1] tracking-[-0.025em] text-[var(--color-ink)] mb-4">
+            <h3 className="font-[family-name:var(--font-display)] text-[21px] md:text-[24px] font-extrabold leading-[1.1] tracking-[-0.025em] text-[var(--color-ink)] mb-4">
               {s.headline}
             </h3>
 
             {/* Body */}
-            <p className="text-[15px] leading-[1.75] text-[var(--color-muted)] mt-auto">
+            <p className="text-[14px] leading-[1.72] text-[var(--color-muted)] mt-auto sm:text-[15px] sm:leading-[1.75]">
               {s.body}
             </p>
 

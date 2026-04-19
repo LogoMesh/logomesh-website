@@ -138,11 +138,11 @@ export function FeaturesBento() {
         transition={{ duration: 0.55, ease: EASE }}
         className="mb-10 text-center md:mb-14 md:text-left"
       >
-        <h2 className="font-[family-name:var(--font-display)] text-[clamp(34px,4.2vw,54px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[var(--color-ink)]">
+        <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,3.85vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[var(--color-ink)]">
           Features
         </h2>
-        <p className="mt-4 mx-auto max-w-[min(100%,42rem)] text-[16px] leading-[1.75] text-[var(--color-muted)] sm:text-[17px] md:mx-0">
-          Why it catches what others miss
+        <p className="read-max mt-4 mx-auto text-[15px] leading-[1.72] text-[var(--color-muted)] sm:text-[16px] sm:leading-[1.75] md:mx-0">
+          Why it catches problems a quick code review often misses.
         </p>
       </motion.div>
 
@@ -153,14 +153,12 @@ export function FeaturesBento() {
           <span className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             01 · Property Inference
           </span>
-          <h3 className="font-[family-name:var(--font-display)] text-[26px] md:text-[24px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
+          <h3 className="font-[family-name:var(--font-display)] text-[24px] md:text-[22px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
             Asks what should
             <br />
-            <em className="font-[family-name:var(--font-serif)] font-normal italic text-[var(--color-muted)]">
-              always be true.
-            </em>
+            <span className="display-subline">always be true.</span>
           </h3>
-          <p className="text-[15px] text-[var(--color-muted)] leading-[1.7] mb-5">
+          <p className="text-[14px] text-[var(--color-muted)] leading-[1.68] mb-5 sm:text-[15px] sm:leading-[1.7]">
             Before generating a single test, LogoMesh uses the LLM to reason
             about your function&rsquo;s contracts, invariants, and
             postconditions. This is what it inferred for{" "}
@@ -177,12 +175,12 @@ export function FeaturesBento() {
           <span className="font-[family-name:var(--font-mono)] text-[11px] sm:text-[12px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             02 · Sandboxed Exec
           </span>
-          <h3 className="font-[family-name:var(--font-display)] text-[22px] md:text-[20px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
+          <h3 className="font-[family-name:var(--font-display)] text-[21px] md:text-[19px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
             Actually runs
             <br />
             the code.
           </h3>
-          <p className="text-[15px] text-[var(--color-muted)] leading-[1.7] mb-5">
+          <p className="text-[14px] text-[var(--color-muted)] leading-[1.68] mb-5 sm:text-[15px] sm:leading-[1.7]">
             Not static analysis. Not an LLM guess. Real execution in a hardened
             Docker container.
           </p>
@@ -196,14 +194,12 @@ export function FeaturesBento() {
               <span className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4 block">
                 03 · Zero Config
               </span>
-              <h3 className="font-[family-name:var(--font-display)] text-[26px] md:text-[24px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
+              <h3 className="font-[family-name:var(--font-display)] text-[24px] md:text-[22px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
                 Works on the
                 <br />
-                <em className="font-[family-name:var(--font-serif)] font-normal italic text-[var(--color-muted)]">
-                  next PR you open.
-                </em>
+                <span className="display-subline">next PR you open.</span>
               </h3>
-              <p className="text-[15px] text-[var(--color-muted)] leading-[1.7]">
+              <p className="text-[14px] text-[var(--color-muted)] leading-[1.68] sm:text-[15px] sm:leading-[1.7]">
                 Install the GitHub App. That&rsquo;s it. No config file. No
                 YAML. No CI integration. LogoMesh listens for PR events and runs
                 the full pipeline automatically.
@@ -237,7 +233,7 @@ export function FeaturesBento() {
           <span className="font-[family-name:var(--font-mono)] text-[12px] sm:text-[12.5px] font-extrabold uppercase tracking-[0.12em] text-[var(--color-accent)] mb-4">
             04 · Crash Validation
           </span>
-          <h3 className="font-[family-name:var(--font-display)] text-[22px] md:text-[20px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
+          <h3 className="font-[family-name:var(--font-display)] text-[21px] md:text-[19px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
             57% fewer
             <br />
             false positives.

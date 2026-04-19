@@ -78,21 +78,19 @@ export function IncidentsGrid() {
       </motion.div>
 
       {/* Split header */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-16 items-start md:items-end mb-8 sm:mb-10 md:mb-14">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-16 items-start mb-8 sm:mb-10 md:mb-14">
         <motion.h2
           initial={{ opacity: 0, y: 22 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.06 }}
-          className="font-[family-name:var(--font-display)] text-[clamp(34px,4.2vw,54px)] font-extrabold leading-[0.96] tracking-[-0.04em]"
+          className="font-[family-name:var(--font-display)] text-[clamp(30px,3.85vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em]"
         >
           The bugs that
           <br />
           code review
           <br />
-          <em className="font-[family-name:var(--font-serif)] italic font-normal text-[var(--color-muted)]" style={{ fontStyle: "italic" }}>
-            can&rsquo;t see.
-          </em>
+          <span className="display-subline">can&rsquo;t see.</span>
         </motion.h2>
         <motion.div
           initial={{ opacity: 0, y: 22 }}
@@ -100,9 +98,11 @@ export function IncidentsGrid() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.12 }}
         >
-          <p className="text-[16px] sm:text-[17px] leading-[1.75] text-[var(--color-muted)] mb-4 sm:mb-5">
-            25–35% of production incidents are code bugs catchable before merge.
-            These all shipped because reviewers read the diff but couldn&rsquo;t run it.
+          <p className="read-max text-[15px] leading-[1.72] text-[var(--color-muted)] sm:text-[16px] sm:leading-[1.75] mb-4 sm:mb-5">
+            Industry postmortems often find that a large slice of serious outages are
+            plain coding mistakes you could catch before release. These well-known
+            examples still shipped because people read the change but couldn&rsquo;t
+            safely execute it the way automated testing can.
           </p>
           <span className="block font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)] tracking-[0.04em] mb-5">
             LogoMesh analysis · 20 production postmortems · Apr 2026
