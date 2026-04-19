@@ -15,15 +15,20 @@ const FRAMEWORKS = [
   "Celery",
 ] as const;
 
-// Duplicate once for seamless loop. CSS translates -50% for one full cycle.
 const LOOP = [...FRAMEWORKS, ...FRAMEWORKS];
 
 export function FrameworkMarquee() {
   return (
-    <section
-      aria-labelledby="framework-marquee-label"
-      className="relative w-full overflow-hidden border-t border-border py-16 sm:py-20"
-    >
+    <section aria-labelledby="framework-marquee-label" className="relative w-full overflow-hidden py-14 sm:py-18">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 0%, hsl(var(--foreground) / 0.08) 50%, transparent 100%)",
+        }}
+      />
+
       <div className="mx-auto max-w-[1280px] px-5 sm:px-8 md:px-10">
         <motion.p
           id="framework-marquee-label"
@@ -31,15 +36,14 @@ export function FrameworkMarquee() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.5 }}
-          className="text-center font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-[0.22em] text-muted-foreground"
+          className="text-center font-sans text-[12px] uppercase tracking-[0.22em] text-muted-foreground"
         >
           Runs against every Python framework you ship with
         </motion.p>
       </div>
 
-      {/* Edge fade mask — gradient both sides */}
       <div
-        className="relative mt-8 sm:mt-10"
+        className="relative mt-7 sm:mt-8"
         style={{
           maskImage:
             "linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)",
@@ -47,20 +51,17 @@ export function FrameworkMarquee() {
             "linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%)",
         }}
       >
-        <div className="flex w-max animate-marquee" style={{ willChange: "transform" }}>
-          {LOOP.map((name, i) => (
+        <div
+          className="flex w-max animate-marquee [animation-duration:38s]"
+          style={{ willChange: "transform" }}
+        >
+          {LOOP.map((name, index) => (
             <span
-              key={`${name}-${i}`}
-              className="flex shrink-0 items-center gap-10 px-10 font-[family-name:var(--font-display)] text-[clamp(2rem,5vw,3.75rem)] font-normal leading-none tracking-[-0.025em] text-foreground/55"
+              key={`${name}-${index}`}
+              className="flex shrink-0 items-center gap-7 px-8 font-sans text-[clamp(1.9rem,4.8vw,3.45rem)] font-semibold leading-none tracking-[-0.025em] text-foreground/45"
             >
               {name}
-              <span
-                aria-hidden
-                className="text-primary/50"
-                style={{ fontSize: "0.7em" }}
-              >
-                ◆
-              </span>
+              <span aria-hidden className="h-1.5 w-1.5 rotate-45 bg-primary/45" />
             </span>
           ))}
         </div>

@@ -1,42 +1,53 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useState } from "react";
 import { EASE } from "@/lib/motion";
 import type { Line, Scenario } from "./terminal-scenarios";
 
-// Class lookup → prevents Tailwind purging dynamic strings
 const LINE_CLASS: Record<Line["kind"], string> = {
-  "cmd": "text-primary/80",
+  cmd: "text-primary/80",
   "step-done": "text-foreground/80",
   "step-run": "text-foreground/70",
-  "crash": "text-destructive font-semibold",
+  crash: "text-destructive font-semibold",
   "crash-detail": "text-destructive/75 pl-0",
-  "success": "text-primary font-semibold",
+  success: "text-primary font-semibold",
 };
 
 type Props = {
   scenario: Scenario;
-  /** ms between line reveals — spec calls for ~200ms */
   lineDelay?: number;
 };
 
 export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
-  const [visibleCount, setVisibleCount] = useState(0);
+  const reducedMotion = useReducedMotion();
+  const lineCount = scenario.lines.length;
+  const [revealed, setRevealed] = useState(1);
 
-  // Reset + replay whenever scenario changes
   useEffect(() => {
-    setVisibleCount(0);
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    scenario.lines.forEach((_, idx) => {
-      timers.push(
-        setTimeout(() => setVisibleCount((c) => Math.max(c, idx + 1)), idx * lineDelay + 120),
-      );
-    });
-    return () => timers.forEach(clearTimeout);
-  }, [scenario, lineDelay]);
+    if (reducedMotion === true) return;
 
-  const done = visibleCount >= scenario.lines.length;
+    const timerIds: number[] = [];
+    timerIds.push(
+      window.setTimeout(() => {
+        setRevealed(1);
+        scenario.lines.slice(1).forEach((_, idx) => {
+          timerIds.push(
+            window.setTimeout(
+              () => setRevealed((count) => Math.max(count, idx + 2)),
+              idx * lineDelay + 150,
+            ),
+          );
+        });
+      }, 0),
+    );
+    return () => {
+      for (const id of timerIds) window.clearTimeout(id);
+    };
+  }, [lineDelay, reducedMotion, scenario]);
+
+  const visibleCount = reducedMotion === true ? lineCount : revealed;
+  const done = visibleCount >= lineCount;
 
   return (
     <div
@@ -44,7 +55,6 @@ export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
       role="img"
       aria-label={`LogoMesh terminal replay — ${scenario.label} pull request`}
     >
-      {/* Soft lime underglow */}
       <div
         aria-hidden
         className="pointer-events-none absolute -inset-12 -z-10 blur-3xl opacity-70"
@@ -54,12 +64,11 @@ export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
         }}
       />
 
-      {/* macOS title bar */}
       <div className="flex items-center gap-2 border-b border-border/80 bg-card/60 px-4 py-2.5">
         <div className="flex gap-1.5">
-          <span className="block h-3 w-3 rounded-full bg-[#ff5f57]" aria-hidden />
-          <span className="block h-3 w-3 rounded-full bg-[#febc2e]" aria-hidden />
-          <span className="block h-3 w-3 rounded-full bg-[#28c840]" aria-hidden />
+          <span className="block h-3 w-3 rounded-full bg-[hsl(var(--window-close))]" aria-hidden />
+          <span className="block h-3 w-3 rounded-full bg-[hsl(var(--window-minimize))]" aria-hidden />
+          <span className="block h-3 w-3 rounded-full bg-[hsl(var(--window-expand))]" aria-hidden />
         </div>
         <span className="ml-3 font-[family-name:var(--font-mono)] text-[11.5px] uppercase tracking-[0.14em] text-muted-foreground">
           logomesh · {scenario.repo} · PR {scenario.prNumber}
@@ -74,10 +83,9 @@ export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
         </span>
       </div>
 
-      {/* Terminal body */}
       <div
         className="relative px-5 py-5 font-[family-name:var(--font-mono)] text-[13px] leading-[1.75] sm:text-[14px]"
-        style={{ minHeight: "272px" }}
+        style={{ minHeight: "300px" }}
       >
         <AnimatePresence mode="wait">
           <motion.div
@@ -100,7 +108,6 @@ export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
                 className={`whitespace-pre-wrap break-words ${LINE_CLASS[line.kind]}`}
               >
                 {line.text}
-                {/* Blinking caret on last visible line while still running */}
                 {idx === visibleCount - 1 && !done && (
                   <span
                     className="animate-blink ml-1 inline-block h-[1em] w-[0.55ch] translate-y-[2px] bg-primary align-middle"
@@ -112,7 +119,6 @@ export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
           </motion.div>
         </AnimatePresence>
 
-        {/* Persistent prompt caret when idle */}
         {done && (
           <div className="mt-2 font-[family-name:var(--font-mono)] text-[13px] text-foreground/40">
             ${" "}

@@ -1,27 +1,27 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { TerminalReplay } from "./TerminalReplay";
 import { SCENARIOS } from "./terminal-scenarios";
 
-// Auto-cycle cadence — cycles the scenario unless the user has clicked a tab
 const CYCLE_MS = 7000;
 
 export function FrameworkTabs() {
   const [activeIdx, setActiveIdx] = useState(0);
   const [userLocked, setUserLocked] = useState(false);
   const cycleRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (userLocked) return;
+    if (userLocked || reducedMotion) return;
     cycleRef.current = setInterval(() => {
-      setActiveIdx((i) => (i + 1) % SCENARIOS.length);
+      setActiveIdx((idx) => (idx + 1) % SCENARIOS.length);
     }, CYCLE_MS);
     return () => {
       if (cycleRef.current) clearInterval(cycleRef.current);
     };
-  }, [userLocked]);
+  }, [reducedMotion, userLocked]);
 
   const pick = (idx: number) => {
     setUserLocked(true);
@@ -32,22 +32,23 @@ export function FrameworkTabs() {
 
   return (
     <div className="w-full">
-      {/* Tabs header */}
       <div
         role="tablist"
         aria-label="Framework scenarios"
-        className="mb-3 flex items-center gap-1 rounded-lg border border-border/80 bg-card/60 p-1 backdrop-blur-sm w-fit"
+        className="mb-3 flex w-fit items-center gap-1 rounded-lg border border-border/80 bg-card/60 p-1 backdrop-blur-sm"
       >
-        {SCENARIOS.map((s, idx) => {
+        {SCENARIOS.map((scenario, idx) => {
           const isActive = idx === activeIdx;
           return (
             <button
-              key={s.id}
+              key={scenario.id}
+              id={`tab-${scenario.id}`}
               role="tab"
               aria-selected={isActive}
-              aria-controls={`terminal-panel-${s.id}`}
+              aria-controls={`terminal-panel-${scenario.id}`}
+              tabIndex={isActive ? 0 : -1}
               onClick={() => pick(idx)}
-              className={`relative rounded-md px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-[0.12em] transition-colors ${
+              className={`relative cursor-pointer rounded-md px-3.5 py-1.5 font-sans text-[12px] uppercase tracking-[0.12em] transition-colors ${
                 isActive
                   ? "text-primary-foreground"
                   : "text-muted-foreground hover:text-foreground"
@@ -61,15 +62,14 @@ export function FrameworkTabs() {
                   aria-hidden
                 />
               )}
-              <span className="relative">{s.label}</span>
+              <span className="relative">{scenario.label}</span>
             </button>
           );
         })}
 
-        {/* Cycle indicator — fades once user overrides */}
-        {!userLocked && (
+        {!userLocked && !reducedMotion && (
           <span
-            className="ml-2 hidden items-center gap-1.5 font-[family-name:var(--font-mono)] text-[10.5px] uppercase tracking-[0.14em] text-dim sm:inline-flex"
+            className="ml-2 hidden items-center gap-1.5 font-sans text-[10.5px] uppercase tracking-[0.14em] text-dim sm:inline-flex"
             aria-hidden
           >
             <span
@@ -81,11 +81,11 @@ export function FrameworkTabs() {
         )}
       </div>
 
-      {/* Terminal panel */}
       <div
         role="tabpanel"
         id={`terminal-panel-${active.id}`}
         aria-labelledby={`tab-${active.id}`}
+        tabIndex={0}
       >
         <TerminalReplay scenario={active} />
       </div>

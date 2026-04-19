@@ -1,55 +1,61 @@
 import { LogoMark } from "./LogoMark";
 
-const LINKS = ["Docs", "GitHub", "Privacy", "Terms"];
+type FooterNavLink = { label: string; href: string; external?: boolean };
 
-/** Solid only — next token after CTA (`--color-canvas-2`) for a clear but related footer band */
-const FOOTER_SOLID = "var(--color-canvas-3)";
+const LINKS: FooterNavLink[] = [
+  { label: "Demo", href: "#demo" },
+  { label: "Why", href: "#why" },
+  { label: "How It Works", href: "#how" },
+  { label: "Install", href: "https://github.com/apps/logomesh", external: true },
+];
 
 export function Footer() {
   return (
     <footer
-      className="relative overflow-hidden border-t border-[var(--color-border-hi)] pb-[max(0.75rem,env(safe-area-inset-bottom))]"
-      style={{ backgroundColor: FOOTER_SOLID }}
+      className="relative overflow-hidden border-t border-border/80 bg-card pb-[max(0.75rem,env(safe-area-inset-bottom))]"
     >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.3) 50%, transparent 100%)",
+        }}
+      />
 
-      {/* Content — stacked + centered on small screens; 3-col grid on lg so nav is truly centered */}
-      <div className="relative z-[2] mx-auto max-w-[1280px] px-4 sm:px-8 py-4 sm:py-7 md:py-8">
-        <div className="grid grid-cols-1 items-center gap-2.5 text-center sm:gap-4 lg:grid-cols-3 lg:gap-6 lg:text-left">
+      <div className="relative z-[2] mx-auto max-w-[1280px] px-5 py-5 sm:px-8 sm:py-8 md:px-10">
+        <div className="grid grid-cols-1 items-center gap-4 text-center lg:grid-cols-3 lg:gap-6 lg:text-left">
           <div className="flex justify-center lg:justify-start">
             <a
-              href="#"
-              className="inline-flex w-fit items-center gap-1.5 min-h-[36px] sm:min-h-[44px]"
+              href="#hero"
+              className="inline-flex min-h-[44px] w-fit items-center gap-2"
             >
-              <LogoMark size={26} />
-              <span
-                className="font-mono text-[17px] sm:text-[18px] font-semibold"
-                style={{ letterSpacing: "-0.03em" }}
-              >
-                <span style={{ color: "rgba(196,255,0,0.45)" }}>logo</span>
-                <span className="text-muted">mesh</span>
+              <LogoMark size={24} />
+              <span className="font-sans text-[16px] font-semibold tracking-[0.03em] text-foreground sm:text-[17px]">
+                logo
+                <span className="text-primary">mesh</span>
               </span>
             </a>
           </div>
 
-          <nav
-            className="flex justify-center lg:justify-center"
-            aria-label="Footer"
-          >
-            <ul className="flex list-none flex-wrap justify-center gap-x-4 gap-y-0.5 sm:gap-x-5 sm:gap-y-1">
-              {LINKS.map((l) => (
-                <li key={l}>
+          <nav className="flex justify-center" aria-label="Footer">
+            <ul className="flex list-none flex-wrap justify-center gap-x-4 gap-y-2 sm:gap-x-5">
+              {LINKS.map((link) => (
+                <li key={link.label}>
                   <a
-                    href="#"
-                    className="inline-flex items-center min-h-[36px] py-0.5 font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors sm:min-h-[44px] sm:py-0"
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer noopener" : undefined}
+                    className="inline-flex min-h-[44px] items-center rounded-md px-1 py-0.5 font-sans text-[12.5px] uppercase tracking-[0.12em] text-dim transition-colors hover:text-foreground"
                   >
-                    {l}
+                    {link.label}
                   </a>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <p className="mx-auto max-w-[20rem] font-[family-name:var(--font-mono)] text-[12px] leading-relaxed text-[var(--color-dim)] lg:mx-0 lg:max-w-[min(100%,17.5rem)] lg:justify-self-end lg:text-right">
+          <p className="mx-auto max-w-[20rem] font-sans text-[12px] font-normal leading-relaxed text-dim lg:mx-0 lg:max-w-[17.5rem] lg:justify-self-end lg:text-right">
             Pre-merge verification. Only comments when it has proof.
           </p>
         </div>
@@ -57,9 +63,9 @@ export function Footer() {
         <p
           id="beta-python-footnote"
           tabIndex={-1}
-          className="mx-auto mt-3 max-w-[40rem] scroll-mt-24 border-t border-[var(--color-border)] pt-3 text-center font-[family-name:var(--font-mono)] text-[11px] leading-snug text-[var(--color-dim)] sm:mt-5 sm:pt-4 sm:leading-relaxed sm:text-[12px]"
+          className="mx-auto mt-4 max-w-[40rem] scroll-mt-24 border-t border-border/80 pt-4 text-center font-sans text-[11px] font-normal leading-snug text-dim sm:mt-5 sm:leading-relaxed sm:text-[12px]"
         >
-          <span className="font-semibold text-[var(--color-muted)]" aria-hidden>
+          <span className="font-semibold text-muted-foreground" aria-hidden>
             *
           </span>{" "}
           During this beta, LogoMesh only runs on Python-based repositories for now. TypeScript,

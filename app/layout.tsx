@@ -1,12 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, JetBrains_Mono, Instrument_Serif } from "next/font/google";
-import { ScrollReset } from "@/components/ScrollReset";
+import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { MotionProvider } from "@/components/MotionProvider";
 import "./globals.css";
 
-const geistSans = Geist({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-geist-sans",
-  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-plus-jakarta",
+  weight: ["400", "500", "600", "700", "800"],
   preload: true,
   display: "swap",
 });
@@ -14,23 +14,14 @@ const geistSans = Geist({
 const jbMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jb-mono",
-  weight: ["300", "400", "500", "600", "700"],
-  preload: true,
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  style: ["normal", "italic"],
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
   preload: true,
   display: "swap",
 });
 
 export const viewport: Viewport = {
   viewportFit: "cover",
-  themeColor: "#0a0a0b",
+  themeColor: "hsl(240 6% 4%)",
 };
 
 export const metadata: Metadata = {
@@ -52,13 +43,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${jbMono.variable} ${instrumentSerif.variable}`}
-    >
-      <body className={`${geistSans.className} antialiased`}>
-        <ScrollReset />
-        {children}
+    <html lang="en" className={`${plusJakarta.variable} ${jbMono.variable}`}>
+      <body className={`${plusJakarta.className} antialiased`}>
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

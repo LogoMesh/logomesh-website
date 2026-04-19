@@ -2,23 +2,18 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { ArrowRight, PlayCircle, Zap, ShieldCheck, MousePointerClick } from "lucide-react";
+import { ArrowRight, PlayCircle, ShieldCheck, TimerReset } from "lucide-react";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { FrameworkTabs } from "./FrameworkTabs";
 
-const MICROCOPY = [
-  { icon: Zap, text: "avg. 12s per PR" },
-  { icon: ShieldCheck, text: "never blocks merge" },
-  { icon: MousePointerClick, text: "uninstall in 2 clicks" },
+const PROOF_METRICS = [
+  { icon: TimerReset, value: "12s", text: "median review per PR" },
+  { icon: ShieldCheck, value: "0", text: "false alarms in beta" },
 ] as const;
 
 export function Hero() {
   return (
-    <section
-      id="hero"
-      className="bg-gradient-hero relative w-full overflow-hidden"
-    >
-      {/* Subtle edge fade — anchors the hero */}
+    <section id="hero" className="bg-gradient-hero relative w-full overflow-hidden">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-x-0 bottom-0 h-px"
@@ -28,11 +23,9 @@ export function Hero() {
         }}
       />
 
-      <div className="relative mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-12 px-5 pt-14 pb-24 sm:px-8 sm:pt-20 sm:pb-28 md:gap-16 md:px-10 md:pt-24 md:pb-36 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20 lg:pt-28 xl:pt-32">
-        {/* ─── LEFT: copy cluster ─── */}
+      <div className="relative mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-12 px-5 pt-14 pb-22 sm:px-8 sm:pt-20 sm:pb-28 md:gap-14 md:px-10 md:pt-24 md:pb-34 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-18 lg:pt-28 xl:pt-30">
         <div className="flex flex-col">
-          {/* Beta kicker */}
-          <p className="animate-rise rise-d1 font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-[0.22em] text-muted-foreground">
+          <p className="animate-rise rise-d1 font-sans text-[12px] font-normal uppercase tracking-[0.22em] text-muted-foreground">
             <span
               aria-hidden
               className="mr-2 inline-block h-[7px] w-[7px] translate-y-[-2px] rounded-full bg-primary align-middle"
@@ -41,8 +34,7 @@ export function Hero() {
             Public beta · Python
           </p>
 
-          {/* H1 — brutalist serif w/ red bug accent */}
-          <h1 className="animate-rise rise-d2 mt-6 font-[family-name:var(--font-display)] text-[clamp(2.5rem,8vw,5.5rem)] font-normal leading-[0.94] tracking-[-0.035em] text-foreground sm:leading-[0.92]">
+          <h1 className="animate-rise rise-d2 mt-6 font-sans text-[clamp(2.5rem,8vw,5.5rem)] font-semibold leading-[0.94] tracking-[-0.035em] text-foreground sm:leading-[0.92]">
             Catch the{" "}
             <span
               className="text-destructive"
@@ -59,25 +51,20 @@ export function Hero() {
             to production.
           </h1>
 
-          {/* Plain-English sub */}
           <p className="animate-rise rise-d3 mt-7 max-w-[38rem] text-[17px] leading-[1.6] text-muted-foreground sm:text-[18.5px]">
             LogoMesh is an AI teammate that tests every pull request, proves
             exactly how it breaks, and posts the fix.{" "}
             <span className="font-medium text-foreground">Zero false alarms.</span>
           </p>
 
-          {/* Tertiary mono — technical pride */}
-          <p className="animate-rise rise-d3 mt-5 font-[family-name:var(--font-mono)] text-[12px] uppercase leading-relaxed tracking-[0.16em] text-dim">
-            infers guarantees
+          <p className="animate-rise rise-d3 mt-5 max-w-[40rem] font-sans text-[12px] uppercase leading-relaxed tracking-[0.16em] text-dim">
+            adversarial property tests
             <span className="mx-2 text-border-strong">·</span>
-            adversarial fuzzing
+            docker sandboxed
             <span className="mx-2 text-border-strong">·</span>
-            docker-sandboxed
-            <span className="mx-2 text-border-strong">·</span>
-            only speaks when 100% confirmed
+            comments only with reproducible proof
           </p>
 
-          {/* CTA cluster */}
           <div className="animate-rise rise-d4 mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
             <motion.a
               href="https://github.com/apps/logomesh"
@@ -106,19 +93,15 @@ export function Hero() {
             </motion.a>
           </div>
 
-          {/* Microcopy row */}
-          <div className="animate-rise rise-d5 mt-7 flex flex-wrap items-center gap-x-5 gap-y-2.5 font-[family-name:var(--font-mono)] text-[12.5px] text-dim">
-            {MICROCOPY.map(({ icon: Icon, text }) => (
-              <span key={text} className="inline-flex items-center gap-1.5">
-                <Icon size={12} className="text-primary/70" />
-                {text}
-              </span>
-            ))}
-          </div>
-
-          {/* Credibility chip */}
-          <div className="animate-rise rise-d6 mt-8">
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-border-strong bg-card/50 px-3.5 py-1.5 font-[family-name:var(--font-mono)] text-[11.5px] uppercase tracking-[0.14em] text-muted-foreground backdrop-blur-sm">
+          <div className="animate-rise rise-d5 mt-6 flex flex-wrap gap-3">
+            <motion.a
+              href="https://agentbeats.berkeley.edu"
+              target="_blank"
+              rel="noreferrer noopener"
+              whileHover={{ y: -1 }}
+              transition={{ duration: 0.2 }}
+              className="glass group inline-flex min-h-[46px] items-center gap-2.5 rounded-full px-3.5 py-2"
+            >
               <Image
                 src="/california_golden_bears.png"
                 alt="California Golden Bears"
@@ -126,14 +109,30 @@ export function Hero() {
                 height={20}
                 className="h-4 w-auto opacity-90"
               />
-              <span className="text-foreground/90">1st place</span>
-              <span className="text-dim">·</span>
-              UC Berkeley AgentBeats — Software Testing Track
-            </span>
+              <span className="font-sans text-[11.5px] uppercase tracking-[0.14em] text-muted-foreground">
+                <span className="text-foreground/90">1st place</span>
+                <span className="mx-2 text-dim">·</span>
+                UC Berkeley AgentBeats
+              </span>
+            </motion.a>
+
+            {PROOF_METRICS.map(({ icon: Icon, value, text }) => (
+              <div
+                key={text}
+                className="inline-flex min-h-[46px] items-center gap-2.5 rounded-full border border-border-strong bg-card/50 px-4 py-2 font-sans text-[11.5px] uppercase tracking-[0.14em] text-muted-foreground backdrop-blur-sm"
+              >
+                <Icon size={13} className="text-primary/80" />
+                <span className="text-foreground">{value}</span>
+                <span>{text}</span>
+              </div>
+            ))}
           </div>
+
+          <p className="animate-rise rise-d6 mt-5 font-sans text-[11px] uppercase tracking-[0.14em] text-dim">
+            Install on a repo. Open a pull request. Wait for proof.
+          </p>
         </div>
 
-        {/* ─── RIGHT: animated terminal cluster ─── */}
         <motion.div
           id="demo"
           initial={{ opacity: 0, y: 24 }}
