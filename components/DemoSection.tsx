@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { EASE } from "@/lib/motion";
 
@@ -110,13 +111,17 @@ export function DemoSection() {
             {/* Viewport — 16:9; max height on narrow viewports */}
             <div className="relative w-full bg-[var(--color-canvas)] aspect-video max-h-[min(52svh,320px)] sm:max-h-none">
               {!gifFailed && (
-                <img
+                <Image
                   src={DEMO_GIF_SRC}
                   alt="LogoMesh demo — install and PR comment flow"
+                  fill
+                  unoptimized
+                  loading="lazy"
+                  sizes="(max-width: 920px) 100vw, 920px"
                   className={
                     gifLoaded
-                      ? "absolute inset-0 z-[1] h-full w-full object-cover object-top"
-                      : "absolute inset-0 z-0 h-full w-full object-cover opacity-0"
+                      ? "absolute inset-0 z-[1] object-cover object-top"
+                      : "absolute inset-0 z-0 object-cover opacity-0"
                   }
                   onLoad={() => setGifLoaded(true)}
                   onError={() => setGifFailed(true)}

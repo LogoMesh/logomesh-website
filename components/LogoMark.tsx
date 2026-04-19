@@ -18,8 +18,8 @@ export function LogoMark({ size = 32 }: LogoMarkProps) {
       <line x1="6" y1="6" x2="6" y2="18" stroke="#484858" strokeWidth="1.5" strokeLinecap="round" />
 
       {/* Proof edges — right + bottom, lime, converging on the catch node */}
-      <line x1="18" y1="6" x2="18" y2="18" stroke="#c4ff00" strokeWidth="1.5" strokeLinecap="round" opacity={0.6} />
-      <line x1="6" y1="18" x2="18" y2="18" stroke="#c4ff00" strokeWidth="1.5" strokeLinecap="round" opacity={0.6} />
+      <line x1="18" y1="6" x2="18" y2="18" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" opacity={0.6} />
+      <line x1="6" y1="18" x2="18" y2="18" stroke="hsl(var(--primary))" strokeWidth="1.5" strokeLinecap="round" opacity={0.6} />
 
       {/* Three dim corner nodes — boosted from #46464f to #565668 */}
       <circle cx="6" cy="6" r="2.5" fill="#565668" />
@@ -31,8 +31,8 @@ export function LogoMark({ size = 32 }: LogoMarkProps) {
         cx="18"
         cy="18"
         r="3"
-        fill="#c4ff00"
-        style={{ filter: "drop-shadow(0 0 3px rgba(196,255,0,0.9))" }}
+        fill="hsl(var(--primary))"
+        style={{ filter: "drop-shadow(0 0 4px hsl(var(--primary) / 0.85))" }}
       />
     </svg>
   );

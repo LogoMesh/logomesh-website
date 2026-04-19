@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { useReducedMotion } from "motion/react";
-import { TECH_LOGOS } from "./icons/TechLogos";
+import { TECH_LOGOS } from "@/components/icons/TechLogos";
 
 function LogoCell({
   name,
@@ -12,18 +12,17 @@ function LogoCell({
   Logo: (typeof TECH_LOGOS)[number]["Logo"];
 }) {
   return (
-    <div className="shrink-0 flex items-center gap-3.5 px-7 border-r border-[var(--color-border)] py-5">
-      <span className="opacity-80">
+    <div className="flex shrink-0 items-center gap-3.5 border-r border-border py-5 pl-2 pr-7 sm:pl-3">
+      <span className="opacity-90">
         <Logo size={28} />
       </span>
-      <span className="font-[family-name:var(--font-mono)] text-[14px] font-semibold text-[var(--color-muted)] whitespace-nowrap">
+      <span className="whitespace-nowrap font-mono text-[14px] font-semibold tracking-tight text-muted-foreground">
         {name}
       </span>
     </div>
   );
 }
 
-/** Stacked row for vertical marquee (mobile) — borders via parent divide-y for a clean loop seam */
 function LogoCellVertical({
   name,
   Logo,
@@ -33,10 +32,8 @@ function LogoCellVertical({
 }) {
   return (
     <div className="flex w-full shrink-0 items-center justify-center gap-3 px-4 py-3.5">
-      <span className="opacity-100">
-        <Logo size={24} />
-      </span>
-      <span className="font-[family-name:var(--font-mono)] text-[13px] font-semibold text-ink/80">
+      <Logo size={24} />
+      <span className="font-mono text-[13px] font-semibold text-foreground/85">
         {name}
       </span>
     </div>
@@ -59,7 +56,7 @@ function LogoHalf({ id }: { id: "a" | "b" }) {
 function LogoHalfVertical({ id }: { id: "a" | "b" }) {
   return (
     <div
-      className="flex w-full shrink-0 flex-col divide-y divide-[var(--color-border)]"
+      className="flex w-full shrink-0 flex-col divide-y divide-border"
       aria-hidden={id === "b" ? true : undefined}
     >
       {TECH_LOGOS.map(({ name, Logo }, i) => (
@@ -71,23 +68,23 @@ function LogoHalfVertical({ id }: { id: "a" | "b" }) {
 
 const MARQUEE_MASK: CSSProperties = {
   WebkitMaskImage:
-    "linear-gradient(to right, transparent, black 4rem, black calc(100% - 4rem), transparent)",
+    "linear-gradient(to right, transparent, black 5rem, black calc(100% - 5rem), transparent)",
   maskImage:
-    "linear-gradient(to right, transparent, black 4rem, black calc(100% - 4rem), transparent)",
+    "linear-gradient(to right, transparent, black 5rem, black calc(100% - 5rem), transparent)",
   WebkitMaskSize: "100% 100%",
   maskSize: "100% 100%",
 };
 
 const MARQUEE_MASK_Y: CSSProperties = {
   WebkitMaskImage:
-    "linear-gradient(to bottom, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent)",
+    "linear-gradient(to bottom, transparent, black 1.5rem, black calc(100% - 1.5rem), transparent)",
   maskImage:
-    "linear-gradient(to bottom, transparent, black 1.25rem, black calc(100% - 1.25rem), transparent)",
+    "linear-gradient(to bottom, transparent, black 1.5rem, black calc(100% - 1.5rem), transparent)",
   WebkitMaskSize: "100% 100%",
   maskSize: "100% 100%",
 };
 
-export function TechStrip() {
+export function FrameworkMarquee() {
   const reducedMotion = useReducedMotion() === true;
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
   const verticalTrackRef = useRef<HTMLDivElement>(null);
@@ -112,7 +109,6 @@ export function TechStrip() {
           | HTMLElement
           | undefined;
         if (vEl) {
-          // Subpixel-accurate loop distance — rounding caused a visible jump at the bottom each cycle
           const h = vEl.getBoundingClientRect().height;
           if (h > 0) setMarqueeShiftYPx(h);
         }
@@ -152,19 +148,15 @@ export function TechStrip() {
   } as CSSProperties;
 
   return (
-    <div
-      className="border-y border-[var(--color-border)] overflow-hidden"
-      style={{ background: "var(--color-canvas-2)" }}
-    >
-      {/* Mobile: heading on top, vertical marquee below (same loop as desktop) */}
+    <div className="border-y border-border bg-card/60">
       <div className="flex flex-col md:hidden">
-        <div className="flex items-center justify-center gap-3 border-b border-[var(--color-border)] px-5 py-4 sm:px-8 sm:py-5">
+        <div className="flex items-center justify-center gap-3 border-b border-border px-5 py-4 sm:px-8 sm:py-5">
           <span
-            className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-accent)]"
-            style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
+            className="h-2 w-2 shrink-0 animate-[pulse-dot_2s_ease-in-out_infinite] rounded-full bg-primary"
+            aria-hidden
           />
-          <span className="font-[family-name:var(--font-mono)] text-[clamp(0.9rem,3.6vw,1.22rem)] font-bold uppercase tracking-[0.08em] text-[var(--color-muted)]">
-            Frameworks supported
+          <span className="font-mono text-[clamp(0.85rem,3.4vw,1.15rem)] font-bold uppercase tracking-[0.1em] text-muted-foreground">
+            Python frameworks supported
           </span>
         </div>
 
@@ -174,8 +166,7 @@ export function TechStrip() {
         >
           {reducedMotion ? (
             <div
-              className="h-full overflow-y-auto"
-              style={{ scrollbarWidth: "none" }}
+              className="h-full overflow-y-auto [scrollbar-width:none]"
             >
               <LogoHalfVertical id="a" />
             </div>
@@ -196,15 +187,14 @@ export function TechStrip() {
         </div>
       </div>
 
-      {/* md+: horizontal marquee */}
       <div className="hidden md:flex md:items-center md:gap-0">
-        <div className="shrink-0 px-4 sm:px-8 py-5 sm:py-6 border-r border-[var(--color-border)] flex items-center gap-2.5">
+        <div className="flex shrink-0 items-center gap-2.5 border-r border-border px-6 py-6 sm:px-8 sm:py-7">
           <span
-            className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"
-            style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
+            className="h-1.5 w-1.5 animate-[pulse-dot_2s_ease-in-out_infinite] rounded-full bg-primary"
+            aria-hidden
           />
-          <span className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--color-muted)] whitespace-nowrap">
-            Frameworks supported
+          <span className="whitespace-nowrap font-mono text-[13px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+            Python frameworks supported
           </span>
         </div>
 
@@ -213,10 +203,7 @@ export function TechStrip() {
           style={MARQUEE_MASK}
         >
           {reducedMotion ? (
-            <div
-              className="flex items-center gap-0 overflow-x-auto"
-              style={{ scrollbarWidth: "none" }}
-            >
+            <div className="flex items-center gap-0 overflow-x-auto [scrollbar-width:none]">
               <LogoHalf id="a" />
             </div>
           ) : (
