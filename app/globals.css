@@ -87,6 +87,13 @@
 html {
   scroll-behavior: smooth;
   background-color: var(--color-canvas);
+  /* Dot grid on html: avoids dev/prod gaps from background-attachment:fixed on body. */
+  background-image: radial-gradient(
+    rgba(152, 152, 166, 0.11) 1px,
+    transparent 1px
+  );
+  background-size: 26px 26px;
+  background-repeat: repeat;
   min-height: 100%;
   min-height: 100dvh;
   /* Fixed nav + notch: hash links (#features, etc.) land with section visible */
@@ -142,13 +149,7 @@ html {
 }
 
 body {
-  background-color: var(--color-canvas);
-  background-image: radial-gradient(
-    rgba(152, 152, 166, 0.11) 1px,
-    transparent 1px
-  );
-  background-size: 26px 26px;
-  background-attachment: fixed;
+  background-color: transparent;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
