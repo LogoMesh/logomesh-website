@@ -6,7 +6,9 @@ import { useEffect } from "react";
 export function ScrollReset() {
   useEffect(() => {
     if (history.scrollRestoration) history.scrollRestoration = "manual";
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, []);
   return null;
 }

@@ -22,7 +22,7 @@ export function CTASection() {
     <section
       ref={sectionRef}
       id="cta"
-      className="relative w-full overflow-hidden border-t border-[var(--color-border)] px-4 py-16 text-center sm:px-5 sm:py-20 md:px-10 md:py-28"
+      className="relative w-full overflow-hidden border-t border-[var(--color-border)] px-4 py-10 text-center sm:px-5 sm:py-12 md:px-10 md:py-16"
       onMouseMove={handleMouseMove}
     >
       {/* Mouse-tracking radial glow */}
@@ -39,7 +39,7 @@ export function CTASection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.65, ease: EASE }}
-        className="relative font-[family-name:var(--font-display)] text-[clamp(1.75rem,8vw,4.375rem)] sm:text-[clamp(36px,5vw,70px)] font-extrabold leading-[0.96] sm:leading-[0.93] tracking-[-0.04em] mb-4 sm:mb-3 px-1"
+        className="relative font-[family-name:var(--font-display)] text-[clamp(1.75rem,6vw,3rem)] sm:text-[clamp(32px,4.5vw,56px)] font-bold leading-[1.08] tracking-[-0.03em] mb-4 sm:mb-3 px-1"
       >
         Install once.
         <br />
@@ -77,7 +77,7 @@ export function CTASection() {
       >
         <motion.a
           href="https://github.com/apps/logomesh"
-          className="inline-flex items-center gap-3 bg-[var(--color-accent)] text-black px-6 sm:px-12 py-4 sm:py-5 font-[family-name:var(--font-mono)] text-[14px] sm:text-[15px] font-bold w-full sm:w-auto justify-center max-w-xs sm:max-w-none mx-auto"
+          className="inline-flex min-h-[52px] items-center gap-3 rounded-xl bg-[var(--color-accent)] px-6 py-3.5 text-[15px] font-semibold text-black sm:px-10 sm:text-[16px] w-full sm:w-auto justify-center max-w-xs sm:max-w-none mx-auto"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

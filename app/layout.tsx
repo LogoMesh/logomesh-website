@@ -1,36 +1,38 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Syne, JetBrains_Mono, Instrument_Serif } from "next/font/google";
+import { Bricolage_Grotesque, JetBrains_Mono, Fraunces } from "next/font/google";
 import { ScrollReset } from "@/components/ScrollReset";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
-  weight: ["300", "400", "500"],
-});
-
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-syne",
-  weight: ["700", "800"],
+  variable: "--font-bricolage",
+  weight: "variable",
+  axes: ["opsz"],
+  preload: true,
+  display: "swap",
 });
 
 const jbMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jb-mono",
-  weight: ["300", "400", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
+  preload: false,
+  display: "swap",
 });
 
-const instrumentSerif = Instrument_Serif({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  variable: "--font-instrument-serif",
-  style: ["normal", "italic"],
-  weight: "400",
+  variable: "--font-fraunces",
+  style: ["italic", "normal"],
+  weight: "variable",
+  axes: ["opsz", "SOFT"],
+  preload: false,
+  display: "swap",
 });
 
 export const viewport: Viewport = {
   viewportFit: "cover",
-  themeColor: "#060608",
+  themeColor: "#0a0a0b",
 };
 
 export const metadata: Metadata = {
@@ -53,9 +55,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${syne.variable} ${jbMono.variable} ${instrumentSerif.variable}`}
+      className={`${bricolage.variable} ${jbMono.variable} ${fraunces.variable}`}
     >
-      <body className="antialiased">
+      <body className={`${bricolage.className} antialiased`}>
         <ScrollReset />
         {children}
       </body>

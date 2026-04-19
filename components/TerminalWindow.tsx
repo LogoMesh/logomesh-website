@@ -199,8 +199,13 @@ export function TerminalWindow() {
   }, [clearTimers, runAnimation, active]);
 
   useEffect(() => {
-    runAnimation(SCENARIOS[0].lines);
-    return clearTimers;
+    const t = window.setTimeout(() => {
+      runAnimation(SCENARIOS[0].lines);
+    }, 0);
+    return () => {
+      clearTimeout(t);
+      clearTimers();
+    };
   }, [runAnimation, clearTimers]);
 
   const current = SCENARIOS[active];

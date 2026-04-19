@@ -60,7 +60,7 @@ export function IncidentsGrid() {
   return (
     <section
       id="examples"
-      className="w-full overflow-x-hidden py-16 sm:py-20 md:py-28"
+      className="w-full overflow-x-hidden py-10 sm:py-12 md:py-16"
     >
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8 md:px-10">
       {/* Tag */}

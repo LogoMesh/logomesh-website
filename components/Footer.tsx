@@ -1,9 +1,13 @@
+import Link from "next/link";
 import { LogoMark } from "./LogoMark";
 
-const LINKS = ["Docs", "GitHub", "Privacy", "Terms"];
-
-/** Solid only — next token after CTA (`--color-canvas-2`) for a clear but related footer band */
 const FOOTER_SOLID = "var(--color-canvas-3)";
+
+const LINKS: { label: string; href: string; external?: boolean }[] = [
+  { label: "Docs", href: "/docs" },
+  { label: "How it works", href: "/how-it-works" },
+  { label: "GitHub", href: "https://github.com/apps/logomesh", external: true },
+];
 
 export function Footer() {
   return (
@@ -11,13 +15,11 @@ export function Footer() {
       className="relative overflow-hidden border-t border-[var(--color-border-hi)] pb-[max(0.75rem,env(safe-area-inset-bottom))]"
       style={{ backgroundColor: FOOTER_SOLID }}
     >
-
-      {/* Content — stacked + centered on small screens; 3-col grid on lg so nav is truly centered */}
-      <div className="relative z-[2] mx-auto max-w-[1280px] px-4 sm:px-8 py-4 sm:py-7 md:py-8">
+      <div className="relative z-[2] mx-auto max-w-[1280px] px-4 sm:px-8 py-4 sm:py-6 md:py-7">
         <div className="grid grid-cols-1 items-center gap-2.5 text-center sm:gap-4 lg:grid-cols-3 lg:gap-6 lg:text-left">
           <div className="flex justify-center lg:justify-start">
-            <a
-              href="#"
+            <Link
+              href="/"
               className="inline-flex w-fit items-center gap-1.5 min-h-[36px] sm:min-h-[44px]"
             >
               <LogoMark size={26} />
@@ -28,7 +30,7 @@ export function Footer() {
                 <span style={{ color: "rgba(196,255,0,0.45)" }}>logo</span>
                 <span className="text-muted">mesh</span>
               </span>
-            </a>
+            </Link>
           </div>
 
           <nav
@@ -37,13 +39,22 @@ export function Footer() {
           >
             <ul className="flex list-none flex-wrap justify-center gap-x-4 gap-y-0.5 sm:gap-x-5 sm:gap-y-1">
               {LINKS.map((l) => (
-                <li key={l}>
-                  <a
-                    href="#"
-                    className="inline-flex items-center min-h-[36px] py-0.5 font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors sm:min-h-[44px] sm:py-0"
-                  >
-                    {l}
-                  </a>
+                <li key={l.label}>
+                  {l.external ? (
+                    <a
+                      href={l.href}
+                      className="inline-flex items-center min-h-[36px] py-0.5 text-[14px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors sm:min-h-[44px] sm:py-0"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={l.href}
+                      className="inline-flex items-center min-h-[36px] py-0.5 text-[14px] text-[var(--color-dim)] hover:text-[var(--color-muted)] transition-colors sm:min-h-[44px] sm:py-0"
+                    >
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>

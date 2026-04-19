@@ -31,7 +31,7 @@ export function PipelineSection() {
   return (
     <section
       id="how"
-      className="w-full bg-[var(--color-canvas-2)] py-20 md:py-28"
+      className="w-full bg-[var(--color-canvas-2)] py-12 md:py-16"
     >
       <div className="mx-auto max-w-[1280px] px-4 sm:px-8 md:px-10">
       {/* Tag + heading */}

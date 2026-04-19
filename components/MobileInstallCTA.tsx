@@ -33,7 +33,7 @@ export function MobileInstallCTA() {
     >
       <a
         href="https://github.com/apps/logomesh"
-        className="flex w-full min-h-[48px] items-center justify-center gap-2 px-4 font-[family-name:var(--font-mono)] text-[13px] font-bold text-black"
+        className="flex w-full min-h-[48px] items-center justify-center gap-2 px-4 text-[15px] font-semibold text-black"
         style={{
           paddingTop: "0.625rem",
           paddingBottom: "max(0.625rem, env(safe-area-inset-bottom))",

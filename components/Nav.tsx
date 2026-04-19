@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   useEffect,
   useLayoutEffect,
@@ -11,23 +13,24 @@ import { cn } from "@/lib/utils";
 import { GithubIcon } from "./icons/GithubIcon";
 import { LogoMark } from "./LogoMark";
 
-const links = [
-  { label: "Demo", href: "#demo" },
-  { label: "Examples", href: "#examples" },
-  { label: "How it works", href: "#proof" },
-  { label: "Features", href: "#features" },
-  { label: "Pipeline", href: "#how" },
-];
+const LONGFORM_LINKS = [
+  { label: "Demo", id: "demo" },
+  { label: "Examples", id: "examples" },
+  { label: "How it works", id: "proof" },
+  { label: "Features", id: "features" },
+  { label: "Pipeline", id: "how" },
+] as const;
 
-const sectionIds = links.map((l) => l.href.slice(1));
+const SIMPLE_LINKS = [
+  { label: "How it works", href: "/how-it-works" },
+  { label: "Docs", href: "/docs" },
+] as const;
 
-/** Document Y of element top (offsetTop is wrong when offsetParent ≠ document body). */
 function getDocumentOffsetTop(el: HTMLElement): number {
   return el.getBoundingClientRect().top + window.scrollY;
 }
 
-/** Last section whose top has passed the activation line (works when scrolling down; IO alone misses after leaving hero). */
-function getActiveSectionIdFromScroll(): string {
+function getActiveSectionIdFromScroll(sectionIds: readonly string[]): string {
   const bias = 96;
   const y = window.scrollY + bias;
   let active = "";
@@ -48,7 +51,18 @@ function scrollToHash(href: string) {
   history.replaceState(null, "", `#${id}`);
 }
 
+const installCtaClass = cn(
+  "inline-flex items-center gap-2 min-h-[44px] rounded-xl px-5 py-3",
+  "bg-[var(--color-accent)] text-black",
+  "text-[14px] sm:text-[15px] font-semibold tracking-normal",
+  "transition-opacity duration-150 hover:opacity-90 active:opacity-95",
+);
+
 export function Nav() {
+  const pathname = usePathname();
+  const isLongform = pathname === "/how-it-works";
+  const sectionIds = LONGFORM_LINKS.map((l) => l.id);
+
   const navRef = useRef<HTMLElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -60,7 +74,6 @@ export function Nav() {
   const [inHomeZone, setInHomeZone] = useState(true);
   const inHomeZoneRef = useRef(true);
   const dockedRef = useRef(false);
-  /** While true, scroll handler must not treat mid–smooth-scroll positions as “home” (fixes Examples highlight). */
   const programmaticSectionNavRef = useRef(false);
   const programmaticNavClearTimerRef = useRef<number | null>(null);
 
@@ -72,7 +85,6 @@ export function Nav() {
     dockedRef.current = docked;
   }, [docked]);
 
-  // Measure nav height for placeholder when docked (menu open changes height)
   useLayoutEffect(() => {
     const el = navRef.current;
     if (!el) return;
@@ -83,7 +95,6 @@ export function Nav() {
     return () => ro.disconnect();
   }, [menuOpen, docked]);
 
-  // Dock when sentinel scrolls above viewport; home zone vs sections for highlights
   useEffect(() => {
     const sentinel = sentinelRef.current;
     if (!sentinel) return;
@@ -99,6 +110,14 @@ export function Nav() {
         setDocked(false);
       }
 
+      if (!isLongform) {
+        const homeRaw = window.scrollY < 100;
+        inHomeZoneRef.current = homeRaw;
+        setInHomeZone(homeRaw);
+        setActiveId("");
+        return;
+      }
+
       const examplesEl = document.getElementById("examples");
       const examplesTop =
         examplesEl != null ? getDocumentOffsetTop(examplesEl) : 0;
@@ -106,7 +125,6 @@ export function Nav() {
         examplesEl != null
           ? window.scrollY < examplesTop - 56
           : window.scrollY < 120;
-      // Smooth scroll to a section passes through “above examples” — don’t snap back to Home
       const home = programmaticSectionNavRef.current ? false : homeRaw;
       inHomeZoneRef.current = home;
       setInHomeZone(home);
@@ -114,14 +132,14 @@ export function Nav() {
       if (home) {
         setActiveId("");
       } else {
-        setActiveId(getActiveSectionIdFromScroll());
+        setActiveId(getActiveSectionIdFromScroll(sectionIds));
       }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isLongform, sectionIds]);
 
   useEffect(() => {
     return () => {
@@ -142,7 +160,6 @@ export function Nav() {
     inHomeZoneRef.current = false;
     setInHomeZone(false);
     setActiveId(id);
-    // Match smooth scroll duration so we don’t re-apply “home” until scroll has settled
     programmaticNavClearTimerRef.current = window.setTimeout(() => {
       programmaticSectionNavRef.current = false;
       programmaticNavClearTimerRef.current = null;
@@ -163,10 +180,20 @@ export function Nav() {
   }
 
   function onMobileNavClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
-    if (!href.startsWith("#")) return;
-    e.preventDefault();
-    setMenuOpen(false);
-    window.setTimeout(() => goToSection(href), 120);
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      setMenuOpen(false);
+      window.setTimeout(() => goToSection(href), 120);
+      return;
+    }
+    if (href.includes("#") && pathname === "/how-it-works") {
+      const hash = href.split("#")[1];
+      if (hash) {
+        e.preventDefault();
+        setMenuOpen(false);
+        window.setTimeout(() => goToSection(`#${hash}`), 120);
+      }
+    }
   }
 
   function onMobileHomeClick(e: MouseEvent<HTMLAnchorElement>) {
@@ -184,9 +211,25 @@ export function Nav() {
     e: MouseEvent<HTMLAnchorElement>,
     href: string,
   ) {
-    if (!href.startsWith("#")) return;
-    e.preventDefault();
-    goToSection(href);
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      goToSection(href);
+      return;
+    }
+    if (pathname === "/how-it-works" && href.includes("#")) {
+      const hash = href.split("#")[1];
+      if (hash) {
+        e.preventDefault();
+        goToSection(`#${hash}`);
+      }
+    }
+  }
+
+  function onLogoClick(e: MouseEvent<HTMLAnchorElement>) {
+    if (pathname === "/") {
+      e.preventDefault();
+      goHome();
+    }
   }
 
   const shell = (docked: boolean) =>
@@ -199,13 +242,10 @@ export function Nav() {
 
   const navChrome = (
     <>
-      <a
-        href="#"
+      <Link
+        href="/"
         className="flex items-center gap-2.5 shrink-0 py-0.5"
-        onClick={(e) => {
-          e.preventDefault();
-          goHome();
-        }}
+        onClick={onLogoClick}
       >
         <span className="flex h-[30px] w-[30px] items-center justify-center shrink-0">
           <LogoMark size={30} />
@@ -225,55 +265,71 @@ export function Nav() {
           </span>
           <span className="text-ink">mesh</span>
         </span>
-      </a>
+      </Link>
 
-      <ul className="hidden md:flex items-center gap-7 list-none m-0 p-0">
-        <li>
-          <a
-            href="#"
-            onClick={onDesktopHomeClick}
-            className={cn(
-              "inline-block text-[14px] py-1 border-b-2 transition-colors duration-200",
-              inHomeZone
-                ? "text-[var(--color-ink)] border-[var(--color-accent)]"
-                : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
-            )}
-          >
-            Home
-          </a>
-        </li>
-        {links.map((l) => {
-          const isActive = !inHomeZone && activeId === l.href.slice(1);
-          return (
-            <li key={l.href}>
-              <a
-                href={l.href}
-                onClick={(e) => onDesktopSectionClick(e, l.href)}
-                className={cn(
-                  "inline-block text-[14px] py-1 border-b-2 transition-colors duration-200",
-                  isActive
-                    ? "text-[var(--color-ink)] border-[var(--color-accent)]"
-                    : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
-                )}
-              >
-                {l.label}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+      {isLongform ? (
+        <ul className="hidden md:flex items-center gap-7 list-none m-0 p-0">
+          <li>
+            <a
+              href="#"
+              onClick={onDesktopHomeClick}
+              className={cn(
+                "inline-block text-[14px] py-1 border-b-2 transition-colors duration-200",
+                inHomeZone
+                  ? "text-[var(--color-ink)] border-[var(--color-accent)]"
+                  : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
+              )}
+            >
+              Home
+            </a>
+          </li>
+          {LONGFORM_LINKS.map((l) => {
+            const href = `/how-it-works#${l.id}`;
+            const isActive = !inHomeZone && activeId === l.id;
+            return (
+              <li key={l.id}>
+                <a
+                  href={href}
+                  onClick={(e) => onDesktopSectionClick(e, href)}
+                  className={cn(
+                    "inline-block text-[14px] py-1 border-b-2 transition-colors duration-200",
+                    isActive
+                      ? "text-[var(--color-ink)] border-[var(--color-accent)]"
+                      : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
+                  )}
+                >
+                  {l.label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <ul className="hidden md:flex items-center gap-7 list-none m-0 p-0">
+          {SIMPLE_LINKS.map((l) => {
+            const active = pathname === l.href;
+            return (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className={cn(
+                    "inline-block text-[14px] py-1 border-b-2 transition-colors duration-200",
+                    active
+                      ? "text-[var(--color-ink)] border-[var(--color-accent)]"
+                      : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
+                  )}
+                >
+                  {l.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
 
       <div className="flex items-center gap-3 shrink-0">
-        <a
-          href="https://github.com/apps/logomesh"
-          className={cn(
-            "inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px]",
-            "bg-[var(--color-accent)] text-black rounded-lg",
-            "font-[family-name:var(--font-mono)] text-[11px] sm:text-[12px] font-bold uppercase tracking-wide",
-            "transition-opacity duration-150 hover:opacity-90 active:opacity-95",
-          )}
-        >
-          <GithubIcon size={12} />
+        <a href="https://github.com/apps/logomesh" className={installCtaClass}>
+          <GithubIcon size={16} />
           <span className="hidden sm:inline">Install on GitHub</span>
           <span className="sm:hidden">Install</span>
         </a>
@@ -308,45 +364,73 @@ export function Nav() {
 
       {menuOpen && (
         <ul className="md:hidden w-full list-none flex flex-col gap-0.5 m-0 p-0 pt-3 mt-2 border-t border-[var(--color-border)]">
-          <li>
-            <a
-              href="#"
-              onClick={onMobileHomeClick}
-              className={cn(
-                "flex items-center min-h-[44px] py-2 text-[15px] transition-colors",
-                inHomeZone
-                  ? "text-[var(--color-ink)]"
-                  : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
-              )}
-            >
-              {inHomeZone && (
-                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mr-2 shrink-0" />
-              )}
-              Home
-            </a>
-          </li>
-          {links.map((l) => {
-            const isActive = !inHomeZone && activeId === l.href.slice(1);
-            return (
-              <li key={l.href}>
+          {isLongform ? (
+            <>
+              <li>
                 <a
-                  href={l.href}
-                  onClick={(e) => onMobileNavClick(e, l.href)}
+                  href="#"
+                  onClick={onMobileHomeClick}
                   className={cn(
                     "flex items-center min-h-[44px] py-2 text-[15px] transition-colors",
-                    isActive
+                    inHomeZone
                       ? "text-[var(--color-ink)]"
                       : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
                   )}
                 >
-                  {isActive && (
+                  {inHomeZone && (
                     <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mr-2 shrink-0" />
                   )}
-                  {l.label}
+                  Home
                 </a>
               </li>
-            );
-          })}
+              {LONGFORM_LINKS.map((l) => {
+                const href = `/how-it-works#${l.id}`;
+                const isActive = !inHomeZone && activeId === l.id;
+                return (
+                  <li key={l.id}>
+                    <a
+                      href={href}
+                      onClick={(e) => onMobileNavClick(e, href)}
+                      className={cn(
+                        "flex items-center min-h-[44px] py-2 text-[15px] transition-colors",
+                        isActive
+                          ? "text-[var(--color-ink)]"
+                          : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
+                      )}
+                    >
+                      {isActive && (
+                        <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mr-2 shrink-0" />
+                      )}
+                      {l.label}
+                    </a>
+                  </li>
+                );
+              })}
+            </>
+          ) : (
+            SIMPLE_LINKS.map((l) => {
+              const active = pathname === l.href;
+              return (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    onClick={() => setMenuOpen(false)}
+                    className={cn(
+                      "flex items-center min-h-[44px] py-2 text-[15px] transition-colors",
+                      active
+                        ? "text-[var(--color-ink)]"
+                        : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
+                    )}
+                  >
+                    {active && (
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mr-2 shrink-0" />
+                    )}
+                    {l.label}
+                  </Link>
+                </li>
+              );
+            })
+          )}
         </ul>
       )}
     </>
