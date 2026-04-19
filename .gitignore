@@ -43,8 +43,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Cursor — local skill installs (data + scripts; reinstall via uipro / marketplace)
-.cursor/skills/
+# editors / IDEs (local workspace config — opt in to sharing if needed)
+.vscode/
+.cursor/
 
 # Superpowers plugin — brainstorm sessions, preview HTML, server state
 .superpowers/
