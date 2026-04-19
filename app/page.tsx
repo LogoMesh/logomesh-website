@@ -1,5 +1,5 @@
 import { Nav } from "@/components/Nav";
-import { Hero } from "@/components/Hero";
+import { Hero } from "@/components/landing/Hero";
 import { TechStrip } from "@/components/TechStrip";
 import { DemoSection } from "@/components/DemoSection";
 import { ProofSection } from "@/components/ProofSection";
