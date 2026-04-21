@@ -46,14 +46,12 @@ test.describe("responsive — home", () => {
 
     for (const id of [
       "#hero",
-      "#integrate",
-      "#harness",
-      "#overview",
+      "#the-comment",
+      "#proof",
+      "#why",
       "#how-it-works",
-      "#demo",
       "#faq",
       "#cta",
-      "#security",
     ]) {
       const section = page.locator(id).first();
       const count = await section.count();
@@ -69,48 +67,4 @@ test.describe("responsive — home", () => {
     }
   });
 
-  test("demo section copy stays within viewport", async ({ page }) => {
-    await page.goto("/");
-    await page.waitForLoadState("networkidle");
-
-    const vw = page.viewportSize()?.width ?? 1280;
-    const demo = page.locator("#demo");
-    await expect(demo).toBeVisible();
-
-    const heading = demo.locator("h2").first();
-    await expect(heading).toBeVisible();
-    const hBox = await heading.boundingBox();
-    expect(hBox).not.toBeNull();
-    if (hBox) {
-      expect(hBox.x).toBeGreaterThanOrEqual(-8);
-      expect(hBox.x + hBox.width).toBeLessThanOrEqual(vw + 12);
-    }
-
-    const bodyCopy = demo
-      .getByText(/Add LogoMesh to a repo, open or update a Python PR/i)
-      .first();
-    await expect(bodyCopy).toBeVisible();
-    const pBox = await bodyCopy.boundingBox();
-    expect(pBox).not.toBeNull();
-    if (pBox) {
-      expect(pBox.x).toBeGreaterThanOrEqual(-8);
-      expect(pBox.x + pBox.width).toBeLessThanOrEqual(vw + 12);
-    }
-  });
-
-  test("demo browser frame scales without clipping controls", async ({ page }) => {
-    await page.goto("/");
-    await page.waitForLoadState("domcontentloaded");
-
-    const vw = page.viewportSize()?.width ?? 1280;
-    const frame = page.locator("#demo div.overflow-hidden").first();
-    await expect(frame).toBeVisible();
-    const box = await frame.boundingBox();
-    expect(box).not.toBeNull();
-    if (box) {
-      expect(box.width).toBeGreaterThan(Math.min(vw - 32, 280));
-      expect(box.x).toBeGreaterThanOrEqual(-4);
-      expect(box.x + box.width).toBeLessThanOrEqual(vw + 8);
-    }
-  });
 });

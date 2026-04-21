@@ -8,6 +8,7 @@ import {
   HARNESS_SHOWCASE,
   type HarnessShowcaseRow,
 } from "@/lib/harness-public.generated";
+import { AnimatedNumber } from "./AnimatedNumber";
 
 function prUrl(row: HarnessShowcaseRow): string {
   return `https://github.com/${row.repo}/pull/${row.prNumber}`;
@@ -15,28 +16,28 @@ function prUrl(row: HarnessShowcaseRow): string {
 
 const SUMMARY_STATS = [
   {
-    label: "Harness batches",
-    value: HARNESS_AGGREGATE.batchRunFiles,
-    suffix: "",
-    hint: "real_prs_run_*.json outputs",
-  },
-  {
-    label: "Repo · PR pairs",
-    value: HARNESS_AGGREGATE.uniquePullRequests,
-    suffix: "",
-    hint: "unique pulls exercised",
-  },
-  {
-    label: "OSS repos",
-    value: HARNESS_AGGREGATE.distinctRepos,
-    suffix: "",
-    hint: "distinct org/projects",
-  },
-  {
-    label: "Confirmed findings",
+    label: "Bugs caught",
     value: HARNESS_AGGREGATE.confirmedFindingsSum,
     suffix: "",
-    hint: "sum across file-rows",
+    hint: "confirmed, reproducible",
+  },
+  {
+    label: "Pull requests",
+    value: HARNESS_AGGREGATE.uniquePullRequests,
+    suffix: "",
+    hint: "across open source Python",
+  },
+  {
+    label: "Repositories",
+    value: HARNESS_AGGREGATE.distinctRepos,
+    suffix: "",
+    hint: "real projects, not toys",
+  },
+  {
+    label: "Comments posted",
+    value: HARNESS_AGGREGATE.fileRowsWithPrComment,
+    suffix: "",
+    hint: "only when we had proof",
   },
 ] as const;
 
@@ -45,7 +46,7 @@ export function RealWorldHarnessSection() {
 
   return (
     <section
-      id="harness"
+      id="proof"
       aria-labelledby="harness-heading"
       className="landing-surface-muted relative w-full min-w-0 scroll-mt-[calc(5rem+env(safe-area-inset-top))] border-t border-[var(--color-border)]"
     >
@@ -67,7 +68,7 @@ export function RealWorldHarnessSection() {
             transition={{ duration: 0.45, ease: EASE }}
             className="landing-kicker"
           >
-            Internal harness
+            Proof
           </motion.p>
           <motion.h2
             id="harness-heading"
@@ -77,7 +78,7 @@ export function RealWorldHarnessSection() {
             transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Real open source PRs, not toy repos.
+            Real PRs. Real bugs. Real repos.
           </motion.h2>
           <motion.p
             initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
@@ -86,8 +87,8 @@ export function RealWorldHarnessSection() {
             transition={{ duration: 0.5, ease: EASE, delay: 0.08 }}
             className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]"
           >
-            We batch-run against public Python PRs to stress the pipeline. These counts are from our harness. Not a
-            guarantee about your repo, just proof we don&apos;t only test hello-world.
+            {HARNESS_AGGREGATE.confirmedFindingsSum} confirmed bugs across {HARNESS_AGGREGATE.uniquePullRequests} pull
+            requests in {HARNESS_AGGREGATE.distinctRepos} open source Python projects. Click any row to see the PR.
           </motion.p>
         </div>
 
@@ -106,8 +107,8 @@ export function RealWorldHarnessSection() {
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-dim)]">
                 {s.label}
               </p>
-              <p className="landing-stat-num mt-2 font-[family-name:var(--font-display)] text-[clamp(1.5rem,4vw,2rem)] font-extrabold tabular-nums">
-                {s.value.toLocaleString("en-US")}
+              <p className="landing-stat-num mt-2 font-[family-name:var(--font-display)] text-[clamp(1.75rem,4.5vw,2.5rem)] font-extrabold tabular-nums text-[var(--color-ink)]">
+                <AnimatedNumber value={s.value} />
                 {s.suffix}
               </p>
               <p className="mt-1.5 font-sans text-[13px] leading-snug text-[var(--color-muted)]">{s.hint}</p>
@@ -124,7 +125,7 @@ export function RealWorldHarnessSection() {
         >
           <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
-              Sample: repos where we confirmed findings (one PR each)
+              A sample. One PR per repo.
             </p>
           </div>
 
@@ -219,21 +220,6 @@ export function RealWorldHarnessSection() {
           </ul>
         </motion.div>
 
-        <motion.p
-          initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45, ease: EASE, delay: 0.06 }}
-          className="mx-auto mt-8 max-w-[46rem] text-center font-sans text-[14px] leading-relaxed text-[var(--color-dim)] sm:text-[15px]"
-        >
-          {HARNESS_AGGREGATE.fileRowsTotal.toLocaleString("en-US")} file-rows scored across batches ·{" "}
-          {HARNESS_AGGREGATE.fileRowsWithPrComment.toLocaleString("en-US")} rows produced a harness comment. Maintainers:
-          refresh stats with{" "}
-          <code className="rounded bg-[var(--color-canvas-3)] px-1.5 py-0.5 font-mono text-[12px] text-[var(--color-ink)]">
-            npm run sync:harness
-          </code>
-          .
-        </motion.p>
       </div>
     </section>
   );

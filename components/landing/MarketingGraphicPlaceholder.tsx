@@ -83,10 +83,10 @@ export function MarketingGraphicPlaceholder({
             }}
           />
 
-          <div className="relative z-[1] flex flex-1 flex-col items-center justify-center px-6 py-10 text-center sm:px-10 sm:py-12">
+          <div className="relative z-[1] flex flex-1 items-center justify-center px-6 py-10 sm:px-10 sm:py-12">
             <div
               className={cn(
-                "mb-5 flex items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.03] text-[var(--color-accent)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
+                "flex items-center justify-center rounded-2xl border border-white/[0.08] bg-white/[0.03] text-[var(--color-accent)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
                 variant === "hero" ? "h-14 w-14 sm:h-16 sm:w-16" : "h-12 w-12 sm:h-14 sm:w-14",
               )}
               aria-hidden
@@ -96,16 +96,7 @@ export function MarketingGraphicPlaceholder({
                 strokeWidth={1.2}
               />
             </div>
-
-            <p className="landing-kicker">Product frame</p>
-            <figcaption className="mt-3 max-w-[26rem] space-y-2">
-              <p className="font-sans text-[17px] font-semibold leading-snug tracking-[-0.02em] text-[var(--color-ink)] sm:text-[18px]">
-                {title}
-              </p>
-              <p className="font-mono text-[13px] leading-relaxed text-[var(--color-muted)] sm:text-[14px]">
-                {recommendedExport}
-              </p>
-            </figcaption>
+            <figcaption className="sr-only">{title}</figcaption>
           </div>
         </div>
       )}

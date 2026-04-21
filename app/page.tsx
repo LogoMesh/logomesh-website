@@ -1,10 +1,10 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/landing/Hero";
-import { IntegrateShowcase } from "@/components/landing/IntegrateShowcase";
+import { SocialProofStrip } from "@/components/landing/SocialProofStrip";
+import { TheCommentSection } from "@/components/landing/TheCommentSection";
 import { RealWorldHarnessSection } from "@/components/landing/RealWorldHarnessSection";
 import { ProductOverviewSection } from "@/components/landing/ProductOverviewSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
-import { DemoSection } from "@/components/DemoSection";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
@@ -17,11 +17,11 @@ export default function Home() {
         <div aria-hidden className="page-dotted-canvas" />
         <main className="relative z-[1] flex w-full min-w-0 flex-1 flex-col">
           <Hero />
-          <IntegrateShowcase />
+          <SocialProofStrip />
+          <TheCommentSection />
           <RealWorldHarnessSection />
           <ProductOverviewSection />
           <HowItWorksSection />
-          <DemoSection />
           <FAQSection />
           <CTASection />
         </main>

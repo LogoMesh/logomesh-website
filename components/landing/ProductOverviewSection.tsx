@@ -1,150 +1,120 @@
 "use client";
 
-import Image from "next/image";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { EASE } from "@/lib/motion";
-import { HARNESS_STATS } from "@/lib/marketing-stats";
-import { FrameworkTabs } from "./FrameworkTabs";
+import { AuroraField } from "./AuroraField";
 
-const STATS = [
+const CARDS = [
   {
-    value: `${HARNESS_STATS.confirmedFindings}+`,
-    label: "Issues caught with a repro",
+    n: "01",
+    title: "Silent on clean PRs",
+    body: "No praise spam. No nits. No score. If nothing broke, we say nothing.",
   },
   {
-    value: `${HARNESS_STATS.uniquePrs}+`,
-    label: "Real PRs in our harness runs",
+    n: "02",
+    title: "Every comment comes with a repro",
+    body: "The exact input. The line. The values at the moment it broke. No guesses.",
   },
   {
-    value: `${HARNESS_STATS.reposRepresented}+`,
-    label: "Repositories represented",
+    n: "03",
+    title: "Paste-ready fix test",
+    body: "A test that passes only when your fix is right. Goes straight in your suite.",
+  },
+  {
+    n: "04",
+    title: "Mutation-checked",
+    body: "Every fix test is mutation-checked. If it still passes on the buggy code, we don't post it.",
+  },
+  {
+    n: "05",
+    title: "Two independent signals",
+    body: "Findings must hit at least two independent checks before we comment. Cuts the noise before you see it.",
+  },
+  {
+    n: "06",
+    title: "Blast radius",
+    body: "We tell you which callers hit the broken path. Know what else to review before merge.",
   },
 ] as const;
 
 export function ProductOverviewSection() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section
-      id="overview"
-      aria-labelledby="overview-heading"
-      className="landing-surface-base w-full min-w-0 scroll-mt-[calc(5rem+env(safe-area-inset-top))] border-t border-[var(--color-border)]"
+      id="why"
+      aria-labelledby="why-heading"
+      className="landing-surface-base relative w-full min-w-0 overflow-hidden scroll-mt-[calc(5rem+env(safe-area-inset-top))] border-t border-[var(--color-border)]"
     >
-      <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 md:py-20 md:px-10">
-        <div className="mx-auto max-w-[42rem]">
-          <div className="min-w-0">
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.45, ease: EASE }}
-              className="landing-kicker"
-            >
-              Product
-            </motion.p>
-            <motion.h2
-              id="overview-heading"
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
-              className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
-            >
-              Checks that execute your Python diff on GitHub.
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.08 }}
-              className="mt-6 max-w-[38rem] text-pretty text-[18px] leading-[1.65] text-[var(--color-muted)] sm:text-[20px] sm:leading-[1.58]"
-            >
-              <p>
-                It&apos;s a GitHub App. We read the diff, run checks on what changed, and{" "}
-                <span className="font-medium text-[var(--color-ink)]">post only when we have a repro</span>. Passing
-                checks? No comment. That&apos;s the deal.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.12 }}
-              className="mt-8 flex items-start gap-3 rounded-xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/80 px-4 py-3.5"
-            >
-              <span className="relative mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--color-border-hi)] bg-[var(--color-canvas-3)] [&_img]:brightness-0 [&_img]:invert">
-                <Image
-                  src="/branding/stack/github.svg"
-                  alt=""
-                  width={22}
-                  height={22}
-                  className="h-5 w-5 object-contain opacity-95"
-                />
-              </span>
-              <p className="text-[16px] leading-relaxed text-[var(--color-muted)] sm:text-[17px]">
-                <span className="font-medium text-[var(--color-ink)]">Everything on GitHub</span>
-                {": "}
-                checks and comments on the PR, not another inbox.
-              </p>
-            </motion.div>
-
-            <motion.ul
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.16 }}
-              className="mt-10 grid gap-4 sm:grid-cols-3"
-            >
-              {STATS.map(({ value, label }, i) => (
-                <li
-                  key={label}
-                  className="rounded-xl border border-[var(--color-border)] bg-[var(--color-canvas-2)] px-4 py-5 text-center sm:text-left"
-                >
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.05 * i }}
-                    className="landing-stat-num font-[family-name:var(--font-display)] text-[clamp(1.35rem,3.5vw,1.75rem)] font-extrabold tabular-nums"
-                  >
-                    {value}
-                  </motion.p>
-                  <p className="mt-2 font-sans text-[14px] leading-snug text-[var(--color-muted)] sm:text-[15px]">
-                    {label}
-                  </p>
-                </li>
-              ))}
-            </motion.ul>
-          </div>
-        </div>
-
-        <div className="landing-section-hairline mx-auto mt-14 md:mt-16" aria-hidden />
-
-        <div
-          id="scenario-preview"
-          className="mx-auto mt-12 max-w-[720px] md:mt-14 scroll-mt-[calc(5rem+env(safe-area-inset-top))]"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
+      <AuroraField className="opacity-70" />
+      <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-8 md:py-28 md:px-10">
+        <div className="mx-auto max-w-[720px] text-center">
+          <motion.p
+            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: EASE }}
-            className="text-center"
+            transition={{ duration: 0.45, ease: EASE }}
+            className="landing-kicker"
           >
-            <p className="landing-kicker">Examples</p>
-            <p className="mt-3 font-sans text-[19px] font-medium leading-snug text-[var(--color-ink)] sm:text-[21px]">
-              Pick a tab. Roughly what a run looks like.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            Why LogoMesh
+          </motion.p>
+          <motion.h2
+            id="why-heading"
+            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.55, ease: EASE, delay: 0.08 }}
-            className="product-frame-shell mt-8 rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/90 p-4 sm:p-5 md:p-6"
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
+            className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            <FrameworkTabs />
-          </motion.div>
+            Proof, not opinions.
+          </motion.h2>
+          <motion.p
+            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, ease: EASE, delay: 0.08 }}
+            className="marketing-lg mx-auto mt-6 max-w-[38rem] text-pretty text-[var(--color-muted)]"
+          >
+            Other tools leave opinions on every PR. We only post when we can show the exact input that broke your code.
+          </motion.p>
         </div>
+
+        <motion.ul
+          initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.55, ease: EASE, delay: 0.1 }}
+          className="mx-auto mt-16 grid max-w-[1180px] gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3"
+        >
+          {CARDS.map(({ n, title, body }, i) => (
+            <motion.li
+              key={n}
+              initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.5, ease: EASE, delay: 0.08 * i }}
+              className="group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/70 p-7 backdrop-blur-sm transition-colors hover:border-[var(--color-border-hi)]"
+            >
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                style={{
+                  background:
+                    "radial-gradient(ellipse 80% 60% at 50% 0%, hsl(78 100% 50% / 0.06) 0%, transparent 70%)",
+                }}
+              />
+              <p className="relative font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-dim)]">
+                {n}
+              </p>
+              <h3 className="relative mt-4 font-[family-name:var(--font-display)] text-[1.35rem] font-bold tracking-[-0.02em] text-[var(--color-ink)] sm:text-[1.5rem]">
+                {title}
+              </h3>
+              <p className="relative mt-3 text-[15.5px] leading-relaxed text-[var(--color-muted)] sm:text-[16.5px]">
+                {body}
+              </p>
+            </motion.li>
+          ))}
+        </motion.ul>
       </div>
     </section>
   );

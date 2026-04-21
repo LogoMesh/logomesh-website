@@ -42,7 +42,7 @@ export function CTASection() {
           transition={{ duration: 0.8, ease: EASE_SOFT }}
           className="relative font-[family-name:var(--font-display)] text-balance text-[clamp(1.6rem,7.2vw,3.85rem)] sm:text-[clamp(32px,4.6vw,64px)] font-extrabold leading-[0.96] sm:leading-[0.93] tracking-[-0.04em] mb-10 sm:mb-12"
         >
-          Add it to
+          Try it on
           <br />
           <span
             className="text-[var(--color-accent)]"
@@ -51,7 +51,7 @@ export function CTASection() {
                 "0 0 22px rgba(196,255,0,0.55), 0 0 48px rgba(196,255,0,0.35), 0 0 90px rgba(196,255,0,0.2)",
             }}
           >
-            a repo you use
+            a repo you actually use
           </span>
         </motion.h2>
 
@@ -62,8 +62,7 @@ export function CTASection() {
           transition={{ duration: 0.65, ease: EASE_SOFT, delay: 0.1 }}
           className="marketing-lg read-max relative mx-auto mb-12 max-w-[30rem] text-[var(--color-muted)] sm:mb-14 md:text-[1.125rem] md:leading-relaxed"
         >
-          Free on public repos during beta. Install once, open a Python PR, follow checks and comments on the thread. No
-          YAML.
+          Install in 30 seconds. Free while in beta. No YAML, no config.
         </motion.p>
 
         <motion.div
@@ -80,7 +79,7 @@ export function CTASection() {
             whileTap={{ scale: 0.98 }}
           >
             <GithubIcon size={20} />
-            Install on GitHub, free in beta
+            Install on GitHub
           </motion.a>
         </motion.div>
 
@@ -91,7 +90,7 @@ export function CTASection() {
           transition={{ duration: 0.5, delay: 0.28 }}
           className="relative mt-10 font-[family-name:var(--font-mono)] text-[14px] text-[var(--color-dim)] sm:mt-12 sm:text-[15px]"
         >
-          Private repos on the roadmap · No YAML
+          Free during beta · Private repos on the roadmap
         </motion.p>
       </div>
     </section>

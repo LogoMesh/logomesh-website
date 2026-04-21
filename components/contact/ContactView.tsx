@@ -104,14 +104,14 @@ export function ContactView() {
             </div>
 
             <p className="text-[14px] leading-relaxed text-[var(--color-dim)]">
-              Prefer the product tour first?{" "}
+              Want to see it in action?{" "}
               <Link
-                href="/#demo"
+                href="/#proof"
                 className="font-medium text-[var(--color-accent)] underline-offset-2 hover:underline"
               >
-                Jump to the demo
+                See real PRs
               </Link>{" "}
-              on the home page.
+              we caught bugs in.
             </p>
           </aside>
         </div>

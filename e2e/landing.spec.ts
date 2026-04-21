@@ -1,31 +1,26 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("landing — content & assets", () => {
-  test("product overview explains GitHub app and shows stats", async ({ page }) => {
+  test("why section shows proof-not-opinions framing", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
-    const overview = page.locator("#overview");
-    await expect(overview).toBeVisible();
-    await expect(
-      overview.getByRole("heading", { name: /Checks that execute your Python diff on GitHub/i }),
-    ).toBeVisible();
-    await expect(overview.getByText(/It.s a GitHub App/i)).toBeVisible();
-    await expect(overview.getByText(/GitHub App/i).first()).toBeVisible();
-    await expect(overview.getByText(/Repositories represented/i)).toBeVisible();
+    const why = page.locator("#why");
+    await expect(why).toBeVisible();
+    await expect(why.getByRole("heading", { name: /Proof, not opinions/i })).toBeVisible();
+    await expect(why.getByText(/Silent on clean PRs/i)).toBeVisible();
   });
 
-  test("how-it-works section lists four steps", async ({ page }) => {
+  test("how-it-works section lists four vertical steps and security block", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
     const how = page.locator("#how-it-works");
     await expect(how).toBeVisible();
-    await expect(
-      how.getByRole("heading", { name: /Four steps/i }),
-    ).toBeVisible();
+    await expect(how.getByRole("heading", { name: /Four steps/i })).toBeVisible();
     await expect(how.getByText(/Add it to the repo/i)).toBeVisible();
-    await expect(how.getByText(/You see it on the PR/i)).toBeVisible();
+    await expect(how.getByText(/A Python PR opens or updates/i)).toBeVisible();
+    await expect(how.getByRole("heading", { name: /Built for least privilege/i })).toBeVisible();
   });
 
   test("FAQ section is present with accordion", async ({ page }) => {
@@ -34,34 +29,26 @@ test.describe("landing — content & assets", () => {
 
     const faq = page.locator("#faq");
     await expect(faq).toBeVisible();
-    await expect(
-      faq.getByRole("heading", { name: /Questions we get/i }),
-    ).toBeVisible();
-    await expect(faq.getByRole("button", { name: /What is LogoMesh/i })).toBeVisible();
+    await expect(faq.getByRole("heading", { name: /Questions we get/i })).toBeVisible();
+    await expect(faq.getByRole("button", { name: /different from CodeRabbit/i })).toBeVisible();
   });
 
-  test("real OSS harness section shows aggregate stats", async ({ page }) => {
+  test("proof section shows aggregate stats and real PR table", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
-    const harness = page.locator("#harness");
-    await expect(harness).toBeVisible();
-    await expect(
-      harness.getByRole("heading", { name: /Real open source PRs/i }),
-    ).toBeVisible();
-    await expect(harness.getByText(/Harness batches/i)).toBeVisible();
+    const proof = page.locator("#proof");
+    await expect(proof).toBeVisible();
+    await expect(proof.getByRole("heading", { name: /Real PRs\. Real bugs\. Real repos/i })).toBeVisible();
+    await expect(proof.getByText(/Bugs caught/i).first()).toBeVisible();
   });
 
   test("hero headline and primary CTAs", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
-    await expect(
-      page.locator("#hero").getByRole("heading", { level: 1 }),
-    ).toContainText(/Catch the/);
-    await expect(
-      page.locator("#hero").getByRole("heading", { level: 1 }),
-    ).toContainText(/production/);
+    await expect(page.locator("#hero").getByRole("heading", { level: 1 })).toContainText(/Catch the/);
+    await expect(page.locator("#hero").getByRole("heading", { level: 1 })).toContainText(/before it ships/);
 
     const installLinks = page.locator('a[href="https://github.com/apps/logomesh"]');
     await expect(installLinks.first()).toBeVisible();

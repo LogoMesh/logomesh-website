@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import {
   Box,
   GitBranch,
@@ -11,6 +11,7 @@ import {
   Shield,
 } from "lucide-react";
 import { EASE } from "@/lib/motion";
+import { cn } from "@/lib/utils";
 import { LANDING_GRAPHICS } from "@/lib/landing-graphic-src";
 import { MarketingGraphicPlaceholder } from "./MarketingGraphicPlaceholder";
 
@@ -91,21 +92,23 @@ const SECURITY_PILLARS: {
     icon: Scale,
     title: "Compliance path",
     body:
-      "SOC2-style paperwork isn&apos;t here yet. We&apos;re in public beta with a small, explainable surface area. Enterprise controls are on the roadmap.",
+      "Formal SOC 2 packs are not what we ship today. Small surface area in public beta. Enterprise controls are on the roadmap.",
   },
 ];
 
 export function HowItWorksSection() {
+  const reducedMotion = useReducedMotion();
+
   return (
     <section
       id="how-it-works"
       aria-labelledby="how-heading"
-      className="landing-surface-muted w-full min-w-0 scroll-mt-[calc(5rem+env(safe-area-inset-top))] border-t border-[var(--color-border)]"
+      className="landing-surface-muted relative w-full min-w-0 scroll-mt-[calc(5rem+env(safe-area-inset-top))] border-t border-[var(--color-border)]"
     >
       <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 md:py-24 md:px-10">
         <div className="mx-auto max-w-[720px] text-center">
           <motion.p
-            initial={{ opacity: 0, y: 10 }}
+            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.45, ease: EASE }}
@@ -115,7 +118,7 @@ export function HowItWorksSection() {
           </motion.p>
           <motion.h2
             id="how-heading"
-            initial={{ opacity: 0, y: 14 }}
+            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 14 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
@@ -125,23 +128,23 @@ export function HowItWorksSection() {
           </motion.h2>
         </div>
 
-        {/* Vertical timeline: research-backed pattern for multi-step flows (clear sequence, one spine). */}
         <ol
           className="mx-auto mt-14 max-w-[960px] list-none md:mt-20"
           aria-label="Steps from install to thread"
         >
           {STEPS.map(({ n, title, body, icon: Icon, graphicSrc, graphicTitle, graphicExport }, i) => {
             const isLast = i === STEPS.length - 1;
+            /** Odd rows: image left, copy right on large screens (still copy-first in DOM on mobile). */
+            const zigzag = i % 2 === 1;
             return (
               <motion.li
                 key={n}
-                initial={{ opacity: 0, y: 20 }}
+                initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.05 * i }}
                 className={`relative flex gap-4 sm:gap-6 md:gap-8 ${isLast ? "" : "pb-14 md:pb-20"}`}
               >
-                {/* Left rail: icon, step index, connecting line */}
                 <div className="relative flex w-[52px] shrink-0 flex-col items-center self-stretch sm:w-14">
                   <div className="relative z-[2] flex h-11 w-11 items-center justify-center rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)] shadow-[0_0_0_1px_rgba(0,0,0,0.35)] sm:h-12 sm:w-12 landing-icon-bright">
                     <Icon className="h-5 w-5" strokeWidth={1.4} aria-hidden />
@@ -157,16 +160,25 @@ export function HowItWorksSection() {
                   ) : null}
                 </div>
 
-                {/* Copy + graphic: stable LTR order (timeline already shows progression). */}
                 <article className="min-w-0 flex-1 pt-0.5 pb-1">
                   <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
-                    <header className="space-y-3">
+                    <header
+                      className={cn(
+                        "space-y-3",
+                        zigzag && "lg:order-2",
+                      )}
+                    >
                       <h3 className="font-[family-name:var(--font-display)] text-[1.35rem] font-bold tracking-[-0.02em] text-[var(--color-ink)] sm:text-[1.45rem]">
                         {title}
                       </h3>
                       <p className="marketing-lg text-pretty text-[var(--color-muted)]">{body}</p>
                     </header>
-                    <div className="min-w-0 lg:max-w-none">
+                    <div
+                      className={cn(
+                        "min-w-0 lg:max-w-none",
+                        zigzag && "lg:order-1",
+                      )}
+                    >
                       <MarketingGraphicPlaceholder
                         variant="step"
                         title={graphicTitle}
@@ -188,7 +200,7 @@ export function HowItWorksSection() {
         >
           <div className="mx-auto max-w-[720px] text-center">
             <motion.p
-              initial={{ opacity: 0, y: 10 }}
+              initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, ease: EASE }}
@@ -198,7 +210,7 @@ export function HowItWorksSection() {
             </motion.p>
             <motion.h3
               id="security-heading"
-              initial={{ opacity: 0, y: 14 }}
+              initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 14 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
@@ -207,7 +219,7 @@ export function HowItWorksSection() {
               Built for least privilege.
             </motion.h3>
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
+              initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, ease: EASE, delay: 0.08 }}
@@ -219,20 +231,20 @@ export function HowItWorksSection() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-12 xl:grid-cols-4 xl:gap-6">
-            {SECURITY_PILLARS.map(({ title, body, icon: Icon }, i) => (
+            {SECURITY_PILLARS.map(({ title: pillarTitle, body, icon: PillarIcon }, i) => (
               <motion.article
-                key={title}
-                initial={{ opacity: 0, y: 18 }}
+                key={pillarTitle}
+                initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.5, ease: EASE, delay: 0.06 * i }}
                 className="flex flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/90 p-5 sm:p-6"
               >
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-3)] landing-icon-bright">
-                  <Icon className="h-5 w-5" strokeWidth={1.4} aria-hidden />
+                  <PillarIcon className="h-5 w-5" strokeWidth={1.4} aria-hidden />
                 </span>
                 <h4 className="mt-4 font-[family-name:var(--font-display)] text-[1.125rem] font-bold tracking-[-0.02em] text-[var(--color-ink)] sm:text-[1.2rem]">
-                  {title}
+                  {pillarTitle}
                 </h4>
                 <p className="mt-2 flex-1 text-[15px] leading-relaxed text-[var(--color-muted)] sm:text-[16px]">
                   {body}
@@ -242,7 +254,7 @@ export function HowItWorksSection() {
           </div>
 
           <motion.p
-            initial={{ opacity: 0 }}
+            initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.45, ease: EASE, delay: 0.2 }}

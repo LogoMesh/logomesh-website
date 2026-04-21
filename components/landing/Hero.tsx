@@ -2,15 +2,16 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
-import { ArrowRight, PlayCircle, ShieldCheck, TimerReset } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { SPRING_UI } from "@/lib/motion";
-import { LANDING_GRAPHICS } from "@/lib/landing-graphic-src";
-import { MarketingGraphicPlaceholder } from "./MarketingGraphicPlaceholder";
+import { HARNESS_STATS } from "@/lib/marketing-stats";
+import { MediaPlaceholder } from "./MediaPlaceholder";
 
 const PROOF_METRICS = [
-  { icon: TimerReset, label: "~12 s typical run" },
-  { icon: ShieldCheck, label: "Quiet when checks pass" },
+  { label: `${HARNESS_STATS.confirmedFindings} bugs caught` },
+  { label: `${HARNESS_STATS.reposRepresented} open source repos` },
+  { label: "Silent on clean PRs" },
 ] as const;
 
 export function Hero() {
@@ -41,7 +42,7 @@ export function Hero() {
               className="mr-2 inline-block h-[7px] w-[7px] translate-y-[-2px] rounded-full bg-primary align-middle"
               style={{ boxShadow: "0 0 12px hsl(78 100% 50% / 0.6)" }}
             />
-            Python PRs, public beta
+            Free during beta
           </p>
 
           <h1 className="animate-rise rise-d2 mt-6 font-sans text-balance text-[clamp(2.25rem,7.2vw,5rem)] font-semibold leading-[0.94] tracking-[-0.035em] text-foreground sm:leading-[0.92]">
@@ -56,19 +57,14 @@ export function Hero() {
               bug
             </span>
             <br />
-            before it ships
-            <br />
-            to production.
+            before it ships.
           </h1>
 
           <div className="landing-hero-rule animate-rise rise-d2" aria-hidden />
 
           <p className="animate-rise rise-d3 read-max mt-7 text-[17px] leading-[1.68] text-muted-foreground sm:text-[19px] sm:leading-[1.65]">
-            Executes the Python your PR changes. Not a skim read. Something breaks? One thread comment with a repro. All
-            green? We don&apos;t spam the thread with praise.
-          </p>
-          <p className="animate-rise rise-d3 read-max mt-5 max-w-[38rem] text-[15px] leading-[1.65] text-dim sm:text-[16px]">
-            Coverage is still widening. We&apos;d rather say that than promise the moon.
+            Runs your Python PR, finds what breaks, and drops a comment with the exact input that caused it. Passing
+            PR? You won&apos;t hear from us.
           </p>
 
           <div className="animate-rise rise-d4 mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
@@ -88,47 +84,45 @@ export function Hero() {
             </motion.a>
 
             <motion.a
-              href="#demo"
+              href="#proof"
               className="group inline-flex min-h-[52px] items-center gap-2 rounded-xl border border-border-strong bg-card/40 px-5 text-[14px] font-medium text-foreground/90 backdrop-blur-sm hover:border-primary/50 hover:text-foreground sm:text-[14.5px]"
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.985 }}
               transition={SPRING_UI}
             >
-              <PlayCircle size={17} className="text-primary/80 group-hover:text-primary" />
-              Watch the flow
+              See the proof
             </motion.a>
           </div>
 
-          <div className="animate-rise rise-d5 mt-6 flex flex-wrap gap-3">
+          <div className="animate-rise rise-d5 mt-8 flex flex-wrap gap-2.5">
             <motion.a
               href="https://agentbeats.berkeley.edu"
               target="_blank"
               rel="noreferrer noopener"
               whileHover={{ y: -1 }}
               transition={{ duration: 0.2 }}
-              className="glass group inline-flex min-h-[46px] items-center gap-2.5 rounded-full px-3.5 py-2"
+              className="glass group inline-flex min-h-[38px] items-center gap-2 rounded-full px-3.5 py-1.5"
             >
               <Image
                 src="/california_golden_bears.png"
                 alt="California Golden Bears"
-                width={20}
-                height={20}
+                width={18}
+                height={18}
                 className="h-4 w-4 shrink-0 object-contain opacity-90"
               />
-              <span className="font-sans text-[13px] uppercase tracking-[0.12em] text-muted-foreground sm:text-[14px]">
+              <span className="font-sans text-[12.5px] uppercase tracking-[0.12em] text-muted-foreground sm:text-[13px]">
                 <span className="text-foreground/90">1st place</span>
-                <span className="mx-2 text-dim">·</span>
+                <span className="mx-1.5 text-dim">·</span>
                 UC Berkeley AgentBeats
               </span>
             </motion.a>
 
-            {PROOF_METRICS.map(({ icon: Icon, label }) => (
+            {PROOF_METRICS.map(({ label }) => (
               <div
                 key={label}
-                className="inline-flex min-h-[46px] items-center gap-2 rounded-full border border-border-strong bg-card/50 px-4 py-2 font-sans text-[13px] font-medium leading-snug text-muted-foreground backdrop-blur-sm normal-case tracking-normal sm:text-[14px]"
+                className="inline-flex min-h-[38px] items-center rounded-full border border-border-strong/70 bg-card/30 px-3.5 py-1.5 font-sans text-[12.5px] font-medium leading-snug text-muted-foreground backdrop-blur-sm normal-case tracking-normal sm:text-[13px]"
               >
-                <Icon size={13} className="shrink-0 text-primary/80" aria-hidden />
-                <span className="text-foreground/95">{label}</span>
+                <span className="text-foreground/85">{label}</span>
               </div>
             ))}
           </div>
@@ -154,19 +148,14 @@ export function Hero() {
                 "radial-gradient(ellipse 65% 55% at 50% 35%, rgba(196,255,0,0.14) 0%, transparent 62%)",
             }}
           />
-          <MarketingGraphicPlaceholder
-            variant="hero"
-            title="Replace with a real screenshot: GitHub PR, checks tab, or a LogoMesh comment."
-            recommendedExport="~1800×1200 @2x WebP. Crop tight; redact tokens. Set NEXT_PUBLIC_LANDING_GRAPHIC_HERO."
-            src={LANDING_GRAPHICS.hero}
+          <MediaPlaceholder
+            label="Hero demo — PR opens, check runs, comment lands"
+            dropPath="/public/marketing/hero.mp4"
+            spec="Screen Studio · ~12 s loop · 1800×1200 @2x"
+            kind="video"
+            emphasis="hero"
+            aspectClassName="aspect-[16/11] min-h-[260px] sm:min-h-[320px]"
           />
-          <p className="mt-4 text-center font-mono text-[15px] uppercase tracking-[0.1em] text-[var(--color-dim)] sm:text-[16px]">
-            <a href="#scenario-preview" className="text-[var(--color-muted)] underline-offset-4 transition-colors hover:text-[var(--color-accent)] hover:underline">
-              Example runs
-            </a>
-            <span className="mx-2 text-[var(--color-border-hi)]">·</span>
-            Sample terminal below
-          </p>
         </motion.div>
       </div>
     </section>

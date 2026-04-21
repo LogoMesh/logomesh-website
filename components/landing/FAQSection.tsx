@@ -7,20 +7,48 @@ import { EASE_SOFT } from "@/lib/motion";
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "What is LogoMesh?",
-    a: "A GitHub App for Python PRs. It reads the diff, runs checks in a sandbox, and comments only when it can show a failure you can reproduce, with inputs, output, and line in file.",
+    q: "How is this different from CodeRabbit, Copilot, or Sourcery?",
+    a: "Those tools leave opinions on every PR. LogoMesh only posts when it can show a broken input and the output it produced. Silence means clean.",
   },
   {
-    q: "Is this production-ready?",
-    a: "We&apos;re in public beta. Real teams use it on real PRs, but we&apos;re not pretending to replace your whole test matrix. Expect gaps; we&apos;d rather miss a comment than spam you.",
+    q: "Will this spam my PRs?",
+    a: "No. Clean PR, no comment. Ever.",
   },
   {
-    q: "Does it comment on every pull request?",
-    a: "No. If there&apos;s nothing concrete to show, it doesn&apos;t post.",
+    q: "What about false positives?",
+    a: "We only post when the failure reproduces. If we can't reproduce it, you don't see it.",
   },
   {
-    q: "How do I get started?",
-    a: "Install the app on a repo you&apos;re okay testing with, then open or touch a Python PR. Checks and any comment show up on that PR. Public repos are free while we&apos;re in beta.",
+    q: "How do you know the fix test actually catches the bug?",
+    a: "Every fix test is mutation-checked. We mutate the code around the finding and confirm the test fails on the broken version. If it still passes on the bug, we throw it out.",
+  },
+  {
+    q: "What stops noisy or borderline findings from reaching the PR?",
+    a: "Every finding has to clear at least two independent signals before we post: the repro, the regression check, and the mutation check. One signal is never enough.",
+  },
+  {
+    q: "Do you suggest fixes, or only point out problems?",
+    a: "Both. When we can, we attach a suggested patch to the finding. You accept it, edit it, or ignore it — same as any GitHub suggestion.",
+  },
+  {
+    q: "Will I know what else my change affects?",
+    a: "Yes. We surface the blast radius — which callers touch the broken path — so you know what else to review before merge.",
+  },
+  {
+    q: "What languages do you support?",
+    a: "Python today. Other languages later.",
+  },
+  {
+    q: "Private repos?",
+    a: "On the roadmap. Free on public repos during beta.",
+  },
+  {
+    q: "What does it cost?",
+    a: "Free during beta.",
+  },
+  {
+    q: "How do I start?",
+    a: "Install the GitHub App on a repo, then open a Python PR. That's it.",
   },
 ];
 
@@ -49,7 +77,7 @@ export function FAQSection() {
             id="faq-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Questions we get
+            Questions we get.
           </h2>
         </motion.div>
 

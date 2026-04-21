@@ -17,29 +17,24 @@ const CONTACT_HREF = "/contact";
 
 /** Document order: every anchored section on `/` used for scroll highlighting. */
 const SCROLL_SECTION_IDS = [
-  "integrate",
-  "harness",
-  "overview",
+  "the-comment",
+  "proof",
+  "why",
   "how-it-works",
-  "demo",
   "faq",
   "cta",
 ] as const;
 
-/**
- * Fewer nav labels; each maps to a scroll target and highlights while any of its
- * on-page sections is in view.
- */
 const SECTION_NAV = [
   {
-    label: "Product",
-    hrefId: "integrate",
-    activeWhen: ["integrate", "harness", "overview"],
+    label: "Why",
+    hrefId: "why",
+    activeWhen: ["the-comment", "proof", "why"],
   },
   {
     label: "How it works",
     hrefId: "how-it-works",
-    activeWhen: ["how-it-works", "demo"],
+    activeWhen: ["how-it-works"],
   },
   {
     label: "Install",
