@@ -134,7 +134,7 @@ const SCENARIOS: Scenario[] = [
       { text: "",                                           color: "dim",    ms: 5410 },
       { text: "  Property : users can only access their data", color: "muted", ms: 5530 },
       { text: "  I called : can_access(user_id=2**31, res=1)", color: "muted", ms: 5690 },
-      { text: "  Got      : True — accessed another user",  color: "danger", ms: 5850 },
+      { text: "  Got      : True. Accessed another user",  color: "danger", ms: 5850 },
       { text: "  Location : auth.py, line 19",              color: "muted",  ms: 6010 },
       { text: "  ─────────────────────────────────────",  color: "dim",    ms: 6150 },
     ],

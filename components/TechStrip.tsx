@@ -1,8 +1,9 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
-import { useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { TECH_LOGOS } from "./icons/TechLogos";
+import { EASE } from "@/lib/motion";
 
 function LogoCell({
   name,
@@ -16,7 +17,7 @@ function LogoCell({
       <span className="opacity-80">
         <Logo size={28} />
       </span>
-      <span className="font-[family-name:var(--font-mono)] text-[14px] font-semibold text-[var(--color-muted)] whitespace-nowrap">
+      <span className="landing-kicker-glow-muted font-[family-name:var(--font-mono)] text-[15px] font-semibold text-[var(--color-ink)] whitespace-nowrap lg:text-[16px]">
         {name}
       </span>
     </div>
@@ -36,7 +37,7 @@ function LogoCellVertical({
       <span className="opacity-100">
         <Logo size={24} />
       </span>
-      <span className="font-[family-name:var(--font-mono)] text-[13px] font-semibold text-ink/80">
+      <span className="landing-kicker-glow-muted font-[family-name:var(--font-mono)] text-[15px] font-semibold text-[var(--color-ink)] lg:text-[16px]">
         {name}
       </span>
     </div>
@@ -89,6 +90,14 @@ const MARQUEE_MASK_Y: CSSProperties = {
 
 export function TechStrip() {
   const reducedMotion = useReducedMotion() === true;
+  const stripMotion = reducedMotion
+    ? undefined
+    : ({
+        initial: { opacity: 0, y: 44 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-80px 0px", amount: 0.2 },
+        transition: { duration: 0.62, ease: EASE },
+      } as const);
   const horizontalTrackRef = useRef<HTMLDivElement>(null);
   const verticalTrackRef = useRef<HTMLDivElement>(null);
   const [marqueeShiftPx, setMarqueeShiftPx] = useState(0);
@@ -152,9 +161,12 @@ export function TechStrip() {
   } as CSSProperties;
 
   return (
-    <div
-      className="border-y border-[var(--color-border)] overflow-hidden"
+    <motion.section
+      id="trust"
+      aria-label="Frameworks supported"
+      className="w-full min-w-0 scroll-mt-[calc(5rem+env(safe-area-inset-top))] border-y border-[var(--color-border)] overflow-hidden shadow-[0_-24px_48px_-28px_rgba(0,0,0,0.55)]"
       style={{ background: "var(--color-canvas-2)" }}
+      {...stripMotion}
     >
       {/* Mobile: heading on top, vertical marquee below (same loop as desktop) */}
       <div className="flex flex-col md:hidden">
@@ -163,7 +175,7 @@ export function TechStrip() {
             className="h-2 w-2 shrink-0 rounded-full bg-[var(--color-accent)]"
             style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
           />
-          <span className="font-[family-name:var(--font-mono)] text-[clamp(0.9rem,3.6vw,1.22rem)] font-bold uppercase tracking-[0.08em] text-[var(--color-muted)]">
+          <span className="landing-kicker-glow-muted font-[family-name:var(--font-mono)] text-[clamp(1.0625rem,3.4vw,1.375rem)] font-bold uppercase tracking-[0.1em] text-[hsl(82_68%_92%)]">
             Frameworks supported
           </span>
         </div>
@@ -203,7 +215,7 @@ export function TechStrip() {
             className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]"
             style={{ animation: "pulse-dot 2s ease-in-out infinite" }}
           />
-          <span className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.12em] text-[var(--color-muted)] whitespace-nowrap">
+          <span className="landing-kicker-glow-muted font-[family-name:var(--font-mono)] text-[15px] font-bold uppercase tracking-[0.11em] text-[hsl(82_68%_92%)] whitespace-nowrap lg:text-[16px]">
             Frameworks supported
           </span>
         </div>
@@ -235,6 +247,6 @@ export function TechStrip() {
           )}
         </div>
       </div>
-    </div>
+    </motion.section>
   );
 }

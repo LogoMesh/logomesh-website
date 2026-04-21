@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
+import { HARNESS_STATS } from "@/lib/marketing-stats";
 
 type Stat = {
   prefix?: string;
@@ -15,25 +16,27 @@ const STATS: Stat[] = [
   {
     value: 96,
     suffix: "%",
-    label: "of developers don't fully trust AI-generated code — only 3% trust it highly",
+    label:
+      "of developers say they do not fully trust AI-written code; only 3% trust it a lot",
     source: "Sonar · State of AI Code Quality · 2026",
   },
   {
     value: 78,
     suffix: "%",
-    label: "of dev teams ignore most AI review feedback because it cries wolf too often",
+    label: "of teams say they ignore most AI review noise because it is wrong too often",
     source: "Diffray · survey of 1,200+ developers · 2026",
   },
   {
-    value: 57,
-    suffix: "%",
-    label: "fewer false positives when crashes are validated before posting — which is why LogoMesh stays silent until it has proof",
-    source: "FalseCrashReducer · arXiv:2510.02185 · 2025",
+    value: HARNESS_STATS.confirmedFindings,
+    suffix: "+",
+    label:
+      "confirmed issues we have seen in our own real-PR harness on open-source Python repos",
+    source: "LogoMesh harness · cumulative · Apr 2026",
   },
   {
     value: 23,
     suffix: ".5%",
-    label: "increase in production incidents per PR year-over-year — as AI code ships faster than test culture can follow",
+    label: "more production incidents per PR year over year as AI ships faster than tests",
     source: "Cortex Engineering · AI Code Quality Report · 2026",
   },
 ];

@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "sync:harness": "node scripts/sync-harness-from-results.mjs",
     "verify": "npm run build && playwright test",
     "verify:desktop": "npm run build && playwright test --project=desktop-chrome",
     "generate:github-logo": "node scripts/generate-github-app-logo.mjs",

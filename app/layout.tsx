@@ -26,15 +26,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "LogoMesh — Pre-merge verification. Only comments when it has proof.",
+  title: "LogoMesh · Ship Python PRs with proof, not noise",
   description:
-    "LogoMesh infers what your code should do, then attacks those properties in a sandboxed container. Only posts a PR comment when it finds a real bug.",
+    "Merge with confidence. LogoMesh runs your changed Python in a sandbox and only comments when it can show a reproducible bug. Free GitHub App for public repos in beta.",
   icons: {
     apple: "/branding/logomesh-github-app-256.png",
   },
   openGraph: {
     title: "LogoMesh",
-    description: "Pre-merge verification. Only comments when it has proof.",
+    description:
+      "Pre-merge checks for Python PRs. Run the code you changed and post only when there is proof. Free in beta.",
     type: "website",
   },
 };

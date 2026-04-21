@@ -21,13 +21,40 @@ test.describe("responsive — home", () => {
     ).toBeLessThanOrEqual(2);
   });
 
+  test("no horizontal overflow at 360px width", async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 800 });
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    const { overflowX, vw } = await page.evaluate(() => ({
+      overflowX:
+        document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      vw: window.innerWidth,
+    }));
+
+    expect(
+      overflowX,
+      `horizontal overflow ${overflowX}px at viewport ${vw}px`,
+    ).toBeLessThanOrEqual(2);
+  });
+
   test("sections fit viewport width", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("domcontentloaded");
 
     const vw = page.viewportSize()?.width ?? 1280;
 
-    for (const id of ["#hero", "#demo", "#examples", "#proof"]) {
+    for (const id of [
+      "#hero",
+      "#integrate",
+      "#harness",
+      "#overview",
+      "#how-it-works",
+      "#demo",
+      "#faq",
+      "#cta",
+      "#security",
+    ]) {
       const section = page.locator(id).first();
       const count = await section.count();
       if (count === 0) continue;
@@ -59,7 +86,9 @@ test.describe("responsive — home", () => {
       expect(hBox.x + hBox.width).toBeLessThanOrEqual(vw + 12);
     }
 
-    const bodyCopy = demo.getByText(/isolated test, real failure/i).first();
+    const bodyCopy = demo
+      .getByText(/Add LogoMesh to a repo, open or update a Python PR/i)
+      .first();
     await expect(bodyCopy).toBeVisible();
     const pBox = await bodyCopy.boundingBox();
     expect(pBox).not.toBeNull();
