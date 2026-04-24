@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useRef } from "react";
 import {
   Box,
   GitBranch,
@@ -10,7 +10,7 @@ import {
   Scale,
   Shield,
 } from "lucide-react";
-import { EASE } from "@/lib/motion";
+import { useFadeUp } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 import { LANDING_GRAPHICS } from "@/lib/landing-graphic-src";
 import { MarketingGraphicPlaceholder } from "./MarketingGraphicPlaceholder";
@@ -97,7 +97,8 @@ const SECURITY_PILLARS: {
 ];
 
 export function HowItWorksSection() {
-  const reducedMotion = useReducedMotion();
+  const stepsRef = useRef<HTMLOListElement>(null);
+  useFadeUp(stepsRef, { targets: "[data-step]", stagger: 0.1 });
 
   return (
     <section
@@ -107,28 +108,19 @@ export function HowItWorksSection() {
     >
       <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 md:py-24 md:px-10">
         <div className="mx-auto max-w-[720px] text-center">
-          <motion.p
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45, ease: EASE }}
-            className="landing-kicker"
-          >
+          <p className="landing-kicker">
             How it works
-          </motion.p>
-          <motion.h2
+          </p>
+          <h2
             id="how-heading"
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
             Four steps
-          </motion.h2>
+          </h2>
         </div>
 
         <ol
+          ref={stepsRef}
           className="mx-auto mt-14 max-w-[960px] list-none md:mt-20"
           aria-label="Steps from install to thread"
         >
@@ -137,12 +129,9 @@ export function HowItWorksSection() {
             /** Odd rows: image left, copy right on large screens (still copy-first in DOM on mobile). */
             const zigzag = i % 2 === 1;
             return (
-              <motion.li
+              <li
                 key={n}
-                initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.5, ease: EASE, delay: 0.05 * i }}
+                data-step
                 className={`relative flex gap-4 sm:gap-6 md:gap-8 ${isLast ? "" : "pb-14 md:pb-20"}`}
               >
                 <div className="relative flex w-[52px] shrink-0 flex-col items-center self-stretch sm:w-14">
@@ -188,7 +177,7 @@ export function HowItWorksSection() {
                     </div>
                   </div>
                 </article>
-              </motion.li>
+              </li>
             );
           })}
         </ol>
@@ -199,45 +188,25 @@ export function HowItWorksSection() {
           className="mx-auto mt-16 max-w-[960px] scroll-mt-[calc(5rem+env(safe-area-inset-top))] border-t border-[var(--color-border)] pt-14 md:mt-20 md:pt-20"
         >
           <div className="mx-auto max-w-[720px] text-center">
-            <motion.p
-              initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.45, ease: EASE }}
-              className="landing-kicker"
-            >
+            <p className="landing-kicker">
               Security
-            </motion.p>
-            <motion.h3
+            </p>
+            <h3
               id="security-heading"
-              initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
               className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
             >
               Built for least privilege.
-            </motion.h3>
-            <motion.p
-              initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.08 }}
-              className="mx-auto mt-5 max-w-[34rem] text-pretty text-[17px] leading-relaxed text-[var(--color-muted)] sm:text-[18px] sm:leading-[1.75]"
-            >
+            </h3>
+            <p className="mx-auto mt-5 max-w-[34rem] text-pretty text-[17px] leading-relaxed text-[var(--color-muted)] sm:text-[18px] sm:leading-[1.75]">
               Short version: least privilege, isolated runs, no mystery access. Here&apos;s how we talk about it today,
               and what comes later if you need a security packet.
-            </motion.p>
+            </p>
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-12 xl:grid-cols-4 xl:gap-6">
             {SECURITY_PILLARS.map(({ title: pillarTitle, body, icon: PillarIcon }, i) => (
-              <motion.article
+              <article
                 key={pillarTitle}
-                initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 18 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.5, ease: EASE, delay: 0.06 * i }}
                 className="flex flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/90 p-5 sm:p-6"
               >
                 <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-3)] landing-icon-bright">
@@ -249,19 +218,13 @@ export function HowItWorksSection() {
                 <p className="mt-2 flex-1 text-[15px] leading-relaxed text-[var(--color-muted)] sm:text-[16px]">
                   {body}
                 </p>
-              </motion.article>
+              </article>
             ))}
           </div>
 
-          <motion.p
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.45, ease: EASE, delay: 0.2 }}
-            className="mx-auto mt-8 max-w-[40rem] text-center text-[14px] leading-relaxed text-[var(--color-dim)] sm:mt-10 sm:text-[15px]"
-          >
+          <p className="mx-auto mt-8 max-w-[40rem] text-center text-[14px] leading-relaxed text-[var(--color-dim)] sm:mt-10 sm:text-[15px]">
             More detail lives in docs and the GitHub App listing. Ask if you need something for a security review.
-          </motion.p>
+          </p>
         </div>
       </div>
     </section>
