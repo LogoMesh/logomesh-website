@@ -3,11 +3,13 @@
 import { useRef, useState, type MouseEvent } from "react";
 import { motion } from "motion/react";
 import { GithubIcon } from "./icons/GithubIcon";
-import { EASE, EASE_SOFT } from "@/lib/motion";
+import { useFadeUp } from "@/lib/animations";
 
 export function CTASection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
+
+  useFadeUp(sectionRef, { targets: "[data-reveal]", stagger: 0.08, y: 22 });
 
   function handleMouseMove(e: MouseEvent<HTMLElement>) {
     const rect = sectionRef.current?.getBoundingClientRect();
@@ -35,11 +37,8 @@ export function CTASection() {
       />
 
       <div className="relative mx-auto w-full min-w-0 max-w-[920px] rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-canvas-2)]/45 px-5 py-12 shadow-[0_32px_80px_-40px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-sm sm:rounded-[2.25rem] sm:px-12 sm:py-16 md:px-16 md:py-20 lg:px-20 lg:py-24">
-        <motion.h2
-          initial={{ opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.8, ease: EASE_SOFT }}
+        <h2
+          data-reveal
           className="relative font-[family-name:var(--font-display)] text-balance text-[clamp(1.6rem,7.2vw,3.85rem)] sm:text-[clamp(32px,4.6vw,64px)] font-extrabold leading-[0.96] sm:leading-[0.93] tracking-[-0.04em] mb-10 sm:mb-12"
         >
           Try it on
@@ -53,23 +52,17 @@ export function CTASection() {
           >
             a repo you actually use
           </span>
-        </motion.h2>
+        </h2>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: EASE_SOFT, delay: 0.1 }}
+        <p
+          data-reveal
           className="marketing-lg read-max relative mx-auto mb-12 max-w-[30rem] text-[var(--color-muted)] sm:mb-14 md:text-[1.125rem] md:leading-relaxed"
         >
           Install in 30 seconds. Free while in beta. No YAML, no config.
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
+        <div
+          data-reveal
           className="relative"
         >
           <motion.a
@@ -81,17 +74,14 @@ export function CTASection() {
             <GithubIcon size={20} />
             Install on GitHub
           </motion.a>
-        </motion.div>
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.28 }}
+        <p
+          data-reveal
           className="relative mt-10 font-[family-name:var(--font-mono)] text-[14px] text-[var(--color-dim)] sm:mt-12 sm:text-[15px]"
         >
           Free during beta · Private repos on the roadmap
-        </motion.p>
+        </p>
       </div>
     </section>
   );
