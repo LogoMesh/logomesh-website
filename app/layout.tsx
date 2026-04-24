@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import { ScrollReset } from "@/components/ScrollReset";
+import { LenisProvider } from "@/lib/lenis";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -54,8 +55,16 @@ export default function RootLayout({
         <Script id="scroll-restoration-head" strategy="beforeInteractive">
           {`(function(){try{if("scrollRestoration"in history)history.scrollRestoration="manual";}catch(e){}})()`}
         </Script>
+        <Script
+          src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.net.min.js"
+          strategy="afterInteractive"
+        />
         <ScrollReset />
-        {children}
+        <LenisProvider>{children}</LenisProvider>
       </body>
     </html>
   );
