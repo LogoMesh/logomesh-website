@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { useState, useRef } from "react";
 import { Bug } from "lucide-react";
-import { EASE } from "@/lib/motion";
 import { HARNESS_AGGREGATE, HARNESS_SHOWCASE } from "@/lib/harness-public.generated";
 import { GithubIcon } from "@/components/icons/GithubIcon";
 import { cn } from "@/lib/utils";
+import { useSplitText, useFadeUp } from "@/lib/animations";
 
 /** Spotlight repos (matches first rows of harness showcase; synced from generated data). */
 const FEATURED = HARNESS_SHOWCASE.slice(0, 6);
@@ -57,7 +56,11 @@ function RepoAvatar({
 }
 
 export function SocialProofStrip() {
-  const reducedMotion = useReducedMotion();
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const gridRef = useRef<HTMLUListElement>(null);
+
+  useSplitText(headingRef);
+  useFadeUp(gridRef, { targets: "li", stagger: 0.07 });
 
   return (
     <section
@@ -66,13 +69,7 @@ export function SocialProofStrip() {
     >
       <div className="mx-auto max-w-[1280px] px-5 py-10 sm:px-8 md:px-10 md:py-14">
         <div className="mx-auto max-w-[720px] text-center">
-          <motion.div
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.4, ease: EASE }}
-            className="flex flex-col items-center gap-4"
-          >
+          <div className="flex flex-col items-center gap-4">
             <span
               className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)] text-[var(--color-accent)] shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
               aria-hidden
@@ -81,6 +78,7 @@ export function SocialProofStrip() {
             </span>
             <div>
               <h2
+                ref={headingRef}
                 id="social-proof-heading"
                 className="font-[family-name:var(--font-display)] text-[clamp(1.25rem,3vw,1.65rem)] font-extrabold tracking-[-0.03em] text-[var(--color-ink)]"
               >
@@ -98,29 +96,20 @@ export function SocialProofStrip() {
                 repos. Six sample projects match the proof table.
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
 
-        <motion.ul
-          initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.5, ease: EASE, delay: 0.06 }}
+        <ul
+          ref={gridRef}
           className="mt-10 grid list-none grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {FEATURED.map((row, i) => {
+          {FEATURED.map((row) => {
             const owner = ownerSlug(row.repo);
             const ghRepoUrl = `https://github.com/${row.repo}`;
             const ghPrUrl = `${ghRepoUrl}/pull/${row.prNumber}`;
 
             return (
-              <motion.li
-                key={row.repo}
-                initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-24px" }}
-                transition={{ duration: 0.45, ease: EASE, delay: 0.05 * i }}
-              >
+              <li key={row.repo}>
                 <article className="group relative flex h-full gap-4 rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/90 p-4 shadow-[var(--shadow-card)] transition-colors hover:border-[var(--color-border)] hover:bg-[var(--color-canvas-2)]">
                   <RepoAvatar owner={owner} />
 
@@ -157,10 +146,10 @@ export function SocialProofStrip() {
                     </p>
                   </div>
                 </article>
-              </motion.li>
+              </li>
             );
           })}
-        </motion.ul>
+        </ul>
       </div>
     </section>
   );
