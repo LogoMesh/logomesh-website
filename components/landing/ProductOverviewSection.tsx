@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import { EASE } from "@/lib/motion";
+import { useRef } from "react";
 import { AuroraField } from "./AuroraField";
+import { useFadeUp } from "@/lib/animations";
 
 const CARDS = [
   {
@@ -38,7 +38,10 @@ const CARDS = [
 ] as const;
 
 export function ProductOverviewSection() {
-  const reducedMotion = useReducedMotion();
+  const cardsRef = useRef<HTMLUListElement>(null);
+
+  useFadeUp(cardsRef, { targets: "h3", stagger: 0.07, y: 16, start: "top 88%" });
+  useFadeUp(cardsRef, { targets: "[data-card]", stagger: 0.1 });
 
   return (
     <section
@@ -49,50 +52,28 @@ export function ProductOverviewSection() {
       <AuroraField className="opacity-70" />
       <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-8 md:py-28 md:px-10">
         <div className="mx-auto max-w-[720px] text-center">
-          <motion.p
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45, ease: EASE }}
-            className="landing-kicker"
-          >
+          <p className="landing-kicker">
             Why LogoMesh
-          </motion.p>
-          <motion.h2
+          </p>
+          <h2
             id="why-heading"
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
             Proof, not opinions.
-          </motion.h2>
-          <motion.p
-            initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.08 }}
-            className="marketing-lg mx-auto mt-6 max-w-[38rem] text-pretty text-[var(--color-muted)]"
-          >
+          </h2>
+          <p className="marketing-lg mx-auto mt-6 max-w-[38rem] text-pretty text-[var(--color-muted)]">
             Other tools leave opinions on every PR. We only post when we can show the exact input that broke your code.
-          </motion.p>
+          </p>
         </div>
 
-        <motion.ul
-          initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.55, ease: EASE, delay: 0.1 }}
+        <ul
+          ref={cardsRef}
           className="mx-auto mt-16 grid max-w-[1180px] gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3"
         >
           {CARDS.map(({ n, title, body }, i) => (
-            <motion.li
+            <li
               key={n}
-              initial={reducedMotion ? { opacity: 1 } : { opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ duration: 0.5, ease: EASE, delay: 0.08 * i }}
+              data-card
               className="group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/70 p-7 backdrop-blur-sm transition-colors hover:border-[var(--color-border-hi)]"
             >
               <div
@@ -112,9 +93,9 @@ export function ProductOverviewSection() {
               <p className="relative mt-3 text-[15.5px] leading-relaxed text-[var(--color-muted)] sm:text-[16.5px]">
                 {body}
               </p>
-            </motion.li>
+            </li>
           ))}
-        </motion.ul>
+        </ul>
       </div>
     </section>
   );
