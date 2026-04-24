@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
@@ -15,11 +16,56 @@ const PROOF_METRICS = [
 ] as const;
 
 export function Hero() {
+  const vantaRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<{ destroy: () => void } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    function init() {
+      if (cancelled || !vantaRef.current || vantaEffect.current) return;
+      if (typeof window === "undefined" || !window.VANTA?.NET) return;
+      vantaEffect.current = window.VANTA.NET({
+        el: vantaRef.current,
+        color: 0xc4ff00,
+        backgroundColor: 0x0a0a0b,
+        points: 8.0,
+        maxDistance: 22.0,
+        spacing: 18.0,
+        mouseControls: true,
+        touchControls: false,
+        gyroControls: false,
+        minHeight: 200,
+        minWidth: 200,
+      });
+    }
+
+    init();
+    const poll = setInterval(() => {
+      if (window.VANTA?.NET) {
+        init();
+        clearInterval(poll);
+      }
+    }, 150);
+
+    return () => {
+      cancelled = true;
+      clearInterval(poll);
+      vantaEffect.current?.destroy();
+      vantaEffect.current = null;
+    };
+  }, []);
+
   return (
     <section
       id="hero"
       className="bg-gradient-hero relative flex min-h-[calc(100svh-4.5rem)] w-full min-w-0 flex-col justify-center overflow-hidden sm:min-h-[calc(100svh-5rem)]"
     >
+      <div
+        ref={vantaRef}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+      />
       <div aria-hidden className="landing-hero-aurora pointer-events-none absolute inset-0 overflow-hidden">
         <div className="landing-hero-aurora-orb landing-hero-aurora-orb--a" />
         <div className="landing-hero-aurora-orb landing-hero-aurora-orb--b" />
