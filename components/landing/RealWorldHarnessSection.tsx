@@ -1,14 +1,14 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
+import { useRef } from "react";
 import { ExternalLink } from "lucide-react";
-import { EASE } from "@/lib/motion";
 import {
   HARNESS_AGGREGATE,
   HARNESS_SHOWCASE,
   type HarnessShowcaseRow,
 } from "@/lib/harness-public.generated";
 import { AnimatedNumber } from "./AnimatedNumber";
+import { useSplitText, useFadeUp } from "@/lib/animations";
 
 function prUrl(row: HarnessShowcaseRow): string {
   return `https://github.com/${row.repo}/pull/${row.prNumber}`;
@@ -42,7 +42,11 @@ const SUMMARY_STATS = [
 ] as const;
 
 export function RealWorldHarnessSection() {
-  const reducedMotion = useReducedMotion();
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  useSplitText(headingRef);
+
+  const statsRef = useRef<HTMLDivElement>(null);
+  useFadeUp(statsRef, { targets: "[data-stat]", stagger: 0.08 });
 
   return (
     <section
@@ -61,47 +65,28 @@ export function RealWorldHarnessSection() {
 
       <div className="relative mx-auto max-w-[1280px] px-5 py-16 sm:px-8 md:py-24 md:px-10">
         <div className="mx-auto max-w-[760px] text-center">
-          <motion.p
-            initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45, ease: EASE }}
-            className="landing-kicker"
-          >
-            Proof
-          </motion.p>
-          <motion.h2
+          <p className="landing-kicker">Proof</p>
+          <h2
             id="harness-heading"
-            initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.04 }}
+            ref={headingRef}
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
             Real PRs. Real bugs. Real repos.
-          </motion.h2>
-          <motion.p
-            initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, ease: EASE, delay: 0.08 }}
-            className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]"
-          >
+          </h2>
+          <p className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]">
             {HARNESS_AGGREGATE.confirmedFindingsSum} confirmed bugs across {HARNESS_AGGREGATE.uniquePullRequests} pull
             requests in {HARNESS_AGGREGATE.distinctRepos} open source Python projects. Click any row to see the PR.
-          </motion.p>
+          </p>
         </div>
 
-        <motion.ul
-          initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.55, ease: EASE, delay: 0.06 }}
+        <div
+          ref={statsRef}
           className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
         >
           {SUMMARY_STATS.map((s) => (
-            <li
+            <div
               key={s.label}
+              data-stat
               className="rounded-xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/90 px-4 py-4 text-left shadow-[var(--shadow-card)]"
             >
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-dim)]">
@@ -112,17 +97,11 @@ export function RealWorldHarnessSection() {
                 {s.suffix}
               </p>
               <p className="mt-1.5 font-sans text-[13px] leading-snug text-[var(--color-muted)]">{s.hint}</p>
-            </li>
+            </div>
           ))}
-        </motion.ul>
+        </div>
 
-        <motion.div
-          initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.58, ease: EASE, delay: 0.1 }}
-          className="mt-12 overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]"
-        >
+        <div className="mt-12 overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
           <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
             <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
               A sample. One PR per repo.
@@ -218,7 +197,7 @@ export function RealWorldHarnessSection() {
               </li>
             ))}
           </ul>
-        </motion.div>
+        </div>
 
       </div>
     </section>
