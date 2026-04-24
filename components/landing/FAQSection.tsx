@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import { EASE_SOFT } from "@/lib/motion";
+import { useSplitText, useFadeUp } from "@/lib/animations";
 
 const FAQS: { q: string; a: string }[] = [
   {
@@ -58,6 +59,12 @@ const FAQS: { q: string; a: string }[] = [
 export function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
 
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const faqListRef = useRef<HTMLDivElement>(null);
+
+  useSplitText(headingRef);
+  useFadeUp(faqListRef, { targets: "[data-faq]", stagger: 0.06 });
+
   return (
     <section
       id="faq"
@@ -65,32 +72,24 @@ export function FAQSection() {
       className="landing-surface-base w-full min-w-0 scroll-mt-[calc(5rem+env(safe-area-inset-top))] border-t border-[var(--color-border)]"
     >
       <div className="mx-auto max-w-[720px] px-5 py-16 sm:px-8 md:py-24 md:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.52, ease: EASE_SOFT }}
-          className="text-center"
-        >
+        <div className="text-center">
           <p className="landing-kicker">FAQ</p>
           <h2
+            ref={headingRef}
             id="faq-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
             Questions we get.
           </h2>
-        </motion.div>
+        </div>
 
-        <div className="mt-12 space-y-2">
+        <div ref={faqListRef} className="mt-12 space-y-2">
           {FAQS.map((item, i) => {
             const isOpen = open === i;
             return (
-              <motion.div
+              <div
                 key={item.q}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-20px" }}
-                transition={{ duration: 0.42, ease: EASE_SOFT, delay: i * 0.04 }}
+                data-faq
                 className="overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]"
               >
                 <button
@@ -130,7 +129,7 @@ export function FAQSection() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </div>
             );
           })}
         </div>
