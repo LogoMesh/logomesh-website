@@ -24,7 +24,7 @@ export function Hero() {
 
     function init() {
       if (cancelled || !vantaRef.current || vantaEffect.current) return;
-      if (typeof window === "undefined" || !window.VANTA?.NET) return;
+      if (typeof window === "undefined" || !window.THREE || !window.VANTA?.NET) return;
       vantaEffect.current = window.VANTA.NET({
         el: vantaRef.current,
         color: 0xc4ff00,
@@ -42,7 +42,7 @@ export function Hero() {
 
     init();
     const poll = setInterval(() => {
-      if (window.VANTA?.NET) {
+      if (window.THREE && window.VANTA?.NET) {
         init();
         clearInterval(poll);
       }

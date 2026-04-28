@@ -1,47 +1,37 @@
 "use client";
 
 import { useRef } from "react";
+import { Bell, FileCode, ShieldCheck, GitPullRequest } from "lucide-react";
 import { AuroraField } from "./AuroraField";
 import { useFadeUp } from "@/lib/animations";
 
 const CARDS = [
   {
-    n: "01",
+    icon: Bell,
     title: "Silent on clean PRs",
-    body: "No praise spam. No nits. No score. If nothing broke, we say nothing.",
+    body: "If nothing broke, you hear nothing. No noise, no scores, no opinions.",
   },
   {
-    n: "02",
-    title: "Every comment comes with a repro",
-    body: "The exact input. The line. The values at the moment it broke. No guesses.",
+    icon: FileCode,
+    title: "Every comment has a repro",
+    body: "The exact input, the exact line, the exact output. Not a guess — proof.",
   },
   {
-    n: "03",
-    title: "Paste-ready fix test",
-    body: "A test that passes only when your fix is right. Goes straight in your suite.",
+    icon: ShieldCheck,
+    title: "Two signals before we post",
+    body: "A finding has to pass two independent checks. Most tools stop at one.",
   },
   {
-    n: "04",
-    title: "Mutation-checked",
-    body: "Every fix test is mutation-checked. If it still passes on the buggy code, we don't post it.",
-  },
-  {
-    n: "05",
-    title: "Two independent signals",
-    body: "Findings must hit at least two independent checks before we comment. Cuts the noise before you see it.",
-  },
-  {
-    n: "06",
-    title: "Blast radius",
-    body: "We tell you which callers hit the broken path. Know what else to review before merge.",
+    icon: GitPullRequest,
+    title: "A fix test, ready to paste",
+    body: "We include a test that fails on the bug and passes on the fix. Drop it straight into your suite.",
   },
 ] as const;
 
 export function ProductOverviewSection() {
   const cardsRef = useRef<HTMLUListElement>(null);
 
-  useFadeUp(cardsRef, { targets: "h3", stagger: 0.07, y: 16, start: "top 88%" });
-  useFadeUp(cardsRef, { targets: "[data-card]", stagger: 0.1 });
+  useFadeUp(cardsRef, { targets: "[data-card]", stagger: 0.12 });
 
   return (
     <section
@@ -51,30 +41,28 @@ export function ProductOverviewSection() {
     >
       <AuroraField className="opacity-70" />
       <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-8 md:py-28 md:px-10">
-        <div className="mx-auto max-w-[720px] text-center">
-          <p className="landing-kicker">
-            Why LogoMesh
-          </p>
+        <div className="mx-auto max-w-[640px] text-center">
+          <p className="landing-kicker">Why LogoMesh</p>
           <h2
             id="why-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
             Proof, not opinions.
           </h2>
-          <p className="marketing-lg mx-auto mt-6 max-w-[38rem] text-pretty text-[var(--color-muted)]">
-            Other tools leave opinions on every PR. We only post when we can show the exact input that broke your code.
+          <p className="marketing-lg mx-auto mt-5 max-w-[34rem] text-pretty text-[var(--color-muted)]">
+            We only comment when we can show the exact input that broke your code.
           </p>
         </div>
 
         <ul
           ref={cardsRef}
-          className="mx-auto mt-16 grid max-w-[1180px] gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3"
+          className="mx-auto mt-14 grid max-w-[860px] gap-4 sm:grid-cols-2 sm:gap-5"
         >
-          {CARDS.map(({ n, title, body }, i) => (
+          {CARDS.map(({ icon: Icon, title, body }) => (
             <li
-              key={n}
+              key={title}
               data-card
-              className="group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/70 p-7 backdrop-blur-sm transition-colors hover:border-[var(--color-border-hi)]"
+              className="group relative overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/70 p-8 backdrop-blur-sm transition-colors hover:border-[var(--color-border-hi)]"
             >
               <div
                 aria-hidden
@@ -84,13 +72,13 @@ export function ProductOverviewSection() {
                     "radial-gradient(ellipse 80% 60% at 50% 0%, hsl(78 100% 50% / 0.06) 0%, transparent 70%)",
                 }}
               />
-              <p className="relative font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-dim)]">
-                {n}
-              </p>
-              <h3 className="relative mt-4 font-[family-name:var(--font-display)] text-[1.35rem] font-bold tracking-[-0.02em] text-[var(--color-ink)] sm:text-[1.5rem]">
+              <div className="relative mb-5 inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-3)]">
+                <Icon className="h-5 w-5 text-[var(--color-accent)]" strokeWidth={1.5} />
+              </div>
+              <h3 className="relative font-[family-name:var(--font-display)] text-[1.2rem] font-bold tracking-[-0.02em] text-[var(--color-ink)]">
                 {title}
               </h3>
-              <p className="relative mt-3 text-[15.5px] leading-relaxed text-[var(--color-muted)] sm:text-[16.5px]">
+              <p className="relative mt-2 text-[15px] leading-relaxed text-[var(--color-muted)]">
                 {body}
               </p>
             </li>

@@ -20,7 +20,7 @@ export function LenisProvider({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    const instance = new Lenis({ lerp: 0.08, smoothWheel: true });
+    const instance = new Lenis({ lerp: 0.65, smoothWheel: true });
     setLenis(instance);
 
     instance.on("scroll", ScrollTrigger.update);
