@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import { EASE } from "@/lib/motion";
+import { HARNESS_STATS } from "@/lib/marketing-stats";
 import { LogoMark } from "./LogoMark";
 
 type Incident = {
@@ -35,7 +36,7 @@ const INCIDENTS: Incident[] = [
   },
   {
     company: "Fintech",
-    title: "Transfer debits account before validation — error leaves balance at −$150",
+    title: "Transfer debits account before validation. Error leaves balance at -$150",
     tag: "state-after-error",
   },
   {
@@ -45,7 +46,7 @@ const INCIDENTS: Incident[] = [
   },
   {
     company: "Shopify",
-    title: "JPY treated as USD — zero decimal places causes 100× pricing errors",
+    title: "JPY treated as USD. Zero decimal places causes 100× pricing errors",
     tag: "precision · boundary",
   },
   {
@@ -72,7 +73,7 @@ export function IncidentsGrid() {
         className="flex items-center gap-3.5 mb-6 sm:mb-7"
       >
         <span className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-accent)]">
-          Real production incidents
+          The cost of &ldquo;looks fine to me&rdquo;
         </span>
         <span className="w-12 h-px bg-[var(--color-border-hi)]" />
       </motion.div>
@@ -86,11 +87,11 @@ export function IncidentsGrid() {
           transition={{ duration: 0.6, ease: EASE, delay: 0.06 }}
           className="font-[family-name:var(--font-display)] text-[clamp(30px,3.85vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em]"
         >
-          The bugs that
+          Regressions do not
           <br />
-          code review
+          arrive with a
           <br />
-          <span className="display-subline">can&rsquo;t see.</span>
+          <span className="display-subline">warning label.</span>
         </motion.h2>
         <motion.div
           initial={{ opacity: 0, y: 22 }}
@@ -99,17 +100,29 @@ export function IncidentsGrid() {
           transition={{ duration: 0.6, ease: EASE, delay: 0.12 }}
         >
           <p className="read-max text-[15px] leading-[1.72] text-[var(--color-muted)] sm:text-[16px] sm:leading-[1.75] mb-4 sm:mb-5">
-            Industry postmortems often find that a large slice of serious outages are
-            plain coding mistakes you could catch before release. These well-known
-            examples still shipped because people read the change but couldn&rsquo;t
-            safely execute it the way automated testing can.
+            Your reviewers are human: they miss edge cases, bad state, and off-by-ones
+            under time pressure. The stories on the grid are famous public postmortems. The
+            kind of damage a single bad merge can still do. LogoMesh is built to surface
+            that class of bug before it becomes your weekend.
           </p>
-          <span className="block font-[family-name:var(--font-mono)] text-[11px] text-[var(--color-dim)] tracking-[0.04em] mb-5">
-            LogoMesh analysis · 20 production postmortems · Apr 2026
-          </span>
+          <div className="mb-5 rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)] px-4 py-3 sm:px-5 sm:py-4">
+            <p className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--color-accent)] mb-2">
+              Why you can believe us
+            </p>
+            <p className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13px] leading-relaxed text-[var(--color-ink)]">
+              We have already run {HARNESS_STATS.uniquePrs}+ real OSS pull requests from{" "}
+              {HARNESS_STATS.reposRepresented} repos through LogoMesh and recorded{" "}
+              {HARNESS_STATS.confirmedFindings}+ confirmed issues before we ask you to bet
+              your own repo on it.
+            </p>
+          </div>
+          <p className="mb-5 font-[family-name:var(--font-mono)] text-[11px] leading-relaxed text-[var(--color-dim)] tracking-[0.03em]">
+            The grid is just context: famous incidents, not LogoMesh tickets on those
+            companies.
+          </p>
           <span className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13px] font-extrabold uppercase tracking-[0.1em] text-[var(--color-accent)]">
             <LogoMark size={14} />
-            catchable by logomesh
+            That is what we are trying to catch for you
           </span>
         </motion.div>
       </div>

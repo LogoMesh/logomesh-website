@@ -139,10 +139,12 @@ export function FeaturesBento() {
         className="mb-10 text-center md:mb-14 md:text-left"
       >
         <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,3.85vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em] text-[var(--color-ink)]">
-          Features
+          What you get on day one
         </h2>
         <p className="read-max mt-4 mx-auto text-[15px] leading-[1.72] text-[var(--color-muted)] sm:text-[16px] sm:leading-[1.75] md:mx-0">
-          Why it catches problems a quick code review often misses.
+          Faster review cycles and fewer surprises in prod, without standing up new CI or
+          writing extra tests yourself. LogoMesh does the adversarial work when the PR
+          opens.
         </p>
       </motion.div>
 
@@ -154,18 +156,17 @@ export function FeaturesBento() {
             01 · Property Inference
           </span>
           <h3 className="font-[family-name:var(--font-display)] text-[24px] md:text-[22px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
-            Asks what should
+            Tests aimed at
             <br />
-            <span className="display-subline">always be true.</span>
+            <span className="display-subline">your real rules.</span>
           </h3>
           <p className="text-[14px] text-[var(--color-muted)] leading-[1.68] mb-5 sm:text-[15px] sm:leading-[1.7]">
-            Before generating a single test, LogoMesh uses the LLM to reason
-            about your function&rsquo;s contracts, invariants, and
-            postconditions. This is what it inferred for{" "}
+            First we ask what your function is supposed to guarantee. Here is a fake
+            example for{" "}
             <code className="font-[family-name:var(--font-mono)] text-[var(--color-accent)] bg-[var(--color-accent-sub)] px-1">
               checkout()
             </code>
-            :
+            . The kind of list we might infer:
           </p>
           <PropertyCard />
         </BentoCard>
@@ -176,13 +177,13 @@ export function FeaturesBento() {
             02 · Sandboxed Exec
           </span>
           <h3 className="font-[family-name:var(--font-display)] text-[21px] md:text-[19px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
-            Actually runs
+            Failures your
             <br />
-            the code.
+            linter cannot see.
           </h3>
           <p className="text-[14px] text-[var(--color-muted)] leading-[1.68] mb-5 sm:text-[15px] sm:leading-[1.7]">
-            Not static analysis. Not an LLM guess. Real execution in a hardened
-            Docker container.
+            Logic bugs show up at runtime. We execute the changed code in a locked-down
+            container so you see real tracebacks, not a guessed warning.
           </p>
           <SandboxCard />
         </BentoCard>
@@ -195,14 +196,14 @@ export function FeaturesBento() {
                 03 · Zero Config
               </span>
               <h3 className="font-[family-name:var(--font-display)] text-[24px] md:text-[22px] font-extrabold leading-[1.1] tracking-[-0.03em] mb-3">
-                Works on the
+                Live on your
                 <br />
-                <span className="display-subline">next PR you open.</span>
+                <span className="display-subline">next pull request.</span>
               </h3>
               <p className="text-[14px] text-[var(--color-muted)] leading-[1.68] sm:text-[15px] sm:leading-[1.7]">
-                Install the GitHub App. That&rsquo;s it. No config file. No
-                YAML. No CI integration. LogoMesh listens for PR events and runs
-                the full pipeline automatically.
+                One GitHub App install. Your team keeps the same workflow; LogoMesh hooks
+                PR events automatically. No new pipeline to own when you are already
+                underwater.
               </p>
             </div>
             <div className="flex-shrink-0 flex w-full max-w-[min(100%,18rem)] flex-col gap-2.5 font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px] md:max-w-none">
@@ -234,16 +235,18 @@ export function FeaturesBento() {
             04 · Crash Validation
           </span>
           <h3 className="font-[family-name:var(--font-display)] text-[21px] md:text-[19px] font-extrabold leading-[1.1] tracking-[-0.025em] mb-3">
-            57% fewer
+            Comments your
             <br />
-            false positives.
+            team will trust.
           </h3>
           <p className="text-[15px] text-[var(--color-muted)] leading-[1.7]">
-            LLM validates every crash is caller-reachable before posting. False
-            positives are the #1 reason developers uninstall.
+            We validate crashes before they hit your thread, so you are not chasing
+            ghosts. Outside research on crash-validation pipelines (see citation below)
+            shows how much noise that class of gate can remove. We bake that idea into
+            what we post.
           </p>
           <div className="mt-auto pt-5 border-t border-[var(--color-border)] font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)]">
-            arXiv:2510.02185 — crash validation study
+            arXiv:2510.02185, crash validation study
           </div>
         </BentoCard>
       </div>

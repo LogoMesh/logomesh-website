@@ -51,9 +51,9 @@ export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
 
   return (
     <div
-      className="relative glass-strong overflow-hidden rounded-xl"
+      className="relative min-w-0 glass-strong overflow-hidden rounded-xl"
       role="img"
-      aria-label={`LogoMesh terminal replay — ${scenario.label} pull request`}
+      aria-label={`LogoMesh terminal replay, ${scenario.label} pull request`}
     >
       <div
         aria-hidden
@@ -64,16 +64,19 @@ export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
         }}
       />
 
-      <div className="flex items-center gap-2 border-b border-border/80 bg-card/60 px-4 py-2.5">
-        <div className="flex gap-1.5">
+      <div className="flex min-w-0 items-center gap-2 border-b border-border/80 bg-card/60 px-3 py-2.5 sm:px-4">
+        <div className="flex shrink-0 gap-1.5">
           <span className="block h-3 w-3 rounded-full bg-[hsl(var(--window-close))]" aria-hidden />
           <span className="block h-3 w-3 rounded-full bg-[hsl(var(--window-minimize))]" aria-hidden />
           <span className="block h-3 w-3 rounded-full bg-[hsl(var(--window-expand))]" aria-hidden />
         </div>
-        <span className="ml-3 font-[family-name:var(--font-mono)] text-[11.5px] uppercase tracking-[0.14em] text-muted-foreground">
+        <span
+          className="ml-2 min-w-0 flex-1 truncate font-[family-name:var(--font-mono)] text-[11.5px] uppercase tracking-[0.14em] text-muted-foreground sm:ml-3"
+          title={`logomesh · ${scenario.repo} · PR ${scenario.prNumber}`}
+        >
           logomesh · {scenario.repo} · PR {scenario.prNumber}
         </span>
-        <span className="ml-auto flex items-center gap-1.5 font-[family-name:var(--font-mono)] text-[10.5px] uppercase tracking-[0.12em] text-dim">
+        <span className="ml-auto flex shrink-0 items-center gap-1.5 font-[family-name:var(--font-mono)] text-[10.5px] uppercase tracking-[0.12em] text-dim">
           <span
             className={`h-1.5 w-1.5 rounded-full ${done ? "bg-success" : "bg-primary"}`}
             style={{ animation: done ? "none" : "pulse-dot 1.2s ease-in-out infinite" }}

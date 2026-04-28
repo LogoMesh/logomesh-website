@@ -59,7 +59,8 @@ test.describe("chrome & background", () => {
     expect(box).not.toBeNull();
     if (box) {
       expect(box.y).toBeGreaterThanOrEqual(-2);
-      expect(box.y).toBeLessThan(520);
+      /* Hero is vertically centered in a full-viewport band; on tall screens the headline sits lower. */
+      expect(box.y).toBeLessThan(720);
       const vw = page.viewportSize()?.width ?? 1280;
       /* lg+: hero is two columns — headline stays in left column (~half width minus gap) */
       const minExpected =

@@ -9,13 +9,17 @@
     "lint": "eslint",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
+    "sync:harness": "node scripts/sync-harness-from-results.mjs",
     "verify": "npm run build && playwright test",
     "verify:desktop": "npm run build && playwright test --project=desktop-chrome",
     "generate:github-logo": "node scripts/generate-github-app-logo.mjs",
     "generate:favicon": "node scripts/generate-favicon.mjs"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "clsx": "^2.1.1",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.23",
     "lucide-react": "^1.8.0",
     "motion": "^12.38.0",
     "next": "16.2.3",

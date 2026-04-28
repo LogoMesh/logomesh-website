@@ -65,6 +65,23 @@
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 
+  /* Spacing: 8px grid — section rhythm + modular type (major third ~1.25) */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --section-y: clamp(3rem, 8vw, 5.5rem);
+  --section-y-lg: clamp(4rem, 10vw, 7rem);
+  --type-display: clamp(2.125rem, 6.25vw, 3.5rem);
+  --type-h2: clamp(1.625rem, 4vw, 2.375rem);
+  --type-h3: clamp(1.125rem, 2.2vw, 1.375rem);
+  --type-lead: clamp(1.0625rem, 2.4vw, 1.3125rem);
+  --leading-display: 1.08;
+  --leading-tight: 1.2;
+  --leading-body: 1.65;
+
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -128,6 +145,62 @@
   max-width: 42rem;
 }
 
+/* Larger body for landing sections — comfortable minimum (~17px+) */
+.marketing-lg {
+  font-size: 1.125rem;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 480px) {
+  .marketing-lg {
+    font-size: 1.1875rem;
+    line-height: 1.68;
+  }
+}
+
+@media (min-width: 768px) {
+  .marketing-lg {
+    font-size: 1.3125rem;
+    line-height: 1.72;
+  }
+}
+
+/* Section vertical rhythm (8px-aligned via clamp) */
+.section-y {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+.section-y-lg {
+  padding-top: var(--section-y-lg);
+  padding-bottom: var(--section-y-lg);
+}
+
+/* Display / title sizes tied to modular scale */
+.type-display {
+  font-size: var(--type-display);
+  line-height: var(--leading-display);
+  letter-spacing: -0.035em;
+}
+
+.type-h2 {
+  font-size: var(--type-h2);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.035em;
+}
+
+.type-h3 {
+  font-size: var(--type-h3);
+  line-height: var(--leading-tight);
+  letter-spacing: -0.03em;
+}
+
+.type-lead {
+  font-size: var(--type-lead);
+  line-height: var(--leading-body);
+}
+
 /* ─────────────────────────────────────────────────────────────
    BASE
    ───────────────────────────────────────────────────────────── */
@@ -145,6 +218,8 @@ html {
   min-height: 100%;
   min-height: 100dvh;
   scroll-padding-top: calc(5rem + env(safe-area-inset-top, 0px));
+  /* Clip subpixel / blur bleed without creating a second scroll container (pairs with body overflow-x). */
+  overflow-x: clip;
 }
 
 /* Stacking + full-bleed background (avoids subpixel gaps / “black bar” in some browsers + Playwright) */
@@ -233,6 +308,72 @@ body::after {
 
 @utility bg-gradient-hero {
   background: var(--gradient-hero);
+}
+
+/* Hero — slow ambient orbs (global reduced-motion rules still apply) */
+.landing-hero-aurora {
+  z-index: 0;
+}
+.landing-hero-aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.landing-hero-aurora-orb--a {
+  width: min(85vw, 560px);
+  height: min(85vw, 560px);
+  left: -18%;
+  top: -22%;
+  background: radial-gradient(
+    circle at 40% 40%,
+    hsl(78 100% 50% / 0.26) 0%,
+    transparent 68%
+  );
+  animation: landing-hero-aurora-drift 22s ease-in-out infinite;
+}
+.landing-hero-aurora-orb--b {
+  width: min(65vw, 420px);
+  height: min(65vw, 420px);
+  right: -12%;
+  top: 8%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    hsl(190 72% 52% / 0.09) 0%,
+    transparent 70%
+  );
+  animation: landing-hero-aurora-drift 28s ease-in-out infinite reverse;
+  animation-delay: -8s;
+}
+.landing-hero-aurora-orb--c {
+  width: min(55vw, 380px);
+  height: min(55vw, 380px);
+  left: 28%;
+  bottom: -8%;
+  background: radial-gradient(
+    circle at 50% 40%,
+    hsl(274 72% 58% / 0.07) 0%,
+    transparent 72%
+  );
+  animation: landing-hero-aurora-drift 26s ease-in-out infinite;
+  animation-delay: -14s;
+}
+
+@keyframes landing-hero-aurora-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.82;
+  }
+  33% {
+    transform: translate3d(3%, -2%, 0) scale(1.04);
+    opacity: 1;
+  }
+  66% {
+    transform: translate3d(-2%, 2%, 0) scale(0.98);
+    opacity: 0.88;
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -364,11 +505,23 @@ body::after {
     transform: none !important;
   }
   .tech-marquee-track--ready,
-  .tech-marquee-track-y--ready {
+  .tech-marquee-track-y--ready,
+  .landing-framework-marquee-track {
     animation: none !important;
   }
   .nav-dock-animated {
     animation: none !important;
+  }
+  .landing-hero-aurora-orb {
+    animation: none !important;
+    opacity: 0.72;
+    transform: none !important;
+  }
+  .landing-kicker,
+  .landing-kicker-glow-muted {
+    text-shadow:
+      0 1px 1px hsl(240 14% 5% / 0.95),
+      0 0 10px hsl(78 100% 50% / 0.14) !important;
   }
 }
 
@@ -388,4 +541,199 @@ body::after {
   --color-danger: #ff3b3b;
   --color-danger-sub: oklch(0.58 0.24 27 / 0.1);
   --color-pass: #00e87a;
+}
+
+/* Landing — premium section rhythm & product frames (reference: high-end SaaS marketing) */
+.landing-hero-rule {
+  width: 100%;
+  max-width: 9rem;
+  height: 1px;
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(78 100% 50% / 0.35) 45%,
+    hsl(78 100% 50% / 0.12) 100%
+  );
+}
+
+.landing-section-hairline {
+  height: 1px;
+  width: 100%;
+  max-width: 6rem;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 9999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(0 0% 100% / 0.12),
+    transparent
+  );
+}
+
+/* Section kickers (Product, How it works, Scenario, FAQ, …) — soft acid glow + legibility halo */
+.landing-kicker {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: hsl(82 68% 92%);
+  text-shadow:
+    0 1px 2px hsl(240 14% 5% / 0.98),
+    0 0 16px hsl(78 100% 55% / 0.38),
+    0 0 36px hsl(78 100% 50% / 0.22),
+    0 0 64px hsl(78 100% 50% / 0.12);
+}
+
+/* Muted labels that share the kicker glow (e.g. TechStrip title) — same bloom, slightly softer */
+.landing-kicker-glow-muted {
+  text-shadow:
+    0 1px 2px hsl(240 14% 5% / 0.92),
+    0 0 12px hsl(78 100% 50% / 0.28),
+    0 0 28px hsl(78 100% 50% / 0.16),
+    0 0 48px hsl(78 100% 50% / 0.09);
+}
+
+@media (min-width: 640px) {
+  .landing-kicker {
+    font-size: 16px;
+    letter-spacing: 0.13em;
+  }
+}
+
+@media (min-width: 1024px) {
+  .landing-kicker {
+    font-size: 17px;
+    letter-spacing: 0.14em;
+  }
+}
+
+.landing-stat-num {
+  color: hsl(82 78% 82%);
+  text-shadow: 0 0 36px hsl(78 100% 50% / 0.12);
+}
+
+/* Terminal / inline code accents */
+.landing-code-line {
+  color: hsl(82 88% 76%);
+  text-shadow: 0 1px 0 hsl(240 10% 6% / 0.9);
+}
+
+/* Lucide icons that used raw accent */
+.landing-icon-bright {
+  color: hsl(82 72% 78%);
+  filter: drop-shadow(0 0 10px hsl(78 100% 50% / 0.15));
+}
+
+.product-frame-shell {
+  border-radius: 1rem;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 28px 90px -36px rgba(0, 0, 0, 0.9);
+}
+
+@media (min-width: 640px) {
+  .product-frame-shell {
+    border-radius: 1.125rem;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   LANDING — alternating surfaces (cool neutrals + single lime accent)
+   ───────────────────────────────────────────────────────────── */
+
+.landing-surface-base {
+  background-color: hsl(var(--background));
+}
+
+.landing-surface-raised {
+  background-color: var(--color-canvas-2);
+  background-image: radial-gradient(
+    ellipse 120% 90% at 50% 0%,
+    hsl(78 100% 50% / 0.045) 0%,
+    transparent 58%
+  );
+}
+
+.landing-surface-muted {
+  background-color: var(--color-canvas-3);
+  background-image: linear-gradient(
+    180deg,
+    hsl(240 6% 7.5%) 0%,
+    var(--color-canvas-3) 100%
+  );
+}
+
+/* Hero → overview bridge: subtle lime bloom, hairline seams, no competing hues */
+.landing-framework-strip {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background:
+    radial-gradient(ellipse 130% 95% at 50% -35%, hsl(78 100% 50% / 0.11) 0%, transparent 52%),
+    linear-gradient(180deg, hsl(240 6% 5.2%) 0%, hsl(240 6% 3.9%) 100%);
+}
+
+.landing-framework-strip::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(0 0% 100% / 0.02) 50%,
+    transparent 100%
+  );
+}
+
+.landing-framework-strip > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Edge-fade so the marquee dissolves into the canvas */
+.landing-framework-strip-marquee {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 10%,
+    #000 90%,
+    transparent 100%
+  );
+}
+
+@keyframes landing-framework-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.landing-framework-marquee-track {
+  animation: landing-framework-marquee 52s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+@media (min-width: 1024px) {
+  .landing-framework-marquee-track {
+    animation-duration: 44s;
+  }
 }

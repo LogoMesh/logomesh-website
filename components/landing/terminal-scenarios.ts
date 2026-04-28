@@ -13,7 +13,7 @@ export type Scenario = {
   lines: Line[];
 };
 
-// Three scenarios — each tells a complete "caught → fixed" story in ~6 lines.
+// Three scenarios. Each tells a complete caught to fixed story in ~6 lines.
 // Lines animate in with staggered reveals; final line posts the proof + fix.
 
 export const SCENARIOS: Scenario[] = [
@@ -23,10 +23,10 @@ export const SCENARIOS: Scenario[] = [
     prNumber: "#47",
     repo: "checkout-service",
     lines: [
-      { kind: "cmd", text: "$ logomesh · PR #47 · checkout-service" },
+      { kind: "cmd", text: "$ logomesh, PR #47, checkout-service" },
       { kind: "step-done", text: "▸ fetching changed files... ✓" },
-      { kind: "step-done", text: "▸ inferring guarantees... ✓" },
-      { kind: "step-run", text: "▸ fuzzing applyCoupon()..." },
+      { kind: "step-done", text: "▸ locking in what should hold... ✓" },
+      { kind: "step-run", text: "▸ stress-testing applyCoupon()..." },
       { kind: "crash", text: '✗ CRASH on input { coupon: "EXPIRED", retry: 2 }' },
       { kind: "crash-detail", text: "   → customer charged twice" },
       { kind: "success", text: "✓ proof + fix posted to PR #47" },
@@ -38,10 +38,10 @@ export const SCENARIOS: Scenario[] = [
     prNumber: "#92",
     repo: "stripe-payments",
     lines: [
-      { kind: "cmd", text: "$ logomesh · PR #92 · stripe-payments" },
+      { kind: "cmd", text: "$ logomesh, PR #92, stripe-payments" },
       { kind: "step-done", text: "▸ fetching changed files... ✓" },
-      { kind: "step-done", text: "▸ inferring guarantees... ✓" },
-      { kind: "step-run", text: "▸ fuzzing refund_customer()..." },
+      { kind: "step-done", text: "▸ locking in what should hold... ✓" },
+      { kind: "step-run", text: "▸ stress-testing refund_customer()..." },
       { kind: "crash", text: '✗ CRASH on input { amount: -50.00, currency: "USD" }' },
       { kind: "crash-detail", text: "   → negative refund bypasses dispute check" },
       { kind: "success", text: "✓ proof + fix posted to PR #92" },
@@ -53,10 +53,10 @@ export const SCENARIOS: Scenario[] = [
     prNumber: "#13",
     repo: "django-auth",
     lines: [
-      { kind: "cmd", text: "$ logomesh · PR #13 · django-auth" },
+      { kind: "cmd", text: "$ logomesh, PR #13, django-auth" },
       { kind: "step-done", text: "▸ fetching changed files... ✓" },
-      { kind: "step-done", text: "▸ inferring guarantees... ✓" },
-      { kind: "step-run", text: "▸ fuzzing validate_token()..." },
+      { kind: "step-done", text: "▸ locking in what should hold... ✓" },
+      { kind: "step-run", text: "▸ stress-testing validate_token()..." },
       { kind: "crash", text: '✗ CRASH on input { token: "", user: "admin" }' },
       { kind: "crash-detail", text: "   → empty token authenticates admin session" },
       { kind: "success", text: "✓ proof + fix posted to PR #13" },

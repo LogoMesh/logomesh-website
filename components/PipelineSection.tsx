@@ -6,23 +6,23 @@ import { EASE } from "@/lib/motion";
 const STEPS = [
   {
     n: "01",
-    title: "Infer",
-    headline: "Ask what should always be true.",
-    body: "LLM reasons about your function's invariants, contracts, and postconditions — not pattern matching, but understanding what the code is meant to guarantee.",
+    title: "Understand",
+    headline: 'Infer what "correct" means here.',
+    body: "For each changed Python function we spell out the invariants and edge cases worth testing. That turns your diff into a concrete test plan instead of a gut feeling.",
     accent: false,
   },
   {
     n: "02",
-    title: "Attack",
-    headline: "Actually run the code.",
-    body: "Adversarial inputs execute in a hardened Docker sandbox. Airgapped. nobody user. 128 MB RAM. 50 PIDs. No network. No escape from a real crash.",
+    title: "Execute",
+    headline: "Break it in a real environment.",
+    body: "We run those tests in an isolated sandbox: no network, tight memory, tight process limits. What breaks is a real failure your team can reproduce, not a static warning.",
     accent: false,
   },
   {
     n: "03",
-    title: "Prove",
-    headline: "Post only when confirmed.",
-    body: "LLM validates every crash is caller-reachable before posting. If nothing is confirmed — silence. The absence of a comment is itself a signal.",
+    title: "Ship signal",
+    headline: "Only post what passed the bar.",
+    body: "We validate and filter before anything hits your PR. Worth fixing gets a comment with evidence. Everything else stays quiet so your reviewers spend time on signal, not noise.",
     accent: true,
   },
 ];
@@ -44,14 +44,14 @@ export function PipelineSection() {
       >
         <div className="flex items-center gap-3.5 mb-6">
           <span className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13.5px] font-bold uppercase tracking-[0.12em] sm:tracking-[0.14em] text-[var(--color-accent)]">
-            The pipeline
+            Under the hood
           </span>
           <span className="w-12 h-px bg-[var(--color-border-hi)]" />
         </div>
         <h2 className="font-[family-name:var(--font-display)] text-[clamp(30px,3.85vw,48px)] font-extrabold leading-[0.96] tracking-[-0.04em]">
-          Three steps.
+          How we earn
           <br />
-          <span className="display-subline">One guarantee.</span>
+          <span className="display-subline">your trust.</span>
         </h2>
       </motion.div>
 
@@ -124,7 +124,7 @@ export function PipelineSection() {
                   <circle cx="18" cy="18" r="3" fill="#c4ff00" style={{ filter: "drop-shadow(0 0 3px rgba(196,255,0,0.9))" }} />
                 </svg>
                 <span className="font-[family-name:var(--font-mono)] text-[11px] font-bold uppercase tracking-[0.1em] text-[var(--color-accent)]">
-                  No comment unless this confirms it
+                  No proof, no comment
                 </span>
               </div>
             )}
