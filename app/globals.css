@@ -212,7 +212,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   background-color: hsl(var(--background));
   color-scheme: dark;
   min-height: 100%;
