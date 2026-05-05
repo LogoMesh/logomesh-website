@@ -2,7 +2,7 @@
 
 import { useRef, useState, type MouseEvent } from "react";
 import { motion } from "motion/react";
-import { GithubIcon } from "./icons/GithubIcon";
+import { ArrowRight } from "lucide-react";
 import { useFadeUp } from "@/lib/animations";
 
 export function CTASection() {
@@ -50,29 +50,40 @@ export function CTASection() {
                 "0 0 22px rgba(196,255,0,0.55), 0 0 48px rgba(196,255,0,0.35), 0 0 90px rgba(196,255,0,0.2)",
             }}
           >
-            a repo you actually use
+            a real production crash
           </span>
         </h2>
 
         <p
           data-reveal
-          className="marketing-lg read-max relative mx-auto mb-12 max-w-[30rem] text-[var(--color-muted)] sm:mb-14 md:text-[1.125rem] md:leading-relaxed"
+          className="marketing-lg read-max relative mx-auto mb-10 max-w-[34rem] text-[var(--color-muted)] sm:mb-12 md:text-[1.125rem] md:leading-relaxed"
         >
-          Install in 30 seconds. Free while in beta. No YAML, no config.
+          Pip install. Paste a Sentry URL. Get a failing pytest in about 60 seconds.
         </p>
+
+        <div
+          data-reveal
+          className="relative mx-auto mb-12 w-full max-w-[34rem] overflow-hidden rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas)]/85 px-4 py-3 text-left font-mono text-[13px] leading-relaxed text-[var(--color-ink)] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)] sm:px-5 sm:py-4 sm:text-[14px]"
+        >
+          <span className="select-none text-[var(--color-dim)]">$ </span>
+          pip install logomesh
+          <br />
+          <span className="select-none text-[var(--color-dim)]">$ </span>
+          logomesh repro &lt;sentry-url&gt;
+        </div>
 
         <div
           data-reveal
           className="relative"
         >
           <motion.a
-            href="https://github.com/apps/logomesh"
-            className="inline-flex min-h-[56px] items-center gap-3.5 bg-[var(--color-accent)] px-8 py-4 text-black font-[family-name:var(--font-mono)] text-[15px] font-bold sm:min-h-[60px] sm:px-14 sm:py-5 sm:text-[16px] w-full sm:w-auto justify-center max-w-md sm:max-w-none mx-auto rounded-xl shadow-[0_12px_40px_-12px_rgba(196,255,0,0.35)]"
+            href="/docs"
+            className="inline-flex min-h-[56px] items-center gap-3 bg-[var(--color-accent)] px-8 py-4 text-black font-[family-name:var(--font-mono)] text-[15px] font-bold sm:min-h-[60px] sm:px-14 sm:py-5 sm:text-[16px] w-full sm:w-auto justify-center max-w-md sm:max-w-none mx-auto rounded-xl shadow-[0_12px_40px_-12px_rgba(196,255,0,0.35)]"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <GithubIcon size={20} />
-            Install on GitHub
+            Read the docs
+            <ArrowRight size={18} className="-mr-1 opacity-70" />
           </motion.a>
         </div>
 
@@ -80,7 +91,7 @@ export function CTASection() {
           data-reveal
           className="relative mt-10 font-[family-name:var(--font-mono)] text-[14px] text-[var(--color-dim)] sm:mt-12 sm:text-[15px]"
         >
-          Free during beta · Private repos on the roadmap
+          Free during beta · 3 reproductions a day · Webhook trigger and fix generation in progress
         </p>
       </div>
     </section>

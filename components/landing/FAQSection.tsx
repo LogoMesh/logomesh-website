@@ -8,48 +8,52 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "How is this different from CodeRabbit, Copilot, or Sourcery?",
-    a: "Those tools leave opinions on every PR. LogoMesh only posts when it can show a broken input and the output it produced. Silence means clean.",
+    q: "How is this different from other agents that try to reproduce crashes?",
+    a: "Other tools confuse \"the script errored\" with \"the bug reproduced.\" They run code, something breaks, and they call it a reproduction. LogoMesh uses the actual program state from the moment of the real crash: the exact variable values, the exact arguments. The reproduction is a replay, not a guess.",
   },
   {
-    q: "Will this spam my PRs?",
-    a: "No. Clean PR, no comment. Ever.",
+    q: "Does the agent hallucinate the bug?",
+    a: "The repro path runs zero LLM calls. Synthesis is deterministic from the captured frame locals. The agent reads the reproduction directly from the crash, it does not narrate it.",
   },
   {
-    q: "What about false positives?",
-    a: "We only post when the failure reproduces. If we can't reproduce it, you don't see it.",
+    q: "What kind of crashes does this work on?",
+    a: "Pure-function failures: refund miscalculations, off-by-one on totals, float rounding on tax, validation bypasses. The kind of bugs that do not need database state to reproduce. Crashes that require a long-running session or production data are out of scope today.",
   },
   {
-    q: "How do you know the fix test actually catches the bug?",
-    a: "Every fix test is mutation-checked. We mutate the code around the finding and confirm the test fails on the broken version. If it still passes on the bug, we throw it out.",
-  },
-  {
-    q: "What stops noisy or borderline findings from reaching the PR?",
-    a: "Every finding has to clear at least two independent signals before we post: the repro, the regression check, and the mutation check. One signal is never enough.",
-  },
-  {
-    q: "Do you suggest fixes, or only point out problems?",
-    a: "Both. When we can, we attach a suggested patch to the finding. You accept it, edit it, or ignore it — same as any GitHub suggestion.",
-  },
-  {
-    q: "Will I know what else my change affects?",
-    a: "Yes. We surface the blast radius — which callers touch the broken path — so you know what else to review before merge.",
+    q: "What stops it from running on the wrong files?",
+    a: "You declare which paths are in scope in a YAML config: billing/, checkout/, pricing/, refund/, payments/. Everything else is ignored by design.",
   },
   {
     q: "What languages do you support?",
     a: "Python today. Other languages later.",
   },
   {
-    q: "Private repos?",
-    a: "On the roadmap. Free on public repos during beta.",
+    q: "How fast?",
+    a: "About 60 seconds from the CLI invocation to a failing pytest. The 30 to 40 minutes of manual reconstruction, gone.",
+  },
+  {
+    q: "What is the audit artifact?",
+    a: "A structured JSON evidence chain mapped to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs. PII and secrets redaction is not yet shipped, so the raw artifact is not safe to hand directly to an auditor today. It is audit-ready evidence, not a finished compliance pack.",
+  },
+  {
+    q: "Does the agent fix the bug?",
+    a: "Not yet. Today the agent reproduces the crash. Fix generation and a draft PR are next. When that ships, the agent will open a draft PR with the failing test, the passing test, and the audit trail attached. Nothing merges without your sign-off.",
+  },
+  {
+    q: "Does it run on every crash automatically?",
+    a: "Today the developer runs logomesh repro <sentry-url>. The Sentry webhook trigger that fires the agent automatically is in progress.",
+  },
+  {
+    q: "How do I install?",
+    a: "pip install logomesh, then logomesh repro <sentry-url>. There is also an MCP server for Claude Code integration.",
   },
   {
     q: "What does it cost?",
-    a: "Free during beta.",
+    a: "Free during beta: 3 reproductions a day, full features, no credit card. Team is $30 per user per month above that. Enterprise is custom (SSO, audit log, on-prem, SLA).",
   },
   {
-    q: "How do I start?",
-    a: "Install the GitHub App on a repo, then open a Python PR. That's it.",
+    q: "Who is this for?",
+    a: "Backend engineers at fintech companies (payments, billing, checkout, pricing) using Python. Series A to B, 20 to 200 engineers. Not for general-purpose testing or non-Python codebases.",
   },
 ];
 
@@ -79,7 +83,7 @@ export function FAQSection() {
             id="faq-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Questions we get.
+            Questions engineers ask.
           </h2>
         </div>
 

@@ -19,7 +19,9 @@ test.describe("contact page", () => {
     ).toBeVisible();
 
     await expect(page.getByText("Other ways to reach us")).toBeVisible();
-    await expect(page.getByRole("link", { name: /GitHub App/i })).toBeVisible();
+    await expect(
+      page.getByRole("complementary").getByRole("link", { name: /Docs/i }),
+    ).toBeVisible();
   });
 
   test("footer Contact links to contact page", async ({ page }) => {

@@ -1,15 +1,15 @@
 import { test, expect } from "@playwright/test";
 
 /**
- * Documents every link to the GitHub App listing so we don't stack redundant primary CTAs.
+ * Documents every primary "Read the docs" link so we don't stack redundant primary CTAs.
  * Run: npx playwright test e2e/install-cta-audit.spec.ts --project=desktop-chrome
  */
-test.describe("install CTA audit (desktop)", () => {
-  test("lists each GitHub App link with visible label", async ({ page }) => {
+test.describe("docs CTA audit (desktop)", () => {
+  test("lists each /docs link with visible label", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
-    const links = page.locator('a[href="https://github.com/apps/logomesh"]');
+    const links = page.locator('a[href="/docs"]');
     const count = await links.count();
     expect(count).toBeGreaterThanOrEqual(1);
 
@@ -21,14 +21,14 @@ test.describe("install CTA audit (desktop)", () => {
       rows.push({ index: i, label, tag });
     }
 
-    // Printed in test output for humans / CI logs
     // eslint-disable-next-line no-console
-    console.log(`GitHub App links on /: ${count}`);
+    console.log(`/docs links on /: ${count}`);
     for (const r of rows) {
       // eslint-disable-next-line no-console
       console.log(`  [${r.index}] <${r.tag}> ${r.label.slice(0, 120)}`);
     }
 
-    expect(count).toBe(3);
+    // Hero primary, Nav (top right), CTA section primary, Footer link
+    expect(count).toBe(4);
   });
 });

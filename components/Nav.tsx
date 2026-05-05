@@ -10,7 +10,6 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { GithubIcon } from "./icons/GithubIcon";
 import { LogoMark } from "./LogoMark";
 
 const CONTACT_HREF = "/contact";
@@ -37,7 +36,7 @@ const SECTION_NAV = [
     activeWhen: ["how-it-works"],
   },
   {
-    label: "Install",
+    label: "Get started",
     hrefId: "cta",
     activeWhen: ["faq", "cta"],
   },
@@ -321,7 +320,7 @@ export function Nav() {
 
       <div className="flex items-center gap-3 shrink-0">
         <a
-          href="https://github.com/apps/logomesh"
+          href="/docs"
           className={cn(
             "inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px]",
             "bg-[var(--color-accent)] text-black rounded-lg",
@@ -329,9 +328,8 @@ export function Nav() {
             "transition-opacity duration-150 hover:opacity-90 active:opacity-95",
           )}
         >
-          <GithubIcon size={12} />
-          <span className="hidden sm:inline">Get the app</span>
-          <span className="sm:hidden">App</span>
+          <span className="hidden sm:inline">Read the docs</span>
+          <span className="sm:hidden">Docs</span>
         </a>
 
         <button

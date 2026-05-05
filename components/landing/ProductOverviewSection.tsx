@@ -1,30 +1,30 @@
 "use client";
 
 import { useRef } from "react";
-import { Bell, FileCode, ShieldCheck, GitPullRequest } from "lucide-react";
+import { Cpu, ShieldCheck, GitPullRequest, ScrollText } from "lucide-react";
 import { AuroraField } from "./AuroraField";
 import { useFadeUp } from "@/lib/animations";
 
 const CARDS = [
   {
-    icon: Bell,
-    title: "Silent on clean PRs",
-    body: "If nothing broke, you hear nothing. No noise, no scores, no opinions.",
-  },
-  {
-    icon: FileCode,
-    title: "Every comment has a repro",
-    body: "The exact input, the exact line, the exact output. Not a guess — proof.",
+    icon: Cpu,
+    title: "Zero LLM in the repro path",
+    body: "Synthesis is deterministic from the captured frame locals. The agent does not hallucinate the reproduction.",
   },
   {
     icon: ShieldCheck,
-    title: "Two signals before we post",
-    body: "A finding has to pass two independent checks. Most tools stop at one.",
+    title: "Hardened Docker sandbox",
+    body: "Airgapped. Nobody-user. Memory and PID limits. Same sandbox that won AgentBeats Phase 2.",
   },
   {
     icon: GitPullRequest,
-    title: "A fix test, ready to paste",
-    body: "We include a test that fails on the bug and passes on the fix. Drop it straight into your suite.",
+    title: "Human gates the fix",
+    body: "When fix generation ships, the agent will open a draft PR. Nothing merges without your sign-off.",
+  },
+  {
+    icon: ScrollText,
+    title: "Audit-ready evidence chain",
+    body: "JSON artifact mapped to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs. Generated as part of the repro.",
   },
 ] as const;
 
@@ -47,10 +47,11 @@ export function ProductOverviewSection() {
             id="why-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Proof, not opinions.
+            Replay, not a guess.
           </h2>
           <p className="marketing-lg mx-auto mt-5 max-w-[34rem] text-pretty text-[var(--color-muted)]">
-            We only comment when we can show the exact input that broke your code.
+            The repro reads the actual program state from the moment of the crash. The reproduction is deterministic.
+            There is no narrative for the agent to hallucinate.
           </p>
         </div>
 

@@ -6,11 +6,11 @@ import { ContactView } from "@/components/contact/ContactView";
 export const metadata: Metadata = {
   title: "Contact · LogoMesh",
   description:
-    "Reach the LogoMesh team about the beta, integrations, or partnerships.",
+    "Talk to us about pilot deployments, audit-evidence requirements, or the agent webhook roadmap.",
   openGraph: {
     title: "Contact · LogoMesh",
     description:
-      "Reach the LogoMesh team about the beta, integrations, or partnerships.",
+      "Talk to us about pilot deployments, audit-evidence requirements, or the agent webhook roadmap.",
     type: "website",
   },
 };
