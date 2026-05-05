@@ -2,15 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Award } from "lucide-react";
 import { SPRING_UI } from "@/lib/motion";
 import { MediaPlaceholder } from "./MediaPlaceholder";
 
 const PROOF_METRICS = [
-  { label: "60-second repro" },
-  { label: "500 tests passing" },
-  { label: "Zero LLM in the repro path" },
+  { label: "Under-a-minute repro flow" },
+  { label: "Deterministic test output" },
+  { label: "No auto code changes" },
 ] as const;
 
 export function Hero() {
@@ -86,11 +85,11 @@ export function Hero() {
               className="mr-2 inline-block h-[7px] w-[7px] translate-y-[-2px] rounded-full bg-primary align-middle"
               style={{ boxShadow: "0 0 12px hsl(78 100% 50% / 0.6)" }}
             />
-            Free during beta · 3 reproductions a day
+            For engineering teams handling production incidents
           </p>
 
           <h1 className="animate-rise rise-d2 mt-6 font-sans text-balance text-[clamp(2.25rem,7.2vw,5rem)] font-semibold leading-[0.94] tracking-[-0.035em] text-foreground sm:leading-[0.92]">
-            Reproduce the{" "}
+            Reproduce production{" "}
             <span
               className="text-destructive"
               style={{
@@ -98,18 +97,17 @@ export function Hero() {
                   "0 0 36px hsl(0 84% 60% / 0.55), 0 0 80px hsl(0 84% 60% / 0.25)",
               }}
             >
-              crash
+              crashes
             </span>
             <br />
-            before you fix it.
+            in about a minute.
           </h1>
 
           <div className="landing-hero-rule animate-rise rise-d2" aria-hidden />
 
           <p className="animate-rise rise-d3 read-max mt-7 text-[17px] leading-[1.68] text-muted-foreground sm:text-[19px] sm:leading-[1.65]">
-            Sentry is an error monitoring tool. It fires when your app crashes in production and captures the program
-            state at the moment of failure. LogoMesh reads that state and writes a failing pytest that reproduces the
-            crash. About 60 seconds. The 30 to 40 minutes of manual reconstruction, gone.
+            Paste a crash link from your error tracker. LogoMesh generates a reproducible failing test and structured
+            incident artifact so your team can debug from evidence instead of guesswork.
           </p>
 
           <div className="animate-rise rise-d4 mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
@@ -147,17 +145,15 @@ export function Hero() {
               transition={{ duration: 0.2 }}
               className="glass group inline-flex min-h-[38px] items-center gap-2 rounded-full px-3.5 py-1.5"
             >
-              <Image
-                src="/california_golden_bears.png"
-                alt="California Golden Bears"
-                width={18}
-                height={18}
-                className="h-4 w-4 shrink-0 object-contain opacity-90"
+              <Award
+                className="h-4 w-4 shrink-0 text-primary opacity-90"
+                strokeWidth={1.75}
+                aria-hidden
               />
-              <span className="font-sans text-[12.5px] uppercase tracking-[0.12em] text-muted-foreground sm:text-[13px]">
-                <span className="text-foreground/90">1st place</span>
-                <span className="mx-1.5 text-dim">·</span>
-                UC Berkeley AgentBeats
+              <span className="font-sans text-[12px] leading-snug text-muted-foreground sm:text-[13px]">
+                <span className="text-foreground/90">UC Berkeley AgentBeats</span>
+                <span className="mx-1.5 text-dim"> · </span>
+                <span className="text-foreground/90">1st place, testing track</span>
               </span>
             </motion.a>
 
@@ -193,7 +189,7 @@ export function Hero() {
             }}
           />
           <MediaPlaceholder
-            label="Hero demo — paste a Sentry URL, get a failing pytest in about 60 seconds"
+            label="Product demo"
             dropPath="/public/marketing/hero.mp4"
             spec="Screen Studio · ~12 s loop · 1800×1200 @2x"
             kind="video"

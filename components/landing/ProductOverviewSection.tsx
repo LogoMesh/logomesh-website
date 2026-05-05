@@ -8,23 +8,23 @@ import { useFadeUp } from "@/lib/animations";
 const CARDS = [
   {
     icon: Cpu,
-    title: "Zero LLM in the repro path",
-    body: "Synthesis is deterministic from the captured frame locals. The agent does not hallucinate the reproduction.",
+    title: "Debug from facts, not guesswork",
+    body: "The same crash input produces the same failing test output, so teams can reproduce issues consistently.",
   },
   {
     icon: ShieldCheck,
-    title: "Hardened Docker sandbox",
-    body: "Airgapped. Nobody-user. Memory and PID limits. Same sandbox that won AgentBeats Phase 2.",
+    title: "Isolated by default",
+    body: "Runs in a hardened sandbox with clear boundaries for safer execution in production-minded workflows.",
   },
   {
     icon: GitPullRequest,
-    title: "Human gates the fix",
-    body: "When fix generation ships, the agent will open a draft PR. Nothing merges without your sign-off.",
+    title: "You stay in control",
+    body: "LogoMesh reproduces incidents. Your team decides root cause, remediation, and every code change.",
   },
   {
     icon: ScrollText,
-    title: "Audit-ready evidence chain",
-    body: "JSON artifact mapped to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs. Generated as part of the repro.",
+    title: "Clear incident trail",
+    body: "Every run includes a structured artifact for internal review, handoff, and post-incident documentation.",
   },
 ] as const;
 
@@ -47,11 +47,11 @@ export function ProductOverviewSection() {
             id="why-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Replay, not a guess.
+            Why teams choose LogoMesh
           </h2>
           <p className="marketing-lg mx-auto mt-5 max-w-[34rem] text-pretty text-[var(--color-muted)]">
-            The repro reads the actual program state from the moment of the crash. The reproduction is deterministic.
-            There is no narrative for the agent to hallucinate.
+            It gives incident responders a repeatable starting point in minutes, helping teams reduce time-to-repro and
+            move faster through debugging.
           </p>
         </div>
 

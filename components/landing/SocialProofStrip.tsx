@@ -20,13 +20,13 @@ const PROOF_POINTS: { title: string; body: string; icon: LucideIcon }[] = [
   },
   {
     icon: Cpu,
-    title: "Zero LLM in the repro path",
-    body: "Synthesis is deterministic from the captured frame locals. The agent does not hallucinate the reproduction.",
+    title: "No LLM in the evidence path",
+    body: "The audit artifact is generated deterministically from frame locals — no LLM in the evidence path.",
   },
   {
     icon: ShieldCheck,
     title: "Hardened Docker sandbox",
-    body: "Airgapped. Nobody-user. Memory and PID limits. Same sandbox that won AgentBeats Phase 2.",
+    body: "Airgapped. Nobody-user. Memory and PID limits for safer, isolated execution.",
   },
   {
     icon: CheckCheck,
@@ -35,13 +35,13 @@ const PROOF_POINTS: { title: string; body: string; icon: LucideIcon }[] = [
   },
   {
     icon: ScrollText,
-    title: "Audit-ready evidence chain",
-    body: "JSON artifact mapped to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs.",
+    title: "Structured incident artifact",
+    body: "Each run emits structured JSON output to support internal debugging and post-incident review.",
   },
   {
     icon: FileCode,
     title: "Python today",
-    body: "Built for the fintech crash paths: billing, refund, pricing, checkout, payments. Other languages later.",
+    body: "Strongest today on deterministic Python crash paths, especially in business-critical backend logic.",
   },
 ];
 
@@ -72,11 +72,11 @@ export function SocialProofStrip() {
                 id="social-proof-heading"
                 className="font-[family-name:var(--font-display)] text-[clamp(1.25rem,3vw,1.65rem)] font-extrabold tracking-[-0.03em] text-[var(--color-ink)]"
               >
-                Built on the sandbox that won AgentBeats.
+                Built for reliable and secure execution.
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)] sm:text-[16px]">
-                1st place at the UC Berkeley AgentBeats Software Testing Track. The hardened Docker sandbox that won
-                the competition is the same one running in the product today.
+                LogoMesh runs in a hardened sandbox with strict boundaries to keep reproduction runs controlled and
+                predictable.
               </p>
             </div>
           </div>

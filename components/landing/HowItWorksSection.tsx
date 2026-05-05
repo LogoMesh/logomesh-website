@@ -28,8 +28,8 @@ const STEPS: {
 }[] = [
   {
     n: "01",
-    title: "Your error monitor fires",
-    body: "Sentry is an error monitoring tool. It fires when your app crashes in production and captures the program state at the moment of failure: which function broke, what arguments came in, what the locals were.",
+    title: "A production crash is detected",
+    body: "Your error monitoring tool catches a real customer-facing crash and saves the details needed to replay it.",
     icon: Bell,
     graphicSrc: LANDING_GRAPHICS.how1,
     graphicTitle:
@@ -38,8 +38,8 @@ const STEPS: {
   },
   {
     n: "02",
-    title: "You paste the crash URL into the CLI",
-    body: "Run logomesh repro <sentry-url>. The agent reads the stack trace and pulls the captured frame locals.",
+    title: "You start one LogoMesh run",
+    body: "Paste the crash link into the LogoMesh CLI to start the reproduction flow.",
     icon: TerminalSquare,
     graphicSrc: LANDING_GRAPHICS.how2,
     graphicTitle:
@@ -48,8 +48,8 @@ const STEPS: {
   },
   {
     n: "03",
-    title: "The agent writes a failing pytest",
-    body: "A test that runs against your current code with the exact arguments captured at the moment of failure. Synthesis is deterministic from those values, not a narrative.",
+    title: "LogoMesh creates a failing test",
+    body: "You get a test that reliably reproduces the issue so your team can work from facts, not guesses.",
     icon: FileCode,
     graphicSrc: LANDING_GRAPHICS.how3,
     graphicTitle:
@@ -58,8 +58,8 @@ const STEPS: {
   },
   {
     n: "04",
-    title: "You get the test and the audit artifact",
-    body: "About 60 seconds, end to end. The JSON evidence chain maps to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs.",
+    title: "You get a clear record of the incident",
+    body: "The run includes both the test output and a structured artifact your team can use for reporting and follow-up.",
     icon: FileBadge,
     graphicSrc: LANDING_GRAPHICS.how4,
     graphicTitle:
@@ -76,8 +76,7 @@ const SECURITY_PILLARS: {
   {
     icon: Shield,
     title: "Hardened sandbox",
-    body:
-      "Airgapped. Nobody-user. Memory and PID limits. Same Docker sandbox that won AgentBeats Phase 2.",
+    body: "Airgapped. Nobody-user. Memory and PID limits for safer, isolated execution.",
   },
   {
     icon: KeyRound,
@@ -93,9 +92,9 @@ const SECURITY_PILLARS: {
   },
   {
     icon: Scale,
-    title: "PII redaction in progress",
+    title: "Engineering artifact output",
     body:
-      "The artifact is structured and maps to the right control IDs, but PII and secrets redaction is not yet shipped. Treat the raw output as you would any developer artifact today.",
+      "Artifacts are intended for engineering workflows. Handle them with your normal internal data controls and review process.",
   },
 ];
 
@@ -118,10 +117,10 @@ export function HowItWorksSection() {
             id="how-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Four steps. About 60 seconds.
+            How LogoMesh works
           </h2>
           <p className="marketing-lg mx-auto mt-5 max-w-[40rem] text-pretty text-[var(--color-muted)]">
-            Today the developer pastes the crash URL. The Sentry webhook trigger and fix generation are in progress.
+            A simple four-step flow from production crash to reproducible test output.
           </p>
         </div>
 
@@ -189,7 +188,7 @@ export function HowItWorksSection() {
         </ol>
 
         <aside
-          aria-label="Coming next"
+          aria-label="Current product behavior"
           className="mx-auto mt-12 max-w-[860px] rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/85 px-5 py-5 sm:px-6 sm:py-6"
         >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
@@ -201,14 +200,13 @@ export function HowItWorksSection() {
             </span>
             <div className="min-w-0">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-accent)]">
-                Coming next
+                Today
               </p>
               <p className="mt-1.5 text-[14.5px] leading-relaxed text-[var(--color-muted)] sm:text-[15px]">
-                <span className="text-[var(--color-ink)]">Sentry webhook trigger.</span> Crash fires, agent fires
-                automatically, no human starts the run.{" "}
-                <span className="text-[var(--color-ink)]">Fix generation and a draft PR.</span> The agent attempts a
-                patch and opens a draft PR with the failing test, the passing test, and the audit trail attached.
-                Human reviews and approves. Nothing merges without sign-off.
+                <span className="text-[var(--color-ink)]">Manual run from a crash link.</span> A developer starts the run
+                and gets reproducible output quickly.{" "}
+                <span className="text-[var(--color-ink)]">Scope is focused.</span> LogoMesh is strongest on deterministic
+                backend failures that can be replayed from captured runtime state.
               </p>
             </div>
           </div>
@@ -227,11 +225,11 @@ export function HowItWorksSection() {
               id="security-heading"
               className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
             >
-              Hardened, scoped, and out of your database.
+              Built with security boundaries in mind.
             </h3>
             <p className="mx-auto mt-5 max-w-[34rem] text-pretty text-[17px] leading-relaxed text-[var(--color-muted)] sm:text-[18px] sm:leading-[1.75]">
-              The same Docker sandbox that won AgentBeats Phase 2. Scoped to paths you declare. The repro reads frame
-              locals captured at the crash, not your production database.
+              LogoMesh runs in an isolated sandbox, focuses only on paths you define, and does not require pulling full
+              production database state for reproduction.
             </p>
           </div>
 

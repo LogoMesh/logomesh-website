@@ -8,7 +8,7 @@ test.describe("landing — content & assets", () => {
     const why = page.locator("#why");
     await expect(why).toBeVisible();
     await expect(why.getByRole("heading", { name: /Replay, not a guess/i })).toBeVisible();
-    await expect(why.getByText(/Zero LLM in the repro path/i).first()).toBeVisible();
+    await expect(why.getByText(/No LLM in the evidence path/i).first()).toBeVisible();
   });
 
   test("how-it-works section lists four steps and security block", async ({ page }) => {
@@ -17,7 +17,7 @@ test.describe("landing — content & assets", () => {
 
     const how = page.locator("#how-it-works");
     await expect(how).toBeVisible();
-    await expect(how.getByRole("heading", { name: /Four steps/i })).toBeVisible();
+    await expect(how.getByRole("heading", { name: /Four steps\. One quick run/i })).toBeVisible();
     await expect(how.getByText(/Your error monitor fires/i)).toBeVisible();
     await expect(how.getByText(/paste the crash URL/i)).toBeVisible();
     await expect(

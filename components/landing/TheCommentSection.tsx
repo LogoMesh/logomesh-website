@@ -54,7 +54,7 @@ export function TheCommentSection() {
           </h2>
           <p className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]">
             Paste a Sentry URL into the CLI. Get a test that fails on your current code with the inputs your users
-            actually hit. About 60 seconds.
+            actually hit.
           </p>
         </div>
 
@@ -70,7 +70,7 @@ export function TheCommentSection() {
             />
             <div className="relative">
               <MediaPlaceholder
-                label="What the agent hands back: failing pytest, frame locals, audit artifact"
+                label="Failing pytest, frame locals, audit artifact"
                 dropPath="/public/marketing/repro-output.png"
                 spec="1600×1100 @2x · crop tight, redact tokens"
                 kind="image"

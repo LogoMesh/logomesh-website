@@ -21,9 +21,9 @@ const SUMMARY_STATS: SummaryStat[] = [
     hint: "manual state rebuild per crash, gone",
   },
   {
-    label: "LLM calls in repro",
+    label: "LLM in evidence path",
     value: "0",
-    hint: "deterministic from frame locals",
+    hint: "audit artifact from frame locals",
   },
   {
     label: "Engine tests",
@@ -78,12 +78,11 @@ export function RealWorldHarnessSection() {
             ref={headingRef}
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Built for billing bugs.
+            Best for high-impact backend incidents.
           </h2>
           <p className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]">
-            Off-by-one on refunds. Negative quantities slipping past validation. Float rounding on tax. The pure-function
-            failures that dominate fintech crash reports. They do not need database state to reproduce. They need the
-            right function called with the right arguments, which is exactly what frame locals capture.
+            Best-fit cases include deterministic failures such as totals math, validation edge cases, and rounding faults
+            that can be replayed from captured runtime state.
           </p>
         </div>
 
@@ -145,7 +144,7 @@ export function RealWorldHarnessSection() {
             </div>
             <div className="px-4 py-4 sm:px-5">
               <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
-                Pure-function failures, the kind that show up in fintech crash reports.
+                Representative deterministic failures we can reliably replay from captured runtime state.
               </p>
               <ul className="mt-4 list-none space-y-2">
                 {BUG_PATTERNS.map((b) => (

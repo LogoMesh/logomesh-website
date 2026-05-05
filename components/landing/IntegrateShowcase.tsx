@@ -21,7 +21,7 @@ const SNIPPETS: Snippet[] = [
     label: "GitHub App",
     filename: "install.md",
     lines: [
-      "# Free beta · install on selected repos",
+      "# Beta access · install on selected repos",
       "",
       `# ${GITHUB_APP_URL}`,
       "",
@@ -158,7 +158,7 @@ export function IntegrateShowcase() {
               className="mt-6 max-w-[38rem] text-pretty marketing-lg text-[var(--color-muted)]"
             >
               Install once, then ship PRs as usual. We diff, sandbox, and only ping the thread when something fails with a
-              repro. Beta means things move. We&apos;ll keep this page straight with you.
+              repro. The product is in beta and focused on high-confidence reproduction workflows.
             </motion.p>
             <motion.p
               initial={reducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}

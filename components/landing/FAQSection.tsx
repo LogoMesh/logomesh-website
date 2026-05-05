@@ -8,52 +8,48 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "How is this different from other agents that try to reproduce crashes?",
-    a: "Other tools confuse \"the script errored\" with \"the bug reproduced.\" They run code, something breaks, and they call it a reproduction. LogoMesh uses the actual program state from the moment of the real crash: the exact variable values, the exact arguments. The reproduction is a replay, not a guess.",
+    q: "What does LogoMesh actually do?",
+    a: "LogoMesh turns a production crash report into a reproducible failing test and structured incident output.",
   },
   {
-    q: "Does the agent hallucinate the bug?",
-    a: "The repro path runs zero LLM calls. Synthesis is deterministic from the captured frame locals. The agent reads the reproduction directly from the crash, it does not narrate it.",
-  },
-  {
-    q: "What kind of crashes does this work on?",
-    a: "Pure-function failures: refund miscalculations, off-by-one on totals, float rounding on tax, validation bypasses. The kind of bugs that do not need database state to reproduce. Crashes that require a long-running session or production data are out of scope today.",
-  },
-  {
-    q: "What stops it from running on the wrong files?",
-    a: "You declare which paths are in scope in a YAML config: billing/, checkout/, pricing/, refund/, payments/. Everything else is ignored by design.",
-  },
-  {
-    q: "What languages do you support?",
-    a: "Python today. Other languages later.",
-  },
-  {
-    q: "How fast?",
-    a: "About 60 seconds from the CLI invocation to a failing pytest. The 30 to 40 minutes of manual reconstruction, gone.",
-  },
-  {
-    q: "What is the audit artifact?",
-    a: "A structured JSON evidence chain mapped to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs. PII and secrets redaction is not yet shipped, so the raw artifact is not safe to hand directly to an auditor today. It is audit-ready evidence, not a finished compliance pack.",
-  },
-  {
-    q: "Does the agent fix the bug?",
-    a: "Not yet. Today the agent reproduces the crash. Fix generation and a draft PR are next. When that ships, the agent will open a draft PR with the failing test, the passing test, and the audit trail attached. Nothing merges without your sign-off.",
-  },
-  {
-    q: "Does it run on every crash automatically?",
-    a: "Today the developer runs logomesh repro <sentry-url>. The Sentry webhook trigger that fires the agent automatically is in progress.",
-  },
-  {
-    q: "How do I install?",
-    a: "pip install logomesh, then logomesh repro <sentry-url>. There is also an MCP server for Claude Code integration.",
-  },
-  {
-    q: "What does it cost?",
-    a: "Free during beta: 3 reproductions a day, full features, no credit card. Team is $30 per user per month above that. Enterprise is custom (SSO, audit log, on-prem, SLA).",
+    q: "Do I need to understand AI to use it?",
+    a: "No. You paste a crash link, run one command, and get clear output your team can act on.",
   },
   {
     q: "Who is this for?",
-    a: "Backend engineers at fintech companies (payments, billing, checkout, pricing) using Python. Series A to B, 20 to 200 engineers. Not for general-purpose testing or non-Python codebases.",
+    a: "Backend engineering teams that want faster incident response and lower time-to-reproduce for production crashes.",
+  },
+  {
+    q: "How fast is it?",
+    a: "Typical runs complete in about a minute, replacing manual crash reconstruction steps.",
+  },
+  {
+    q: "Do we stay in control of changes?",
+    a: "Yes. LogoMesh helps generate reproducible evidence, but your team reviews and approves what happens next.",
+  },
+  {
+    q: "Is it secure?",
+    a: "LogoMesh runs in an isolated environment with scoped boundaries designed for production engineering workflows.",
+  },
+  {
+    q: "What do we get after each run?",
+    a: "You get a failing reproducible test plus a structured artifact for debugging and internal incident follow-up.",
+  },
+  {
+    q: "Does it fix the bug automatically?",
+    a: "No. Today LogoMesh reproduces crashes and generates evidence. Your team owns diagnosis and code changes.",
+  },
+  {
+    q: "Can this run automatically?",
+    a: "Today teams start runs manually from a crash link.",
+  },
+  {
+    q: "How do we start?",
+    a: "Install LogoMesh, point it at your crash reporting workflow, and run your first reproduction from an incident link.",
+  },
+  {
+    q: "What does it cost?",
+    a: "LogoMesh is in beta. Contact us for current team and enterprise access details.",
   },
 ];
 
@@ -83,7 +79,7 @@ export function FAQSection() {
             id="faq-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Questions engineers ask.
+            Common questions.
           </h2>
         </div>
 

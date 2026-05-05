@@ -58,7 +58,7 @@ export function CTASection() {
           data-reveal
           className="marketing-lg read-max relative mx-auto mb-10 max-w-[34rem] text-[var(--color-muted)] sm:mb-12 md:text-[1.125rem] md:leading-relaxed"
         >
-          Pip install. Paste a Sentry URL. Get a failing pytest in about 60 seconds.
+          Pip install. Paste a Sentry URL. Get a failing pytest from captured frame locals.
         </p>
 
         <div
