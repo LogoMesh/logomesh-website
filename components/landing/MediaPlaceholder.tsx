@@ -7,12 +7,14 @@ import { cn } from "@/lib/utils";
 type MediaKind = "video" | "gif" | "image";
 
 type Props = {
-  /** Short label — e.g. "Hero demo", "Install flow" */
+  /** Short label — e.g. "Product demo", "CLI output" */
   label: string;
-  /** Where to drop the file, e.g. "/public/marketing/hero.mp4" */
+  /** Where to drop the file, e.g. "/public/marketing/hero.mp4" — only shown when showAssetHints */
   dropPath: string;
-  /** Suggested capture (duration / dims) */
+  /** Suggested capture (duration / dims) — only shown when showAssetHints */
   spec?: string;
+  /** Set true to show drop path and spec (authoring). Default: public-friendly label only. */
+  showAssetHints?: boolean;
   /** Provide to render the real asset; leaves placeholder if empty */
   src?: string;
   /** video | gif | image — drives icon + copy */
@@ -39,6 +41,7 @@ export function MediaPlaceholder({
   label,
   dropPath,
   spec,
+  showAssetHints = false,
   src,
   kind = "video",
   aspectClassName = "aspect-[16/10]",
@@ -130,12 +133,15 @@ export function MediaPlaceholder({
         <p className="font-[family-name:var(--font-display)] text-[15px] font-semibold tracking-[-0.01em] text-[var(--color-ink)] sm:text-[17px]">
           {label}
         </p>
-        <div className="flex flex-col items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-[var(--color-dim)] sm:text-[11px]">
-          <span className="rounded-full border border-white/[0.08] bg-white/[0.02] px-2.5 py-0.5 text-[var(--color-muted)]">
-            Drop {KIND_LABEL[kind].toLowerCase()} → <span className="text-[var(--color-accent)]">{dropPath}</span>
-          </span>
-          {spec ? <span className="text-[var(--color-dim)]">{spec}</span> : null}
-        </div>
+        {showAssetHints ? (
+          <div className="flex flex-col items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-[var(--color-dim)] sm:text-[11px]">
+            <span className="rounded-full border border-white/[0.08] bg-white/[0.02] px-2.5 py-0.5 text-[var(--color-muted)]">
+              Drop {KIND_LABEL[kind].toLowerCase()} →{" "}
+              <span className="text-[var(--color-accent)]">{dropPath}</span>
+            </span>
+            {spec ? <span className="text-[var(--color-dim)]">{spec}</span> : null}
+          </div>
+        ) : null}
       </div>
     </figure>
   );

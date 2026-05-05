@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LogoMark } from "./LogoMark";
 
 const LINKS = [
-  { label: "Docs", href: "#" },
+  { label: "Docs", href: "/docs" },
   { label: "GitHub", href: "#" },
   { label: "Privacy", href: "#" },
   { label: "Terms", href: "#" },
@@ -55,7 +55,7 @@ export function Footer() {
           </nav>
 
           <p className="mx-auto max-w-[22rem] text-[15px] leading-relaxed text-[var(--color-muted)] sm:text-[16px] lg:mx-0 lg:max-w-[min(100%,17.5rem)] lg:justify-self-end lg:text-right">
-            Speaks up when something breaks. Quiet when it doesn&apos;t.
+            Reads the crash. Reproduces it. Hands you the test.
           </p>
         </div>
 
@@ -67,7 +67,7 @@ export function Footer() {
           <span className="font-semibold text-[var(--color-muted)]" aria-hidden>
             *
           </span>{" "}
-          Public beta · Python only · Things will move as we ship and learn.
+          Public beta · Python only · Free for 3 reproductions a day. Webhook trigger and fix generation in progress.
         </p>
       </div>
     </footer>

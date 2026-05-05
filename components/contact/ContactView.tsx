@@ -1,10 +1,7 @@
 import Link from "next/link";
-import { Mail } from "lucide-react";
-import { GithubIcon } from "@/components/icons/GithubIcon";
+import { Mail, TerminalSquare } from "lucide-react";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { CONTACT_EMAIL } from "@/lib/contact";
-
-const GITHUB_APP_URL = "https://github.com/apps/logomesh";
 
 export function ContactView() {
   return (
@@ -32,8 +29,8 @@ export function ContactView() {
             Contact
           </h1>
           <p className="read-max mt-4 max-w-[34rem] text-[16px] leading-relaxed text-[var(--color-muted)] sm:text-[17px] sm:leading-[1.65]">
-            Ask about the beta, your stack, or a partnership. Short form below: we kept
-            fields light on purpose so sending a note feels fast.
+            Talk to us about a pilot, audit-evidence requirements, or the agent webhook roadmap. Short form below: we
+            kept fields light on purpose so sending a note feels fast.
           </p>
         </div>
       </section>
@@ -83,35 +80,35 @@ export function ContactView() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    href={GITHUB_APP_URL}
+                  <Link
+                    href="/docs"
                     className="group flex gap-3 rounded-lg border border-transparent p-2 transition-colors hover:border-[var(--color-border-hi)] hover:bg-[var(--color-canvas-2)]"
                   >
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--color-muted)]/15 text-[var(--color-ink)]">
-                      <GithubIcon size={22} />
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--color-muted)]/15 text-[var(--color-accent)]">
+                      <TerminalSquare className="h-5 w-5" strokeWidth={1.6} aria-hidden />
                     </span>
                     <span className="min-w-0">
                       <span className="block text-[15px] font-semibold text-[var(--color-ink)]">
-                        GitHub App
+                        Docs
                       </span>
                       <span className="block text-[14px] text-[var(--color-muted)] group-hover:text-[var(--color-ink)]">
-                        Install or manage the integration
+                        Install the CLI and run your first repro
                       </span>
                     </span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
 
             <p className="text-[14px] leading-relaxed text-[var(--color-dim)]">
-              Want to see it in action?{" "}
+              Want to see what comes back?{" "}
               <Link
-                href="/#proof"
+                href="/#how-it-works"
                 className="font-medium text-[var(--color-accent)] underline-offset-2 hover:underline"
               >
-                See real PRs
+                See how it works
               </Link>{" "}
-              we caught bugs in.
+              from Sentry URL to failing pytest.
             </p>
           </aside>
         </div>

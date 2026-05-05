@@ -1,30 +1,30 @@
 "use client";
 
 import { useRef } from "react";
-import { Bell, FileCode, ShieldCheck, GitPullRequest } from "lucide-react";
+import { Cpu, ShieldCheck, GitPullRequest, ScrollText } from "lucide-react";
 import { AuroraField } from "./AuroraField";
 import { useFadeUp } from "@/lib/animations";
 
 const CARDS = [
   {
-    icon: Bell,
-    title: "Silent on clean PRs",
-    body: "If nothing broke, you hear nothing. No noise, no scores, no opinions.",
-  },
-  {
-    icon: FileCode,
-    title: "Every comment has a repro",
-    body: "The exact input, the exact line, the exact output. Not a guess — proof.",
+    icon: Cpu,
+    title: "Debug from facts, not guesswork",
+    body: "The same crash input produces the same failing test output, so teams can reproduce issues consistently.",
   },
   {
     icon: ShieldCheck,
-    title: "Two signals before we post",
-    body: "A finding has to pass two independent checks. Most tools stop at one.",
+    title: "Isolated by default",
+    body: "Runs in a hardened sandbox with clear boundaries for safer execution in production-minded workflows.",
   },
   {
     icon: GitPullRequest,
-    title: "A fix test, ready to paste",
-    body: "We include a test that fails on the bug and passes on the fix. Drop it straight into your suite.",
+    title: "You stay in control",
+    body: "LogoMesh reproduces incidents. Your team decides root cause, remediation, and every code change.",
+  },
+  {
+    icon: ScrollText,
+    title: "Clear incident trail",
+    body: "Every run includes a structured artifact for internal review, handoff, and post-incident documentation.",
   },
 ] as const;
 
@@ -47,10 +47,11 @@ export function ProductOverviewSection() {
             id="why-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Proof, not opinions.
+            Why teams choose LogoMesh
           </h2>
           <p className="marketing-lg mx-auto mt-5 max-w-[34rem] text-pretty text-[var(--color-muted)]">
-            We only comment when we can show the exact input that broke your code.
+            It gives incident responders a repeatable starting point in minutes, helping teams reduce time-to-repro and
+            move faster through debugging.
           </p>
         </div>
 

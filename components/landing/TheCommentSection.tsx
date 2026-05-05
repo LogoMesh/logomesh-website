@@ -7,16 +7,16 @@ import { useFadeUp } from "@/lib/animations";
 
 const CALLOUTS = [
   {
-    label: "What we tried",
-    body: "The exact input that broke your code.",
+    label: "The failing test",
+    body: "A pytest that reproduces the crash against your current code. Paste-ready.",
   },
   {
-    label: "What broke",
-    body: "The output, the file, and the line.",
+    label: "The frame locals",
+    body: "The exact arguments captured at the moment of failure. Synthesis is deterministic from those values.",
   },
   {
-    label: "A test for your fix",
-    body: "Paste-ready. Passes only when your fix is right.",
+    label: "The audit artifact",
+    body: "A JSON evidence chain mapped to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs.",
   },
 ] as const;
 
@@ -44,16 +44,17 @@ export function TheCommentSection() {
       <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-8 md:py-28 md:px-10">
         <div className="mx-auto max-w-[720px] text-center">
           <p className="landing-kicker">
-            The comment
+            What you get back
           </p>
           <h2
             id="the-comment-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            One comment per issue. That&apos;s it.
+            A failing pytest. The exact arguments. Audit-ready evidence.
           </h2>
           <p className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]">
-            No score. No &ldquo;looks good to me.&rdquo; No nits. If there&apos;s nothing to show, we don&apos;t post.
+            Paste a Sentry URL into the CLI. Get a test that fails on your current code with the inputs your users
+            actually hit.
           </p>
         </div>
 
@@ -69,8 +70,8 @@ export function TheCommentSection() {
             />
             <div className="relative">
               <MediaPlaceholder
-                label="The comment, as it lands on GitHub"
-                dropPath="/public/marketing/comment.png"
+                label="Failing pytest, frame locals, audit artifact"
+                dropPath="/public/marketing/repro-output.png"
                 spec="1600×1100 @2x · crop tight, redact tokens"
                 kind="image"
                 aspectClassName="aspect-[16/11]"

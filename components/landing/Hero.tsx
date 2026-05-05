@@ -2,17 +2,14 @@
 
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react";
-import { GithubIcon } from "@/components/icons/GithubIcon";
+import { ArrowRight, Award } from "lucide-react";
 import { SPRING_UI } from "@/lib/motion";
-import { HARNESS_STATS } from "@/lib/marketing-stats";
 import { MediaPlaceholder } from "./MediaPlaceholder";
 
 const PROOF_METRICS = [
-  { label: `${HARNESS_STATS.confirmedFindings} bugs caught` },
-  { label: `${HARNESS_STATS.reposRepresented} open source repos` },
-  { label: "Silent on clean PRs" },
+  { label: "Under-a-minute repro flow" },
+  { label: "Deterministic test output" },
+  { label: "No auto code changes" },
 ] as const;
 
 export function Hero() {
@@ -88,11 +85,11 @@ export function Hero() {
               className="mr-2 inline-block h-[7px] w-[7px] translate-y-[-2px] rounded-full bg-primary align-middle"
               style={{ boxShadow: "0 0 12px hsl(78 100% 50% / 0.6)" }}
             />
-            Free during beta
+            For engineering teams handling production incidents
           </p>
 
           <h1 className="animate-rise rise-d2 mt-6 font-sans text-balance text-[clamp(2.25rem,7.2vw,5rem)] font-semibold leading-[0.94] tracking-[-0.035em] text-foreground sm:leading-[0.92]">
-            Catch the{" "}
+            Reproduce production{" "}
             <span
               className="text-destructive"
               style={{
@@ -100,29 +97,28 @@ export function Hero() {
                   "0 0 36px hsl(0 84% 60% / 0.55), 0 0 80px hsl(0 84% 60% / 0.25)",
               }}
             >
-              bug
+              crashes
             </span>
             <br />
-            before it ships.
+            in about a minute.
           </h1>
 
           <div className="landing-hero-rule animate-rise rise-d2" aria-hidden />
 
           <p className="animate-rise rise-d3 read-max mt-7 text-[17px] leading-[1.68] text-muted-foreground sm:text-[19px] sm:leading-[1.65]">
-            Runs your Python PR, finds what breaks, and drops a comment with the exact input that caused it. Passing
-            PR? You won&apos;t hear from us.
+            Paste a crash link from your error tracker. LogoMesh generates a reproducible failing test and structured
+            incident artifact so your team can debug from evidence instead of guesswork.
           </p>
 
           <div className="animate-rise rise-d4 mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
             <motion.a
-              href="https://github.com/apps/logomesh"
+              href="/docs"
               className="glow-primary group relative inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-xl bg-primary px-6 text-[15px] font-semibold text-primary-foreground sm:text-[16px]"
               whileHover={{ y: -1, boxShadow: "var(--shadow-glow-hover)" }}
               whileTap={{ scale: 0.985 }}
               transition={SPRING_UI}
             >
-              <GithubIcon size={17} />
-              Install on GitHub
+              Read the docs
               <ArrowRight
                 size={16}
                 className="-mr-1 opacity-60 transition-transform group-hover:translate-x-0.5"
@@ -130,13 +126,13 @@ export function Hero() {
             </motion.a>
 
             <motion.a
-              href="#proof"
+              href="#how-it-works"
               className="group inline-flex min-h-[52px] items-center gap-2 rounded-xl border border-border-strong bg-card/40 px-5 text-[14px] font-medium text-foreground/90 backdrop-blur-sm hover:border-primary/50 hover:text-foreground sm:text-[14.5px]"
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.985 }}
               transition={SPRING_UI}
             >
-              See the proof
+              See how it works
             </motion.a>
           </div>
 
@@ -149,17 +145,15 @@ export function Hero() {
               transition={{ duration: 0.2 }}
               className="glass group inline-flex min-h-[38px] items-center gap-2 rounded-full px-3.5 py-1.5"
             >
-              <Image
-                src="/california_golden_bears.png"
-                alt="California Golden Bears"
-                width={18}
-                height={18}
-                className="h-4 w-4 shrink-0 object-contain opacity-90"
+              <Award
+                className="h-4 w-4 shrink-0 text-primary opacity-90"
+                strokeWidth={1.75}
+                aria-hidden
               />
-              <span className="font-sans text-[12.5px] uppercase tracking-[0.12em] text-muted-foreground sm:text-[13px]">
-                <span className="text-foreground/90">1st place</span>
-                <span className="mx-1.5 text-dim">·</span>
-                UC Berkeley AgentBeats
+              <span className="font-sans text-[12px] leading-snug text-muted-foreground sm:text-[13px]">
+                <span className="text-foreground/90">UC Berkeley AgentBeats</span>
+                <span className="mx-1.5 text-dim"> · </span>
+                <span className="text-foreground/90">1st place, testing track</span>
               </span>
             </motion.a>
 
@@ -195,7 +189,7 @@ export function Hero() {
             }}
           />
           <MediaPlaceholder
-            label="Hero demo — PR opens, check runs, comment lands"
+            label="Product demo"
             dropPath="/public/marketing/hero.mp4"
             spec="Screen Studio · ~12 s loop · 1800×1200 @2x"
             kind="video"

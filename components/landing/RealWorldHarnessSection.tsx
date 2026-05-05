@@ -1,45 +1,52 @@
 "use client";
 
 import { useRef } from "react";
-import { ExternalLink } from "lucide-react";
-import {
-  HARNESS_AGGREGATE,
-  HARNESS_SHOWCASE,
-  type HarnessShowcaseRow,
-} from "@/lib/harness-public.generated";
-import { AnimatedNumber } from "./AnimatedNumber";
 import { useSplitText, useFadeUp } from "@/lib/animations";
 
-function prUrl(row: HarnessShowcaseRow): string {
-  return `https://github.com/${row.repo}/pull/${row.prNumber}`;
-}
+type SummaryStat = {
+  label: string;
+  value: string;
+  hint: string;
+};
 
-const SUMMARY_STATS = [
+const SUMMARY_STATS: SummaryStat[] = [
   {
-    label: "Bugs caught",
-    value: HARNESS_AGGREGATE.confirmedFindingsSum,
-    suffix: "",
-    hint: "confirmed, reproducible",
+    label: "Repro time",
+    value: "60s",
+    hint: "from Sentry URL to a failing pytest",
   },
   {
-    label: "Pull requests",
-    value: HARNESS_AGGREGATE.uniquePullRequests,
-    suffix: "",
-    hint: "across open source Python",
+    label: "Reconstruction saved",
+    value: "30–40 min",
+    hint: "manual state rebuild per crash, gone",
   },
   {
-    label: "Repositories",
-    value: HARNESS_AGGREGATE.distinctRepos,
-    suffix: "",
-    hint: "real projects, not toys",
+    label: "LLM in evidence path",
+    value: "0",
+    hint: "audit artifact from frame locals",
   },
   {
-    label: "Comments posted",
-    value: HARNESS_AGGREGATE.fileRowsWithPrComment,
-    suffix: "",
-    hint: "only when we had proof",
+    label: "Engine tests",
+    value: "500",
+    hint: "unit tests passing, run on every change",
   },
-] as const;
+];
+
+const SCOPED_PATHS: { path: string; note: string }[] = [
+  { path: "billing/", note: "Subscription totals, proration, invoice math." },
+  { path: "checkout/", note: "Cart validation, quantity rules, currency conversion." },
+  { path: "pricing/", note: "Tier resolution, coupon stacking, tax calculation." },
+  { path: "refund/", note: "Refund amounts, partial refunds, off-by-one on totals." },
+  { path: "payments/", note: "Charge intent, idempotency, status reconciliation." },
+];
+
+const BUG_PATTERNS: string[] = [
+  "Off-by-one on a refund total",
+  "Negative quantity slipping past validation",
+  "Float rounding on a tax calculation",
+  "Wrong tier resolved for a coupon stack",
+  "Currency mismatch on a partial charge",
+];
 
 export function RealWorldHarnessSection() {
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -65,17 +72,17 @@ export function RealWorldHarnessSection() {
 
       <div className="relative mx-auto max-w-[1280px] px-5 py-16 sm:px-8 md:py-24 md:px-10">
         <div className="mx-auto max-w-[760px] text-center">
-          <p className="landing-kicker">Proof</p>
+          <p className="landing-kicker">Who it&apos;s for</p>
           <h2
             id="harness-heading"
             ref={headingRef}
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Real PRs. Real bugs. Real repos.
+            Best for high-impact backend incidents.
           </h2>
           <p className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]">
-            {HARNESS_AGGREGATE.confirmedFindingsSum} confirmed bugs across {HARNESS_AGGREGATE.uniquePullRequests} pull
-            requests in {HARNESS_AGGREGATE.distinctRepos} open source Python projects. Click any row to see the PR.
+            Best-fit cases include deterministic failures such as totals math, validation edge cases, and rounding faults
+            that can be replayed from captured runtime state.
           </p>
         </div>
 
@@ -93,112 +100,72 @@ export function RealWorldHarnessSection() {
                 {s.label}
               </p>
               <p className="landing-stat-num mt-2 font-[family-name:var(--font-display)] text-[clamp(1.75rem,4.5vw,2.5rem)] font-extrabold tabular-nums text-[var(--color-ink)]">
-                <AnimatedNumber value={s.value} />
-                {s.suffix}
+                {s.value}
               </p>
               <p className="mt-1.5 font-sans text-[13px] leading-snug text-[var(--color-muted)]">{s.hint}</p>
             </div>
           ))}
         </div>
 
-        <div className="mt-12 overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
-          <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
-            <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
-              A sample. One PR per repo.
-            </p>
-          </div>
-
-          <div className="hidden md:block">
-            <table className="w-full border-collapse text-left font-sans text-[14px]">
-              <thead>
-                <tr className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/40 font-mono text-[11px] uppercase tracking-[0.1em] text-[var(--color-dim)]">
-                  <th scope="col" className="px-4 py-3 font-semibold sm:px-5">
-                    Repository
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold sm:px-5">
-                    PR
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold sm:px-5">
-                    File
-                  </th>
-                  <th scope="col" className="px-4 py-3 text-right font-semibold sm:px-5">
-                    Confirmed
-                  </th>
-                  <th scope="col" className="px-4 py-3 font-semibold sm:px-5">
-                    <span className="sr-only">Open on GitHub</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {HARNESS_SHOWCASE.map((row, i) => (
-                  <tr
-                    key={`${row.repo}-${row.prNumber}`}
-                    title={row.title}
-                    className={
-                      i % 2 === 0
-                        ? "border-b border-[var(--color-border)]/80 bg-[var(--color-canvas-2)]/50"
-                        : "border-b border-[var(--color-border)]/80 bg-[var(--color-canvas-2)]/30"
-                    }
-                  >
-                    <td className="max-w-[14rem] px-4 py-3.5 font-mono text-[13px] text-[var(--color-ink)] sm:px-5">
-                      {row.repo}
-                    </td>
-                    <td className="px-4 py-3.5 text-[var(--color-muted)] sm:px-5">#{row.prNumber}</td>
-                    <td className="px-4 py-3.5 font-mono text-[13px] text-[hsl(var(--syntax-symbol))] sm:px-5">
-                      {row.fileBasename}
-                    </td>
-                    <td className="px-4 py-3.5 text-right font-semibold tabular-nums text-primary sm:px-5">
-                      {row.confirmedFindings}
-                    </td>
-                    <td className="px-4 py-3 sm:px-5">
-                      <a
-                        href={prUrl(row)}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="inline-flex items-center gap-1 font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-primary hover:underline"
-                      >
-                        View
-                        <ExternalLink size={13} className="opacity-80" aria-hidden />
-                      </a>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-
-          <ul className="divide-y divide-[var(--color-border)] md:hidden">
-            {HARNESS_SHOWCASE.map((row) => (
-              <li key={`${row.repo}-${row.prNumber}`} className="px-4 py-4 sm:px-5">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="min-w-0">
-                    <p className="font-mono text-[13px] font-semibold text-[var(--color-ink)]">{row.repo}</p>
-                    <p className="mt-1 text-[13px] text-[var(--color-muted)]">
-                      #{row.prNumber} ·{" "}
-                      <span className="font-mono text-[hsl(var(--syntax-symbol))]">{row.fileBasename}</span>
-                    </p>
-                    <p className="mt-2 line-clamp-2 text-[14px] leading-snug text-[var(--color-muted)]">{row.title}</p>
-                  </div>
-                  <div className="flex shrink-0 flex-col items-end gap-2">
-                    <span className="rounded-md bg-primary/15 px-2 py-1 font-mono text-[13px] font-bold tabular-nums text-primary">
-                      {row.confirmedFindings}
+        <div className="mt-12 grid gap-5 lg:grid-cols-2 lg:gap-6">
+          <article className="overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
+            <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
+                In scope
+              </p>
+            </div>
+            <div className="px-4 py-4 sm:px-5">
+              <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
+                LogoMesh only scans paths you declare in YAML. Everything else is ignored by design.
+              </p>
+              <ul className="mt-4 list-none divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
+                {SCOPED_PATHS.map((p) => (
+                  <li key={p.path} className="flex flex-col gap-1 py-2.5 sm:flex-row sm:items-baseline sm:gap-4">
+                    <span className="shrink-0 font-mono text-[13.5px] font-semibold text-[hsl(var(--syntax-symbol))] sm:w-[6.5rem]">
+                      {p.path}
                     </span>
-                    <a
-                      href={prUrl(row)}
-                      target="_blank"
-                      rel="noreferrer noopener"
-                      className="inline-flex items-center gap-1 font-mono text-[11px] font-semibold uppercase tracking-[0.1em] text-primary"
-                    >
-                      PR
-                      <ExternalLink size={12} aria-hidden />
-                    </a>
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
+                    <span className="text-[13.5px] leading-snug text-[var(--color-muted)] sm:text-[14px]">
+                      {p.note}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[13px] leading-relaxed text-[var(--color-dim)]">
+                Not for general-purpose testing, infrastructure incidents, or codebases outside the declared paths.
+              </p>
+            </div>
+          </article>
 
+          <article className="overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
+            <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
+                Crashes we reproduce
+              </p>
+            </div>
+            <div className="px-4 py-4 sm:px-5">
+              <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
+                Representative deterministic failures we can reliably replay from captured runtime state.
+              </p>
+              <ul className="mt-4 list-none space-y-2">
+                {BUG_PATTERNS.map((b) => (
+                  <li
+                    key={b}
+                    className="flex items-start gap-3 rounded-md border border-[var(--color-border)] bg-[var(--color-canvas)]/40 px-3 py-2.5"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-accent)]"
+                    />
+                    <span className="text-[14px] leading-snug text-[var(--color-ink)]">{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[13px] leading-relaxed text-[var(--color-dim)]">
+                If a crash needs database state or a long-running session to reproduce, it is out of scope today.
+              </p>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
   );

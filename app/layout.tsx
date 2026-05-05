@@ -27,16 +27,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "LogoMesh · Ship Python PRs with proof, not noise",
+  title: "LogoMesh · Reproduce production crashes in 60 seconds",
   description:
-    "Merge with confidence. LogoMesh runs your changed Python in a sandbox and only comments when it can show a reproducible bug. Free GitHub App for public repos in beta.",
+    "When your error monitor fires, LogoMesh reads the program state at the moment of failure and writes a failing pytest that reproduces the crash. The audit artifact is deterministic from frame locals — no LLM in the evidence path. Python. Free during beta.",
   icons: {
     apple: "/branding/logomesh-github-app-256.png",
   },
   openGraph: {
     title: "LogoMesh",
     description:
-      "Pre-merge checks for Python PRs. Run the code you changed and post only when there is proof. Free in beta.",
+      "Reads the crash. Reproduces it from frame locals. Hands you a failing pytest. Built for Python fintech.",
     type: "website",
   },
 };

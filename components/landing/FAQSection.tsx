@@ -8,48 +8,48 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "How is this different from CodeRabbit, Copilot, or Sourcery?",
-    a: "Those tools leave opinions on every PR. LogoMesh only posts when it can show a broken input and the output it produced. Silence means clean.",
+    q: "What does LogoMesh actually do?",
+    a: "LogoMesh turns a production crash report into a reproducible failing test and structured incident output.",
   },
   {
-    q: "Will this spam my PRs?",
-    a: "No. Clean PR, no comment. Ever.",
+    q: "Do I need to understand AI to use it?",
+    a: "No. You paste a crash link, run one command, and get clear output your team can act on.",
   },
   {
-    q: "What about false positives?",
-    a: "We only post when the failure reproduces. If we can't reproduce it, you don't see it.",
+    q: "Who is this for?",
+    a: "Backend engineering teams that want faster incident response and lower time-to-reproduce for production crashes.",
   },
   {
-    q: "How do you know the fix test actually catches the bug?",
-    a: "Every fix test is mutation-checked. We mutate the code around the finding and confirm the test fails on the broken version. If it still passes on the bug, we throw it out.",
+    q: "How fast is it?",
+    a: "Typical runs complete in about a minute, replacing manual crash reconstruction steps.",
   },
   {
-    q: "What stops noisy or borderline findings from reaching the PR?",
-    a: "Every finding has to clear at least two independent signals before we post: the repro, the regression check, and the mutation check. One signal is never enough.",
+    q: "Do we stay in control of changes?",
+    a: "Yes. LogoMesh helps generate reproducible evidence, but your team reviews and approves what happens next.",
   },
   {
-    q: "Do you suggest fixes, or only point out problems?",
-    a: "Both. When we can, we attach a suggested patch to the finding. You accept it, edit it, or ignore it — same as any GitHub suggestion.",
+    q: "Is it secure?",
+    a: "LogoMesh runs in an isolated environment with scoped boundaries designed for production engineering workflows.",
   },
   {
-    q: "Will I know what else my change affects?",
-    a: "Yes. We surface the blast radius — which callers touch the broken path — so you know what else to review before merge.",
+    q: "What do we get after each run?",
+    a: "You get a failing reproducible test plus a structured artifact for debugging and internal incident follow-up.",
   },
   {
-    q: "What languages do you support?",
-    a: "Python today. Other languages later.",
+    q: "Does it fix the bug automatically?",
+    a: "No. Today LogoMesh reproduces crashes and generates evidence. Your team owns diagnosis and code changes.",
   },
   {
-    q: "Private repos?",
-    a: "On the roadmap. Free on public repos during beta.",
+    q: "Can this run automatically?",
+    a: "Today teams start runs manually from a crash link.",
+  },
+  {
+    q: "How do we start?",
+    a: "Install LogoMesh, point it at your crash reporting workflow, and run your first reproduction from an incident link.",
   },
   {
     q: "What does it cost?",
-    a: "Free during beta.",
-  },
-  {
-    q: "How do I start?",
-    a: "Install the GitHub App on a repo, then open a Python PR. That's it.",
+    a: "LogoMesh is in beta. Contact us for current team and enterprise access details.",
   },
 ];
 
@@ -79,7 +79,7 @@ export function FAQSection() {
             id="faq-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Questions we get.
+            Common questions.
           </h2>
         </div>
 
