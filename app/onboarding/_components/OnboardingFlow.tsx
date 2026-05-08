@@ -69,7 +69,11 @@ export function OnboardingFlow() {
 
   const handleInstallCreated = useCallback(
     (data: CreateInstallationResponse) => {
-      save(data.id);
+      // Persist the client_secret too — every subsequent /api/installations
+      // call needs it as a Bearer token (api.ts auto-attaches from
+      // localStorage). The secret is shown to the user once at creation
+      // and isn't recoverable after that.
+      save(data.id, data.client_secret);
       setInstall(data);
     },
     [save],

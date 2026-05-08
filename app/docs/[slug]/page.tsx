@@ -5,6 +5,11 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { GithubPatVsAppContent } from "./_content/GithubPatVsAppContent";
 import { ComplianceContent } from "./_content/ComplianceContent";
+import { QuickStartContent } from "./_content/QuickStartContent";
+import { HowItWorksContent } from "./_content/HowItWorksContent";
+import { ArtifactContent } from "./_content/ArtifactContent";
+import { TroubleshootingContent } from "./_content/TroubleshootingContent";
+import { FAQContent } from "./_content/FAQContent";
 
 type DocEntry = {
   title: string;
@@ -13,6 +18,34 @@ type DocEntry = {
 };
 
 const DOCS: Record<string, DocEntry> = {
+  quickstart: {
+    title: "Quick start",
+    description:
+      "Install LogoMesh, set your Sentry token, and run your first crash reproduction in under 4 minutes.",
+    Body: QuickStartContent,
+  },
+  "how-it-works": {
+    title: "How it works",
+    description:
+      "The 8-stage pipeline: from Sentry URL to a deterministic failing pytest in an isolated sandbox.",
+    Body: HowItWorksContent,
+  },
+  artifact: {
+    title: "Sealed artifact",
+    description:
+      "What the compliance JSON envelope contains, what llm_in_evidence_path: false means, and how an auditor verifies it.",
+    Body: ArtifactContent,
+  },
+  troubleshooting: {
+    title: "Troubleshooting",
+    description: "Common failure modes and how to fix them.",
+    Body: TroubleshootingContent,
+  },
+  faq: {
+    title: "FAQ",
+    description: "Top questions from pilots.",
+    Body: FAQContent,
+  },
   "github-pat-vs-app": {
     title: "GitHub PAT vs. App",
     description:

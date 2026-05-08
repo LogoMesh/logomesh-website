@@ -15,13 +15,20 @@ export async function proxy(
     body = await req.text();
   }
 
+  // Forward auth + a few caller-provided headers. We deliberately do
+  // NOT forward cookies — the upstream Python backend uses bearer-token
+  // auth and we don't want browser cookies riding along.
+  const fwd: Record<string, string> = {
+    "Content-Type": req.headers.get("content-type") ?? "application/json",
+  };
+  const auth = req.headers.get("authorization");
+  if (auth) fwd["Authorization"] = auth;
+
   let upstream: Response;
   try {
     upstream = await fetch(url, {
       method: req.method,
-      headers: {
-        "Content-Type": req.headers.get("content-type") ?? "application/json",
-      },
+      headers: fwd,
       body,
       cache: "no-store",
     });
