@@ -74,7 +74,7 @@ function scrollToHash(href: string) {
   if (!id) return;
   const el = document.getElementById(id);
   if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  el.scrollIntoView({ behavior: "auto", block: "start" });
   history.replaceState(null, "", `#${id}`);
 }
 
@@ -94,7 +94,7 @@ export function Nav() {
   const [inHomeZone, setInHomeZone] = useState(true);
   const inHomeZoneRef = useRef(true);
   const dockedRef = useRef(false);
-  /** While true, scroll handler must not treat mid smooth scroll positions as “home” (fixes Examples highlight). */
+  /** Guards active-state updates during programmatic section navigation. */
   const programmaticSectionNavRef = useRef(false);
   const programmaticNavClearTimerRef = useRef<number | null>(null);
 
@@ -196,7 +196,7 @@ export function Nav() {
       programmaticNavClearTimerRef.current = null;
     }
     programmaticSectionNavRef.current = false;
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "auto" });
     history.replaceState(null, "", window.location.pathname);
     inHomeZoneRef.current = true;
     setInHomeZone(true);

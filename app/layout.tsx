@@ -3,7 +3,6 @@ import { DM_Sans, JetBrains_Mono } from "next/font/google";
 import Script from "next/script";
 import { ScrollReset } from "@/components/ScrollReset";
 import { VantaScripts } from "@/components/VantaScripts";
-import { LenisProvider } from "@/lib/lenis";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -58,7 +57,7 @@ export default function RootLayout({
         </Script>
         <VantaScripts />
         <ScrollReset />
-        <LenisProvider>{children}</LenisProvider>
+        {children}
       </body>
     </html>
   );
