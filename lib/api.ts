@@ -88,3 +88,21 @@ export const api = {
   artifactUrl: (id: string, runId: string) =>
     `/api/installations/${id}/runs/${runId}/artifact`,
 };
+
+/** Convert any thrown error into a sentence safe to show in a banner. */
+export function humanError(e: unknown): string {
+  if (e instanceof ApiClientError) {
+    if (e.status === 0) {
+      return "Can't reach the LogoMesh backend. Is your network blocking it?";
+    }
+    if (e.status >= 500) {
+      return (
+        e.detail ?? "Something went wrong on our end. We've been notified."
+      );
+    }
+    if (e.detail) return e.detail;
+    return `Request failed (${e.code}).`;
+  }
+  if (e instanceof Error && e.message) return e.message;
+  return "An unexpected error occurred.";
+}
