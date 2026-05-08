@@ -3,6 +3,7 @@ import type {
   InstallationSummary,
   RunsListResponse,
 } from "./types";
+import { readInstallationSecret } from "./use-installation";
 
 export class ApiClientError extends Error {
   constructor(
@@ -16,12 +17,20 @@ export class ApiClientError extends Error {
 
 async function request<T>(
   path: string,
-  init?: RequestInit & { json?: unknown },
+  init?: RequestInit & { json?: unknown; auth?: boolean },
 ): Promise<T> {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     ...((init?.headers as Record<string, string>) ?? {}),
   };
+  // Auto-attach Bearer auth for endpoints scoped to a specific install.
+  // POST /api/installations (create) is anonymous so callers pass auth: false.
+  if (init?.auth !== false) {
+    const secret = readInstallationSecret();
+    if (secret && !headers["Authorization"]) {
+      headers["Authorization"] = `Bearer ${secret}`;
+    }
+  }
   const body = init?.json !== undefined ? JSON.stringify(init.json) : init?.body;
 
   let res: Response;
@@ -60,6 +69,7 @@ export const api = {
     request<CreateInstallationResponse>("/api/installations", {
       method: "POST",
       json: {},
+      auth: false,
     }),
   getInstallation: (id: string) =>
     request<InstallationSummary>(`/api/installations/${id}`),
