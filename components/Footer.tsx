@@ -59,6 +59,24 @@ export function Footer() {
           </p>
         </div>
 
+        <div className="mt-3 flex flex-col items-center gap-2.5 border-t border-[var(--color-border)] pt-3 text-center sm:mt-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-5 sm:gap-y-2 sm:pt-4">
+          <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
+            Pilot resources
+          </span>
+          <Link
+            href="/docs/github-pat-vs-app"
+            className="font-[family-name:var(--font-mono)] text-[12.5px] text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors"
+          >
+            GitHub PAT vs. App
+          </Link>
+          <Link
+            href="/docs/compliance"
+            className="font-[family-name:var(--font-mono)] text-[12.5px] text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors"
+          >
+            Compliance contract
+          </Link>
+        </div>
+
         <p
           id="beta-python-footnote"
           tabIndex={-1}

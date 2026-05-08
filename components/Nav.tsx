@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useInstallationId } from "@/lib/use-installation";
 import { LogoMark } from "./LogoMark";
 
 const CONTACT_HREF = "/contact";
@@ -81,6 +82,9 @@ export function Nav() {
   const pathname = usePathname();
   const navRef = useRef<HTMLElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
+
+  const { id: installationId, hydrated: installationHydrated } =
+    useInstallationId();
 
   const [docked, setDocked] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
@@ -319,6 +323,26 @@ export function Nav() {
       </ul>
 
       <div className="flex items-center gap-3 shrink-0">
+        {installationHydrated && installationId ? (
+          <Link
+            href={`/dashboard/${installationId}`}
+            className="hidden md:inline-flex items-center min-h-[40px] px-1 font-[family-name:var(--font-mono)] text-[12.5px] font-bold uppercase tracking-wide text-[var(--color-muted)] hover:text-[var(--color-ink)] transition-colors"
+          >
+            Dashboard
+          </Link>
+        ) : null}
+        <Link
+          href="/onboarding"
+          className={cn(
+            "inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px]",
+            "bg-[var(--color-accent)] text-black rounded-lg",
+            "font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px] font-bold uppercase tracking-wide",
+            "transition-opacity duration-150 hover:opacity-90 active:opacity-95",
+          )}
+        >
+          <span className="hidden sm:inline">Get started</span>
+          <span className="sm:hidden">Start</span>
+        </Link>
         <a
           href="/docs"
           className={cn(
