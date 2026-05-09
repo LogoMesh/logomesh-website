@@ -9,47 +9,47 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What does LogoMesh actually do?",
-    a: "LogoMesh turns a production crash report into a reproducible failing test and structured incident output.",
-  },
-  {
-    q: "Do I need to understand AI to use it?",
-    a: "No. You paste a crash link, run one command, and get clear output your team can act on.",
+    a: "When a Python crash hits Sentry, LogoMesh reads the program state at the moment of failure and writes a failing pytest that reproduces the crash. It then opens a draft GitHub PR with the test and a sealed compliance artifact — all within about 60 seconds, with zero LLM in the evidence path.",
   },
   {
     q: "Who is this for?",
-    a: "Backend engineering teams that want faster incident response and lower time-to-reproduce for production crashes.",
+    a: "Python backend engineers and SREs at fintechs who use Sentry daily. If your team is in the middle of SOC2 Type II or PCI audit prep and your reviewer flagged 'evidence of post-incident fix verification' as a gap — we built this for you.",
   },
   {
     q: "How fast is it?",
-    a: "Typical runs complete in about a minute, replacing manual crash reconstruction steps.",
+    a: "Setup is 4 minutes with the guided wizard. After that, every matching crash reproduces end-to-end in about 60 seconds with no human in the loop.",
+  },
+  {
+    q: "Do I have to change my codebase?",
+    a: "No. LogoMesh connects to Sentry via a webhook and to GitHub via a personal access token. You don't install an SDK, don't wrap your code, don't change your error handling.",
   },
   {
     q: "Do we stay in control of changes?",
-    a: "Yes. LogoMesh helps generate reproducible evidence, but your team reviews and approves what happens next.",
+    a: "Always. LogoMesh opens a draft PR with the failing test — it never merges, never modifies main, never auto-fixes. Your team decides what the fix looks like.",
   },
   {
     q: "Is it secure?",
-    a: "LogoMesh runs in an isolated environment with scoped boundaries designed for production engineering workflows.",
+    a: "Every repro runs in an airgapped Docker sandbox (unprivileged user, memory + PID caps, no network). We never pull from your production database. PII is redacted before anything reaches an LLM or the audit seal.",
   },
   {
-    q: "What do we get after each run?",
-    a: "You get a failing reproducible test plus a structured artifact for debugging and internal incident follow-up.",
+    q: "What does the compliance artifact contain?",
+    a: "A sealed JSON envelope with the failing test, the redacted frame locals, the hash of the test bytes, a `llm_in_evidence_path: false` flag, and control mappings to PCI DSS 12.10.5 and SOC2 CC7.3 / CC7.4.",
   },
   {
     q: "Does it fix the bug automatically?",
-    a: "No. Today LogoMesh reproduces crashes and generates evidence. Your team owns diagnosis and code changes.",
+    a: "No. Today LogoMesh reproduces crashes and generates evidence. Your team owns diagnosis and the code change. Auto-remediation is on the roadmap but will always require explicit approval.",
   },
   {
-    q: "Can this run automatically?",
-    a: "Today teams start runs manually from a crash link.",
+    q: "What if a crash can't be reproduced?",
+    a: "We flag it as `needs_human_review` with a structured reason (frame locals insufficient, depends on DB state, race condition, etc.). We never fake a green.",
   },
   {
     q: "How do we start?",
-    a: "Install LogoMesh, point it at your crash reporting workflow, and run your first reproduction from an incident link.",
+    a: "Click 'Start the wizard' in the nav. In 4 minutes you'll have a Sentry webhook configured, a GitHub PAT connected, and the first test event flowing through the dashboard.",
   },
   {
     q: "What does it cost?",
-    a: "LogoMesh is in beta. Contact us for current team and enterprise access details.",
+    a: "Free during public beta — 3 reproductions per day, no credit card. Pilot tier is $0 for design partners (we ask for written feedback in exchange). Enterprise with dedicated VPC deployment is custom. See the pricing page for the full matrix.",
   },
 ];
 

@@ -1,22 +1,22 @@
 "use client";
 
 import { useRef } from "react";
-import { MediaPlaceholder } from "./MediaPlaceholder";
+import { ArtifactShowcase } from "./ArtifactShowcase";
 import { AuroraField } from "./AuroraField";
 import { useFadeUp } from "@/lib/animations";
 
 const CALLOUTS = [
   {
     label: "The failing test",
-    body: "A pytest that reproduces the crash against your current code. Paste-ready.",
+    body: "A pytest that reproduces the crash against your current code. Commits straight to a draft GitHub PR.",
   },
   {
     label: "The frame locals",
-    body: "The exact arguments captured at the moment of failure. Synthesis is deterministic from those values.",
+    body: "The exact arguments captured at the moment of failure. Synthesis is deterministic from those values — PII redacted before anything touches an LLM.",
   },
   {
     label: "The audit artifact",
-    body: "A JSON evidence chain mapped to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs.",
+    body: "A JSON evidence chain mapped to PCI DSS 12.10.5 and SOC2 CC7.3 + CC7.4 — the post-incident response controls your auditor actually asks about.",
   },
 ] as const;
 
@@ -53,12 +53,12 @@ export function TheCommentSection() {
             A failing pytest. The exact arguments. Audit-ready evidence.
           </h2>
           <p className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]">
-            Paste a Sentry URL into the CLI. Get a test that fails on your current code with the inputs your users
-            actually hit.
+            Your Sentry webhook fires; 60 seconds later you have a test that fails on your current code with the inputs
+            your users actually hit, a draft PR against your repo, and a sealed artifact for your compliance reviewer.
           </p>
         </div>
 
-        <div className="mx-auto mt-14 grid max-w-[1080px] gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-14">
+        <div className="mx-auto mt-14 grid max-w-[1080px] gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-14">
           <div className="relative order-2 lg:order-1">
             <div
               aria-hidden
@@ -69,17 +69,11 @@ export function TheCommentSection() {
               }}
             />
             <div className="relative">
-              <MediaPlaceholder
-                label="Failing pytest, frame locals, audit artifact"
-                dropPath="/public/marketing/repro-output.png"
-                spec="1600×1100 @2x · crop tight, redact tokens"
-                kind="image"
-                aspectClassName="aspect-[16/11]"
-              />
+              <ArtifactShowcase />
             </div>
           </div>
 
-          <ol className="order-1 list-none space-y-4 lg:order-2">
+          <ol className="order-1 list-none space-y-4 lg:order-2 lg:sticky lg:top-28">
             {CALLOUTS.map((item) => (
               <li
                 key={item.label}

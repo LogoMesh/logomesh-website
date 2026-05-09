@@ -28,8 +28,8 @@ const STEPS: {
 }[] = [
   {
     n: "01",
-    title: "A production crash is detected",
-    body: "Your error monitoring tool catches a real customer-facing crash and saves the details needed to replay it.",
+    title: "A production crash fires in Sentry",
+    body: "Your error monitor captures the failure — stack trace, innermost frame, and the local variables at the moment of the crash.",
     icon: Bell,
     graphicSrc: LANDING_GRAPHICS.how1,
     graphicTitle:
@@ -38,18 +38,18 @@ const STEPS: {
   },
   {
     n: "02",
-    title: "You start one LogoMesh run",
-    body: "Paste the crash link into the LogoMesh CLI to start the reproduction flow.",
+    title: "Sentry calls your LogoMesh webhook",
+    body: "A custom Sentry integration fires `POST /webhooks/sentry/<installation_id>`. LogoMesh ACKs in under 50ms and starts reproducing — no manual trigger, no CLI to install.",
     icon: TerminalSquare,
     graphicSrc: LANDING_GRAPHICS.how2,
     graphicTitle:
-      "Screenshot: terminal running `logomesh repro <sentry-url>` with progress lines.",
-    graphicExport: "~1200×800 @2x. Crop tight to the CLI invocation.",
+      "Screenshot: Sentry custom integration settings with the LogoMesh webhook URL configured.",
+    graphicExport: "~1200×800 @2x. Crop tight to the webhook URL field.",
   },
   {
     n: "03",
-    title: "LogoMesh creates a failing test",
-    body: "You get a test that reliably reproduces the issue so your team can work from facts, not guesses.",
+    title: "LogoMesh synthesizes a failing pytest",
+    body: "Frame locals become a deterministic test that reproduces the crash against your current code. The synthesizer is a pure function — no LLM touches the evidence path.",
     icon: FileCode,
     graphicSrc: LANDING_GRAPHICS.how3,
     graphicTitle:
@@ -58,13 +58,13 @@ const STEPS: {
   },
   {
     n: "04",
-    title: "You get a clear record of the incident",
-    body: "The run includes both the test output and a structured artifact your team can use for reporting and follow-up.",
+    title: "You get a sealed record of the incident",
+    body: "A draft GitHub PR with the failing test, a Sentry comment with the verdict, and an audit artifact mapped to SOC2 CC7.3 / CC7.4 + PCI DSS 12.10.5 — everything your reviewer needs.",
     icon: FileBadge,
     graphicSrc: LANDING_GRAPHICS.how4,
     graphicTitle:
-      "Screenshot: pytest output showing the failure plus the JSON audit artifact.",
-    graphicExport: "~1200×800 @2x. Show test failure + artifact side by side.",
+      "Screenshot: draft PR with the failing test plus the JSON audit artifact.",
+    graphicExport: "~1200×800 @2x. Show PR + artifact side by side.",
   },
 ];
 
@@ -76,25 +76,25 @@ const SECURITY_PILLARS: {
   {
     icon: Shield,
     title: "Hardened sandbox",
-    body: "Airgapped. Nobody-user. Memory and PID limits for safer, isolated execution.",
+    body: "Airgapped Docker container, unprivileged user, memory and PID limits. Refuses to run in production without Docker isolation.",
   },
   {
     icon: KeyRound,
-    title: "Scoped to declared paths",
+    title: "Per-installation secrets",
     body:
-      "You list which paths get scanned in YAML: billing/, checkout/, pricing/, refund/, payments/. Everything else is ignored by design.",
+      "Each install has its own Sentry HMAC secret, GitHub PAT, and Slack webhook, encrypted at rest in Supabase and rotatable from the dashboard.",
   },
   {
     icon: Lock,
     title: "No state from your DB",
     body:
-      "The repro path reads frame locals captured at the crash. We do not pull from your production database.",
+      "The repro path reads frame locals captured at the crash. LogoMesh never connects to your production database.",
   },
   {
     icon: Scale,
-    title: "Engineering artifact output",
+    title: "PII redacted before every LLM call",
     body:
-      "Artifacts are intended for engineering workflows. Handle them with your normal internal data controls and review process.",
+      "PAN (Luhn-validated), SSN, email, JWTs, and 15+ API-key prefixes are scrubbed before anything reaches an LLM or the audit seal.",
   },
 ];
 
@@ -203,10 +203,12 @@ export function HowItWorksSection() {
                 Today
               </p>
               <p className="mt-1.5 text-[14.5px] leading-relaxed text-[var(--color-muted)] sm:text-[15px]">
-                <span className="text-[var(--color-ink)]">Manual run from a crash link.</span> A developer starts the run
-                and gets reproducible output quickly.{" "}
-                <span className="text-[var(--color-ink)]">Scope is focused.</span> LogoMesh is strongest on deterministic
-                backend failures that can be replayed from captured runtime state.
+                <span className="text-[var(--color-ink)]">Sentry-webhook-triggered.</span> The 4-minute wizard connects
+                Sentry, GitHub, and optionally Slack — after that, every matching crash runs end-to-end without a human
+                in the loop.{" "}
+                <span className="text-[var(--color-ink)]">Scope is deliberately narrow.</span> LogoMesh is strongest on
+                deterministic backend failures where frame locals capture the whole story. Race conditions and
+                distributed transactions are out of scope today.
               </p>
             </div>
           </div>
@@ -234,7 +236,7 @@ export function HowItWorksSection() {
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:mt-12 xl:grid-cols-4 xl:gap-6">
-            {SECURITY_PILLARS.map(({ title: pillarTitle, body, icon: PillarIcon }, i) => (
+            {SECURITY_PILLARS.map(({ title: pillarTitle, body, icon: PillarIcon }) => (
               <article
                 key={pillarTitle}
                 className="flex flex-col rounded-2xl border border-[var(--color-border)] bg-[var(--color-canvas-2)]/90 p-5 sm:p-6"

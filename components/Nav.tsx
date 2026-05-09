@@ -14,6 +14,7 @@ import { useInstallationId } from "@/lib/use-installation";
 import { LogoMark } from "./LogoMark";
 
 const CONTACT_HREF = "/contact";
+const PRICING_HREF = "/pricing";
 
 /** Document order: every anchored section on `/` used for scroll highlighting. */
 const SCROLL_SECTION_IDS = [
@@ -35,11 +36,6 @@ const SECTION_NAV = [
     label: "How it works",
     hrefId: "how-it-works",
     activeWhen: ["how-it-works"],
-  },
-  {
-    label: "Get started",
-    hrefId: "cta",
-    activeWhen: ["faq", "cta"],
   },
 ] as const;
 
@@ -309,6 +305,19 @@ export function Nav() {
         })}
         <li>
           <Link
+            href={PRICING_HREF}
+            className={cn(
+              "inline-block text-[15px] py-1 border-b-2 transition-colors duration-300 ease-out",
+              pathname === PRICING_HREF
+                ? "text-[var(--color-ink)] border-[var(--color-accent)]"
+                : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
+            )}
+          >
+            Pricing
+          </Link>
+        </li>
+        <li>
+          <Link
             href={CONTACT_HREF}
             className={cn(
               "inline-block text-[15px] py-1 border-b-2 transition-colors duration-300 ease-out",
@@ -343,18 +352,18 @@ export function Nav() {
           <span className="hidden sm:inline">Get started</span>
           <span className="sm:hidden">Start</span>
         </Link>
-        <a
+        <Link
           href="/docs"
           className={cn(
-            "inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px]",
-            "bg-[var(--color-accent)] text-black rounded-lg",
-            "font-[family-name:var(--font-mono)] text-[12px] sm:text-[13px] font-bold uppercase tracking-wide",
-            "transition-opacity duration-150 hover:opacity-90 active:opacity-95",
+            "hidden sm:inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px]",
+            "rounded-lg border border-[var(--color-border-hi)] bg-transparent",
+            "font-[family-name:var(--font-mono)] text-[12.5px] font-bold uppercase tracking-wide",
+            "text-[var(--color-muted)] hover:text-[var(--color-ink)] hover:border-[var(--color-accent)]/55",
+            "transition-colors duration-150",
           )}
         >
-          <span className="hidden sm:inline">Read the docs</span>
-          <span className="sm:hidden">Docs</span>
-        </a>
+          Docs
+        </Link>
 
         <button
           type="button"
@@ -446,6 +455,40 @@ export function Nav() {
               </li>
             );
           })}
+          <li>
+            <Link
+              href={PRICING_HREF}
+              onClick={() => setMenuOpen(false)}
+              className={cn(
+                "flex items-center min-h-[44px] py-2 text-[16px] transition-colors",
+                pathname === PRICING_HREF
+                  ? "text-[var(--color-ink)]"
+                  : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
+              )}
+            >
+              {pathname === PRICING_HREF && (
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mr-2 shrink-0" />
+              )}
+              Pricing
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/docs"
+              onClick={() => setMenuOpen(false)}
+              className={cn(
+                "flex items-center min-h-[44px] py-2 text-[16px] transition-colors",
+                pathname.startsWith("/docs")
+                  ? "text-[var(--color-ink)]"
+                  : "text-[var(--color-muted)] hover:text-[var(--color-ink)]",
+              )}
+            >
+              {pathname.startsWith("/docs") && (
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mr-2 shrink-0" />
+              )}
+              Docs
+            </Link>
+          </li>
           <li>
             <Link
               href={CONTACT_HREF}

@@ -48,6 +48,13 @@ const BUG_PATTERNS: string[] = [
   "Currency mismatch on a partial charge",
 ];
 
+const OUT_OF_SCOPE: string[] = [
+  "Race conditions across async tasks",
+  "Distributed transactions that span services",
+  "Bugs requiring a live database row to reproduce",
+  "Failures from external API timeouts or rate limits",
+];
+
 export function RealWorldHarnessSection() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   useSplitText(headingRef);
@@ -111,12 +118,12 @@ export function RealWorldHarnessSection() {
           <article className="overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
             <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
-                In scope
+                Common crash paths
               </p>
             </div>
             <div className="px-4 py-4 sm:px-5">
               <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
-                LogoMesh only scans paths you declare in YAML. Everything else is ignored by design.
+                Crashes in Python business-logic modules — where the bad input is in frame locals — reproduce reliably.
               </p>
               <ul className="mt-4 list-none divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
                 {SCOPED_PATHS.map((p) => (
@@ -130,22 +137,6 @@ export function RealWorldHarnessSection() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-[13px] leading-relaxed text-[var(--color-dim)]">
-                Not for general-purpose testing, infrastructure incidents, or codebases outside the declared paths.
-              </p>
-            </div>
-          </article>
-
-          <article className="overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
-            <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
-                Crashes we reproduce
-              </p>
-            </div>
-            <div className="px-4 py-4 sm:px-5">
-              <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
-                Representative deterministic failures we can reliably replay from captured runtime state.
-              </p>
               <ul className="mt-4 list-none space-y-2">
                 {BUG_PATTERNS.map((b) => (
                   <li
@@ -160,8 +151,37 @@ export function RealWorldHarnessSection() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </article>
+
+          <article className="overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
+            <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
+                Honest limits
+              </p>
+            </div>
+            <div className="px-4 py-4 sm:px-5">
+              <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
+                When the bug lives outside the frame — shared state, timing, external systems — we say so instead of
+                faking a repro.
+              </p>
+              <ul className="mt-4 list-none space-y-2">
+                {OUT_OF_SCOPE.map((b) => (
+                  <li
+                    key={b}
+                    className="flex items-start gap-3 rounded-md border border-[var(--color-border)] bg-[var(--color-canvas)]/40 px-3 py-2.5"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-border-hi)]"
+                    />
+                    <span className="text-[14px] leading-snug text-[var(--color-muted)]">{b}</span>
+                  </li>
+                ))}
+              </ul>
               <p className="mt-4 text-[13px] leading-relaxed text-[var(--color-dim)]">
-                If a crash needs database state or a long-running session to reproduce, it is out of scope today.
+                On these, LogoMesh flags <span className="font-mono text-[var(--color-muted)]">needs_human_review</span>{" "}
+                with a structured reason. No false-positive ships.
               </p>
             </div>
           </article>

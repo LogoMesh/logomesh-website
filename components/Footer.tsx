@@ -3,9 +3,9 @@ import { LogoMark } from "./LogoMark";
 
 const LINKS = [
   { label: "Docs", href: "/docs" },
-  { label: "GitHub", href: "#" },
-  { label: "Privacy", href: "#" },
-  { label: "Terms", href: "#" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Terms", href: "/terms" },
   { label: "Contact", href: "/contact" },
 ];
 

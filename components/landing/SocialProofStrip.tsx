@@ -41,7 +41,7 @@ const PROOF_POINTS: { title: string; body: string; icon: LucideIcon }[] = [
   {
     icon: FileCode,
     title: "Python today",
-    body: "Strongest today on deterministic Python crash paths, especially in business-critical backend logic.",
+    body: "Deterministic Python crash paths where the frame captures the failure. Business-logic bugs are our sweet spot.",
   },
 ];
 

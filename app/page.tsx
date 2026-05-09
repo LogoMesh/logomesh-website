@@ -1,5 +1,6 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/landing/Hero";
+import { TrustStrip } from "@/components/landing/TrustStrip";
 import { SocialProofStrip } from "@/components/landing/SocialProofStrip";
 import { TheCommentSection } from "@/components/landing/TheCommentSection";
 import { RealWorldHarnessSection } from "@/components/landing/RealWorldHarnessSection";
@@ -17,6 +18,7 @@ export default function Home() {
         <div aria-hidden className="page-dotted-canvas" />
         <main className="relative z-[1] flex w-full min-w-0 flex-1 flex-col">
           <Hero />
+          <TrustStrip />
           <SocialProofStrip />
           <TheCommentSection />
           <RealWorldHarnessSection />
