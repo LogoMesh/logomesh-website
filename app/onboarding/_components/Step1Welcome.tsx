@@ -5,7 +5,7 @@ import { ArrowRight, Check } from "lucide-react";
 
 const BULLETS = [
   "Deterministic repro from your Sentry events",
-  "PCI DSS 6.3.2 / SOC2 CC8.1 evidence path, sealed",
+  "PCI DSS 12.10.5 · SOC2 CC7.3 / CC7.4 evidence path, sealed",
   "Works with your existing Sentry + GitHub setup",
 ] as const;
 
