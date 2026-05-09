@@ -1,7 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 /**
- * Documents every primary "Read the docs" link so we don't stack redundant primary CTAs.
+ * Documents every /docs link on the landing page so we don't stack redundant
+ * docs CTAs again. Current design funnels /docs as a secondary reference, not
+ * a primary CTA; activation CTAs point to /onboarding.
  * Run: npx playwright test e2e/install-cta-audit.spec.ts --project=desktop-chrome
  */
 test.describe("docs CTA audit (desktop)", () => {
@@ -28,7 +30,8 @@ test.describe("docs CTA audit (desktop)", () => {
       console.log(`  [${r.index}] <${r.tag}> ${r.label.slice(0, 120)}`);
     }
 
-    // Hero primary, Nav (top right), CTA section primary, Footer link
-    expect(count).toBe(4);
+    // Hero secondary link, Nav ghost button, Footer link.
+    // CTASection intentionally points to /onboarding + /pricing only.
+    expect(count).toBe(3);
   });
 });
