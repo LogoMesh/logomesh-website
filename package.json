@@ -10,10 +10,11 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "sync:harness": "node scripts/sync-harness-from-results.mjs",
+    "sync:branding": "node scripts/sync-branding-assets.mjs",
     "verify": "npm run build && playwright test",
     "verify:desktop": "npm run build && playwright test --project=desktop-chrome",
-    "generate:github-logo": "node scripts/generate-github-app-logo.mjs",
-    "generate:favicon": "node scripts/generate-favicon.mjs"
+    "generate:github-logo": "node scripts/sync-branding-assets.mjs",
+    "generate:favicon": "node scripts/sync-branding-assets.mjs"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
