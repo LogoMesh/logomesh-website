@@ -28,8 +28,8 @@ const STEPS: {
 }[] = [
   {
     n: "01",
-    title: "A production crash fires in Sentry",
-    body: "Your error monitor captures the failure — stack trace, innermost frame, and the local variables at the moment of the crash.",
+    title: "Your crashes don't sit waiting",
+    body: "The moment Sentry catches a crash, the agent picks it up. No manual trigger, no human in the loop.",
     icon: Bell,
     graphicSrc: LANDING_GRAPHICS.how1,
     graphicTitle:
@@ -38,28 +38,28 @@ const STEPS: {
   },
   {
     n: "02",
-    title: "Sentry calls your LogoMesh webhook",
-    body: "A custom Sentry integration fires `POST /webhooks/sentry/<installation_id>`. LogoMesh ACKs in under 50ms and starts reproducing — no manual trigger, no CLI to install.",
+    title: "An agent reproduces the bug for you",
+    body: "It reads the crash, finds the right piece of your code, and figures out how to trigger it. If it can't, it tells you why — never a fake green.",
     icon: TerminalSquare,
     graphicSrc: LANDING_GRAPHICS.how2,
     graphicTitle:
-      "Screenshot: Sentry custom integration settings with the LogoMesh webhook URL configured.",
-    graphicExport: "~1200×800 @2x. Crop tight to the webhook URL field.",
+      "Screenshot: agent audit log showing tool calls and decisions during a repro.",
+    graphicExport: "~1200×800 @2x. Show the agent's tool-call trace.",
   },
   {
     n: "03",
-    title: "LogoMesh synthesizes a failing pytest",
-    body: "Frame locals become a deterministic test that reproduces the crash against your current code. The synthesizer is a pure function — no LLM touches the evidence path.",
+    title: "The proof is written by code, not AI",
+    body: "A deterministic Python function writes the failing test and the audit file. No hallucinations land in your evidence. That's the part your auditor cares about.",
     icon: FileCode,
     graphicSrc: LANDING_GRAPHICS.how3,
     graphicTitle:
-      "Screenshot: generated pytest opened in the editor next to the failing assertion.",
-    graphicExport: "~1200×800 @2x. Highlight the test body and the assertion.",
+      "Screenshot: failing pytest plus the sealed audit envelope side by side.",
+    graphicExport: "~1200×800 @2x. Highlight the failing assertion + the seal.",
   },
   {
     n: "04",
-    title: "You get a sealed record of the incident",
-    body: "A draft GitHub PR with the failing test, a Sentry comment with the verdict, and an audit artifact mapped to SOC2 CC7.3 / CC7.4 + PCI DSS 12.10.5 — everything your reviewer needs.",
+    title: "Your team gets a draft PR they can trust",
+    body: "Real failing test. Sealed audit file mapped to SOC2 and PCI. We never touch your code or merge a PR — your team ships the fix.",
     icon: FileBadge,
     graphicSrc: LANDING_GRAPHICS.how4,
     graphicTitle:
@@ -117,10 +117,10 @@ export function HowItWorksSection() {
             id="how-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            How LogoMesh works
+            From crash to verified test, automatically
           </h2>
           <p className="marketing-lg mx-auto mt-5 max-w-[40rem] text-pretty text-[var(--color-muted)]">
-            A simple four-step flow from production crash to reproducible test output.
+            Four things happen between a Sentry alert and the failing test landing in your PR queue.
           </p>
         </div>
 
@@ -188,7 +188,7 @@ export function HowItWorksSection() {
         </ol>
 
         <aside
-          aria-label="Current product behavior"
+          aria-label="Why the agent does not write the proof"
           className="mx-auto mt-12 max-w-[860px] rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/85 px-5 py-5 sm:px-6 sm:py-6"
         >
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:gap-5">
@@ -200,15 +200,13 @@ export function HowItWorksSection() {
             </span>
             <div className="min-w-0">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--color-accent)]">
-                Today
+                Why we split the job
               </p>
               <p className="mt-1.5 text-[14.5px] leading-relaxed text-[var(--color-muted)] sm:text-[15px]">
-                <span className="text-[var(--color-ink)]">Sentry-webhook-triggered.</span> The 4-minute wizard connects
-                Sentry, GitHub, and optionally Slack — after that, every matching crash runs end-to-end without a human
-                in the loop.{" "}
-                <span className="text-[var(--color-ink)]">Scope is deliberately narrow.</span> LogoMesh is strongest on
-                deterministic backend failures where frame locals capture the whole story. Race conditions and
-                distributed transactions are out of scope today.
+                <span className="text-[var(--color-ink)]">AI is great at planning. It is not great at evidence.</span>{" "}
+                The agent does the investigation. A deterministic Python function writes the failing test and the
+                audit file. And the agent only marks a crash &ldquo;reproduced&rdquo; if the sandbox raised{" "}
+                <span className="text-[var(--color-ink)]">the same error</span> your users saw — not a similar one.
               </p>
             </div>
           </div>
@@ -227,11 +225,10 @@ export function HowItWorksSection() {
               id="security-heading"
               className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
             >
-              Built with security boundaries in mind.
+              Security you don&rsquo;t have to argue for
             </h3>
             <p className="mx-auto mt-5 max-w-[34rem] text-pretty text-[17px] leading-relaxed text-[var(--color-muted)] sm:text-[18px] sm:leading-[1.75]">
-              LogoMesh runs in an isolated sandbox, focuses only on paths you define, and does not require pulling full
-              production database state for reproduction.
+              Every reproduction runs in an isolated sandbox. We never touch your production database. The same boundaries apply on the free tier and the enterprise deployment.
             </p>
           </div>
 

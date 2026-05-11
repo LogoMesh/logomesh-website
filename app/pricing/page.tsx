@@ -7,7 +7,7 @@ import { Footer } from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Pricing · LogoMesh",
   description:
-    "Honest pricing for LogoMesh: free CLI for engineers, invite-only Pilot for design partners, and Enterprise for regulated environments.",
+    "Honest pricing for LogoMesh: free during beta, Agent Pro for engineering teams, Agent + Audit for regulated environments.",
 };
 
 type Tier = {
@@ -25,38 +25,38 @@ type Tier = {
 
 const TIERS: Tier[] = [
   {
-    name: "CLI",
+    name: "Free Beta",
     price: "Free",
     priceSuffix: "during beta",
-    forWho: "Solo engineers reproducing crashes locally",
-    ctaLabel: "pip install logomesh",
-    ctaHref: "/docs",
+    forWho: "Try the agent on a few real Sentry crashes",
+    ctaLabel: "Start the wizard",
+    ctaHref: "/onboarding",
     ctaVariant: "secondary",
     features: [
-      { label: "Reproduce from a Sentry URL", included: true },
+      { label: "The agent investigates every connected Sentry crash", included: true },
       { label: "Up to 3 reproductions per day", included: true },
-      { label: "Local Docker sandbox", included: true },
-      { label: "Audit artifact (deterministic, signed)", included: true },
-      { label: "PII redaction at capture time", included: true },
-      { label: "Sentry webhook trigger", included: false },
-      { label: "GitHub draft PR + Slack delivery", included: false },
+      { label: "Dashboard with agent run history", included: true },
+      { label: "Sealed audit file on every verified crash", included: true },
+      { label: "PII redaction before anything leaves the agent", included: true },
+      { label: "GitHub draft PR with the failing test", included: false },
+      { label: "Slack delivery on a dedicated channel", included: false },
       { label: "Vendor security questionnaire support", included: false },
     ],
     footnote:
-      "No account required. Runs entirely on your machine. Pricing after beta will not increase the free-tier daily limit.",
+      "No credit card. After beta, the free tier keeps the same 3-a-day limit.",
   },
   {
-    name: "Pilot",
-    price: "Invite-only",
-    priceSuffix: "design partners",
-    forWho: "Backend teams piloting on a real fintech codebase",
-    ctaLabel: "Request pilot access",
+    name: "Agent Pro",
+    price: "$199",
+    priceSuffix: "per month",
+    forWho: "Engineering teams that want every crash auto-reproduced",
+    ctaLabel: "Start the wizard",
     ctaHref: "/onboarding",
     ctaVariant: "primary",
     highlight: true,
     features: [
-      { label: "Everything in CLI", included: true },
-      { label: "Sentry webhook → automatic repro on crash", included: true },
+      { label: "Everything in Free Beta", included: true },
+      { label: "Sentry webhook — every matching crash triggers the agent", included: true },
       { label: "Draft GitHub PR with the failing test", included: true },
       { label: "Slack delivery on a dedicated channel", included: true },
       { label: "Up to 200 reproductions per month", included: true },
@@ -65,43 +65,43 @@ const TIERS: Tier[] = [
       { label: "Dedicated VPC / on-prem deployment", included: false },
     ],
     footnote:
-      "Pilot tenants are charged $0 during the design-partner phase. We ask for written feedback every two weeks and the right to cite you (anonymized) in case studies.",
+      "For teams ready to put the agent on real production crashes. We onboard you ourselves during this phase.",
   },
   {
-    name: "Enterprise",
+    name: "Agent + Audit",
     price: "Custom",
     priceSuffix: "annual",
-    forWho: "Regulated environments (PCI Level 1, SOC2 Type II tenants)",
+    forWho: "Regulated environments — PCI Level 1, SOC2 Type II, banking",
     ctaLabel: "Talk to founders",
     ctaHref: "/contact?topic=enterprise",
     ctaVariant: "secondary",
     features: [
-      { label: "Everything in Pilot", included: true },
+      { label: "Everything in Agent Pro", included: true },
       { label: "Dedicated VPC or on-prem deployment", included: true },
-      { label: "Custom MSA, DPA, and security questionnaire response", included: true },
-      { label: "SLO on response time (initial repro under 60s, P50)", included: true },
-      { label: "Named pager rotation for incident-mode runs", included: true },
+      { label: "Audit-export bundle, MSA, DPA, security questionnaire", included: true },
+      { label: "SLO on response time (verdict under 60s, P50)", included: true },
+      { label: "SSO + named pager rotation for incident-mode runs", included: true },
       { label: "Priority on language expansion (Go / Node next)", included: "coming" },
       { label: "Quarterly business review with the engineering team", included: true },
-      { label: "Custom audit-control mappings beyond PCI/SOC2", included: true },
+      { label: "Custom audit-control mappings beyond PCI / SOC2", included: true },
     ],
     footnote:
-      "Pricing depends on deployment topology and tenant volume. Typical engagements start in the low five figures annual.",
+      "Pricing depends on deployment and tenant volume. Typical engagements start in the low five figures annual.",
   },
 ];
 
 const SECURITY_PILLARS = [
   {
     label: "No production DB access",
-    body: "Reproduction reads frame locals captured at the crash. We never connect to your live database.",
+    body: "The agent works from the variable values Sentry captured at crash time. It never connects to your live database.",
   },
   {
     label: "Airgapped sandbox",
-    body: "Docker container, unprivileged user, memory and PID limits, no outbound network.",
+    body: "Every test runs in a Docker container with no network, an unprivileged user, and strict memory and process limits.",
   },
   {
-    label: "No LLM in evidence path",
-    body: "The audit artifact is deterministic from the redacted frame locals. The LLM is on the side path, not the seal path.",
+    label: "No AI in the audit file",
+    body: "The agent plans and uses tools. A deterministic Python function writes the proof. The audit file has no AI-generated content in it, by design.",
   },
 ];
 
@@ -120,7 +120,7 @@ export default function PricingPage() {
                   Pricing
                 </p>
                 <h1 className="mt-4 font-[family-name:var(--font-display)] text-[clamp(2.25rem,5.6vw,3.5rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-[var(--color-ink)]">
-                  Free for engineers.
+                  Try the agent free.
                   <br />
                   <span
                     className="text-[var(--color-accent)]"
@@ -129,14 +129,14 @@ export default function PricingPage() {
                         "0 0 22px rgba(196,255,0,0.45), 0 0 48px rgba(196,255,0,0.25)",
                     }}
                   >
-                    Honest for buyers.
+                    Pay when it pays for itself.
                   </span>
                 </h1>
                 <p className="mt-6 text-[17px] leading-[1.65] text-[var(--color-muted)] sm:text-[18px]">
-                  The CLI is free during the public beta. The Pilot tier is
-                  invite-only and gives you the Sentry webhook, GitHub draft PR,
-                  and a direct Slack channel with the founders. Enterprise is for
-                  regulated tenants who need a custom MSA and a VPC deployment.
+                  Start free during the beta — the agent investigates up to three crashes a
+                  day. Agent Pro turns it on for every Sentry alert, adds the GitHub draft PR
+                  and Slack delivery, and gets you direct access to the founders. Agent + Audit
+                  is for regulated teams that need a VPC, an MSA, and an audit-export bundle.
                 </p>
               </div>
 
@@ -254,9 +254,9 @@ export default function PricingPage() {
                   What you don&apos;t pay extra for
                 </h2>
                 <p className="mt-4 text-[15.5px] leading-[1.65] text-[var(--color-muted)]">
-                  Security boundaries don&apos;t scale with tier. The free CLI
-                  and the Enterprise deployment use the same evidence path and
-                  the same redactor.
+                  Security boundaries don&apos;t scale with tier. The free beta and the
+                  Agent + Audit deployment use the same agent, the same sandbox, and the
+                  same redactor.
                 </p>
               </div>
 
@@ -286,24 +286,24 @@ export default function PricingPage() {
               </h2>
               <dl className="mt-8 space-y-7">
                 <Q
-                  q="What happens to free-tier users when beta ends?"
-                  a="The free CLI tier stays free, with the same 3-reproductions-per-day cap. We may add a paid Solo tier for engineers who want a higher limit, but we will not pull functionality out of free."
+                  q="What happens to free-beta users when the beta ends?"
+                  a="The free tier stays free, with the same 3-reproductions-a-day cap. We may add a paid Solo tier for engineers who want a higher limit, but we will not pull functionality out of free."
                 />
                 <Q
-                  q="Why is Pilot $0?"
-                  a="We're optimizing for fit, not revenue, this quarter. Design partners give us biweekly written feedback and the right to anonymized case studies. In return, you get a direct Slack channel with the founders and feature priority."
+                  q="Why $199 for Agent Pro?"
+                  a="That price assumes your team is on Sentry and ships a few crashes a week. If reproducing one production crash usually eats half a day of engineering time, the agent pays for itself the first week. We onboard you ourselves during this phase, so you also get founder time included."
                 />
                 <Q
                   q="Do you store our crash data?"
-                  a="CLI mode: no. Everything stays on your machine. Pilot and Enterprise: only artifact metadata (event ids, repro test paths, control mappings, hashes) — never raw frame locals."
+                  a="We store artifact metadata — event IDs, test file paths, control mappings, hashes — never the raw variable values from the crash. PII is redacted before anything leaves the agent."
                 />
                 <Q
                   q="Do you have SOC2 Type II?"
-                  a="Type I in progress. Type II target Q3 2026. We will share our gap-analysis report under NDA during pilot procurement."
+                  a="Type I in progress. Type II target Q3 2026. We share our gap-analysis report under NDA during procurement."
                 />
                 <Q
-                  q="Can we pay you for Enterprise today?"
-                  a="Yes, but we will steer you to Pilot first. We don't sell Enterprise to teams who haven't run the tool against a real production crash."
+                  q="Can we buy Agent + Audit today?"
+                  a="Yes, but we'll steer you to Agent Pro first. We don't sell the audit-bundle tier to teams that haven't run the agent against a real production crash yet."
                 />
               </dl>
             </div>

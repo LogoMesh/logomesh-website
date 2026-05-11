@@ -9,7 +9,11 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What does LogoMesh actually do?",
-    a: "When a Python crash hits Sentry, LogoMesh reads the program state at the moment of failure and writes a failing pytest that reproduces the crash. It then opens a draft GitHub PR with the test and a sealed compliance artifact — all within about 60 seconds, with zero LLM in the evidence path.",
+    a: "When a Python crash hits Sentry, an AI agent investigates the crash, finds the part of your code that broke, and writes a failing test that reproduces it. You get a draft GitHub PR with the test and a sealed audit file your reviewer can sign off on — usually inside a minute.",
+  },
+  {
+    q: "Is it really an AI agent?",
+    a: "Yes. It plans, uses tools, recovers when it gets stuck, and knows when to shut up and ask for help. The one thing it's strictly forbidden from doing is writing the final test code — that part stays 100% deterministic so your auditors don't have a meltdown.",
   },
   {
     q: "Who is this for?",
@@ -32,8 +36,8 @@ const FAQS: { q: string; a: string }[] = [
     a: "Every repro runs in an airgapped Docker sandbox (unprivileged user, memory + PID caps, no network). We never pull from your production database. PII is redacted before anything reaches an LLM or the audit seal.",
   },
   {
-    q: "What does the compliance artifact contain?",
-    a: "A sealed JSON envelope with the failing test, the redacted frame locals, the hash of the test bytes, a `llm_in_evidence_path: false` flag, and control mappings to PCI DSS 12.10.5 and SOC2 CC7.3 / CC7.4.",
+    q: "What does the audit file contain?",
+    a: "A sealed JSON envelope with the failing test, the redacted crash values, a hash of the test bytes, a flag confirming no AI wrote the proof, and control mappings to PCI DSS 12.10.5 and SOC2 CC7.3 / CC7.4. It's designed so an auditor can verify the chain of custody without trusting our word for it.",
   },
   {
     q: "Does it fix the bug automatically?",

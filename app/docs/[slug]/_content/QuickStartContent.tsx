@@ -4,84 +4,64 @@ export function QuickStartContent() {
   return (
     <article className="docs-prose">
       <P>
-        Four steps from a Sentry URL to a failing pytest you can paste into
-        your repo. No account required for the core repro path — you need a
-        Sentry API token and Docker.
+        Three steps. Four minutes. No SDK.
       </P>
 
-      <H2>1. Install</H2>
-      <Pre>{`pip install logomesh
-# or, if you use uv:
-uv add logomesh`}</Pre>
-
-      <H2>2. Set your Sentry token</H2>
+      <H2>1. Start the wizard</H2>
       <P>
-        Go to Sentry → Settings → Account → API Tokens → Create New Token.
-        The only scope you need is <Code>event:read</Code>.
-      </P>
-      <Pre>{`export SENTRY_AUTH_TOKEN=sntrys_...`}</Pre>
-
-      <H2>3. Run</H2>
-      <Pre>{`logomesh repro https://sentry.io/organizations/<org>/issues/<id>/`}</Pre>
-      <P>
-        LogoMesh fetches the event, picks the innermost app frame, synthesizes
-        a pytest, and runs it in an isolated Docker sandbox. The whole round
-        trip takes under 60 seconds on a warm Docker daemon.
+        Go to{" "}
+        <Link href="/onboarding" className="text-[var(--color-accent)] underline-offset-2 hover:underline">
+          /onboarding
+        </Link>{" "}
+        and connect Sentry + GitHub. Takes literally two minutes. Your secrets are encrypted
+        before they ever touch our database.
       </P>
 
-      <H2>4. Get a failing pytest</H2>
+      <H2>2. Paste the webhook</H2>
       <P>
-        If the bug reproduces, you get a structured report and a ready-to-paste
-        test. Exit code <Code>0</Code> means reproduced. Exit code{" "}
-        <Code>1</Code> means not reproduced on this branch. Exit code{" "}
-        <Code>2</Code> means an error occurred.
+        Drop the LogoMesh webhook URL into your Sentry project, fire a test event,
+        and watch the agent work live in your dashboard. Done.
       </P>
-      <Pre>{`## LogoMesh found 1 issue
+
+      <H2>3. You&rsquo;re live</H2>
+      <P>
+        Every new crash in Sentry now triggers the agent automatically. You get a draft PR
+        with the failing test and a sealed audit file. Your team does the rest — we never
+        touch your code.
+      </P>
+      <Pre>{`## LogoMesh reproduced your crash
 
 ### Negative quantity bypasses checkout validation
-Property:  Order total should always be ≥ 0
-I called:  checkout(item_id=1, qty=-5)
+Crash:     ValueError matched on both sides
+Called:    checkout(item_id=1, qty=-5)
 Got:       Order created with total -$49.95
-Location:  checkout.py, line 42`}</Pre>
+Location:  checkout.py, line 42
+Verdict:   reproduced · audit file sealed`}</Pre>
 
-      <H2>Optional flags</H2>
+      <H2>What the dashboard shows you</H2>
       <Ul>
         <Li>
-          <Code>--artifact</Code> — emit a sealed JSON envelope mapped to PCI
-          DSS 12.10.5 and SOC2 CC7.3 / CC7.4 for post-incident evidence.
+          Every run the agent has done — verdict, duration, cost.
         </Li>
         <Li>
-          <Code>--draft-pr</Code> — open a GitHub draft PR that includes the
-          repro test alongside a description of the violated property.
+          The sealed audit file with the SOC2 / PCI control mapping, ready to forward
+          to your reviewer.
         </Li>
         <Li>
-          <Code>--no-llm</Code> — skip the LLM synthesis step and build the
-          test deterministically from frame locals only. Fastest path; no API
-          key needed.
-        </Li>
-        <Li>
-          <Code>--json</Code> — write machine-readable output to stdout instead
-          of the human-formatted report.
-        </Li>
-        <Li>
-          <Code>--state-file &lt;path&gt;</Code> — inject a captured snapshot
-          of DB / Redis / HTTP state so the replay is fully deterministic.
-        </Li>
-        <Li>
-          <Code>--repo &lt;path&gt;</Code> — point to a local repo root if
-          automatic path resolution fails to locate the crashing source file.
+          The agent&rsquo;s decisions — which tools it called, what it tried, why it
+          stopped — for the curious or for incident review.
         </Li>
       </Ul>
 
       <Aside>
-        LogoMesh uses Docker for the sandbox (airgapped, nobody user). If
-        Docker is not available it falls back to a subprocess — less isolated
-        but still works. For production use, run with Docker.{" "}
+        <strong className="text-[var(--color-ink)]">Power users: </strong>
+        you can still run <Code>logomesh repro &lt;sentry-url&gt;</Code> locally if you want
+        to poke at the agent on a single crash. The dashboard is what most teams use.{" "}
         <Link
           href="/docs/how-it-works"
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"
         >
-          See how the sandbox works →
+          See how the agent works →
         </Link>
       </Aside>
     </article>
