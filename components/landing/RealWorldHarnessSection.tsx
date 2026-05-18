@@ -16,19 +16,19 @@ const SUMMARY_STATS: SummaryStat[] = [
     hint: "from Sentry URL to a failing pytest",
   },
   {
-    label: "Reconstruction saved",
+    label: "Engineer time saved",
     value: "30–40 min",
-    hint: "manual state rebuild per crash, gone",
+    hint: "per crash vs. manual state reconstruction",
   },
   {
-    label: "LLM in evidence path",
+    label: "AI in evidence path",
     value: "0",
-    hint: "audit artifact from frame locals",
+    hint: "audit records are deterministic",
   },
   {
-    label: "Engine tests",
-    value: "500",
-    hint: "unit tests passing, run on every change",
+    label: "Quality checks",
+    value: "500+",
+    hint: "automated tests on every release",
   },
 ];
 
@@ -46,6 +46,13 @@ const BUG_PATTERNS: string[] = [
   "Float rounding on a tax calculation",
   "Wrong tier resolved for a coupon stack",
   "Currency mismatch on a partial charge",
+];
+
+const OUT_OF_SCOPE: string[] = [
+  "Race conditions across async tasks",
+  "Distributed transactions that span services",
+  "Bugs requiring a live database row to reproduce",
+  "Failures from external API timeouts or rate limits",
 ];
 
 export function RealWorldHarnessSection() {
@@ -78,11 +85,11 @@ export function RealWorldHarnessSection() {
             ref={headingRef}
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Best for high-impact backend incidents.
+            Built for high-impact backend incidents.
           </h2>
           <p className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]">
-            Best-fit cases include deterministic failures such as totals math, validation edge cases, and rounding faults
-            that can be replayed from captured runtime state.
+            Ideal for deterministic failures — billing math, validation edge cases, and rounding errors that can be
+            replayed from captured runtime state.
           </p>
         </div>
 
@@ -111,12 +118,12 @@ export function RealWorldHarnessSection() {
           <article className="overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
             <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
               <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
-                In scope
+                Common crash paths
               </p>
             </div>
             <div className="px-4 py-4 sm:px-5">
               <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
-                LogoMesh only scans paths you declare in YAML. Everything else is ignored by design.
+                Crashes in Python business-logic modules — where the bad input is in frame locals — reproduce reliably.
               </p>
               <ul className="mt-4 list-none divide-y divide-[var(--color-border)] border-y border-[var(--color-border)]">
                 {SCOPED_PATHS.map((p) => (
@@ -130,22 +137,6 @@ export function RealWorldHarnessSection() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-[13px] leading-relaxed text-[var(--color-dim)]">
-                Not for general-purpose testing, infrastructure incidents, or codebases outside the declared paths.
-              </p>
-            </div>
-          </article>
-
-          <article className="overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
-            <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
-              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
-                Crashes we reproduce
-              </p>
-            </div>
-            <div className="px-4 py-4 sm:px-5">
-              <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
-                Representative deterministic failures we can reliably replay from captured runtime state.
-              </p>
               <ul className="mt-4 list-none space-y-2">
                 {BUG_PATTERNS.map((b) => (
                   <li
@@ -160,8 +151,37 @@ export function RealWorldHarnessSection() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </article>
+
+          <article className="overflow-hidden rounded-2xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)]/95 shadow-[var(--shadow-card)]">
+            <div className="border-b border-[var(--color-border)] bg-[var(--color-canvas-3)]/80 px-4 py-3 sm:px-5">
+              <p className="font-mono text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--color-muted)]">
+                Where we draw the line
+              </p>
+            </div>
+            <div className="px-4 py-4 sm:px-5">
+              <p className="text-[14.5px] leading-relaxed text-[var(--color-muted)]">
+                When the root cause depends on shared state, timing, or external systems, logomesh reports that clearly
+                instead of claiming a match.
+              </p>
+              <ul className="mt-4 list-none space-y-2">
+                {OUT_OF_SCOPE.map((b) => (
+                  <li
+                    key={b}
+                    className="flex items-start gap-3 rounded-md border border-[var(--color-border)] bg-[var(--color-canvas)]/40 px-3 py-2.5"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--color-border-hi)]"
+                    />
+                    <span className="text-[14px] leading-snug text-[var(--color-muted)]">{b}</span>
+                  </li>
+                ))}
+              </ul>
               <p className="mt-4 text-[13px] leading-relaxed text-[var(--color-dim)]">
-                If a crash needs database state or a long-running session to reproduce, it is out of scope today.
+                In these cases, logomesh returns a structured explanation so your team can triage with confidence — never
+                a false positive.
               </p>
             </div>
           </article>

@@ -46,7 +46,7 @@ const ROWS: Row[] = [
   },
 ];
 
-const TOOLS = ["LogoMesh", "CodeRabbit", "Copilot", "Snyk", "SonarQube"];
+const TOOLS = ["logomesh", "CodeRabbit", "Copilot", "Snyk", "SonarQube"];
 
 function Cell({ val, label }: { val: "yes" | "partial" | "no" | "label"; label?: string }) {
   if (val === "yes")

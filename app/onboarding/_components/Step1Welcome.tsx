@@ -5,7 +5,7 @@ import { ArrowRight, Check } from "lucide-react";
 
 const BULLETS = [
   "Deterministic repro from your Sentry events",
-  "PCI DSS 6.3.2 / SOC2 CC8.1 evidence path, sealed",
+  "PCI DSS 12.10.5 · SOC2 CC7.3 / CC7.4 evidence path, sealed",
   "Works with your existing Sentry + GitHub setup",
 ] as const;
 
@@ -21,7 +21,7 @@ export function Step1Welcome({ onNext }: { onNext: () => void }) {
         <span className="text-[var(--color-accent)]">in 4 minutes.</span>
       </h1>
       <p className="mt-5 text-[16px] leading-[1.7] text-[var(--color-muted)]">
-        When Sentry fires, LogoMesh reproduces the crash deterministically in a
+        When Sentry fires, logomesh reproduces the crash deterministically in a
         sandbox and posts a sealed PCI/SOC2 evidence artifact back to your
         Sentry issue and a draft GitHub PR. No LLM in the evidence path. The
         kind of audit your compliance reviewer signs off on without questions.

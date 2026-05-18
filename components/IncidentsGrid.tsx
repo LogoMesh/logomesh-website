@@ -102,7 +102,7 @@ export function IncidentsGrid() {
           <p className="read-max text-[15px] leading-[1.72] text-[var(--color-muted)] sm:text-[16px] sm:leading-[1.75] mb-4 sm:mb-5">
             Your reviewers are human: they miss edge cases, bad state, and off-by-ones
             under time pressure. The stories on the grid are famous public postmortems. The
-            kind of damage a single bad merge can still do. LogoMesh is built to surface
+            kind of damage a single bad merge can still do. logomesh is built to surface
             that class of bug before it becomes your weekend.
           </p>
           <div className="mb-5 rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)] px-4 py-3 sm:px-5 sm:py-4">
@@ -111,13 +111,13 @@ export function IncidentsGrid() {
             </p>
             <p className="font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13px] leading-relaxed text-[var(--color-ink)]">
               We have already run {HARNESS_STATS.uniquePrs}+ real OSS pull requests from{" "}
-              {HARNESS_STATS.reposRepresented} repos through LogoMesh and recorded{" "}
+              {HARNESS_STATS.reposRepresented} repos through logomesh and recorded{" "}
               {HARNESS_STATS.confirmedFindings}+ confirmed issues before we ask you to bet
               your own repo on it.
             </p>
           </div>
           <p className="mb-5 font-[family-name:var(--font-mono)] text-[11px] leading-relaxed text-[var(--color-dim)] tracking-[0.03em]">
-            The grid is just context: famous incidents, not LogoMesh tickets on those
+            The grid is just context: famous incidents, not logomesh tickets on those
             companies.
           </p>
           <span className="inline-flex items-center gap-2 font-[family-name:var(--font-mono)] text-[12.5px] sm:text-[13px] font-extrabold uppercase tracking-[0.1em] text-[var(--color-accent)]">

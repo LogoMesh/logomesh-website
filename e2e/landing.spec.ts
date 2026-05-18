@@ -1,27 +1,27 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("landing — content & assets", () => {
-  test("why section shows replay-not-guess framing", async ({ page }) => {
+  test("why section articulates the logomesh differentiator", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
     const why = page.locator("#why");
     await expect(why).toBeVisible();
-    await expect(why.getByRole("heading", { name: /Replay, not a guess/i })).toBeVisible();
-    await expect(why.getByText(/No LLM in the evidence path/i).first()).toBeVisible();
+    await expect(why.getByRole("heading", { name: /Why teams choose logomesh/i })).toBeVisible();
+    await expect(why.getByText(/Debug from facts/i).first()).toBeVisible();
   });
 
-  test("how-it-works section lists four steps and security block", async ({ page }) => {
+  test("how-it-works section walks the four-step webhook flow", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
     const how = page.locator("#how-it-works");
     await expect(how).toBeVisible();
-    await expect(how.getByRole("heading", { name: /Four steps\. One quick run/i })).toBeVisible();
-    await expect(how.getByText(/Your error monitor fires/i)).toBeVisible();
-    await expect(how.getByText(/paste the crash URL/i)).toBeVisible();
+    await expect(how.getByRole("heading", { name: /How logomesh works/i })).toBeVisible();
+    await expect(how.getByText(/A production crash fires in Sentry/i)).toBeVisible();
+    await expect(how.getByText(/Sentry calls your logomesh webhook/i)).toBeVisible();
     await expect(
-      how.getByRole("heading", { name: /Hardened, scoped, and out of your database/i }),
+      how.getByRole("heading", { name: /Built with security boundaries/i }),
     ).toBeVisible();
   });
 
@@ -31,17 +31,17 @@ test.describe("landing — content & assets", () => {
 
     const faq = page.locator("#faq");
     await expect(faq).toBeVisible();
-    await expect(faq.getByRole("heading", { name: /Questions engineers ask/i })).toBeVisible();
-    await expect(faq.getByRole("button", { name: /agents that try to reproduce crashes/i })).toBeVisible();
+    await expect(faq.getByRole("heading", { name: /Common questions/i })).toBeVisible();
+    await expect(faq.getByRole("button", { name: /What does logomesh actually do/i })).toBeVisible();
   });
 
-  test("proof section shows fintech scope and stat grid", async ({ page }) => {
+  test("proof section shows scope + stat grid", async ({ page }) => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
     const proof = page.locator("#proof");
     await expect(proof).toBeVisible();
-    await expect(proof.getByRole("heading", { name: /Built for billing bugs/i })).toBeVisible();
+    await expect(proof.getByRole("heading", { name: /Best for high-impact backend incidents/i })).toBeVisible();
     await expect(proof.getByText(/Repro time/i).first()).toBeVisible();
   });
 
@@ -49,11 +49,15 @@ test.describe("landing — content & assets", () => {
     await page.goto("/");
     await page.waitForLoadState("networkidle");
 
-    await expect(page.locator("#hero").getByRole("heading", { level: 1 })).toContainText(/Reproduce the/);
-    await expect(page.locator("#hero").getByRole("heading", { level: 1 })).toContainText(/before you fix it/);
+    await expect(page.locator("#hero").getByRole("heading", { level: 1 })).toContainText(/Reproduce production/);
+    await expect(page.locator("#hero").getByRole("heading", { level: 1 })).toContainText(/in 60 seconds/);
 
-    const docsLinks = page.locator('a[href="/docs"]');
+    // Primary CTA drives activation, not docs.
+    const startLink = page.locator("#hero a[href='/docs/quickstart']");
+    await expect(startLink.first()).toBeVisible();
+
+    // Docs is still accessible as a secondary link.
+    const docsLinks = page.locator("#hero a[href='/docs']");
     await expect(docsLinks.first()).toBeVisible();
-    expect(await docsLinks.count()).toBeGreaterThanOrEqual(1);
   });
 });

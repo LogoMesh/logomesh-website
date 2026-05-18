@@ -53,7 +53,7 @@ export function TerminalReplay({ scenario, lineDelay = 220 }: Props) {
     <div
       className="relative min-w-0 glass-strong overflow-hidden rounded-xl"
       role="img"
-      aria-label={`LogoMesh terminal replay, ${scenario.label} pull request`}
+      aria-label={`logomesh terminal replay, ${scenario.label} pull request`}
     >
       <div
         aria-hidden

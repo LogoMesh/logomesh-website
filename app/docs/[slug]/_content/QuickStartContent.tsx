@@ -1,87 +1,68 @@
 import Link from "next/link";
+import { LOGOMESH_GITHUB_REPO } from "@/lib/product-links";
 
 export function QuickStartContent() {
   return (
     <article className="docs-prose">
       <P>
-        Four steps from a Sentry URL to a failing pytest you can paste into
-        your repo. No account required for the core repro path — you need a
-        Sentry API token and Docker.
+        Install logomesh, connect Sentry, and reproduce your first production crash — no SDK required in your
+        application.
       </P>
 
       <H2>1. Install</H2>
-      <Pre>{`pip install logomesh
-# or, if you use uv:
-uv add logomesh`}</Pre>
-
-      <H2>2. Set your Sentry token</H2>
+      <Pre>{`pip install logomesh`}</Pre>
       <P>
-        Go to Sentry → Settings → Account → API Tokens → Create New Token.
-        The only scope you need is <Code>event:read</Code>.
-      </P>
-      <Pre>{`export SENTRY_AUTH_TOKEN=sntrys_...`}</Pre>
-
-      <H2>3. Run</H2>
-      <Pre>{`logomesh repro https://sentry.io/organizations/<org>/issues/<id>/`}</Pre>
-      <P>
-        LogoMesh fetches the event, picks the innermost app frame, synthesizes
-        a pytest, and runs it in an isolated Docker sandbox. The whole round
-        trip takes under 60 seconds on a warm Docker daemon.
+        Requires Python 3.11+, Docker running locally, and a Sentry auth token with{" "}
+        <Code>event:read</Code> scope. An OpenAI key is optional — pass{" "}
+        <Code>--no-llm</Code> to skip the agent entirely.
       </P>
 
-      <H2>4. Get a failing pytest</H2>
+      <H2>2. Configure</H2>
+      <Pre>{`export SENTRY_AUTH_TOKEN=sntryu_…
+export OPENAI_API_KEY=sk-…   # optional`}</Pre>
+      <P>A <Code>.env</Code> in your repo root works too.</P>
+
+      <H2>3. Reproduce</H2>
+      <Pre>{`logomesh repro https://sentry.io/organizations/your-org/issues/12345678/`}</Pre>
       <P>
-        If the bug reproduces, you get a structured report and a ready-to-paste
-        test. Exit code <Code>0</Code> means reproduced. Exit code{" "}
-        <Code>1</Code> means not reproduced on this branch. Exit code{" "}
-        <Code>2</Code> means an error occurred.
+        Add <Code>--artifact</Code> for the compliance JSON, <Code>--draft-pr</Code> for a GitHub
+        draft PR, or <Code>--no-llm</Code> for deterministic-only mode.
       </P>
-      <Pre>{`## LogoMesh found 1 issue
+      <Pre>{`## logomesh reproduced your crash
 
 ### Negative quantity bypasses checkout validation
-Property:  Order total should always be ≥ 0
-I called:  checkout(item_id=1, qty=-5)
+Crash:     ValueError matched on both sides
+Called:    checkout(item_id=1, qty=-5)
 Got:       Order created with total -$49.95
-Location:  checkout.py, line 42`}</Pre>
+Location:  checkout.py, line 42
+Verdict:   reproduced · audit file sealed`}</Pre>
 
-      <H2>Optional flags</H2>
+      <H2>What you get</H2>
       <Ul>
+        <Li>A failing pytest against your current branch — synthesized from frame locals, not LLM output.</Li>
         <Li>
-          <Code>--artifact</Code> — emit a sealed JSON envelope mapped to PCI
-          DSS 12.10.5 and SOC2 CC7.3 / CC7.4 for post-incident evidence.
+          Optional sealed audit file with <Code>llm_in_evidence_path: false</Code> and mappings to
+          SOC2 CC7.3 / CC7.4 and PCI DSS 12.10.5.
         </Li>
         <Li>
-          <Code>--draft-pr</Code> — open a GitHub draft PR that includes the
-          repro test alongside a description of the violated property.
-        </Li>
-        <Li>
-          <Code>--no-llm</Code> — skip the LLM synthesis step and build the
-          test deterministically from frame locals only. Fastest path; no API
-          key needed.
-        </Li>
-        <Li>
-          <Code>--json</Code> — write machine-readable output to stdout instead
-          of the human-formatted report.
-        </Li>
-        <Li>
-          <Code>--state-file &lt;path&gt;</Code> — inject a captured snapshot
-          of DB / Redis / HTTP state so the replay is fully deterministic.
-        </Li>
-        <Li>
-          <Code>--repo &lt;path&gt;</Code> — point to a local repo root if
-          automatic path resolution fails to locate the crashing source file.
+          A clear status when reproduction is not possible — never a false positive.
         </Li>
       </Ul>
 
       <Aside>
-        LogoMesh uses Docker for the sandbox (airgapped, nobody user). If
-        Docker is not available it falls back to a subprocess — less isolated
-        but still works. For production use, run with Docker.{" "}
+        <strong className="text-[var(--color-ink)]">Source code: </strong>
+        <Link
+          href={LOGOMESH_GITHUB_REPO}
+          className="text-[var(--color-accent)] underline-offset-2 hover:underline"
+        >
+          github.com/LogoMesh/LogoMesh-Dev
+        </Link>
+        . Full pipeline:{" "}
         <Link
           href="/docs/how-it-works"
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"
         >
-          See how the sandbox works →
+          How it works →
         </Link>
       </Aside>
     </article>

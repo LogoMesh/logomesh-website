@@ -1,22 +1,22 @@
 "use client";
 
 import { useRef } from "react";
-import { MediaPlaceholder } from "./MediaPlaceholder";
+import { ArtifactShowcase } from "./ArtifactShowcase";
 import { AuroraField } from "./AuroraField";
 import { useFadeUp } from "@/lib/animations";
 
 const CALLOUTS = [
   {
     label: "The failing test",
-    body: "A pytest that reproduces the crash against your current code. Paste-ready.",
+    body: "A pytest that reproduces the crash on your current branch, delivered as a draft pull request for your team to review.",
   },
   {
-    label: "The frame locals",
-    body: "The exact arguments captured at the moment of failure. Synthesis is deterministic from those values.",
+    label: "Captured runtime values",
+    body: "The exact inputs present when the failure occurred. Tests are synthesized deterministically from those values, with sensitive data redacted before any model sees them.",
   },
   {
-    label: "The audit artifact",
-    body: "A JSON evidence chain mapped to PCI DSS 4.0 Req 6.3.2 and SOC2 CC8.1 control IDs.",
+    label: "The audit record",
+    body: "A sealed JSON evidence chain mapped to PCI DSS 12.10.5 and SOC 2 CC7.3 / CC7.4 — the post-incident controls your compliance reviewers expect.",
   },
 ] as const;
 
@@ -50,15 +50,15 @@ export function TheCommentSection() {
             id="the-comment-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            A failing pytest. The exact arguments. Audit-ready evidence.
+            A failing test. The exact inputs. Audit-ready evidence.
           </h2>
           <p className="marketing-lg mx-auto mt-6 max-w-[40rem] text-pretty text-[var(--color-muted)]">
-            Paste a Sentry URL into the CLI. Get a test that fails on your current code with the inputs your users
-            actually hit.
+            When Sentry captures a crash, logomesh returns a failing test built from the real inputs your users hit, a
+            draft pull request for your repository, and a sealed compliance record — typically within 60 seconds.
           </p>
         </div>
 
-        <div className="mx-auto mt-14 grid max-w-[1080px] gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-center lg:gap-14">
+        <div className="mx-auto mt-14 grid max-w-[1080px] gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start lg:gap-14">
           <div className="relative order-2 lg:order-1">
             <div
               aria-hidden
@@ -69,17 +69,11 @@ export function TheCommentSection() {
               }}
             />
             <div className="relative">
-              <MediaPlaceholder
-                label="Failing pytest, frame locals, audit artifact"
-                dropPath="/public/marketing/repro-output.png"
-                spec="1600×1100 @2x · crop tight, redact tokens"
-                kind="image"
-                aspectClassName="aspect-[16/11]"
-              />
+              <ArtifactShowcase />
             </div>
           </div>
 
-          <ol className="order-1 list-none space-y-4 lg:order-2">
+          <ol className="order-1 list-none space-y-4 lg:order-2 lg:sticky lg:top-28">
             {CALLOUTS.map((item) => (
               <li
                 key={item.label}

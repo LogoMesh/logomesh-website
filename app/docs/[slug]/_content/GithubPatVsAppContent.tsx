@@ -21,7 +21,7 @@ export function GithubPatVsAppContent() {
         <ExternalLink href="https://github.com/settings/tokens">
           github.com/settings/tokens
         </ExternalLink>
-        . LogoMesh needs exactly two scopes:
+        . logomesh needs exactly two scopes:
       </P>
       <Ul>
         <Li>
@@ -50,7 +50,7 @@ export function GithubPatVsAppContent() {
           and either delete or regenerate the token.
         </Li>
         <Li>
-          In your LogoMesh dashboard, open the GitHub row in the configuration
+          In your logomesh dashboard, open the GitHub row in the configuration
           panel and paste the new token. The old one stops working
           immediately.
         </Li>

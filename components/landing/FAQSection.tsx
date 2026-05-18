@@ -8,48 +8,52 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "What does LogoMesh actually do?",
-    a: "LogoMesh turns a production crash report into a reproducible failing test and structured incident output.",
+    q: "What does logomesh do?",
+    a: "When a Python crash lands in Sentry, an AI agent investigates it, identifies the failing code path, and produces a deterministic failing test that reproduces the issue. You receive a draft pull request with the test and a sealed audit record suitable for compliance review — typically within a minute.",
   },
   {
-    q: "Do I need to understand AI to use it?",
-    a: "No. You paste a crash link, run one command, and get clear output your team can act on.",
+    q: "Is it really an AI agent?",
+    a: "Yes. The agent plans, calls tools, and escalates when it needs human input. It never writes the final test or audit evidence — those are generated deterministically so auditors can verify the chain of custody independently.",
   },
   {
     q: "Who is this for?",
-    a: "Backend engineering teams that want faster incident response and lower time-to-reproduce for production crashes.",
+    a: "Python backend and platform teams who rely on Sentry for production incidents — especially in regulated environments preparing for SOC 2 Type II or PCI audits where post-incident verification is required.",
   },
   {
     q: "How fast is it?",
-    a: "Typical runs complete in about a minute, replacing manual crash reconstruction steps.",
+    a: "Most teams are running their first reproduction within minutes of install. A typical crash returns a verdict in about 60 seconds once your environment is configured.",
+  },
+  {
+    q: "Do I have to change my codebase?",
+    a: "No SDK and no code changes required. Connect Sentry and GitHub, then point logomesh at an issue URL. Your existing error monitoring and deployment workflow stay the same.",
   },
   {
     q: "Do we stay in control of changes?",
-    a: "Yes. LogoMesh helps generate reproducible evidence, but your team reviews and approves what happens next.",
+    a: "Always. logomesh opens a draft pull request with the failing test. It never merges, never modifies your default branch, and never ships fixes on your behalf.",
   },
   {
     q: "Is it secure?",
-    a: "LogoMesh runs in an isolated environment with scoped boundaries designed for production engineering workflows.",
+    a: "Every reproduction runs in an isolated Docker sandbox with no network access, an unprivileged user, and strict resource limits. logomesh never connects to your production database. Sensitive data is redacted before anything reaches a language model or the audit record.",
   },
   {
-    q: "What do we get after each run?",
-    a: "You get a failing reproducible test plus a structured artifact for debugging and internal incident follow-up.",
+    q: "What does the audit file contain?",
+    a: "A sealed JSON envelope with the failing test, redacted crash values, a cryptographic hash of the test bytes, confirmation that no AI wrote the proof, and mappings to PCI DSS 12.10.5 and SOC 2 CC7.3 / CC7.4 — structured so auditors can verify independently.",
   },
   {
     q: "Does it fix the bug automatically?",
-    a: "No. Today LogoMesh reproduces crashes and generates evidence. Your team owns diagnosis and code changes.",
+    a: "No. logomesh reproduces incidents and generates evidence. Your engineering team owns diagnosis and remediation. Any future automation will require explicit approval.",
   },
   {
-    q: "Can this run automatically?",
-    a: "Today teams start runs manually from a crash link.",
+    q: "What if a crash can't be reproduced?",
+    a: "logomesh returns a clear status with a structured explanation — insufficient runtime context, dependency on live database state, race conditions, and similar cases. It never reports success without a verified match.",
   },
   {
-    q: "How do we start?",
-    a: "Install LogoMesh, point it at your crash reporting workflow, and run your first reproduction from an incident link.",
+    q: "How do we get started?",
+    a: "Follow the Quick start guide in our documentation: install logomesh, configure your Sentry credentials, and run your first reproduction against a real issue.",
   },
   {
     q: "What does it cost?",
-    a: "LogoMesh is in beta. Contact us for current team and enterprise access details.",
+    a: "logomesh is open source and free to install from PyPI under the MIT license. Enterprise teams who need a managed deployment or webhook integration can contact us for options.",
   },
 ];
 

@@ -15,33 +15,33 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 const PROOF_POINTS: { title: string; body: string; icon: LucideIcon }[] = [
   {
     icon: TerminalSquare,
-    title: "60-second repro",
-    body: "From a Sentry URL to a failing pytest. End to end.",
+    title: "60-second reproduction",
+    body: "From a Sentry issue URL to a verified failing test.",
   },
   {
     icon: Cpu,
-    title: "No LLM in the evidence path",
-    body: "The audit artifact is generated deterministically from frame locals — no LLM in the evidence path.",
+    title: "Deterministic evidence",
+    body: "Audit records are generated from captured runtime values — never from model output.",
   },
   {
     icon: ShieldCheck,
-    title: "Hardened Docker sandbox",
-    body: "Airgapped. Nobody-user. Memory and PID limits for safer, isolated execution.",
+    title: "Isolated execution",
+    body: "Every run uses a hardened Docker sandbox with no network access and strict resource limits.",
   },
   {
     icon: CheckCheck,
-    title: "500 unit tests passing",
-    body: "On the engine. Run on every change.",
+    title: "500+ quality checks",
+    body: "Automated tests run on every release to keep the engine reliable.",
   },
   {
     icon: ScrollText,
-    title: "Structured incident artifact",
-    body: "Each run emits structured JSON output to support internal debugging and post-incident review.",
+    title: "Structured audit records",
+    body: "Each run produces JSON evidence designed for post-incident review and compliance handoff.",
   },
   {
     icon: FileCode,
-    title: "Python today",
-    body: "Strongest today on deterministic Python crash paths, especially in business-critical backend logic.",
+    title: "Python, today",
+    body: "Purpose-built for Python backend incidents where runtime context captures the failure.",
   },
 ];
 
@@ -72,11 +72,10 @@ export function SocialProofStrip() {
                 id="social-proof-heading"
                 className="font-[family-name:var(--font-display)] text-[clamp(1.25rem,3vw,1.65rem)] font-extrabold tracking-[-0.03em] text-[var(--color-ink)]"
               >
-                Built for reliable and secure execution.
+                Reliable, secure, and built for production.
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)] sm:text-[16px]">
-                LogoMesh runs in a hardened sandbox with strict boundaries to keep reproduction runs controlled and
-                predictable.
+                Every reproduction runs in isolation with strict boundaries — so your team can trust the results.
               </p>
             </div>
           </div>

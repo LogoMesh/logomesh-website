@@ -54,7 +54,7 @@ export function Step3Sentry({
         Configure Sentry
       </h2>
       <p className="mt-3 text-[15px] leading-[1.65] text-[var(--color-muted)]">
-        Wire your Sentry project to send issue events to LogoMesh. Five steps,
+        Wire your Sentry project to send issue events to logomesh. Five steps,
         about a minute.
       </p>
 
@@ -71,7 +71,7 @@ export function Step3Sentry({
                 </span>
                 <div className="min-w-0 space-y-1.5">
                   <p>
-                    Name <span className="font-[family-name:var(--font-mono)] text-[var(--color-accent)]">LogoMesh</span>{" "}
+                    Name <span className="font-[family-name:var(--font-mono)] text-[var(--color-accent)]">logomesh</span>{" "}
                     — paste the values below.
                   </p>
                   <div className="grid grid-cols-1 gap-1.5">

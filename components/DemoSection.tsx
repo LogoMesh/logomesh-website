@@ -70,7 +70,7 @@ export function DemoSection() {
             Install, PR, thread
           </h2>
           <p className="read-max mx-auto mt-4 px-3 text-center text-balance text-[18px] leading-snug text-[var(--color-muted)] sm:px-4 sm:text-[19px]">
-            Add LogoMesh to a repo, open or update a Python PR, and watch checks run. If something breaks, it lands on
+            Add logomesh to a repo, open or update a Python PR, and watch checks run. If something breaks, it lands on
             the PR, not in another tool.
           </p>
         </motion.div>
@@ -91,8 +91,8 @@ export function DemoSection() {
               </div>
               <div className="min-w-0 flex-1 flex justify-center px-1">
                 <span className="w-full truncate rounded-md border border-[var(--color-border)] bg-[var(--color-canvas)] px-2 py-1 text-center font-mono text-[11px] leading-tight text-[var(--color-dim)] sm:w-auto sm:px-3 sm:py-1.5 sm:text-[13px]">
-                  <span className="sm:hidden">github.com / PR / LogoMesh</span>
-                  <span className="hidden sm:inline">github.com/pulls / LogoMesh</span>
+                  <span className="sm:hidden">github.com / PR / logomesh</span>
+                  <span className="hidden sm:inline">github.com/pulls / logomesh</span>
                 </span>
               </div>
               <span className="w-8 shrink-0 sm:w-12 md:w-14" aria-hidden />
@@ -102,7 +102,7 @@ export function DemoSection() {
               {gifEnabled && !gifFailed && (
                 <img
                   src={DEMO_GIF_SRC}
-                  alt="LogoMesh demo of install and PR comment flow"
+                  alt="logomesh demo of install and PR comment flow"
                   className={
                     gifLoaded
                       ? "absolute inset-0 z-[1] h-full w-full object-cover object-top"

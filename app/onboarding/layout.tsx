@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Set up LogoMesh · 4-minute pilot install",
+  title: "Set up logomesh · 4-minute pilot install",
   description:
-    "Connect Sentry, GitHub, and (optionally) Slack to your LogoMesh installation. Sealed evidence, no LLM in the evidence path.",
+    "Connect Sentry, GitHub, and (optionally) Slack to your logomesh installation. Sealed evidence, no LLM in the evidence path.",
 };
 
 export default function OnboardingLayout({ children }: { children: ReactNode }) {

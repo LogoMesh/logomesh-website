@@ -27,16 +27,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "LogoMesh · Reproduce production crashes in 60 seconds",
+  title: "logomesh · Reproduce production crashes in 60 seconds",
   description:
-    "When your error monitor fires, LogoMesh reads the program state at the moment of failure and writes a failing pytest that reproduces the crash. The audit artifact is deterministic from frame locals — no LLM in the evidence path. Python. Free during beta.",
+    "When Sentry captures a production crash, logomesh investigates it and produces a deterministic failing test plus audit-ready evidence. Open source. Built for Python teams in regulated environments.",
   icons: {
     apple: "/branding/logomesh-github-app-256.png",
   },
   openGraph: {
-    title: "LogoMesh",
+    title: "logomesh",
     description:
-      "Reads the crash. Reproduces it from frame locals. Hands you a failing pytest. Built for Python fintech.",
+      "From Sentry alert to verified reproduction — failing tests and compliance evidence for Python teams.",
     type: "website",
   },
 };

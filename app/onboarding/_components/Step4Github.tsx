@@ -49,7 +49,7 @@ export function Step4Github({
         Connect GitHub
       </h2>
       <p className="mt-3 text-[15px] leading-[1.65] text-[var(--color-muted)]">
-        LogoMesh opens a draft PR with the failing pytest and the sealed
+        logomesh opens a draft PR with the failing pytest and the sealed
         artifact. We need a token with{" "}
         <span className="font-[family-name:var(--font-mono)] text-[var(--color-ink)]">
           repo

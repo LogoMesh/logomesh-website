@@ -4,93 +4,91 @@ export function HowItWorksContent() {
   return (
     <article className="docs-prose">
       <P>
-        One command triggers a deterministic eight-stage pipeline. Each stage
-        has a single job; none of them share mutable state with the others.
+        logomesh is an AI agent with a tight job. The agent plans and uses tools.
+        A separate, deterministic Python function writes the actual proof.
+        That split is the whole point: AI is great at planning, but auditors
+        won&rsquo;t accept evidence that an AI wrote.
       </P>
 
-      <H2>1. Parse URL</H2>
+      <H2>What the agent does</H2>
       <P>
-        LogoMesh extracts the Sentry organization slug and issue ID from the
-        URL you pass. No browser session or OAuth flow required — just the URL
-        and your <Code>SENTRY_AUTH_TOKEN</Code>.
+        When Sentry fires, the agent runs a short investigation against your code:
       </P>
+      <Ul>
+        <Li>
+          Reads the crash — error type, message, stack trace, and the variable values
+          that were in memory at the moment of failure.
+        </Li>
+        <Li>
+          Finds the part of your code that broke. If the file path doesn&rsquo;t
+          match your repo layout, it tries again with hints from a search step.
+        </Li>
+        <Li>
+          Checks if your project has any missing dependencies the sandbox would need,
+          and prepares them in an isolated bundle before the test runs.
+        </Li>
+        <Li>
+          Calls the deterministic synthesizer to write the failing test.
+        </Li>
+        <Li>
+          Runs the test in a hardened Docker sandbox (no network, unprivileged user,
+          memory + process caps).
+        </Li>
+        <Li>
+          Verifies that the sandbox raised the <em>same</em> error your users saw —
+          not a similar error, the same one.
+        </Li>
+        <Li>
+          If something blocks it, it tells you why (&ldquo;can&rsquo;t find your source&rdquo;,
+          &ldquo;crash needs database state we don&rsquo;t have&rdquo;, etc.) instead of
+          guessing.
+        </Li>
+      </Ul>
 
-      <H2>2. Fetch crash</H2>
+      <H2>What the agent is NOT allowed to do</H2>
       <P>
-        The Sentry API returns the latest event for that issue: error type,
-        message, full stack trace, and — critically — the frame locals captured
-        at crash time. These are the real values from memory at the moment the
-        exception was raised.
+        This is the part that matters for compliance.
       </P>
+      <Ul>
+        <Li>
+          <strong className="text-[var(--color-ink)]">Write the test code.</strong> The
+          failing test is written by a pure Python function from the captured crash
+          values — never by an AI. The bytes in the test file have no AI in them.
+        </Li>
+        <Li>
+          <strong className="text-[var(--color-ink)]">Write the audit file.</strong> The
+          sealed JSON envelope is built deterministically. It includes a hash of the
+          test bytes and a flag that says <Code>llm_in_evidence_path: false</Code>.
+        </Li>
+        <Li>
+          <strong className="text-[var(--color-ink)]">Edit your code.</strong> logomesh
+          opens a draft PR. It never pushes, never merges, never &ldquo;auto-fixes.&rdquo;
+          Your team owns the change.
+        </Li>
+        <Li>
+          <strong className="text-[var(--color-ink)]">Fake a green check.</strong> If
+          the test crashed with a different error than your users saw, the run is
+          flagged for human review with a structured reason. Never silently shipped.
+        </Li>
+      </Ul>
 
-      <H2>3. Pick the frame</H2>
+      <H2>What you get back</H2>
       <P>
-        LogoMesh selects the innermost frame whose filename belongs to your
-        application, not a library or interpreter internal. Frame locals are
-        PII-redacted at this step — before they touch anything else. PAN
-        patterns and field-name heuristics (e.g. <Code>card_number</Code>,{" "}
-        <Code>ssn</Code>) are masked before any LLM call or test-file write.
-      </P>
-
-      <H2>4. Read source</H2>
-      <P>
-        LogoMesh locates the crashing function&rsquo;s source on disk using
-        the file path in the stack frame. If the file cannot be found — for
-        example, on a CI machine without a checkout — it falls back to the
-        context lines Sentry captured alongside the frame.
-      </P>
-
-      <H2>5. Synthesize test</H2>
-      <P>
-        An LLM writes a pytest that imports the function and calls it with
-        values derived from the frame locals. The test does not wrap the call
-        in <Code>try/except</Code> or <Code>pytest.raises</Code> — the
-        exception must propagate naturally so the sandbox exit code is
-        unambiguous. Pass <Code>--no-llm</Code> to skip the LLM entirely and
-        build the test from frame locals only.
-      </P>
-
-      <H2>6. Run sandbox</H2>
-      <P>
-        The test runs inside a Docker container: network disabled, running as
-        the <Code>nobody</Code> user, 512 KB file cap, randomized report
-        filename to prevent path-guessing. LogoMesh never pip-installs
-        dependencies from your code inside the sandbox — only the packages
-        already in the image are available.
-      </P>
-
-      <H2>7. Retry if needed</H2>
-      <P>
-        If the test passes (no repro), LogoMesh makes one retry: it sends the
-        passing output back to the LLM and asks it to fix the test. Common
-        causes are type mismatches — for example, the frame local was the
-        string <Code>&quot;-1&quot;</Code> but the function expects an int{" "}
-        <Code>-1</Code>. One retry only; if it still does not reproduce, exit
-        code <Code>1</Code> is returned.
-      </P>
-
-      <H2>8. Output</H2>
-      <P>
-        Exit <Code>0</Code>: reproduced — you get the formatted report and a
-        copy of the failing test. Exit <Code>1</Code>: not reproduced on this
-        branch. Exit <Code>2</Code>: a pipeline error occurred. With{" "}
-        <Code>--artifact</Code>, a sealed JSON envelope is written alongside
-        the report.
+        Every run produces three artifacts: a failing test file, a sealed JSON audit
+        envelope mapped to SOC2 CC7.3 / CC7.4 and PCI DSS 12.10.5, and a verdict —
+        <Code>reproduced</Code>, <Code>needs_human_review</Code>, or <Code>error</Code>.
+        The audit envelope is what you forward to your reviewer.
       </P>
 
       <Aside>
         <strong className="text-[var(--color-ink)]">
-          What &ldquo;reproduced&rdquo; means:{" "}
+          What &ldquo;reproduced&rdquo; really means:{" "}
         </strong>
-        The sandbox pytest run returned{" "}
-        <Code>{`result["failed"] > 0`}</Code>. The test crashed — confirming
-        the bug exists on this branch. A passing test (zero failures) means
-        either the branch already has a fix, the synthesized test is wrong, or
-        the crash requires external state that was not injected. Use{" "}
-        <Code>--state-file</Code> to provide captured state for the latter
-        case.{" "}
+        The agent&rsquo;s test crashed in the sandbox with the same error type
+        your users saw in Sentry. If it crashed with a different error, or if it
+        passed, you don&rsquo;t get a green &mdash; you get a reason.{" "}
         <Link
-          href="/docs/quick-start"
+          href="/docs/quickstart"
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"
         >
           Back to Quick Start →

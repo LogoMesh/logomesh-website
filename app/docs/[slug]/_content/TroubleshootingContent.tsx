@@ -49,7 +49,7 @@ export function TroubleshootingContent() {
       <P>
         The file being analyzed has a syntax error. The error message includes
         the file path. Open that file, fix the syntax error, and re-run.
-        LogoMesh does not attempt to generate tests for files that do not parse.
+        logomesh does not attempt to generate tests for files that do not parse.
       </P>
 
       <H2>Sandbox exits with collection error (total: 0)</H2>
@@ -66,7 +66,7 @@ export function TroubleshootingContent() {
 
       <H2>Docker not found &rarr; subprocess fallback</H2>
       <P>
-        Without Docker, LogoMesh falls back to a subprocess runner
+        Without Docker, logomesh falls back to a subprocess runner
         automatically. The subprocess runner is less isolated &mdash; it runs in
         your local Python environment without memory or PID limits.
       </P>
@@ -85,7 +85,7 @@ export function TroubleshootingContent() {
       </P>
       <Pre>{`logomesh repro <url> --repo /path/to/your/repo`}</Pre>
       <P>
-        LogoMesh strips common leading path components automatically (
+        logomesh strips common leading path components automatically (
         <Code>/app</Code>, <Code>/app/src</Code>, etc.). If your layout is
         unusual, confirm the file exists relative to the repo root you passed.
       </P>

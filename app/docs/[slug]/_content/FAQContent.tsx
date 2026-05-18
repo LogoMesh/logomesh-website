@@ -5,15 +5,15 @@ export function FAQContent() {
     <article className="docs-prose">
       <P>Top questions from pilots and early users.</P>
 
-      <H2>Does LogoMesh modify my code?</H2>
+      <H2>Does logomesh modify my code?</H2>
       <P>
-        No. LogoMesh reads your source and runs a test in an isolated sandbox.
+        No. logomesh reads your source and runs a test in an isolated sandbox.
         Nothing is written to your repo unless you pass <Code>--draft-pr</Code>.
       </P>
 
       <H2>What if the test doesn&rsquo;t reproduce the crash?</H2>
       <P>
-        LogoMesh retries once with the passing output. If it still doesn&rsquo;t
+        logomesh retries once with the passing output. If it still doesn&rsquo;t
         reproduce, it exits with code 1. Common reasons: the bug is already
         fixed on this branch, or frame locals had type coercion issues (Sentry
         serializes everything as strings — <Code>"-1"</Code> vs{" "}
@@ -45,13 +45,13 @@ export function FAQContent() {
           href="/contact?topic=security"
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"
         >
-          Talk to LogoMesh security →
+          Talk to logomesh security →
         </Link>
       </P>
 
       <H2>Does it work without Docker?</H2>
       <P>
-        Yes. Without Docker, LogoMesh falls back to a subprocess runner. Less
+        Yes. Without Docker, logomesh falls back to a subprocess runner. Less
         isolated (no network airgap), but the test still runs. For compliance
         artifacts, Docker isolation is recommended.
       </P>
@@ -59,7 +59,7 @@ export function FAQContent() {
       <H2>What Python versions are supported?</H2>
       <P>
         The sandbox runs Python 3.12. Your source file can target any version —
-        LogoMesh parses it with the system Python.
+        logomesh parses it with the system Python.
       </P>
 
       <Aside>

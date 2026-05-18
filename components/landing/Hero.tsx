@@ -4,12 +4,12 @@ import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, Award } from "lucide-react";
 import { SPRING_UI } from "@/lib/motion";
-import { MediaPlaceholder } from "./MediaPlaceholder";
+import { HeroProductFrame } from "./HeroProductFrame";
 
 const PROOF_METRICS = [
-  { label: "Under-a-minute repro flow" },
-  { label: "Deterministic test output" },
-  { label: "No auto code changes" },
+  { label: "500+ automated checks on every release" },
+  { label: "AI investigates. Code writes the proof." },
+  { label: "SOC2 CC7.3 / CC7.4 · PCI DSS 12.10.5" },
 ] as const;
 
 export function Hero() {
@@ -85,11 +85,11 @@ export function Hero() {
               className="mr-2 inline-block h-[7px] w-[7px] translate-y-[-2px] rounded-full bg-primary align-middle"
               style={{ boxShadow: "0 0 12px hsl(78 100% 50% / 0.6)" }}
             />
-            For engineering teams handling production incidents
+            Production crashes deserve more than a 45-minute repro.
           </p>
 
           <h1 className="animate-rise rise-d2 mt-6 font-sans text-balance text-[clamp(2.25rem,7.2vw,5rem)] font-semibold leading-[0.94] tracking-[-0.035em] text-foreground sm:leading-[0.92]">
-            Reproduce production{" "}
+            Your production{" "}
             <span
               className="text-destructive"
               style={{
@@ -97,28 +97,27 @@ export function Hero() {
                   "0 0 36px hsl(0 84% 60% / 0.55), 0 0 80px hsl(0 84% 60% / 0.25)",
               }}
             >
-              crashes
-            </span>
-            <br />
-            in about a minute.
+              crash
+            </span>{" "}
+            just got a failing test.
           </h1>
 
           <div className="landing-hero-rule animate-rise rise-d2" aria-hidden />
 
           <p className="animate-rise rise-d3 read-max mt-7 text-[17px] leading-[1.68] text-muted-foreground sm:text-[19px] sm:leading-[1.65]">
-            Paste a crash link from your error tracker. LogoMesh generates a reproducible failing test and structured
-            incident artifact so your team can debug from evidence instead of guesswork.
+            An AI agent investigates every crash. Deterministic code writes the failing test and sealed audit record.
+            Your team gets a draft PR to review — with evidence compliance teams can verify.
           </p>
 
           <div className="animate-rise rise-d4 mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
             <motion.a
-              href="/docs"
+              href="/docs/quickstart"
               className="glow-primary group relative inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-xl bg-primary px-6 text-[15px] font-semibold text-primary-foreground sm:text-[16px]"
               whileHover={{ y: -1, boxShadow: "var(--shadow-glow-hover)" }}
               whileTap={{ scale: 0.985 }}
               transition={SPRING_UI}
             >
-              Read the docs
+              Get started
               <ArrowRight
                 size={16}
                 className="-mr-1 opacity-60 transition-transform group-hover:translate-x-0.5"
@@ -126,15 +125,19 @@ export function Hero() {
             </motion.a>
 
             <motion.a
-              href="#how-it-works"
+              href="/docs"
               className="group inline-flex min-h-[52px] items-center gap-2 rounded-xl border border-border-strong bg-card/40 px-5 text-[14px] font-medium text-foreground/90 backdrop-blur-sm hover:border-primary/50 hover:text-foreground sm:text-[14.5px]"
               whileHover={{ y: -1 }}
               whileTap={{ scale: 0.985 }}
               transition={SPRING_UI}
             >
-              See how it works
+              Read the docs
             </motion.a>
           </div>
+
+          <p className="animate-rise rise-d4 mt-3 font-mono text-[12.5px] text-dim sm:text-[13px]">
+            Open source · Install in minutes · Python 3.11+
+          </p>
 
           <div className="animate-rise rise-d5 mt-8 flex flex-wrap gap-2.5">
             <motion.a
@@ -180,22 +183,7 @@ export function Hero() {
           }}
           className="relative w-full min-w-0 scroll-mt-28"
         >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -inset-6 rounded-[1.75rem] opacity-80 blur-3xl sm:-inset-8"
-            style={{
-              background:
-                "radial-gradient(ellipse 65% 55% at 50% 35%, rgba(196,255,0,0.14) 0%, transparent 62%)",
-            }}
-          />
-          <MediaPlaceholder
-            label="Product demo"
-            dropPath="/public/marketing/hero.mp4"
-            spec="Screen Studio · ~12 s loop · 1800×1200 @2x"
-            kind="video"
-            emphasis="hero"
-            aspectClassName="aspect-[16/11] min-h-[260px] sm:min-h-[320px]"
-          />
+          <HeroProductFrame />
         </motion.div>
       </div>
     </section>

@@ -2,7 +2,7 @@
 
 /* ─────────────────────────────────────────────────────────────
    DESIGN SYSTEM — HSL-only semantic tokens
-   LogoMesh: near-black canvas · acid-lime primary · brutalist
+   logomesh: near-black canvas · acid-lime primary · brutalist
    ───────────────────────────────────────────────────────────── */
 
 :root {
@@ -19,7 +19,7 @@
   --muted-foreground: 240 4% 71%;      /* slightly brighter for body readability */
   --border: 240 4% 12%;                /* #1a1a1d */
   --border-strong: 240 4% 20%;
-  --dim: 240 5% 52%;
+  --dim: 240 5% 58%;                   /* bumped from 52% for AAA body contrast on canvas */
   --input: 240 4% 12%;
   --ring: 78 100% 50%;
 

@@ -7,7 +7,7 @@ const DOCS_INDEX = [
     slug: "quickstart",
     title: "Quick start",
     description:
-      "Install LogoMesh, set your Sentry token, and run your first crash reproduction in under 4 minutes.",
+      "pip install logomesh, set your Sentry token, and reproduce your first crash from the CLI.",
   },
   {
     slug: "how-it-works",
@@ -41,14 +41,14 @@ const DOCS_INDEX = [
     slug: "compliance",
     title: "Compliance contract",
     description:
-      "The three rules that govern every LogoMesh artifact, mapped to SOC2 CC7.3, CC7.4, and PCI DSS 12.10.5.",
+      "The three rules that govern every logomesh artifact, mapped to SOC2 CC7.3, CC7.4, and PCI DSS 12.10.5.",
   },
 ] as const;
 
 export const metadata = {
-  title: "LogoMesh · Docs",
+  title: "logomesh · Docs",
   description:
-    "Documentation for LogoMesh — Sentry URL to deterministic failing pytest in under 60 seconds.",
+    "Documentation for logomesh — Sentry URL to deterministic failing pytest in under 60 seconds.",
 };
 
 export default function DocsIndexPage() {

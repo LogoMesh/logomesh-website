@@ -31,7 +31,7 @@ const STATS: Stat[] = [
     suffix: "+",
     label:
       "confirmed issues we have seen in our own real-PR harness on open-source Python repos",
-    source: "LogoMesh harness · cumulative · Apr 2026",
+    source: "logomesh harness · cumulative · Apr 2026",
   },
   {
     value: 23,

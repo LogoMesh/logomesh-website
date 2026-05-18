@@ -32,7 +32,7 @@ export function ContactForm() {
     setTouched(true);
     if (!canSubmit) return;
 
-    const subject = `LogoMesh contact from ${name.trim()}`;
+    const subject = `logomesh contact from ${name.trim()}`;
     const text = `${body.trim()}\n\nReply to: ${email.trim()} (${name.trim()})`;
     const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
 

@@ -25,7 +25,7 @@ const SNIPPETS: Snippet[] = [
       "",
       `# ${GITHUB_APP_URL}`,
       "",
-      "# LogoMesh shows up under Checks.",
+      "# logomesh shows up under Checks.",
       "# It only comments when it has something reproducible.",
     ],
   },
