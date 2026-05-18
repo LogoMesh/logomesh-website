@@ -7,9 +7,9 @@ import { Footer } from "@/components/Footer";
 import { LOGOMESH_GITHUB_REPO, LOGOMESH_PYPI } from "@/lib/product-links";
 
 export const metadata: Metadata = {
-  title: "Install · logomesh",
+  title: "Get started · logomesh",
   description:
-    "Install logomesh from PyPI — open-source CLI that reproduces Sentry crashes as failing pytest tests with audit-ready evidence.",
+    "Install logomesh and reproduce Sentry production crashes as failing tests with audit-ready compliance evidence.",
 };
 
 const INSTALL_STEPS = [
@@ -20,7 +20,7 @@ const INSTALL_STEPS = [
   },
   {
     title: "Configure",
-    body: "Sentry token with event:read scope. OpenAI key optional (--no-llm skips it).",
+    body: "Add your Sentry token with event:read scope. An OpenAI key is optional for agent-assisted runs.",
     code: `export SENTRY_AUTH_TOKEN=sntryu_…
 export OPENAI_API_KEY=sk-…`,
   },
@@ -42,17 +42,17 @@ export default function InstallPage() {
             <div className="mx-auto max-w-[880px] px-5 py-16 sm:px-8 sm:py-24 md:py-28">
               <div className="mx-auto max-w-[720px] text-center">
                 <p className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.16em] text-[var(--color-accent)]">
-                  Open source
+                  Get started
                 </p>
                 <h1 className="mt-4 font-[family-name:var(--font-display)] text-[clamp(2.25rem,5.6vw,3.5rem)] font-extrabold leading-[1.04] tracking-[-0.035em] text-[var(--color-ink)]">
-                  Install from PyPI.
+                  Start reproducing crashes
                   <br />
-                  <span className="text-[var(--color-accent)]">No hosted tier required.</span>
+                  <span className="text-[var(--color-accent)]">in minutes.</span>
                 </h1>
                 <p className="mt-6 text-[17px] leading-[1.65] text-[var(--color-muted)] sm:text-[18px]">
-                  logomesh is an MIT-licensed CLI. Paste a Sentry URL, get a failing pytest and a
-                  sealed audit envelope mapped to SOC2 CC7.3 / CC7.4 and PCI DSS 12.10.5. The agent
-                  investigates; deterministic code writes the proof.
+                  logomesh is open source and free to install. Point it at a Sentry issue and receive a failing test
+                  plus a sealed audit record mapped to SOC 2 CC7.3 / CC7.4 and PCI DSS 12.10.5. The agent investigates;
+                  deterministic code writes the proof.
                 </p>
                 <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                   <Link
@@ -108,15 +108,14 @@ export default function InstallPage() {
                     pypi.org/project/logomesh
                   </Link>
                   {" · "}
-                  <InlineCode>logomesh repro &lt;url&gt; --artifact</InlineCode> for the compliance JSON.
+                  <InlineCode>logomesh repro &lt;url&gt; --artifact</InlineCode> exports the compliance record.
                 </p>
                 <p className="mt-4 text-[14px] leading-relaxed text-[var(--color-dim)]">
-                  A hosted dashboard and webhook pilot exist for design partners — not required to
-                  use the CLI.{" "}
+                  Need a managed deployment with webhooks and a dashboard?{" "}
                   <Link href="/contact" className="text-[var(--color-muted)] hover:text-[var(--color-ink)]">
-                    Contact us
+                    Contact our team
                   </Link>{" "}
-                  if you need that path.
+                  for enterprise options.
                 </p>
               </div>
             </div>

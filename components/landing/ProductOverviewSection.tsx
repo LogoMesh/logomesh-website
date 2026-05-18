@@ -50,8 +50,8 @@ export function ProductOverviewSection() {
             Why teams choose logomesh
           </h2>
           <p className="marketing-lg mx-auto mt-5 max-w-[34rem] text-pretty text-[var(--color-muted)]">
-            It gives incident responders a repeatable starting point in minutes, helping teams reduce time-to-repro and
-            move faster through debugging.
+            Give incident responders a repeatable starting point in minutes — so teams spend less time reconstructing
+            state and more time shipping fixes.
           </p>
         </div>
 

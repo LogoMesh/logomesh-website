@@ -6,11 +6,11 @@ import { ArrowRight } from "lucide-react";
 import { useFadeUp } from "@/lib/animations";
 import { LOGOMESH_GITHUB_REPO } from "@/lib/product-links";
 
-const CLI_STEPS = [
-  "pip install logomesh",
-  "export SENTRY_AUTH_TOKEN=…",
-  "logomesh repro <sentry-url>",
-  "logomesh repro <url> --artifact",
+const START_STEPS = [
+  "Install logomesh",
+  "Connect your Sentry project",
+  "Reproduce your first crash",
+  "Export audit-ready evidence",
 ] as const;
 
 export function CTASection() {
@@ -35,12 +35,12 @@ export function CTASection() {
       className="landing-surface-raised relative w-full min-w-0 overflow-hidden border-t border-[var(--color-border)] px-4 py-20 text-center sm:px-6 sm:py-24 md:px-10 md:py-28 lg:px-14 lg:py-36"
       onMouseMove={handleMouseMove}
     >
-      <div
+      <motion.div
+        aria-hidden
         className="pointer-events-none absolute inset-0 transition-[background,opacity] duration-700 ease-out"
         style={{
           background: `radial-gradient(600px circle at ${glowPos.x}% ${glowPos.y}%, rgba(196,255,0,0.07) 0%, transparent 65%)`,
         }}
-        aria-hidden
       />
 
       <div className="relative mx-auto w-full min-w-0 max-w-[920px] rounded-[2rem] border border-[var(--color-border)] bg-[var(--color-canvas-2)]/45 px-5 py-12 shadow-[0_32px_80px_-40px_rgba(0,0,0,0.65),inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-sm sm:rounded-[2.25rem] sm:px-12 sm:py-16 md:px-16 md:py-20 lg:px-20 lg:py-24">
@@ -48,14 +48,14 @@ export function CTASection() {
           data-reveal
           className="font-[family-name:var(--font-mono)] text-[12px] font-bold uppercase tracking-[0.16em] text-[var(--color-accent)]"
         >
-          Open source
+          Get started
         </p>
 
         <h2
           data-reveal
           className="relative mt-5 font-[family-name:var(--font-display)] text-balance text-[clamp(1.6rem,7.2vw,3.85rem)] sm:text-[clamp(32px,4.6vw,64px)] font-extrabold leading-[0.96] sm:leading-[0.93] tracking-[-0.04em] mb-8 sm:mb-10"
         >
-          Paste a Sentry URL.
+          From Sentry alert to
           <br />
           <span
             className="text-[var(--color-accent)]"
@@ -64,7 +64,7 @@ export function CTASection() {
                 "0 0 22px rgba(196,255,0,0.55), 0 0 48px rgba(196,255,0,0.35), 0 0 90px rgba(196,255,0,0.2)",
             }}
           >
-            Get the failing test.
+            verified evidence.
           </span>
         </h2>
 
@@ -72,27 +72,29 @@ export function CTASection() {
           data-reveal
           className="marketing-lg read-max relative mx-auto mb-10 max-w-[34rem] text-[var(--color-muted)] sm:mb-12 md:text-[1.125rem] md:leading-relaxed"
         >
-          Install from PyPI, point at a crash, and read the verdict in your terminal. No hosted
-          signup required.
+          Install logomesh, point it at a production crash, and receive a failing test plus an audit record your team
+          can stand behind.
         </p>
 
         <ol
           data-reveal
-          aria-label="CLI quick start"
-          className="relative mx-auto mb-12 grid w-full max-w-[38rem] list-none gap-2"
+          aria-label="Getting started"
+          className="relative mx-auto mb-12 grid w-full max-w-[38rem] list-none gap-2 sm:grid-cols-2"
         >
-          {CLI_STEPS.map((step, i) => (
+          {START_STEPS.map((step, i) => (
             <li
               key={step}
-              className="flex items-center gap-3 rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas)]/70 px-3.5 py-2.5 text-left font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-ink)] sm:text-[13.5px]"
+              className="flex items-center gap-3 rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas)]/70 px-3.5 py-2.5 text-left"
             >
               <span
                 aria-hidden
-                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-[var(--color-border-hi)] bg-[var(--color-canvas-3)] text-[11px] font-bold text-[var(--color-accent)]"
+                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-[var(--color-border-hi)] bg-[var(--color-canvas-3)] font-[family-name:var(--font-mono)] text-[11px] font-bold text-[var(--color-accent)]"
               >
-                {i + 1}
+                0{i + 1}
               </span>
-              <span className="min-w-0 truncate sm:whitespace-normal">{step}</span>
+              <span className="font-sans text-[14px] font-medium text-[var(--color-ink)] sm:text-[14.5px]">
+                {step}
+              </span>
             </li>
           ))}
         </ol>
@@ -104,7 +106,7 @@ export function CTASection() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Quick start
+            Get started
             <ArrowRight size={18} className="-mr-1 opacity-70" />
           </motion.a>
 
@@ -116,7 +118,7 @@ export function CTASection() {
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.98 }}
           >
-            GitHub
+            View on GitHub
           </motion.a>
         </motion.div>
 
@@ -124,7 +126,7 @@ export function CTASection() {
           data-reveal
           className="relative mt-10 font-[family-name:var(--font-mono)] text-[13px] text-[var(--color-dim)] sm:mt-12 sm:text-[14px]"
         >
-          MIT · pip install logomesh · Python 3.11+
+          Open source · MIT license · Python 3.11+
         </p>
       </div>
     </section>

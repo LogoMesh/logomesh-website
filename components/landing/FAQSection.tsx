@@ -8,52 +8,52 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "What does logomesh actually do?",
-    a: "When a Python crash hits Sentry, an AI agent investigates the crash, finds the part of your code that broke, and writes a failing test that reproduces it. You get a draft GitHub PR with the test and a sealed audit file your reviewer can sign off on — usually inside a minute.",
+    q: "What does logomesh do?",
+    a: "When a Python crash lands in Sentry, an AI agent investigates it, identifies the failing code path, and produces a deterministic failing test that reproduces the issue. You receive a draft pull request with the test and a sealed audit record suitable for compliance review — typically within a minute.",
   },
   {
     q: "Is it really an AI agent?",
-    a: "Yes. It plans, uses tools, recovers when it gets stuck, and knows when to shut up and ask for help. The one thing it's strictly forbidden from doing is writing the final test code — that part stays 100% deterministic so your auditors don't have a meltdown.",
+    a: "Yes. The agent plans, calls tools, and escalates when it needs human input. It never writes the final test or audit evidence — those are generated deterministically so auditors can verify the chain of custody independently.",
   },
   {
     q: "Who is this for?",
-    a: "Python backend engineers and SREs at fintechs who use Sentry daily. If your team is in the middle of SOC2 Type II or PCI audit prep and your reviewer flagged 'evidence of post-incident fix verification' as a gap — we built this for you.",
+    a: "Python backend and platform teams who rely on Sentry for production incidents — especially in regulated environments preparing for SOC 2 Type II or PCI audits where post-incident verification is required.",
   },
   {
     q: "How fast is it?",
-    a: "pip install logomesh, export your Sentry token, and run logomesh repro <url> against your checkout. Most crashes return a verdict in about a minute once Docker is warm.",
+    a: "Most teams are running their first reproduction within minutes of install. A typical crash returns a verdict in about 60 seconds once your environment is configured.",
   },
   {
     q: "Do I have to change my codebase?",
-    a: "No. logomesh connects to Sentry via a webhook and to GitHub via a personal access token. You don't install an SDK, don't wrap your code, don't change your error handling.",
+    a: "No SDK and no code changes required. Connect Sentry and GitHub, then point logomesh at an issue URL. Your existing error monitoring and deployment workflow stay the same.",
   },
   {
     q: "Do we stay in control of changes?",
-    a: "Always. logomesh opens a draft PR with the failing test — it never merges, never modifies main, never auto-fixes. Your team decides what the fix looks like.",
+    a: "Always. logomesh opens a draft pull request with the failing test. It never merges, never modifies your default branch, and never ships fixes on your behalf.",
   },
   {
     q: "Is it secure?",
-    a: "Every repro runs in an airgapped Docker sandbox (unprivileged user, memory + PID caps, no network). We never pull from your production database. PII is redacted before anything reaches an LLM or the audit seal.",
+    a: "Every reproduction runs in an isolated Docker sandbox with no network access, an unprivileged user, and strict resource limits. logomesh never connects to your production database. Sensitive data is redacted before anything reaches a language model or the audit record.",
   },
   {
     q: "What does the audit file contain?",
-    a: "A sealed JSON envelope with the failing test, the redacted crash values, a hash of the test bytes, a flag confirming no AI wrote the proof, and control mappings to PCI DSS 12.10.5 and SOC2 CC7.3 / CC7.4. It's designed so an auditor can verify the chain of custody without trusting our word for it.",
+    a: "A sealed JSON envelope with the failing test, redacted crash values, a cryptographic hash of the test bytes, confirmation that no AI wrote the proof, and mappings to PCI DSS 12.10.5 and SOC 2 CC7.3 / CC7.4 — structured so auditors can verify independently.",
   },
   {
     q: "Does it fix the bug automatically?",
-    a: "No. Today logomesh reproduces crashes and generates evidence. Your team owns diagnosis and the code change. Auto-remediation is on the roadmap but will always require explicit approval.",
+    a: "No. logomesh reproduces incidents and generates evidence. Your engineering team owns diagnosis and remediation. Any future automation will require explicit approval.",
   },
   {
     q: "What if a crash can't be reproduced?",
-    a: "We flag it as `needs_human_review` with a structured reason (frame locals insufficient, depends on DB state, race condition, etc.). We never fake a green.",
+    a: "logomesh returns a clear status with a structured explanation — insufficient runtime context, dependency on live database state, race conditions, and similar cases. It never reports success without a verified match.",
   },
   {
-    q: "How do we start?",
-    a: "Open Quick start in the docs from the nav. It walks through install, Sentry, GitHub, and your first test event in about four minutes.",
+    q: "How do we get started?",
+    a: "Follow the Quick start guide in our documentation: install logomesh, configure your Sentry credentials, and run your first reproduction against a real issue.",
   },
   {
     q: "What does it cost?",
-    a: "The CLI is MIT-licensed and free on PyPI. A hosted webhook pilot exists for design partners who want a dashboard — contact us if you need that path. There is no $199/mo self-serve tier.",
+    a: "logomesh is open source and free to install from PyPI under the MIT license. Enterprise teams who need a managed deployment or webhook integration can contact us for options.",
   },
 ];
 

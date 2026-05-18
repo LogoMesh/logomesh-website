@@ -313,7 +313,7 @@ export function Nav() {
                 : "text-[var(--color-muted)] border-transparent hover:text-[var(--color-ink)] hover:border-[var(--color-border-hi)]",
             )}
           >
-            Pricing
+            Get started
           </Link>
         </li>
         <li>
@@ -469,7 +469,7 @@ export function Nav() {
               {pathname === PRICING_HREF && (
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mr-2 shrink-0" />
               )}
-            Install
+            Get started
           </Link>
         </li>
         <li>

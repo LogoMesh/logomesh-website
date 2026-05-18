@@ -4,7 +4,10 @@ import { LOGOMESH_GITHUB_REPO } from "@/lib/product-links";
 export function QuickStartContent() {
   return (
     <article className="docs-prose">
-      <P>Three steps. A Sentry URL. No SDK in your app.</P>
+      <P>
+        Install logomesh, connect Sentry, and reproduce your first production crash — no SDK required in your
+        application.
+      </P>
 
       <H2>1. Install</H2>
       <Pre>{`pip install logomesh`}</Pre>
@@ -42,12 +45,12 @@ Verdict:   reproduced · audit file sealed`}</Pre>
           SOC2 CC7.3 / CC7.4 and PCI DSS 12.10.5.
         </Li>
         <Li>
-          A clear verdict when reproduction is not possible — never a fake green.
+          A clear status when reproduction is not possible — never a false positive.
         </Li>
       </Ul>
 
       <Aside>
-        <strong className="text-[var(--color-ink)]">Source &amp; issues: </strong>
+        <strong className="text-[var(--color-ink)]">Source code: </strong>
         <Link
           href={LOGOMESH_GITHUB_REPO}
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"

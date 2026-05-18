@@ -7,7 +7,7 @@ import { SPRING_UI } from "@/lib/motion";
 import { HeroProductFrame } from "./HeroProductFrame";
 
 const PROOF_METRICS = [
-  { label: "500 engine tests on every change" },
+  { label: "500+ automated checks on every release" },
   { label: "AI investigates. Code writes the proof." },
   { label: "SOC2 CC7.3 / CC7.4 · PCI DSS 12.10.5" },
 ] as const;
@@ -85,7 +85,7 @@ export function Hero() {
               className="mr-2 inline-block h-[7px] w-[7px] translate-y-[-2px] rounded-full bg-primary align-middle"
               style={{ boxShadow: "0 0 12px hsl(78 100% 50% / 0.6)" }}
             />
-            Reproducing a Sentry crash shouldn&rsquo;t take 45 minutes.
+            Production crashes deserve more than a 45-minute repro.
           </p>
 
           <h1 className="animate-rise rise-d2 mt-6 font-sans text-balance text-[clamp(2.25rem,7.2vw,5rem)] font-semibold leading-[0.94] tracking-[-0.035em] text-foreground sm:leading-[0.92]">
@@ -105,8 +105,8 @@ export function Hero() {
           <div className="landing-hero-rule animate-rise rise-d2" aria-hidden />
 
           <p className="animate-rise rise-d3 read-max mt-7 text-[17px] leading-[1.68] text-muted-foreground sm:text-[19px] sm:leading-[1.65]">
-            An AI agent investigates the crash. A pure Python function writes the proof. You get a draft PR your team
-            can ship — and a sealed audit file your reviewer will sign.
+            An AI agent investigates every crash. Deterministic code writes the failing test and sealed audit record.
+            Your team gets a draft PR to review — with evidence compliance teams can verify.
           </p>
 
           <div className="animate-rise rise-d4 mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
@@ -117,7 +117,7 @@ export function Hero() {
               whileTap={{ scale: 0.985 }}
               transition={SPRING_UI}
             >
-              Quick start
+              Get started
               <ArrowRight
                 size={16}
                 className="-mr-1 opacity-60 transition-transform group-hover:translate-x-0.5"
@@ -136,7 +136,7 @@ export function Hero() {
           </div>
 
           <p className="animate-rise rise-d4 mt-3 font-mono text-[12.5px] text-dim sm:text-[13px]">
-            MIT · pip install logomesh · Python 3.11+
+            Open source · Install in minutes · Python 3.11+
           </p>
 
           <div className="animate-rise rise-d5 mt-8 flex flex-wrap gap-2.5">

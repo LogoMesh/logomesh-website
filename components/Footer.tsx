@@ -3,7 +3,7 @@ import { LogoMark } from "./LogoMark";
 
 const LINKS = [
   { label: "Docs", href: "/docs" },
-  { label: "Install", href: "/pricing" },
+  { label: "Get started", href: "/pricing" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
   { label: "Contact", href: "/contact" },
@@ -55,13 +55,13 @@ export function Footer() {
           </nav>
 
           <p className="mx-auto max-w-[22rem] text-[15px] leading-relaxed text-[var(--color-muted)] sm:text-[16px] lg:mx-0 lg:max-w-[min(100%,17.5rem)] lg:justify-self-end lg:text-right">
-            Reads the crash. Reproduces it. Hands you the test.
+            From Sentry alert to verified reproduction.
           </p>
         </div>
 
         <div className="mt-3 flex flex-col items-center gap-2.5 border-t border-[var(--color-border)] pt-3 text-center sm:mt-5 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-5 sm:gap-y-2 sm:pt-4">
           <span className="font-[family-name:var(--font-mono)] text-[11.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
-            Pilot resources
+            Resources
           </span>
           <Link
             href="/docs/github-pat-vs-app"
@@ -85,7 +85,7 @@ export function Footer() {
           <span className="font-semibold text-[var(--color-muted)]" aria-hidden>
             *
           </span>{" "}
-          MIT · open source · pip install logomesh · Python 3.11+. Hosted webhook pilot available for design partners.
+          Open source · MIT license · Python 3.11+. Enterprise deployments available on request.
         </p>
       </div>
     </footer>

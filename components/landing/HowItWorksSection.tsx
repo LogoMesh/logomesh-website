@@ -22,26 +22,26 @@ const STEPS: {
 }[] = [
   {
     n: "01",
-    title: "Your crashes don't sit waiting",
-    body: "The moment Sentry catches a crash, the agent picks it up. No manual trigger, no human in the loop.",
+    title: "Every alert gets investigated",
+    body: "When Sentry captures a crash, the agent starts immediately — no manual triage and no queue to babysit.",
     icon: Bell,
   },
   {
     n: "02",
-    title: "An agent reproduces the bug for you",
-    body: "It reads the crash, finds the right piece of your code, and figures out how to trigger it. If it can't, it tells you why — never a fake green.",
+    title: "The agent reproduces the failure",
+    body: "It reads the crash, locates the relevant code, and determines how to trigger the same failure. When reproduction isn't possible, you get a clear explanation instead of a false positive.",
     icon: TerminalSquare,
   },
   {
     n: "03",
-    title: "The proof is written by code, not AI",
-    body: "A deterministic Python function writes the failing test and the audit file. No hallucinations land in your evidence. That's the part your auditor cares about.",
+    title: "Evidence is written deterministically",
+    body: "A deterministic function generates the failing test and audit record. No model output enters your compliance evidence path.",
     icon: FileCode,
   },
   {
     n: "04",
-    title: "Your team gets a draft PR they can trust",
-    body: "Real failing test. Sealed audit file mapped to SOC2 and PCI. We never touch your code or merge a PR — your team ships the fix.",
+    title: "Your team reviews a draft PR",
+    body: "A real failing test and sealed audit record mapped to SOC 2 and PCI controls. logomesh never merges code — your team owns the fix.",
     icon: FileBadge,
   },
 ];
@@ -53,26 +53,26 @@ const SECURITY_PILLARS: {
 }[] = [
   {
     icon: Shield,
-    title: "Hardened sandbox",
-    body: "Airgapped Docker container, unprivileged user, memory and PID limits. Refuses to run in production without Docker isolation.",
+    title: "Isolated sandbox",
+    body: "Each run executes in a hardened Docker container with no outbound network, an unprivileged user, and strict memory and process limits.",
   },
   {
     icon: KeyRound,
-    title: "Per-installation secrets",
+    title: "Your credentials, encrypted",
     body:
-      "Each install has its own Sentry HMAC secret, GitHub PAT, and Slack webhook, encrypted at rest in Supabase and rotatable from the dashboard.",
+      "Sentry and GitHub credentials are encrypted at rest and scoped to your installation. Rotate keys anytime from your dashboard.",
   },
   {
     icon: Lock,
-    title: "No state from your DB",
+    title: "No production database access",
     body:
-      "The repro path reads frame locals captured at the crash. logomesh never connects to your production database.",
+      "Reproduction uses runtime values captured at the moment of the crash. logomesh never connects to your live database.",
   },
   {
     icon: Scale,
-    title: "PII redacted before every LLM call",
+    title: "PII redacted by default",
     body:
-      "PAN (Luhn-validated), SSN, email, JWTs, and 15+ API-key prefixes are scrubbed before anything reaches an LLM or the audit seal.",
+      "Payment card numbers, government IDs, email addresses, tokens, and common API-key patterns are removed before any model call or audit record is written.",
   },
 ];
 
@@ -159,10 +159,11 @@ export function HowItWorksSection() {
                 Why we split the job
               </p>
               <p className="mt-1.5 text-[14.5px] leading-relaxed text-[var(--color-muted)] sm:text-[15px]">
-                <span className="text-[var(--color-ink)]">AI is great at planning. It is not great at evidence.</span>{" "}
-                The agent does the investigation. A deterministic Python function writes the failing test and the
-                audit file. And the agent only marks a crash &ldquo;reproduced&rdquo; if the sandbox raised{" "}
-                <span className="text-[var(--color-ink)]">the same error</span> your users saw — not a similar one.
+                <span className="text-[var(--color-ink)]">AI excels at investigation. Evidence must be deterministic.</span>{" "}
+                The agent handles discovery. Deterministic code writes the failing test and audit record. A crash is
+                marked reproduced only when the sandbox raises{" "}
+                <span className="text-[var(--color-ink)]">the same exception type</span> Sentry recorded — not merely a
+                failing test.
               </p>
             </div>
           </div>
@@ -181,10 +182,10 @@ export function HowItWorksSection() {
               id="security-heading"
               className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
             >
-              Security you don&rsquo;t have to argue for
+              Enterprise-grade isolation
             </h3>
             <p className="mx-auto mt-5 max-w-[34rem] text-pretty text-[17px] leading-relaxed text-[var(--color-muted)] sm:text-[18px] sm:leading-[1.75]">
-              Every reproduction runs in an isolated sandbox. We never touch your production database. The same boundaries apply on the free tier and the enterprise deployment.
+              Every reproduction runs in an isolated sandbox with the same security boundaries whether you use the CLI locally or a managed deployment.
             </p>
           </div>
 
@@ -208,7 +209,7 @@ export function HowItWorksSection() {
           </div>
 
           <p className="mx-auto mt-8 max-w-[40rem] text-center text-[14px] leading-relaxed text-[var(--color-dim)] sm:mt-10 sm:text-[15px]">
-            More detail lives in the docs. Ask if you need something for a security review.
+            Full security and compliance documentation is available for vendor review.
           </p>
         </div>
       </div>

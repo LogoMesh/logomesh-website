@@ -41,7 +41,7 @@ const PILLARS: { title: string; body: string; icon: LucideIcon }[] = [
   {
     icon: BadgeCheck,
     title: "PCI DSS 12.10.5 · SOC2 CC7.3 / CC7.4",
-    body: "Each artifact maps the repro to post-incident response control IDs. Reviewer-ready on day one.",
+    body: "Each record maps reproduction to post-incident response controls — ready for your next audit.",
   },
 ];
 
@@ -67,7 +67,7 @@ export function TrustStrip() {
               For your security team
             </p>
             <p className="mt-0.5 font-[family-name:var(--font-display)] text-[15px] font-bold leading-tight tracking-[-0.015em] text-[var(--color-ink)]">
-              The four claims that pass a vendor review.
+              Built for security and compliance review.
             </p>
           </div>
         </div>
@@ -115,7 +115,7 @@ export function TrustStrip() {
             UC Berkeley AgentBeats — 1st place, testing track
           </span>
           <span className="text-[var(--color-border-hi)]">·</span>
-          <span>Python 3.10+ today</span>
+          <span>Python 3.11+</span>
           <span className="text-[var(--color-border-hi)]">·</span>
           <span>SOC2 Type I in progress · Type II Q3 2026</span>
         </div>

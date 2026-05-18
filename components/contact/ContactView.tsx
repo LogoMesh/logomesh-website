@@ -29,8 +29,8 @@ export function ContactView() {
             Contact
           </h1>
           <p className="read-max mt-4 max-w-[34rem] text-[16px] leading-relaxed text-[var(--color-muted)] sm:text-[17px] sm:leading-[1.65]">
-            Talk to us about a pilot, audit-evidence requirements, or the agent webhook roadmap. Short form below: we
-            kept fields light on purpose so sending a note feels fast.
+            Reach our team about enterprise deployments, compliance requirements, or webhook integrations. The form
+            below is short by design — most notes take under a minute to send.
           </p>
         </div>
       </section>
