@@ -20,7 +20,7 @@ export function ContactView() {
         />
         <div className="mx-auto max-w-[1280px] px-4 pb-12 pt-8 sm:px-8 sm:pb-16 sm:pt-12 md:px-10 md:pb-20">
           <p className="font-[family-name:var(--font-mono)] text-[12.5px] font-bold uppercase tracking-[0.14em] text-[var(--color-accent)] sm:text-[13px]">
-            LogoMesh
+            logomesh
           </p>
           <h1
             id="contact-hero-heading"

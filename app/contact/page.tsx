@@ -4,11 +4,11 @@ import { Footer } from "@/components/Footer";
 import { ContactView } from "@/components/contact/ContactView";
 
 export const metadata: Metadata = {
-  title: "Contact · LogoMesh",
+  title: "Contact · logomesh",
   description:
     "Talk to us about pilot deployments, audit-evidence requirements, or the agent webhook roadmap.",
   openGraph: {
-    title: "Contact · LogoMesh",
+    title: "Contact · logomesh",
     description:
       "Talk to us about pilot deployments, audit-evidence requirements, or the agent webhook roadmap.",
     type: "website",

@@ -4,7 +4,7 @@ export function ComplianceContent() {
   return (
     <article className="docs-prose">
       <P>
-        These five clauses make up the LogoMesh compliance contract. They are
+        These five clauses make up the logomesh compliance contract. They are
         the same three rules that govern the orchestrator&rsquo;s evidence
         path, plus the standards mapping and the audit trail that follows from
         them. If any clause stops being true for an artifact, the artifact is
@@ -44,49 +44,60 @@ export function ComplianceContent() {
         If the verification gate fails, the run emits{" "}
         <Code>needs_human_review: true</Code> with the reason — never a green
         &ldquo;shipped&rdquo; verdict on a wrong artifact. Mismatches surface
-        in the dashboard with the{" "}
-        <span className="font-[family-name:var(--font-mono)] text-[hsl(38_95%_72%)]">
-          ✗ Mismatch
-        </span>{" "}
-        pill so a human can decide whether the divergence is meaningful.
+        with a structured <Code>review_reason</Code> so a human can decide
+        whether the divergence is meaningful.
       </P>
 
-      <H2>Control mappings: PCI DSS 6.3.2 / SOC2 CC8.1</H2>
+      <H2>Control mappings: SOC2 CC7.3 / CC7.4 · PCI DSS 12.10.5</H2>
       <P>
-        Every artifact embeds a{" "}
-        <Code>{`"control_mappings": ["PCI DSS 6.3.2", "SOC2 CC8.1"]`}</Code>{" "}
-        block. Those two controls govern the audit-evidence path the artifact
-        is designed to satisfy:
+        Every artifact embeds post-incident response controls — not pre-release
+        code-review controls. The CLI emits:
       </P>
+      <Pre>{`"controls": [
+  "SOC2-CC7.3",
+  "SOC2-CC7.4",
+  "PCI-DSS-4.0-12.10.5"
+]`}</Pre>
+      <P>Human-readable docs and dashboards may show the same three as:</P>
+      <Pre>{`"control_mappings": [
+  "SOC2 CC7.3",
+  "SOC2 CC7.4",
+  "PCI DSS 12.10.5"
+]`}</Pre>
       <Ul>
         <Li>
-          <strong className="text-[var(--color-ink)]">
-            PCI DSS 6.3.2
-          </strong>{" "}
-          — review of bespoke and custom code prior to release to identify
-          potential vulnerabilities. The sealed reproduction is the
-          machine-witnessed evidence the reviewer keeps on file.
+          <strong className="text-[var(--color-ink)]">SOC2 CC7.3</strong> —
+          evaluate security events to determine whether they could or have
+          resulted in a failure to meet objectives. The deterministic repro is
+          machine-witnessed evaluation of the production incident.
         </Li>
         <Li>
-          <strong className="text-[var(--color-ink)]">SOC2 CC8.1</strong> —
-          authorization, design, development, and configuration of changes
-          including system components. The artifact + draft PR pair documents
-          the change motivation alongside its proof.
+          <strong className="text-[var(--color-ink)]">SOC2 CC7.4</strong> —
+          respond to identified security incidents. The sealed test, optional
+          draft PR, and audit trail document the response.
+        </Li>
+        <Li>
+          <strong className="text-[var(--color-ink)]">PCI DSS 12.10.5</strong>{" "}
+          — incident response procedures are in place and followed. The sealed
+          envelope is the procedural artifact tying the alert to a verifiable
+          reproduction.
         </Li>
       </Ul>
+      <P>
+        <strong className="text-[var(--color-ink)]">Do not use</strong>{" "}
+        <Code>PCI DSS 6.3.2</Code> or <Code>SOC2 CC8.1</Code> for this product.
+        Those govern pre-release secure code review and change management — i.e.
+        controls applied <em>before</em> a change ships. logomesh fires{" "}
+        <em>after</em> a production crash is captured; the correct mapping is
+        incident response (CC7.3 / CC7.4 / 12.10.5).
+      </P>
 
       <H2>Audit trail and attestation</H2>
       <P>
-        Each installation accumulates an append-only{" "}
-        <Code>session_audit</Code> stream stamped on every artifact. Reviewers
-        can request the session journal from a customer-success contact; we
-        do not transmit it through the dashboard surface to keep the
-        URL-as-secret risk surface narrow during pilot v1.
-      </P>
-      <P>
-        For the long form — including the precise rule numbering for both
-        controls and how to walk an auditor through a single artifact end to
-        end — open a security-review thread.
+        Each <Code>logomesh repro … --artifact</Code> run writes a timestamped
+        JSON envelope to disk. Reviewers can hash the test bytes, verify{" "}
+        <Code>llm_in_evidence_path: false</Code>, and walk the control mapping
+        without trusting marketing copy.
       </P>
       <Aside>
         Need attestation language for your own SOC2 / PCI workpaper?{" "}
@@ -94,17 +105,12 @@ export function ComplianceContent() {
           href="/contact?topic=security"
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"
         >
-          Talk to LogoMesh security →
+          Talk to logomesh security →
         </Link>
       </Aside>
     </article>
   );
 }
-
-// ──────────────────────────────────────────────────────────────────────
-// Inline prose primitives — kept identical to the sibling content file
-// for visual consistency without a typography plugin.
-// ──────────────────────────────────────────────────────────────────────
 
 function H2({ children }: { children: React.ReactNode }) {
   return (
@@ -147,6 +153,14 @@ function Code({ children }: { children: React.ReactNode }) {
     <code className="rounded-md border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)] px-1.5 py-0.5 font-[family-name:var(--font-mono)] text-[12.5px] text-[var(--color-ink)]">
       {children}
     </code>
+  );
+}
+
+function Pre({ children }: { children: React.ReactNode }) {
+  return (
+    <pre className="mt-4 overflow-x-auto rounded-xl border border-[var(--color-border-hi)] bg-[var(--color-canvas-2)] p-4 font-[family-name:var(--font-mono)] text-[13px] leading-[1.65] text-[var(--color-ink)]">
+      {children}
+    </pre>
   );
 }
 

@@ -36,7 +36,7 @@ export async function proxy(
     return NextResponse.json(
       {
         error: "backend_unreachable",
-        detail: "Cannot reach the LogoMesh backend.",
+        detail: "Cannot reach the logomesh backend.",
       },
       { status: 502 },
     );

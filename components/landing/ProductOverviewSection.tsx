@@ -19,7 +19,7 @@ const CARDS = [
   {
     icon: GitPullRequest,
     title: "You stay in control",
-    body: "LogoMesh reproduces incidents. Your team decides root cause, remediation, and every code change.",
+    body: "logomesh reproduces incidents. Your team decides root cause, remediation, and every code change.",
   },
   {
     icon: ScrollText,
@@ -42,12 +42,12 @@ export function ProductOverviewSection() {
       <AuroraField className="opacity-70" />
       <div className="relative mx-auto max-w-[1280px] px-5 py-20 sm:px-8 md:py-28 md:px-10">
         <div className="mx-auto max-w-[640px] text-center">
-          <p className="landing-kicker">Why LogoMesh</p>
+          <p className="landing-kicker">Why logomesh</p>
           <h2
             id="why-heading"
             className="type-h2 mt-4 font-[family-name:var(--font-display)] font-extrabold text-[var(--color-ink)]"
           >
-            Why teams choose LogoMesh
+            Why teams choose logomesh
           </h2>
           <p className="marketing-lg mx-auto mt-5 max-w-[34rem] text-pretty text-[var(--color-muted)]">
             It gives incident responders a repeatable starting point in minutes, helping teams reduce time-to-repro and

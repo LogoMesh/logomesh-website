@@ -1,35 +1,31 @@
 import Link from "next/link";
+import { LOGOMESH_GITHUB_REPO } from "@/lib/product-links";
 
 export function QuickStartContent() {
   return (
     <article className="docs-prose">
+      <P>Three steps. A Sentry URL. No SDK in your app.</P>
+
+      <H2>1. Install</H2>
+      <Pre>{`pip install logomesh`}</Pre>
       <P>
-        Three steps. Four minutes. No SDK.
+        Requires Python 3.11+, Docker running locally, and a Sentry auth token with{" "}
+        <Code>event:read</Code> scope. An OpenAI key is optional — pass{" "}
+        <Code>--no-llm</Code> to skip the agent entirely.
       </P>
 
-      <H2>1. Start the wizard</H2>
-      <P>
-        Go to{" "}
-        <Link href="/onboarding" className="text-[var(--color-accent)] underline-offset-2 hover:underline">
-          /onboarding
-        </Link>{" "}
-        and connect Sentry + GitHub. Takes literally two minutes. Your secrets are encrypted
-        before they ever touch our database.
-      </P>
+      <H2>2. Configure</H2>
+      <Pre>{`export SENTRY_AUTH_TOKEN=sntryu_…
+export OPENAI_API_KEY=sk-…   # optional`}</Pre>
+      <P>A <Code>.env</Code> in your repo root works too.</P>
 
-      <H2>2. Paste the webhook</H2>
+      <H2>3. Reproduce</H2>
+      <Pre>{`logomesh repro https://sentry.io/organizations/your-org/issues/12345678/`}</Pre>
       <P>
-        Drop the LogoMesh webhook URL into your Sentry project, fire a test event,
-        and watch the agent work live in your dashboard. Done.
+        Add <Code>--artifact</Code> for the compliance JSON, <Code>--draft-pr</Code> for a GitHub
+        draft PR, or <Code>--no-llm</Code> for deterministic-only mode.
       </P>
-
-      <H2>3. You&rsquo;re live</H2>
-      <P>
-        Every new crash in Sentry now triggers the agent automatically. You get a draft PR
-        with the failing test and a sealed audit file. Your team does the rest — we never
-        touch your code.
-      </P>
-      <Pre>{`## LogoMesh reproduced your crash
+      <Pre>{`## logomesh reproduced your crash
 
 ### Negative quantity bypasses checkout validation
 Crash:     ValueError matched on both sides
@@ -38,30 +34,32 @@ Got:       Order created with total -$49.95
 Location:  checkout.py, line 42
 Verdict:   reproduced · audit file sealed`}</Pre>
 
-      <H2>What the dashboard shows you</H2>
+      <H2>What you get</H2>
       <Ul>
+        <Li>A failing pytest against your current branch — synthesized from frame locals, not LLM output.</Li>
         <Li>
-          Every run the agent has done — verdict, duration, cost.
+          Optional sealed audit file with <Code>llm_in_evidence_path: false</Code> and mappings to
+          SOC2 CC7.3 / CC7.4 and PCI DSS 12.10.5.
         </Li>
         <Li>
-          The sealed audit file with the SOC2 / PCI control mapping, ready to forward
-          to your reviewer.
-        </Li>
-        <Li>
-          The agent&rsquo;s decisions — which tools it called, what it tried, why it
-          stopped — for the curious or for incident review.
+          A clear verdict when reproduction is not possible — never a fake green.
         </Li>
       </Ul>
 
       <Aside>
-        <strong className="text-[var(--color-ink)]">Power users: </strong>
-        you can still run <Code>logomesh repro &lt;sentry-url&gt;</Code> locally if you want
-        to poke at the agent on a single crash. The dashboard is what most teams use.{" "}
+        <strong className="text-[var(--color-ink)]">Source &amp; issues: </strong>
+        <Link
+          href={LOGOMESH_GITHUB_REPO}
+          className="text-[var(--color-accent)] underline-offset-2 hover:underline"
+        >
+          github.com/LogoMesh/LogoMesh-Dev
+        </Link>
+        . Full pipeline:{" "}
         <Link
           href="/docs/how-it-works"
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"
         >
-          See how the agent works →
+          How it works →
         </Link>
       </Aside>
     </article>

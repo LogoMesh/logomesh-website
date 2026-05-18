@@ -30,7 +30,7 @@ export function CompliancePanel() {
             Control mappings
           </p>
           <p className="mt-1.5 text-[14.5px] leading-[1.6] text-[var(--color-ink)]">
-            PCI DSS 6.3.2 · SOC2 CC8.1
+            PCI DSS 12.10.5 · SOC2 CC7.3 / CC7.4
           </p>
         </div>
       </div>

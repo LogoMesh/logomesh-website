@@ -93,7 +93,7 @@ export function HeroProductFrame() {
     <div
       className="relative w-full min-w-0"
       role="img"
-      aria-label="LogoMesh terminal: reproducing a Sentry crash, ending in a failing pytest and a signed PCI DSS / SOC2 audit artifact"
+      aria-label="logomesh terminal: reproducing a Sentry crash, ending in a failing pytest and a signed PCI DSS / SOC2 audit artifact"
     >
       {/* lime bloom behind the frame */}
       <div

@@ -4,7 +4,7 @@ export function HowItWorksContent() {
   return (
     <article className="docs-prose">
       <P>
-        LogoMesh is an AI agent with a tight job. The agent plans and uses tools.
+        logomesh is an AI agent with a tight job. The agent plans and uses tools.
         A separate, deterministic Python function writes the actual proof.
         That split is the whole point: AI is great at planning, but auditors
         won&rsquo;t accept evidence that an AI wrote.
@@ -61,7 +61,7 @@ export function HowItWorksContent() {
           test bytes and a flag that says <Code>llm_in_evidence_path: false</Code>.
         </Li>
         <Li>
-          <strong className="text-[var(--color-ink)]">Edit your code.</strong> LogoMesh
+          <strong className="text-[var(--color-ink)]">Edit your code.</strong> logomesh
           opens a draft PR. It never pushes, never merges, never &ldquo;auto-fixes.&rdquo;
           Your team owns the change.
         </Li>
@@ -88,7 +88,7 @@ export function HowItWorksContent() {
         your users saw in Sentry. If it crashed with a different error, or if it
         passed, you don&rsquo;t get a green &mdash; you get a reason.{" "}
         <Link
-          href="/docs/quick-start"
+          href="/docs/quickstart"
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"
         >
           Back to Quick Start →

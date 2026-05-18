@@ -21,7 +21,7 @@ const DOCS: Record<string, DocEntry> = {
   quickstart: {
     title: "Quick start",
     description:
-      "Install LogoMesh, set your Sentry token, and run your first crash reproduction in under 4 minutes.",
+      "pip install logomesh, set your Sentry token, and reproduce your first crash from the CLI.",
     Body: QuickStartContent,
   },
   "how-it-works": {
@@ -49,13 +49,13 @@ const DOCS: Record<string, DocEntry> = {
   "github-pat-vs-app": {
     title: "GitHub PAT vs. App",
     description:
-      "Why LogoMesh's pilot uses a personal access token, what scopes are required, and when the GitHub App migration lands.",
+      "Why logomesh's pilot uses a personal access token, what scopes are required, and when the GitHub App migration lands.",
     Body: GithubPatVsAppContent,
   },
   compliance: {
     title: "Compliance contract",
     description:
-      "The three rules that govern every LogoMesh artifact, mapped to PCI DSS 6.3.2 and SOC2 CC8.1.",
+      "The three rules that govern every logomesh artifact, mapped to SOC2 CC7.3, CC7.4, and PCI DSS 12.10.5.",
     Body: ComplianceContent,
   },
 };
@@ -73,9 +73,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const entry = DOCS[slug];
-  if (!entry) return { title: "LogoMesh · Docs" };
+  if (!entry) return { title: "logomesh · Docs" };
   return {
-    title: `LogoMesh · ${entry.title}`,
+    title: `logomesh · ${entry.title}`,
     description: entry.description,
   };
 }

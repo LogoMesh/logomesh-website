@@ -118,7 +118,7 @@ export function ArtifactContent() {
           href="/contact?topic=security"
           className="text-[var(--color-accent)] underline-offset-2 hover:underline"
         >
-          Talk to the LogoMesh security team →
+          Talk to the logomesh security team →
         </Link>
       </Aside>
     </article>

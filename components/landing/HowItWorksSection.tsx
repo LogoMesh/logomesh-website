@@ -13,58 +13,36 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { useFadeUp } from "@/lib/animations";
-import { cn } from "@/lib/utils";
-import { LANDING_GRAPHICS } from "@/lib/landing-graphic-src";
-import { MarketingGraphicPlaceholder } from "./MarketingGraphicPlaceholder";
 
 const STEPS: {
   n: string;
   title: string;
   body: string;
   icon: LucideIcon;
-  graphicSrc: string;
-  graphicTitle: string;
-  graphicExport: string;
 }[] = [
   {
     n: "01",
     title: "Your crashes don't sit waiting",
     body: "The moment Sentry catches a crash, the agent picks it up. No manual trigger, no human in the loop.",
     icon: Bell,
-    graphicSrc: LANDING_GRAPHICS.how1,
-    graphicTitle:
-      "Screenshot: Sentry issue page with stack trace and frame locals (your error monitor of choice).",
-    graphicExport: "~1200×800 @2x WebP. Show the issue + frame locals panel.",
   },
   {
     n: "02",
     title: "An agent reproduces the bug for you",
     body: "It reads the crash, finds the right piece of your code, and figures out how to trigger it. If it can't, it tells you why — never a fake green.",
     icon: TerminalSquare,
-    graphicSrc: LANDING_GRAPHICS.how2,
-    graphicTitle:
-      "Screenshot: agent audit log showing tool calls and decisions during a repro.",
-    graphicExport: "~1200×800 @2x. Show the agent's tool-call trace.",
   },
   {
     n: "03",
     title: "The proof is written by code, not AI",
     body: "A deterministic Python function writes the failing test and the audit file. No hallucinations land in your evidence. That's the part your auditor cares about.",
     icon: FileCode,
-    graphicSrc: LANDING_GRAPHICS.how3,
-    graphicTitle:
-      "Screenshot: failing pytest plus the sealed audit envelope side by side.",
-    graphicExport: "~1200×800 @2x. Highlight the failing assertion + the seal.",
   },
   {
     n: "04",
     title: "Your team gets a draft PR they can trust",
     body: "Real failing test. Sealed audit file mapped to SOC2 and PCI. We never touch your code or merge a PR — your team ships the fix.",
     icon: FileBadge,
-    graphicSrc: LANDING_GRAPHICS.how4,
-    graphicTitle:
-      "Screenshot: draft PR with the failing test plus the JSON audit artifact.",
-    graphicExport: "~1200×800 @2x. Show PR + artifact side by side.",
   },
 ];
 
@@ -88,7 +66,7 @@ const SECURITY_PILLARS: {
     icon: Lock,
     title: "No state from your DB",
     body:
-      "The repro path reads frame locals captured at the crash. LogoMesh never connects to your production database.",
+      "The repro path reads frame locals captured at the crash. logomesh never connects to your production database.",
   },
   {
     icon: Scale,
@@ -129,10 +107,8 @@ export function HowItWorksSection() {
           className="mx-auto mt-14 max-w-[960px] list-none md:mt-20"
           aria-label="Steps from install to thread"
         >
-          {STEPS.map(({ n, title, body, icon: Icon, graphicSrc, graphicTitle, graphicExport }, i) => {
+          {STEPS.map(({ n, title, body, icon: Icon }, i) => {
             const isLast = i === STEPS.length - 1;
-            /** Odd rows: image left, copy right on large screens (still copy-first in DOM on mobile). */
-            const zigzag = i % 2 === 1;
             return (
               <li
                 key={n}
@@ -155,32 +131,12 @@ export function HowItWorksSection() {
                 </div>
 
                 <article className="min-w-0 flex-1 pt-0.5 pb-1">
-                  <div className="grid gap-8 lg:grid-cols-2 lg:items-start lg:gap-10">
-                    <header
-                      className={cn(
-                        "space-y-3",
-                        zigzag && "lg:order-2",
-                      )}
-                    >
-                      <h3 className="font-[family-name:var(--font-display)] text-[1.35rem] font-bold tracking-[-0.02em] text-[var(--color-ink)] sm:text-[1.45rem]">
-                        {title}
-                      </h3>
-                      <p className="marketing-lg text-pretty text-[var(--color-muted)]">{body}</p>
-                    </header>
-                    <div
-                      className={cn(
-                        "min-w-0 lg:max-w-none",
-                        zigzag && "lg:order-1",
-                      )}
-                    >
-                      <MarketingGraphicPlaceholder
-                        variant="step"
-                        title={graphicTitle}
-                        recommendedExport={graphicExport}
-                        src={graphicSrc}
-                      />
-                    </div>
-                  </div>
+                  <header className="space-y-3">
+                    <h3 className="font-[family-name:var(--font-display)] text-[1.35rem] font-bold tracking-[-0.02em] text-[var(--color-ink)] sm:text-[1.45rem]">
+                      {title}
+                    </h3>
+                    <p className="marketing-lg text-pretty text-[var(--color-muted)]">{body}</p>
+                  </header>
                 </article>
               </li>
             );

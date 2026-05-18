@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add Vanta.js animated hero background + Lenis smooth scroll + GSAP ScrollTrigger section reveals (split-text headlines, staggered fade-up cards) to the LogoMesh marketing site.
+**Goal:** Add Vanta.js animated hero background + Lenis smooth scroll + GSAP ScrollTrigger section reveals (split-text headlines, staggered fade-up cards) to the logomesh marketing site.
 
 **Architecture:** Custom hooks `useFadeUp` and `useSplitText` in `lib/animations.ts` (powered by `@gsap/react` `useGSAP`). `LenisProvider` in `lib/lenis.tsx` wraps `app/layout.tsx`, integrates Lenis RAF with GSAP's ticker. Vanta.js + Three.js loaded via CDN `<Script>` in layout; Hero polls `window.VANTA` until ready. Existing `whileInView` motion patterns replaced by hooks; `whileHover`/`whileTap` kept untouched.
 
@@ -305,14 +305,14 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "LogoMesh · Ship Python PRs with proof, not noise",
+  title: "logomesh · Ship Python PRs with proof, not noise",
   description:
-    "Merge with confidence. LogoMesh runs your changed Python in a sandbox and only comments when it can show a reproducible bug. Free GitHub App for public repos in beta.",
+    "Merge with confidence. logomesh runs your changed Python in a sandbox and only comments when it can show a reproducible bug. Free GitHub App for public repos in beta.",
   icons: {
     apple: "/branding/logomesh-github-app-256.png",
   },
   openGraph: {
-    title: "LogoMesh",
+    title: "logomesh",
     description:
       "Pre-merge checks for Python PRs. Run the code you changed and post only when there is proof. Free in beta.",
     type: "website",

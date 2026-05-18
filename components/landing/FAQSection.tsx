@@ -8,7 +8,7 @@ import { useSplitText, useFadeUp } from "@/lib/animations";
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "What does LogoMesh actually do?",
+    q: "What does logomesh actually do?",
     a: "When a Python crash hits Sentry, an AI agent investigates the crash, finds the part of your code that broke, and writes a failing test that reproduces it. You get a draft GitHub PR with the test and a sealed audit file your reviewer can sign off on — usually inside a minute.",
   },
   {
@@ -21,15 +21,15 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How fast is it?",
-    a: "Setup is 4 minutes with the guided wizard. After that, every matching crash reproduces end-to-end in about 60 seconds with no human in the loop.",
+    a: "pip install logomesh, export your Sentry token, and run logomesh repro <url> against your checkout. Most crashes return a verdict in about a minute once Docker is warm.",
   },
   {
     q: "Do I have to change my codebase?",
-    a: "No. LogoMesh connects to Sentry via a webhook and to GitHub via a personal access token. You don't install an SDK, don't wrap your code, don't change your error handling.",
+    a: "No. logomesh connects to Sentry via a webhook and to GitHub via a personal access token. You don't install an SDK, don't wrap your code, don't change your error handling.",
   },
   {
     q: "Do we stay in control of changes?",
-    a: "Always. LogoMesh opens a draft PR with the failing test — it never merges, never modifies main, never auto-fixes. Your team decides what the fix looks like.",
+    a: "Always. logomesh opens a draft PR with the failing test — it never merges, never modifies main, never auto-fixes. Your team decides what the fix looks like.",
   },
   {
     q: "Is it secure?",
@@ -41,7 +41,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "Does it fix the bug automatically?",
-    a: "No. Today LogoMesh reproduces crashes and generates evidence. Your team owns diagnosis and the code change. Auto-remediation is on the roadmap but will always require explicit approval.",
+    a: "No. Today logomesh reproduces crashes and generates evidence. Your team owns diagnosis and the code change. Auto-remediation is on the roadmap but will always require explicit approval.",
   },
   {
     q: "What if a crash can't be reproduced?",
@@ -49,11 +49,11 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How do we start?",
-    a: "Click 'Start the wizard' in the nav. In 4 minutes you'll have a Sentry webhook configured, a GitHub PAT connected, and the first test event flowing through the dashboard.",
+    a: "Open Quick start in the docs from the nav. It walks through install, Sentry, GitHub, and your first test event in about four minutes.",
   },
   {
     q: "What does it cost?",
-    a: "Free during public beta — 3 reproductions per day, no credit card. Pilot tier is $0 for design partners (we ask for written feedback in exchange). Enterprise with dedicated VPC deployment is custom. See the pricing page for the full matrix.",
+    a: "The CLI is MIT-licensed and free on PyPI. A hosted webhook pilot exists for design partners who want a dashboard — contact us if you need that path. There is no $199/mo self-serve tier.",
   },
 ];
 

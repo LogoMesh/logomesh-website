@@ -279,7 +279,7 @@ export const mockBackend = {
       sandbox_exception_type: run.sandbox_exception_type,
       expected_exception_type: run.expected_exception_type,
       duration_s: run.duration_s,
-      control_mappings: ["PCI DSS 6.3.2", "SOC2 CC8.1"],
+      control_mappings: ["SOC2 CC7.3", "SOC2 CC7.4", "PCI DSS 12.10.5"],
       evidence_path_seal: {
         llm_in_evidence_path: false,
         sealed_at: run.created_at,

@@ -143,7 +143,7 @@ export function FeaturesBento() {
         </h2>
         <p className="read-max mt-4 mx-auto text-[15px] leading-[1.72] text-[var(--color-muted)] sm:text-[16px] sm:leading-[1.75] md:mx-0">
           Faster review cycles and fewer surprises in prod, without standing up new CI or
-          writing extra tests yourself. LogoMesh does the adversarial work when the PR
+          writing extra tests yourself. logomesh does the adversarial work when the PR
           opens.
         </p>
       </motion.div>
@@ -201,7 +201,7 @@ export function FeaturesBento() {
                 <span className="display-subline">next pull request.</span>
               </h3>
               <p className="text-[14px] text-[var(--color-muted)] leading-[1.68] sm:text-[15px] sm:leading-[1.7]">
-                One GitHub App install. Your team keeps the same workflow; LogoMesh hooks
+                One GitHub App install. Your team keeps the same workflow; logomesh hooks
                 PR events automatically. No new pipeline to own when you are already
                 underwater.
               </p>

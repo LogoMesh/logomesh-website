@@ -5,16 +5,16 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Privacy · LogoMesh",
+  title: "Privacy · logomesh",
   description:
-    "How LogoMesh handles crash data, frame locals, and audit artifacts. PII is redacted at capture time. No frame data leaves your sandbox unredacted.",
+    "How logomesh handles crash data, frame locals, and audit artifacts. PII is redacted at capture time. No frame data leaves your sandbox unredacted.",
 };
 
 const SECTIONS = [
   {
     heading: "What we collect",
     body: [
-      "When you run LogoMesh against a Sentry event, the CLI fetches the event payload from your Sentry organization using credentials you provide. The fetched payload is processed locally on the machine running the CLI.",
+      "When you run logomesh against a Sentry event, the CLI fetches the event payload from your Sentry organization using credentials you provide. The fetched payload is processed locally on the machine running the CLI.",
       "When you connect a pilot installation, we additionally store the metadata you supply during onboarding — your Sentry organization slug, GitHub installation id, and (optionally) Slack incoming webhook URL — for the lifetime of the pilot.",
     ],
   },
@@ -71,11 +71,11 @@ export default function PrivacyPage() {
           Privacy
         </h1>
         <p className="mt-4 font-[family-name:var(--font-mono)] text-[12.5px] text-[var(--color-dim)]">
-          Effective 2026-05-07 · LogoMesh public beta
+          Effective 2026-05-07 · logomesh public beta
         </p>
 
         <p className="mt-8 text-[16px] leading-[1.7] text-[var(--color-muted)]">
-          LogoMesh is a crash-reproduction tool for backend Python services. The
+          logomesh is a crash-reproduction tool for backend Python services. The
           summary below describes what data the CLI and pilot service touch, what
           they never touch, and the controls available to pilot tenants. If your
           security review needs more detail than what is here, get in touch.

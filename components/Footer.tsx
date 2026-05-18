@@ -3,7 +3,7 @@ import { LogoMark } from "./LogoMark";
 
 const LINKS = [
   { label: "Docs", href: "/docs" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Install", href: "/pricing" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },
   { label: "Contact", href: "/contact" },
@@ -85,7 +85,7 @@ export function Footer() {
           <span className="font-semibold text-[var(--color-muted)]" aria-hidden>
             *
           </span>{" "}
-          Public beta · Python only · Free for 3 reproductions a day. Webhook trigger and fix generation in progress.
+          MIT · open source · pip install logomesh · Python 3.11+. Hosted webhook pilot available for design partners.
         </p>
       </div>
     </footer>

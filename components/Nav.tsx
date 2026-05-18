@@ -341,7 +341,7 @@ export function Nav() {
           </Link>
         ) : null}
         <Link
-          href="/onboarding"
+          href="/docs/quickstart"
           className={cn(
             "inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px]",
             "bg-[var(--color-accent)] text-black rounded-lg",
@@ -469,12 +469,12 @@ export function Nav() {
               {pathname === PRICING_HREF && (
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mr-2 shrink-0" />
               )}
-              Pricing
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/docs"
+            Install
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/docs"
               onClick={() => setMenuOpen(false)}
               className={cn(
                 "flex items-center min-h-[44px] py-2 text-[16px] transition-colors",

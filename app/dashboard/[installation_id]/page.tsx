@@ -22,7 +22,7 @@ export default async function DashboardPage({ params }: { params: Params }) {
         "We couldn't find that installation. The id in the URL may be stale.";
     } else if (e instanceof Error) {
       errorMessage =
-        "Couldn't load this installation. The LogoMesh backend may be unreachable.";
+        "Couldn't load this installation. The logomesh backend may be unreachable.";
     } else {
       errorMessage = "Unexpected error loading the installation.";
     }

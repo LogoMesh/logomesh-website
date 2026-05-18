@@ -1,13 +1,13 @@
 ---
-title: "LogoMesh UI/UX Redesign — Audit + Plan"
+title: "logomesh UI/UX Redesign — Audit + Plan"
 authored: 2026-05-08
 branch: marketing-rewrite
 role: UI/UX Pro Max v2.0
 ---
 
-# LogoMesh — UI/UX Audit + Redesign
+# logomesh — UI/UX Audit + Redesign
 
-Honest, opinionated audit of the current site + product, against the 2026 replacement context ("LogoMesh is a modern dashboard SaaS with a 4-minute Sentry wizard — CLI is legacy"). Everything below is scoped to the `marketing-rewrite` branch. Nothing touches `main`.
+Honest, opinionated audit of the current site + product, against the 2026 replacement context ("logomesh is a modern dashboard SaaS with a 4-minute Sentry wizard — CLI is legacy"). Everything below is scoped to the `marketing-rewrite` branch. Nothing touches `main`.
 
 ---
 
@@ -37,7 +37,7 @@ These three fixes alone will convert meaningfully better. Everything else is pol
 **Problems:**
 - **Buried IA for the new core value prop.** The wizard (the product per the replacement context) isn't referenced anywhere in the IA until the nav button. Sections read as if the user is about to install a CLI.
 - **"Why" section is generic.** `ProductOverviewSection` copy is abstract ("Debug from facts, not guesswork", "Isolated by default") — it could be pasted into any infra tool. No falsifiable claims, no differentiator vs. Sentry Replay / Rookout / Datadog Live Debugger.
-- **"Who it's for" ≠ "How it works".** `RealWorldHarnessSection` describes a YAML-path-scope product ("LogoMesh only scans paths you declare in YAML") that does not match the webhook/frame-locals reality. The whole in-scope/crashes-we-reproduce cards are describing a product we don't have.
+- **"Who it's for" ≠ "How it works".** `RealWorldHarnessSection` describes a YAML-path-scope product ("logomesh only scans paths you declare in YAML") that does not match the webhook/frame-locals reality. The whole in-scope/crashes-we-reproduce cards are describing a product we don't have.
 - **No navigation to Pricing.** A paid-tier shortlist buyer has to discover pricing from the footer or guess. Top-nav should surface it.
 
 **Score: 5/10** — the architecture is clean and scannable; it's describing the wrong product.
@@ -170,7 +170,7 @@ These three fixes alone will convert meaningfully better. Everything else is pol
 
 Versus 3–5 best-in-class AI B2B SaaS interfaces in 2026:
 
-| | LogoMesh today | Linear | Vercel (Otter) | Supabase | Stripe | Retool |
+| | logomesh today | Linear | Vercel (Otter) | Supabase | Stripe | Retool |
 |---|---|---|---|---|---|---|
 | Hero clarity (<4s) | 6 | 10 | 9 | 8 | 10 | 8 |
 | CTA hierarchy | 4 | 10 | 9 | 9 | 10 | 8 |
@@ -235,7 +235,7 @@ Footer  (wire /privacy, /terms, fix GitHub link or remove)
 
 - Hero eyebrow: `For engineering teams handling production incidents` → `Python · For Sentry users doing SOC2 or PCI incident response`
 - Hero headline: keep `Reproduce production crashes in about a minute.` but **change subline time from "about a minute" to "in 60 seconds"** to match docs + product claim. Consistency beats hedging.
-- Hero subtitle: `Paste a crash link from your error tracker.` → `When your Sentry webhook fires, LogoMesh reads the program state at the moment of failure and writes a failing pytest that reproduces the crash. The audit artifact is deterministic from frame locals — no LLM in the evidence path.`
+- Hero subtitle: `Paste a crash link from your error tracker.` → `When your Sentry webhook fires, logomesh reads the program state at the moment of failure and writes a failing pytest that reproduces the crash. The audit artifact is deterministic from frame locals — no LLM in the evidence path.`
 - Hero primary CTA: `Read the docs` → **`Start the wizard — free during beta`** (→ `/onboarding`). Secondary button: `Read the docs` (→ `/docs`), demoted to outline/ghost.
 - Hero proof chips: keep Berkeley pill. Change the three generic pills:
   - `Under-a-minute repro flow` → `60-second Sentry → failing pytest`

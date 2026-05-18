@@ -180,7 +180,7 @@ export function RealWorldHarnessSection() {
                 ))}
               </ul>
               <p className="mt-4 text-[13px] leading-relaxed text-[var(--color-dim)]">
-                On these, LogoMesh flags <span className="font-mono text-[var(--color-muted)]">needs_human_review</span>{" "}
+                On these, logomesh flags <span className="font-mono text-[var(--color-muted)]">needs_human_review</span>{" "}
                 with a structured reason. No false-positive ships.
               </p>
             </div>

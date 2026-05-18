@@ -7,9 +7,9 @@ import { SPRING_UI } from "@/lib/motion";
 import { HeroProductFrame } from "./HeroProductFrame";
 
 const PROOF_METRICS = [
-  { label: "Reproduced 3 of 3 real production crashes" },
+  { label: "500 engine tests on every change" },
   { label: "AI investigates. Code writes the proof." },
-  { label: "SOC2 CC7.3 · PCI DSS 12.10.5" },
+  { label: "SOC2 CC7.3 / CC7.4 · PCI DSS 12.10.5" },
 ] as const;
 
 export function Hero() {
@@ -111,13 +111,13 @@ export function Hero() {
 
           <div className="animate-rise rise-d4 mt-9 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-6">
             <motion.a
-              href="/onboarding"
+              href="/docs/quickstart"
               className="glow-primary group relative inline-flex min-h-[52px] items-center justify-center gap-2.5 rounded-xl bg-primary px-6 text-[15px] font-semibold text-primary-foreground sm:text-[16px]"
               whileHover={{ y: -1, boxShadow: "var(--shadow-glow-hover)" }}
               whileTap={{ scale: 0.985 }}
               transition={SPRING_UI}
             >
-              Start the 4-minute wizard
+              Quick start
               <ArrowRight
                 size={16}
                 className="-mr-1 opacity-60 transition-transform group-hover:translate-x-0.5"
@@ -136,7 +136,7 @@ export function Hero() {
           </div>
 
           <p className="animate-rise rise-d4 mt-3 font-mono text-[12.5px] text-dim sm:text-[13px]">
-            Free during beta · 3 reproductions a day · no credit card
+            MIT · pip install logomesh · Python 3.11+
           </p>
 
           <div className="animate-rise rise-d5 mt-8 flex flex-wrap gap-2.5">

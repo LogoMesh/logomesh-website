@@ -75,7 +75,7 @@ export function SocialProofStrip() {
                 Built for reliable and secure execution.
               </h2>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--color-muted)] sm:text-[16px]">
-                LogoMesh runs in a hardened sandbox with strict boundaries to keep reproduction runs controlled and
+                logomesh runs in a hardened sandbox with strict boundaries to keep reproduction runs controlled and
                 predictable.
               </p>
             </div>

@@ -4,38 +4,38 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Terms · LogoMesh",
+  title: "Terms · logomesh",
   description:
-    "Beta terms of service for LogoMesh CLI and pilot installations. Use is at your own discretion. No warranties during beta.",
+    "Beta terms of service for logomesh CLI and pilot installations. Use is at your own discretion. No warranties during beta.",
 };
 
 const SECTIONS = [
   {
     heading: "1 · Beta status",
     body: [
-      "LogoMesh is in public beta. The CLI is free for non-commercial and evaluation use during the beta. Pilot installations are invite-only and governed by a separate pilot agreement.",
+      "logomesh is in public beta. The CLI is free for non-commercial and evaluation use during the beta. Pilot installations are invite-only and governed by a separate pilot agreement.",
       "Functionality is provided AS IS during beta. We may change behavior, output formats, or pricing at any time without prior notice. Production use is at your own risk.",
     ],
   },
   {
     heading: "2 · Acceptable use",
     body: [
-      "You may run LogoMesh against any source code or Sentry event you are authorized to access. You may not run LogoMesh against systems you are not authorized to test or against third-party code without a license to do so.",
-      "You may not use LogoMesh to attempt to bypass authentication, authorization, or access controls on systems you do not own or operate.",
+      "You may run logomesh against any source code or Sentry event you are authorized to access. You may not run logomesh against systems you are not authorized to test or against third-party code without a license to do so.",
+      "You may not use logomesh to attempt to bypass authentication, authorization, or access controls on systems you do not own or operate.",
     ],
   },
   {
     heading: "3 · Audit artifacts",
     body: [
-      "LogoMesh emits structured artifacts that reference PCI DSS and SOC2 control IDs. The artifact is engineering output produced from your own code and your own crash data. It is not a certification, an attestation, or a substitute for a qualified assessor.",
+      "logomesh emits structured artifacts that reference PCI DSS and SOC2 control IDs. The artifact is engineering output produced from your own code and your own crash data. It is not a certification, an attestation, or a substitute for a qualified assessor.",
       "Use of the artifact in an audit, internal review, or compliance workflow is at your discretion. We make no representation that the artifact will be accepted by any specific assessor or in any specific framework.",
     ],
   },
   {
     heading: "4 · Limits of liability",
     body: [
-      "During the beta, LogoMesh is provided without warranty of any kind. To the maximum extent permitted by law, our liability for any claim arising from your use of LogoMesh during the beta is capped at $0.",
-      "If your use case requires liability terms beyond the beta cap, contact us about a paid commercial agreement before relying on LogoMesh in production.",
+      "During the beta, logomesh is provided without warranty of any kind. To the maximum extent permitted by law, our liability for any claim arising from your use of logomesh during the beta is capped at $0.",
+      "If your use case requires liability terms beyond the beta cap, contact us about a paid commercial agreement before relying on logomesh in production.",
     ],
   },
   {
@@ -68,7 +68,7 @@ export default function TermsPage() {
           Terms
         </h1>
         <p className="mt-4 font-[family-name:var(--font-mono)] text-[12.5px] text-[var(--color-dim)]">
-          Effective 2026-05-07 · LogoMesh public beta
+          Effective 2026-05-07 · logomesh public beta
         </p>
 
         <p className="mt-8 text-[16px] leading-[1.7] text-[var(--color-muted)]">

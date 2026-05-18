@@ -40,7 +40,7 @@ async function request<T>(
     throw new ApiClientError(
       0,
       "network_unreachable",
-      "Can't reach the LogoMesh backend. Is your network blocking it?",
+      "Can't reach the logomesh backend. Is your network blocking it?",
     );
   }
 
@@ -103,7 +103,7 @@ export const api = {
 export function humanError(e: unknown): string {
   if (e instanceof ApiClientError) {
     if (e.status === 0) {
-      return "Can't reach the LogoMesh backend. Is your network blocking it?";
+      return "Can't reach the logomesh backend. Is your network blocking it?";
     }
     if (e.status >= 500) {
       return (

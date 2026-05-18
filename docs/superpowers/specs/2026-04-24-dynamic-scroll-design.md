@@ -7,7 +7,7 @@
 
 ## Goal
 
-Add cinematic scroll animations and an animated hero background to the existing LogoMesh marketing site. No content changes — pure motion layer on top of existing components.
+Add cinematic scroll animations and an animated hero background to the existing logomesh marketing site. No content changes — pure motion layer on top of existing components.
 
 ---
 
